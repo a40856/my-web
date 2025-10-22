@@ -53,41 +53,42 @@ def fetch_data_from_finviz(ticker):
         price_tag = soup.find("strong", class_="quote-price_wrapper_price")
         price = price_tag.text.strip() if price_tag else "N/A"
         
-        # Extract Previous Close and Day Close
-        previous_close = extract_value(10, 11)
-        day_close = extract_value(11, 11)
-        
-        # Calculate Day Change
-        try:
-            day_change = round(float(day_close) - float(previous_close), 2)
-        except ValueError:
-            day_change = "N/A"
-        
-        percent_change = extract_value(12, 11)
-        ema_20 = extract_value(12, 1)
-        ema_50 = extract_value(12, 3)
-        ema_200 = extract_value(12, 5)
-        ytd_percent = extract_value(5, 11)
-        return_12m = extract_value(4, 11)
-        rsi = extract_value(8, 9)
-        market_cap = extract_value(1, 1)
-        atr = extract_value(7, 11)  # ATR added here
+        # Extract values from correct columns (cross-checked against page)
+        previous_close = extract_value(11, 9)
+        price = extract_value(12, 11)
+        percent_change = extract_value(13, 11)  # Change (%)
 
+        # SMA values (SMA20, SMA50, SMA200 are in col 7 for their rows)
+        ema_20 = extract_value(10, 7)   # SMA20
+        ema_50 = extract_value(11, 7)   # SMA50
+        ema_200 = extract_value(12, 7)  # SMA200
+
+        # RSI & ATR
+        rsi = extract_value(9, 9)       # RSI (14)
+        atr = extract_value(8, 9)       # ATR (14)
+
+        market_cap = extract_value(1, 1)
+        ytd_percent = extract_value(4, 11)
+        return_12m = extract_value(5, 11)
+
+        # 52-week high / low
+        high_52w = extract_value(5, 9)
+        low_52w = extract_value(6, 9)
         
         return {
             "Name": name,
             "Price": price,
-            "Day Change": day_change,
             "% Change": percent_change,
-            "20 EMA": ema_20,
-            "50 EMA": ema_50,
-            "200 EMA": ema_200,
+            "20 SMA": ema_20,
+            "50 SMA": ema_50,
+            "200 SMA": ema_200,
             "YTD %": ytd_percent,
             "12M Return": return_12m,
             "RSI": rsi,
             "Market Cap": market_cap,
-            "ATR": atr  # Include ATR in return
-
+            "ATR": atr,
+            "52W High": high_52w,
+            "52W Low": low_52w
         }
     except Exception as e:
         print(f"Error fetching data for {ticker}: {e}")
@@ -97,18 +98,34 @@ def fetch_data_from_finviz(ticker):
 output_file = "stock_data.csv"
 with open(output_file, mode="w", newline="") as file:
     writer = csv.writer(file)
-    writer.writerow(["Ticker", "Name", "Price", "Day Change", "% Change", "20 EMA", "50 EMA", "200 EMA", "YTD %", "12M Return", "RSI", "ATR", "Market Cap"])  # Add headers
+    # Updated headers to match returned keys from fetch_data_from_finviz
+    writer.writerow([
+        "Ticker", "Name", "Price", "% Change", "20 SMA", "50 SMA", "200 SMA",
+        "YTD %", "12M Return", "RSI", "ATR", "Market Cap", "52W High", "52W Low"
+    ])
 
     for ticker in tickers:
         finviz_data = fetch_data_from_finviz(ticker)
-        
+
         if finviz_data:
             writer.writerow([
-                ticker, finviz_data["Name"], finviz_data["Price"], finviz_data["Day Change"], finviz_data["% Change"],
-                finviz_data["20 EMA"], finviz_data["50 EMA"], finviz_data["200 EMA"], finviz_data["YTD %"], finviz_data["12M Return"], finviz_data["RSI"], finviz_data["ATR"],finviz_data["Market Cap"]
+                ticker,
+                finviz_data.get("Name", "N/A"),
+                finviz_data.get("Price", "N/A"),
+                finviz_data.get("% Change", "N/A"),
+                finviz_data.get("20 SMA", "N/A"),
+                finviz_data.get("50 SMA", "N/A"),
+                finviz_data.get("200 SMA", "N/A"),
+                finviz_data.get("YTD %", "N/A"),
+                finviz_data.get("12M Return", "N/A"),
+                finviz_data.get("RSI", "N/A"),
+                finviz_data.get("ATR", "N/A"),
+                finviz_data.get("Market Cap", "N/A"),
+                finviz_data.get("52W High", "N/A"),
+                finviz_data.get("52W Low", "N/A"),
             ])  # Save each result
             print(f"Saved data for {ticker}")
-        
-        time.sleep(random.uniform(1, 2))  # Introduce a random delay between 2 to 6 seconds
+
+        time.sleep(random.uniform(1, 2))  # random delay
 
 print(f"Data saved to {output_file}")

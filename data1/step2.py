@@ -25,12 +25,12 @@ sorted_rows = df.iloc[4:].sort_values(by="Market Cap", ascending=False)  # Sort 
 # Combine fixed rows and sorted rows
 df_sorted = pd.concat([fixed_rows, sorted_rows])
 
-# Convert RSI, YTD%, and EMA % differences to numeric
+# Convert RSI, YTD%, and SMA values to numeric
 df_sorted["RSI"] = pd.to_numeric(df_sorted["RSI"], errors="coerce")
 df_sorted["YTD %"] = pd.to_numeric(df_sorted["YTD %"], errors="coerce")
-df_sorted["20 EMA"] = pd.to_numeric(df_sorted["20 EMA"], errors="coerce")
-df_sorted["50 EMA"] = pd.to_numeric(df_sorted["50 EMA"], errors="coerce")
-df_sorted["200 EMA"] = pd.to_numeric(df_sorted["200 EMA"], errors="coerce")
+df_sorted["20 SMA"] = pd.to_numeric(df_sorted["20 SMA"], errors="coerce")
+df_sorted["50 SMA"] = pd.to_numeric(df_sorted["50 SMA"], errors="coerce")
+df_sorted["200 SMA"] = pd.to_numeric(df_sorted["200 SMA"], errors="coerce")
 
 # Save sorted data to Excel
 excel_file = "final_stock_data.xlsx"
@@ -58,11 +58,11 @@ for col_index, col_name in enumerate(df_sorted.columns, start=1):
         rsi_col = col_index
     elif col_name == "YTD %":
         ytd_col = col_index
-    elif col_name == "20 EMA":
+    elif col_name == "20 SMA":
         ema_20_col = col_index
-    elif col_name == "50 EMA":
+    elif col_name == "50 SMA":
         ema_50_col = col_index
-    elif col_name == "200 EMA":
+    elif col_name == "200 SMA":
         ema_200_col = col_index
 
 # Apply conditional formatting
