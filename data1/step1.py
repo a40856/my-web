@@ -53,25 +53,22 @@ def fetch_data_from_finviz(ticker):
         price_tag = soup.find("strong", class_="quote-price_wrapper_price")
         price = price_tag.text.strip() if price_tag else "N/A"
         
-        # Extract values from correct columns (cross-checked against page)
+        # Extract values from correct columns (cross-checked)
         previous_close = extract_value(11, 9)
         price = extract_value(12, 11)
         percent_change = extract_value(13, 11)  # Change (%)
-
-        # SMA values (SMA20, SMA50, SMA200 are in col 7 for their rows)
-        ema_20 = extract_value(10, 7)   # SMA20
-        ema_50 = extract_value(11, 7)   # SMA50
-        ema_200 = extract_value(12, 7)  # SMA200
-
-        # RSI & ATR
-        rsi = extract_value(9, 9)       # RSI (14)
-        atr = extract_value(8, 9)       # ATR (14)
-
+        # SMA/EMA values (cross-checked)
+        ema_20 = extract_value(10, 7)  # SMA20 value is in col 7
+        ema_50 = extract_value(11, 7)  # SMA50 value is in col 7
+        ema_200 = extract_value(12, 7) # SMA200 value is in col 7
+        # RSI & ATR (cross-checked)
+        rsi = extract_value(9, 9)      # RSI (14) value is in col 9
+        atr = extract_value(8, 9)      # ATR (14) value is in col 9
         market_cap = extract_value(1, 1)
         ytd_percent = extract_value(4, 11)
         return_12m = extract_value(5, 11)
-
-        # 52-week high / low
+        # day_change 不再計算，直接用 percent_change
+        # 52W High/Low
         high_52w = extract_value(5, 9)
         low_52w = extract_value(6, 9)
         
