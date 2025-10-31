@@ -1,0 +1,51 @@
+name: auto-option-schedule
+
+on:
+  schedule:
+    # 06:00 Asia/Hong_Kong => 22:00 UTC previous day; run Sun-Fri at 22:00 UTC => Mon-Sat 06:00 HKT
+    - cron: '0 22 * * 0-5'
+  workflow_dispatch:
+
+jobs:
+  run-auto-option:
+    runs-on: ubuntu-latest
+    env:
+      # 如果需要 secrets 或其他 env，請在 repo settings -> secrets 裡新增，並在這裡把名稱對應上
+      # EXAMPLE_API_KEY: ${{ secrets.EXAMPLE_API_KEY }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies (if any)
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Create logs dir
+        run: mkdir -p logs analysis || true
+
+      - name: Run auto-option.py
+        # IMPORTANT: ensure auto-option.py uses relative paths within repo (not absolute host paths)
+        run: |
+          set -o pipefail
+          python auto-option.py 2>&1 | tee logs/auto-option-$(date +%F-%H%M%S).log
+        # If your script requires env secrets, they can be referenced via ${{ secrets.NAME }}
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: auto-option-logs-${{ github.run_id }}
+          path: logs
+          retention-days: 7
+
+      - name: Upload analysis output (if produced)
+        uses: actions/upload-artifact@v4
+        with:
+          name: auto-option-analysis-${{ github.run_id }}
+          path: analysis
+          retention-days: 7
