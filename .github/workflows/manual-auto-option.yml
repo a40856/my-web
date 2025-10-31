@@ -1,9 +1,6 @@
-name: auto-option-schedule
+name: auto-option-manual
 
 on:
-  schedule:
-    # 06:00 Asia/Hong_Kong => 22:00 UTC previous day; run Sun-Fri at 22:00 UTC => Mon-Sat 06:00 HKT
-    - cron: '0 22 * * 0-5'
   workflow_dispatch:
 
 jobs:
