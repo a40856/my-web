@@ -1,0 +1,43 @@
+name: auto-option-schedule
+
+on:
+  schedule:
+    # 06:00 Asia/Hong_Kong => 22:00 UTC previous day; run Sun-Fri 22:00 UTC => Mon-Sat 06:00 HKT
+    - cron: '0 22 * * 0-5'
+  workflow_dispatch:
+
+jobs:
+  run-auto-option:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies (if any)
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Ensure outputs dir exists
+        run: mkdir -p outputs logs || true
+
+      - name: Run auto-script.py
+        # Run the repo runner; using auto-script.py per user request
+        run: |
+          set -o pipefail
+          python auto-script.py 2>&1 | tee logs/auto-script-$(date +%F-%H%M%S).log
+
+      - name: Upload outputs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: auto-option-output-${{ github.run_id }}
+          path: |
+            outputs/**
+            logs/**
+          retention-days: 7
