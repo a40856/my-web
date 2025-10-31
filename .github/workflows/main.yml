@@ -9,9 +9,6 @@ on:
 jobs:
   run-auto-option:
     runs-on: ubuntu-latest
-    env:
-      # 如果需要 secrets 或其他 env，請在 repo settings -> secrets 裡新增，並在這裡把名稱對應上
-      # EXAMPLE_API_KEY: ${{ secrets.EXAMPLE_API_KEY }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
