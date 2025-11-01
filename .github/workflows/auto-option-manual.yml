@@ -20,20 +20,18 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f testing/requirements.txt ]; then pip install -r testing/requirements.txt; fi
 
-      - name: Ensure testing folders exist
+      - name: Ensure testing log folders exist
         run: |
-          mkdir -p testing/logs testing/outputs testing/active testing/OI
+          mkdir -p testing/logs testing/log
 
       - name: Run testing runner
         run: |
           python testing/auto-script.py
 
-      - name: Upload artifacts (outputs, logs, active, OI)
+      - name: Upload artifacts (logs)
         uses: actions/upload-artifact@v4
         with:
-          name: testing-artifacts
+          name: testing-logs
           path: |
-            testing/outputs/**
+            testing/log/**
             testing/logs/**
-            testing/active/**
-            testing/OI/**
