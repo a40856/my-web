@@ -54,7 +54,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
           git fetch origin
-          git checkout -B data
+          # if origin/data exists, base local data branch on it to avoid non-fast-forward
+          if git rev-parse --verify origin/data >/dev/null 2>&1; then
+            git checkout -B data origin/data
+          else
+            git checkout -B data
+          fi
           echo "Listing testing directory before add:"
           ls -la testing || true
           ls -la testing/active || true
