@@ -19,7 +19,9 @@ tickers = [
     "RCL", "XYZ", "SNOW", "JD", "SMCI", "EL", "MRNA", "MSTR", "CCL", "ILMN", "CELH", "MARA", "VST",
     "OKLO", "SMR", "APO", "WDAY", "APP", "NET", "MBLY", "AFRM", "UPST", "TMDX", "QUBT", "IONQ", "RKLB",
     "SOFI", "NU", "MELI", "TXRH", "BROS", "PRMB", "PM", "TDOC", "ZM", "PINS", "ROKU", "CRSP", "Z", "FSLY",
-    "RDDT", "GRAB", "GLW", "NNE", "ZS", "TWLO","FSLR", "NBIS", "PENN","DKNG"
+    "RDDT", "GRAB", "GLW", "NNE", "ZS", "TWLO","FSLR", "NBIS", "PENN","DKNG", "LMND", "DDOG", "CRWV", "CRCL",
+    "LEU", "ASPI", "APLD", "ALAB", "VRT", "RGTI", "HIMS", "AI", "GRAB", "S", "OSCR", "IBIT", "IREN", "ETHA",
+    "CMG", "WDC", "ONDS","AVAV", "UMAC","FLNC", "SNDK"
 
 ]
 

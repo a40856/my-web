@@ -101,6 +101,25 @@ for row in ws.iter_rows(min_row=2, max_row=ws.max_row):  # Skip header row
                 elif ema_value < -5:
                     row[ema_col - 1].fill = red_fill  # Strong Downtrend
 
+# Append percent sign to columns D-J (Excel columns 4..10) if value is numeric and not already formatted
+for r in range(2, ws.max_row + 1):
+    for c in range(4, 11):
+        cell = ws.cell(row=r, column=c)
+        val = cell.value
+        if val is None:
+            continue
+        # Skip if already contains a percent sign
+        try:
+            if isinstance(val, str) and '%' in val:
+                continue
+            # Try to convert to float
+            num = float(val)
+            # Format with two decimals and add percent sign
+            cell.value = f"{num:.2f}%"
+        except Exception:
+            # not numeric, leave as-is
+            continue
+
 # Adjust column widths dynamically
 for col in ws.columns:
     max_length = 0

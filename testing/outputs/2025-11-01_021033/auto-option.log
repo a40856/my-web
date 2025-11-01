@@ -1,0 +1,308 @@
+[2025-11-01 02:10:33] Auto-option run started.
+[2025-11-01 02:10:33] RUN START: /workspaces/my-web/testing/Mostactive.py
+
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=0&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=100&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=200&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=300&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=400&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=500&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=600&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=700&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=800&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=900&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1000&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1100&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1200&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1300&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1400&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1500&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1600&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1700&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1800&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=1900&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2000&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2100&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2200&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2300&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2400&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2500&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2600&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2700&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2800&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=2900&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3000&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3100&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3200&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3300&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3400&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3500&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3600&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3700&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3800&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=3900&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4000&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4100&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4200&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4300&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4400&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4500&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4600&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4700&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4800&count=100
+Fetching: https://finance.yahoo.com/markets/options/most-active/?start=4900&count=100
+
+[2025-11-01 02:11:25] RUN OK: /workspaces/my-web/testing/Mostactive.py (51.9s)
+[2025-11-01 02:11:25] RUN START: /workspaces/my-web/testing/optionsOI.py
+
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=0&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=100&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=200&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=300&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=400&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=500&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=600&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=700&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=800&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=900&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1000&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1100&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1200&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1300&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1400&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1500&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1600&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1700&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1800&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=1900&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2000&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2100&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2200&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2300&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2400&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2500&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2600&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2700&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2800&count=100
+Fetching: https://finance.yahoo.com/markets/options/highest-open-interest/?start=2900&count=100
+Done: Filtered out HYG and sorted by highest Open Interest. Saved to /workspaces/my-web/option OI/Sorted-2025-11-01.xlsx
+
+[2025-11-01 02:11:55] RUN OK: /workspaces/my-web/testing/optionsOI.py (29.6s)
+[2025-11-01 02:11:55] RUN START: /workspaces/my-web/testing/step1.py
+
+Saved data for QQQ
+Saved data for SPY
+Saved data for IWM
+Saved data for AAPL
+Saved data for NVDA
+Saved data for MSFT
+Saved data for GOOG
+Saved data for AMZN
+Saved data for META
+Saved data for BRK-B
+Saved data for LLY
+Saved data for TSM
+Saved data for AVGO
+Saved data for TSLA
+Saved data for JPM
+Saved data for WMT
+Saved data for UNH
+Saved data for V
+Saved data for XOM
+Saved data for NVO
+Saved data for MA
+Saved data for PG
+Saved data for JNJ
+Saved data for COST
+Saved data for ORCL
+Saved data for HD
+Saved data for ASML
+Saved data for ABBV
+Saved data for BAC
+Saved data for KO
+Saved data for MRK
+Saved data for NFLX
+Saved data for CVX
+Saved data for AZN
+Saved data for CRM
+Saved data for SAP
+Saved data for AMD
+Saved data for TM
+Saved data for ADBE
+Saved data for PEP
+Saved data for SHEL
+Saved data for NVS
+Saved data for TMUS
+Saved data for TMO
+Saved data for LIN
+Saved data for ACN
+Saved data for MCD
+Saved data for CSCO
+Saved data for ABT
+Saved data for DHR
+Saved data for QCOM
+Saved data for WFC
+Saved data for TXN
+Saved data for PDD
+Saved data for GE
+Saved data for IBM
+Saved data for BABA
+Saved data for AXP
+Saved data for AMGN
+Saved data for VZ
+Saved data for INTU
+Saved data for ISRG
+Saved data for BX
+Saved data for CAT
+Saved data for AMAT
+Saved data for MS
+Saved data for DIS
+Saved data for NEE
+Saved data for TTE
+Saved data for GS
+Saved data for RTX
+Saved data for SPGI
+Saved data for UBER
+Saved data for ARM
+Saved data for LOW
+Saved data for T
+Saved data for PGR
+Saved data for LMT
+Saved data for REGN
+Saved data for BLK
+Saved data for BKNG
+Saved data for ELV
+Saved data for NKE
+Saved data for PLD
+Saved data for C
+Saved data for SCHW
+Saved data for MU
+Saved data for PANW
+Saved data for MDT
+Saved data for CB
+Saved data for LRCX
+Saved data for ADP
+Saved data for KLAC
+Saved data for MMC
+Saved data for UPS
+Saved data for BA
+Saved data for SBUX
+Saved data for DE
+Saved data for HCA
+Saved data for CI
+Saved data for SHOP
+Saved data for FI
+Saved data for BMY
+Saved data for GILD
+Saved data for ICE
+Saved data for MO
+Saved data for RACE
+Saved data for CL
+Saved data for ZTS
+Saved data for DELL
+Saved data for EQIX
+Saved data for NOC
+Saved data for ABNB
+Saved data for TGT
+Saved data for PYPL
+Saved data for MMM
+Saved data for PLTR
+Saved data for USB
+Saved data for SPOT
+Saved data for CRWD
+Saved data for SLB
+Saved data for ADSK
+Saved data for GM
+Saved data for COIN
+Saved data for OXY
+Saved data for GEV
+Saved data for CHTR
+Saved data for MSCI
+Saved data for F
+Saved data for SE
+Saved data for EW
+Saved data for RCL
+Saved data for XYZ
+Saved data for SNOW
+Saved data for JD
+Saved data for SMCI
+Saved data for EL
+Saved data for MRNA
+Saved data for MSTR
+Saved data for CCL
+Saved data for ILMN
+Saved data for CELH
+Saved data for MARA
+Saved data for VST
+Saved data for OKLO
+Saved data for SMR
+Saved data for APO
+Saved data for WDAY
+Saved data for APP
+Saved data for NET
+Saved data for MBLY
+Saved data for AFRM
+Saved data for UPST
+Saved data for TMDX
+Saved data for QUBT
+Saved data for IONQ
+Saved data for RKLB
+Saved data for SOFI
+Saved data for NU
+Saved data for MELI
+Saved data for TXRH
+Saved data for BROS
+Saved data for PRMB
+Saved data for PM
+Saved data for TDOC
+Saved data for ZM
+Saved data for PINS
+Saved data for ROKU
+Saved data for CRSP
+Saved data for Z
+Saved data for FSLY
+Saved data for RDDT
+Saved data for GRAB
+Saved data for GLW
+Saved data for NNE
+Saved data for ZS
+Saved data for TWLO
+Saved data for FSLR
+Saved data for NBIS
+Saved data for PENN
+Saved data for DKNG
+Saved data for LMND
+Saved data for DDOG
+Saved data for CRWV
+Saved data for CRCL
+Saved data for LEU
+Saved data for ASPI
+Saved data for APLD
+Saved data for ALAB
+Saved data for VRT
+Saved data for RGTI
+Saved data for HIMS
+Saved data for AI
+Saved data for GRAB
+Saved data for S
+Saved data for OSCR
+Saved data for IBIT
+Saved data for IREN
+Saved data for ETHA
+Saved data for CMG
+Saved data for WDC
+Saved data for ONDS
+Saved data for AVAV
+Saved data for UMAC
+Saved data for FLNC
+Saved data for SNDK
+Data saved to stock_data.csv
+
+[2025-11-01 02:18:22] RUN OK: /workspaces/my-web/testing/step1.py (387.6s)
+[2025-11-01 02:18:22] RUN START: /workspaces/my-web/testing/step2.py
+
+Sorted and formatted data saved to final_stock_data.xlsx
+
+[2025-11-01 02:18:23] RUN OK: /workspaces/my-web/testing/step2.py (0.6s)
+[2025-11-01 02:18:23] Moved 2 files to /workspaces/my-web/testing/outputs/2025-11-01_021033: ['/workspaces/my-web/testing/outputs/2025-11-01_021033/final_stock_data.xlsx', '/workspaces/my-web/testing/outputs/2025-11-01_021033/stock_data.csv']
+[2025-11-01 02:18:23] Auto-option run finished successfully.

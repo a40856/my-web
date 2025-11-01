@@ -29,7 +29,7 @@ for page in range(0, 30):
 
 
 # 建立資料夾（若不存在）
-folder_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "option OI")
+folder_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "testing/OI")
 os.makedirs(folder_path, exist_ok=True)
 
 # 產生檔名格式
