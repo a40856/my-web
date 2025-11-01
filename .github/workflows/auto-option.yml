@@ -2,8 +2,8 @@ name: auto-option-schedule
 
 on:
   schedule:
-    # 06:00 Asia/Hong_Kong => 22:00 UTC previous day; run Sun-Fri 22:00 UTC => Mon-Sat 06:00 HKT
-    - cron: '0 22 * * 0-5'
+    # 06:00 Asia/Hong_Kong => 22:00 UTC previous day; run daily at 22:00 UTC => 06:00 HKT daily
+    - cron: '0 22 * * *'
   workflow_dispatch:
 
 jobs:
@@ -24,11 +24,13 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Ensure outputs dir exists
+      - name: Ensure outputs dir exists (in testing)
+        working-directory: testing
         run: mkdir -p outputs logs || true
 
-      - name: Run auto-script.py
-        # Run the repo runner; using auto-script.py per user request
+      - name: Run auto-script.py (in testing)
+        # Run the repo runner from testing/ directory
+        working-directory: testing
         run: |
           set -o pipefail
           python auto-script.py 2>&1 | tee logs/auto-script-$(date +%F-%H%M%S).log
@@ -38,6 +40,6 @@ jobs:
         with:
           name: auto-option-output-${{ github.run_id }}
           path: |
-            outputs/**
-            logs/**
+            testing/outputs/**
+            testing/logs/**
           retention-days: 7
