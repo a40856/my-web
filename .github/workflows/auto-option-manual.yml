@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -40,11 +42,6 @@ jobs:
             testing/stock_data.csv
             testing/final_stock_data.xlsx
 
-      - name: Checkout (for committing data)
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: true
-
       - name: Commit generated data to `data` branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -54,6 +51,11 @@ jobs:
           # create/update data branch and commit only if there are changes
           git fetch origin
           git checkout -B data
+          echo "Listing testing directory before add:"
+          ls -la testing || true
+          ls -la testing/active || true
+          ls -la testing/OI || true
+          git status --porcelain || true
           git add testing/active testing/OI testing/stock_data.csv testing/final_stock_data.xlsx || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
