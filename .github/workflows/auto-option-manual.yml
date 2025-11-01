@@ -1,4 +1,6 @@
 name: Manual run - auto-option (testing)
+permissions:
+  contents: write
 
 on:
   workflow_dispatch: {}
