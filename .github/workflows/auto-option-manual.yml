@@ -35,3 +35,7 @@ jobs:
           path: |
             testing/log/**
             testing/logs/**
+            testing/active/**
+            testing/OI/**
+            testing/stock_data.csv
+            testing/final_stock_data.xlsx
