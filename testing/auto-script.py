@@ -13,17 +13,18 @@ from glob import glob
 ROOT = os.path.abspath(os.path.dirname(__file__))  # repo root
 os.chdir(ROOT)
 
-# output folder (timestamped)
+# log folder — per-run merged logs will be saved as a single file under this folder
 TS = datetime.now().strftime("%Y-%m-%d_%H%M%S")
-OUT_BASE = os.path.join(ROOT, "outputs")
-OUT_DIR = os.path.join(OUT_BASE, TS)
-os.makedirs(OUT_DIR, exist_ok=True)
+OUT_BASE = os.path.join(ROOT, "log")
+os.makedirs(OUT_BASE, exist_ok=True)
 
 # files that existed before run (to detect newly created/modified files)
 pre_existing = set(glob(os.path.join(ROOT, "*.*")))
 
-# simple logger to file + stdout
-log_path = os.path.join(OUT_DIR, "auto-option.log")
+# simple logger to file + stdout (write main and per-script logs into testing/logs/ during run)
+per_log_dir = os.path.join(ROOT, "logs")
+os.makedirs(per_log_dir, exist_ok=True)
+log_path = os.path.join(per_log_dir, "auto-option.log")
 def log(msg):
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     line = f"[{ts}] {msg}"
@@ -83,26 +84,44 @@ try:
             continue
         run_script(s)
 
-    # collect outputs: any new or modified .xlsx/.csv in ROOT will be moved into OUT_DIR
-    # (also include files created in subfolders if you prefer)
-    moved = []
-    now = time.time()
-    for pattern in ("*.xlsx", "*.xls", "*.csv", "*.json"):
-        for path in glob(os.path.join(ROOT, pattern)):
-            if path in pre_existing:
-                # if existed before but modified recently, move it too
-                mtime = os.path.getmtime(path)
-                if mtime >= (time.time() - 24*3600):  # modified within 24h (tunable)
-                    dest = os.path.join(OUT_DIR, os.path.basename(path))
-                    shutil.move(path, dest)
-                    moved.append(dest)
-            else:
-                # newly created
-                dest = os.path.join(OUT_DIR, os.path.basename(path))
-                shutil.move(path, dest)
-                moved.append(dest)
+    # After run: merge main log and per-script logs into one file under testing/log/
+    merged_log_path = os.path.join(OUT_BASE, f"log {TS}.log")
+    try:
+        with open(merged_log_path, "w", encoding="utf-8") as out:
+            # write a header
+            out.write(f"Run log for {TS}\n")
+            out.write("=" * 80 + "\n\n")
 
-    log(f"Moved {len(moved)} files to {OUT_DIR}: {moved}")
+            # include main auto-option log first
+            try:
+                with open(log_path, "r", encoding="utf-8", errors="replace") as mf:
+                    out.write("--- auto-option.log ---\n")
+                    out.write(mf.read())
+                    out.write("\n\n")
+            except Exception:
+                out.write("(auto-option.log missing)\n\n")
+
+            # append each per-script log
+            for script_log in sorted(glob(os.path.join(per_log_dir, "*.log"))):
+                try:
+                    out.write(f"--- {os.path.basename(script_log)} ---\n")
+                    with open(script_log, "r", encoding="utf-8", errors="replace") as sf:
+                        out.write(sf.read())
+                    out.write("\n\n")
+                except Exception:
+                    out.write(f"({script_log} could not be read)\n\n")
+
+    except Exception as e:
+        log(f"Could not write merged log {merged_log_path}: {e}")
+        # do not treat this as fatal — logs are auxiliary
+        merged_log_path = None
+
+    moved = [merged_log_path] if merged_log_path else []
+
+    if merged_log_path:
+        log(f"Saved merged log to {merged_log_path}")
+    else:
+        log(f"No merged log was created; moved items: {moved}")
     log("Auto-option run finished successfully.")
 except Exception as e:
     log(f"Fatal error: {e}")

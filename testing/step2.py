@@ -1,9 +1,16 @@
+import sys
+from pathlib import Path
 import pandas as pd
 import openpyxl
 from openpyxl.styles import PatternFill
 
+# Use script directory so outputs/read inputs are in testing/ by default
+BASE_DIR = Path(__file__).resolve().parent
 # Load the CSV file
-file_path = "stock_data.csv"  # Change if necessary
+file_path = BASE_DIR / "stock_data.csv"
+if not file_path.exists():
+    print(f"Input file not found: {file_path}")
+    sys.exit(1)
 df = pd.read_csv(file_path)
 
 # Convert Market Cap to numeric values for sorting
@@ -31,9 +38,8 @@ df_sorted["YTD %"] = pd.to_numeric(df_sorted["YTD %"], errors="coerce")
 df_sorted["20 SMA"] = pd.to_numeric(df_sorted["20 SMA"], errors="coerce")
 df_sorted["50 SMA"] = pd.to_numeric(df_sorted["50 SMA"], errors="coerce")
 df_sorted["200 SMA"] = pd.to_numeric(df_sorted["200 SMA"], errors="coerce")
-
-# Save sorted data to Excel
-excel_file = "final_stock_data.xlsx"
+# Save sorted data to Excel (in testing/)
+excel_file = BASE_DIR / "final_stock_data.xlsx"
 df_sorted.to_excel(excel_file, index=False)
 
 # Open the Excel file for formatting

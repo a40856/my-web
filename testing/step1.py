@@ -2,6 +2,8 @@ import csv
 import requests
 import time
 import random
+import sys
+from pathlib import Path
 from bs4 import BeautifulSoup
 
 # List of tickers
@@ -93,9 +95,16 @@ def fetch_data_from_finviz(ticker):
         print(f"Error fetching data for {ticker}: {e}")
         return None
 
-# Fetch data for all tickers and save to a CSV
-output_file = "stock_data.csv"
-with open(output_file, mode="w", newline="") as file:
+# Ensure outputs are written relative to this script's directory (testing/)
+BASE_DIR = Path(__file__).resolve().parent
+output_file = BASE_DIR / "stock_data.csv"
+try:
+    file = open(output_file, mode="w", newline="")
+except Exception as e:
+    print(f"Failed to open output file {output_file}: {e}")
+    sys.exit(1)
+with file as f:
+    writer = csv.writer(f)
     writer = csv.writer(file)
     # Updated headers to match returned keys from fetch_data_from_finviz
     writer.writerow([
@@ -125,6 +134,6 @@ with open(output_file, mode="w", newline="") as file:
             ])  # Save each result
             print(f"Saved data for {ticker}")
 
-        time.sleep(random.uniform(1, 2))  # random delay
+    time.sleep(random.uniform(1, 2))  # random delay
 
 print(f"Data saved to {output_file}")
