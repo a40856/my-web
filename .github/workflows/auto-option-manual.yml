@@ -1,0 +1,39 @@
+name: Manual run - auto-option (testing)
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  manual-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f testing/requirements.txt ]; then pip install -r testing/requirements.txt; fi
+
+      - name: Ensure testing folders exist
+        run: |
+          mkdir -p testing/logs testing/outputs testing/active testing/OI
+
+      - name: Run testing runner
+        run: |
+          python testing/auto-script.py
+
+      - name: Upload artifacts (outputs, logs, active, OI)
+        uses: actions/upload-artifact@v4
+        with:
+          name: testing-artifacts
+          path: |
+            testing/outputs/**
+            testing/logs/**
+            testing/active/**
+            testing/OI/**
