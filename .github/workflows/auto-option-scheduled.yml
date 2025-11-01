@@ -42,3 +42,24 @@ jobs:
             testing/OI/**
             testing/stock_data.csv
             testing/final_stock_data.xlsx
+
+      - name: Checkout (for committing data)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Commit generated data to `data` branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git fetch origin
+          git checkout -B data
+          git add testing/active testing/OI testing/stock_data.csv testing/final_stock_data.xlsx || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(data): update generated testing artifacts from workflow"
+            git push origin data
+          fi
