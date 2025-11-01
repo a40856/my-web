@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -50,23 +51,40 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
-          # create/update data branch and commit only if there are changes
           git fetch origin
-          # if origin/data exists, base local data branch on it to avoid non-fast-forward
-          if git rev-parse --verify origin/data >/dev/null 2>&1; then
-            git checkout -B data origin/data
-          else
-            git checkout -B data
-          fi
           echo "Listing testing directory before add:"
           ls -la testing || true
           ls -la testing/active || true
           ls -la testing/OI || true
           git status --porcelain || true
-          git add testing/active testing/OI testing/stock_data.csv testing/final_stock_data.xlsx || true
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
+
+          if git rev-parse --verify origin/data >/dev/null 2>&1; then
+            echo "origin/data exists — using git worktree to avoid overwrite of untracked files"
+            TMPWT=$(mktemp -d)
+            echo "Creating worktree at $TMPWT"
+            git worktree add "$TMPWT" origin/data
+            # copy generated testing files into worktree
+            rsync -a --delete testing/ "$TMPWT/testing/" || true
+            pushd "$TMPWT"
+            git add testing/active testing/OI testing/stock_data.csv testing/final_stock_data.xlsx || true
+            if git diff --staged --quiet; then
+              echo "No changes to commit in worktree"
+            else
+              git commit -m "chore(data): update generated testing artifacts from workflow"
+              git push origin data
+            fi
+            popd
+            # remove worktree
+            git worktree remove --force "$TMPWT" || true
+            rm -rf "$TMPWT" || true
           else
-            git commit -m "chore(data): update generated testing artifacts from workflow"
-            git push origin data
+            echo "origin/data does not exist — creating local data branch"
+            git checkout -B data
+            git add testing/active testing/OI testing/stock_data.csv testing/final_stock_data.xlsx || true
+            if git diff --staged --quiet; then
+              echo "No changes to commit"
+            else
+              git commit -m "chore(data): update generated testing artifacts from workflow"
+              git push origin data
+            fi
           fi
