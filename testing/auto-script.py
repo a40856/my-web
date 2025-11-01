@@ -41,21 +41,36 @@ SCRIPTS = [
 ]
 
 def run_script(script):
-    log(f"RUN START: {script}")
+    # Run each script and capture stdout/stderr to a per-script log file in testing/logs
+    script_name = os.path.splitext(os.path.basename(script))[0]
+    per_log_dir = os.path.join(ROOT, "logs")
+    os.makedirs(per_log_dir, exist_ok=True)
+    per_log_path = os.path.join(per_log_dir, f"{script_name}.log")
+
+    log(f"RUN START: {script} (log: {per_log_path})")
     start = time.time()
-    # use same env but ensure PYTHONUNBUFFERED so logs appear in real time
     env = os.environ.copy()
     env["PYTHONUNBUFFERED"] = "1"
-    # Run the script; ensure absolute path or relative to ROOT
-    proc = subprocess.run([sys.executable, script], cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    # write stdout to log
-    out = proc.stdout.decode("utf-8", errors="replace") if proc.stdout else ""
-    if out:
-        with open(log_path, "a", encoding="utf-8") as f:
-            f.write("\n" + out + "\n")
+
+    # Run and stream output to per-script log file
+    with open(per_log_path, "wb") as pf:
+        proc = subprocess.run([sys.executable, script], cwd=ROOT, env=env, stdout=pf, stderr=subprocess.STDOUT)
+
+    # Append a short tail of the per-script log into the main auto log for quick glance
+    try:
+        with open(per_log_path, "rb") as pf:
+            content = pf.read().decode("utf-8", errors="replace")
+            tail = content[-8192:]
+            if tail:
+                with open(log_path, "a", encoding="utf-8") as f:
+                    f.write("\n" + tail + "\n")
+    except Exception:
+        pass
+
     if proc.returncode != 0:
-        log(f"ERROR: {script} exited with code {proc.returncode}")
+        log(f"ERROR: {script} exited with code {proc.returncode} (see {per_log_path})")
         raise SystemExit(proc.returncode)
+
     elapsed = time.time() - start
     log(f"RUN OK: {script} ({elapsed:.1f}s)")
 
