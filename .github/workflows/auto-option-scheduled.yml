@@ -74,6 +74,8 @@ jobs:
               echo "No changes to commit in worktree"
             else
               git commit -m "chore(data): update generated testing artifacts from workflow"
+              # create/update local branch 'data' pointing at current HEAD so we can push
+              git checkout -B data
               git push origin data
             fi
             popd
