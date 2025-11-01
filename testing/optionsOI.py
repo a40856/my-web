@@ -28,8 +28,8 @@ for page in range(0, 30):
             all_rows.append(row)
 
 
-# 建立資料夾（若不存在）
-folder_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "testing/OI")
+# 建立資料夾（若不存在），儲存在 testing/OI
+folder_path = os.path.join(os.path.dirname(__file__), "OI")
 os.makedirs(folder_path, exist_ok=True)
 
 # 產生檔名格式

@@ -15,31 +15,29 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies (if any)
+      - name: Install dependencies (if any) (in testing)
+        working-directory: testing
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Create logs dir
-        run: mkdir -p logs analysis || true
+      - name: Ensure outputs/logs dirs exist (in testing)
+        working-directory: testing
+        run: mkdir -p outputs logs active OI || true
 
-      - name: Run auto-option.py
-        # IMPORTANT: ensure auto-option.py uses relative paths within repo (not absolute host paths)
+      - name: Run testing/auto-script.py
+        working-directory: testing
         run: |
           set -o pipefail
-          python auto-option.py 2>&1 | tee logs/auto-option-$(date +%F-%H%M%S).log
-        # If your script requires env secrets, they can be referenced via ${{ secrets.NAME }}
+          python auto-script.py 2>&1 | tee logs/auto-script-$(date +%F-%H%M%S).log
 
-      - name: Upload logs
+      - name: Upload testing artifacts (outputs + logs)
         uses: actions/upload-artifact@v4
         with:
-          name: auto-option-logs-${{ github.run_id }}
-          path: logs
-          retention-days: 7
-
-      - name: Upload analysis output (if produced)
-        uses: actions/upload-artifact@v4
-        with:
-          name: auto-option-analysis-${{ github.run_id }}
-          path: analysis
+          name: testing-artifacts-${{ github.run_id }}
+          path: |
+            testing/outputs/**
+            testing/logs/**
+            testing/active/**
+            testing/OI/**
           retention-days: 7
