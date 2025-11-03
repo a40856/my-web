@@ -135,6 +135,6 @@ with file as f:
             print(f"Saved data for {ticker}")
 
     # sleep 1 second between ticker requests to avoid rate-limiting/glitches on the server
-    time.sleep(0.5)
+    time.sleep(0.7)
 
 print(f"Data saved to {output_file}")
