@@ -23,7 +23,7 @@ tickers = [
     "SOFI", "NU", "MELI", "TXRH", "BROS", "PRMB", "PM", "TDOC", "ZM", "PINS", "ROKU", "CRSP", "Z", "FSLY",
     "RDDT", "GRAB", "GLW", "NNE", "ZS", "TWLO","FSLR", "NBIS", "PENN","DKNG", "LMND", "DDOG", "CRWV", "CRCL",
     "LEU", "ASPI", "APLD", "ALAB", "VRT", "RGTI", "HIMS", "AI", "GRAB", "S", "OSCR", "IBIT", "IREN", "ETHA",
-    "CMG", "WDC", "ONDS","AVAV", "UMAC","FLNC", "SNDK"
+    "CMG", "WDC", "ONDS","AVAV", "UMAC","FLNC", "SNDK", "RR", 
 
 ]
 
@@ -134,6 +134,7 @@ with file as f:
             ])  # Save each result
             print(f"Saved data for {ticker}")
 
-    time.sleep(random.uniform(1, 2))  # random delay
+    # sleep 1 second between ticker requests to avoid rate-limiting/glitches on the server
+    time.sleep(0.5)
 
 print(f"Data saved to {output_file}")
