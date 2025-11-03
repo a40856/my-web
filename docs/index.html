@@ -71,6 +71,13 @@
   th.sortable::after{content:'';position:absolute;right:12px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-top-color:rgba(255,255,255,0.4)}
   th.sortable.sorted-asc::after{border-top-color:#fff;transform:translateY(-50%) rotate(180deg)}
   th.sortable.sorted-desc::after{border-top-color:#fff}
+  th.sortable .th-content{padding-right:18px}
+  th.sortable .filter-trigger{margin-right:6px}
+  th .th-content{display:flex;align-items:center;gap:10px;justify-content:space-between}
+  th .header-label{flex:1;min-width:0}
+  .filter-trigger{padding:4px 10px;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;border:1px solid rgba(255,255,255,0.18);border-radius:6px;background:rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;transition:background 0.15s ease,color 0.15s ease,border-color 0.15s ease}
+  .filter-trigger:hover,.filter-trigger.active{color:#fff;border-color:var(--accent);background:rgba(79,155,255,0.18)}
+  th.filtered .header-label{color:var(--accent)}
     tbody tr:nth-child(even){background:var(--table-stripe)}
     tbody tr:hover{background:rgba(79,155,255,0.12)}
   td.cell-number{text-align:right;font-variant-numeric:tabular-nums}
@@ -87,18 +94,24 @@
   .pagination button.current{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
   .pagination .ellipsis{display:inline-flex;align-items:center;justify-content:center;padding:0 6px;font-size:0.9rem;color:var(--muted)}
   section.source{position:relative}
-  .filter-popover{position:fixed;z-index:50;min-width:220px;background:#0f1d33;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 16px;box-shadow:0 16px 32px rgba(0,0,0,0.45);display:none;max-width:320px}
-  .filter-popover.open{display:block}
-  .filter-popover label{display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;color:#c5d4ff;text-transform:uppercase;letter-spacing:0.05em}
-  .filter-popover input{width:100%;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:#091324;color:#fff;margin-bottom:10px}
-  .filter-popover input::placeholder{color:rgba(255,255,255,0.45)}
+  .filter-popover{position:fixed;z-index:50;min-width:240px;background:#0f1d33;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:16px;box-shadow:0 16px 32px rgba(0,0,0,0.45);display:none;max-width:340px;flex-direction:column;gap:12px}
+  .filter-popover.open{display:flex}
+  .filter-title{font-size:0.78rem;font-weight:600;color:#c5d4ff;text-transform:uppercase;letter-spacing:0.08em}
+  .filter-text{display:none}
+  .filter-text input{width:100%;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:#091324;color:#fff}
+  .filter-text input::placeholder{color:rgba(255,255,255,0.45)}
+  .filter-multi{display:none;max-height:320px;overflow-y:auto;padding-right:4px}
+  .filter-multi-actions{display:flex;gap:8px;justify-content:flex-end;margin-bottom:6px}
+  .filter-options{display:grid;gap:6px}
+  .filter-option{display:flex;align-items:center;gap:8px;padding:2px 0;color:var(--text);font-size:0.85rem}
+  .filter-option input{margin:0}
+  .filter-option-label{flex:1;min-width:0}
+  .filter-option-count{margin-left:auto;color:var(--muted);font-size:0.75rem}
+  .filter-empty{margin:0;color:var(--muted);font-size:0.85rem}
   .filter-popover .filter-actions{display:flex;gap:8px;justify-content:flex-end}
   .filter-popover button{padding:6px 12px;font-size:0.85rem;border-radius:6px;border:1px solid var(--card-border);background:transparent;color:var(--muted);cursor:pointer}
   .filter-popover button.apply{background:var(--accent);border-color:var(--accent);color:#fff}
   .filter-popover button:hover{border-color:var(--accent);color:#fff}
-  th.filterable{cursor:pointer;padding-right:34px}
-  th.filterable::after{content:'\1F50D';position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:0.9rem;opacity:0.5}
-  th.filterable.filtered::after{opacity:1}
     footer.site-footer{margin-top:auto;padding:24px 5vw 32px;color:var(--muted);font-size:0.85rem;text-align:center}
     @media(max-width:1200px){
       .layout{max-width:1040px}
@@ -169,6 +182,15 @@
     const REPO = 'my-web';
     const DATA_REF = 'data';
 
+    function extractSymbolRoot(value){
+      if(value == null) return '';
+      const text = String(value).trim();
+      if(!text) return '';
+      const match = text.match(/^[A-Za-z^]+/);
+      const base = match ? match[0] : text;
+      return base.replace(/^\^/, '').toUpperCase();
+    }
+
   const statusEl = document.getElementById('status');
   const downloadsContainer = document.getElementById('downloads');
   const downloadsEl = document.getElementById('download-list');
@@ -204,9 +226,9 @@
           { key: '52W Low', label: '52W Low', decorate: 'number' }
         ],
         sortKey: 'Ticker',
-        filterKey: 'Ticker',
-        filterLabel: 'Filter Ticker',
-        filterPlaceholder: '輸入股票代號 (例如 NVDA)'
+        filters: [
+          { key: 'Ticker', type: 'text', label: 'Filter Ticker', placeholder: '輸入股票代號 (例如 NVDA)' }
+        ]
       },
       {
         id: 'active',
@@ -228,9 +250,10 @@
           { key: 'Demanda', label: 'Ask', decorate: 'number' }
         ],
         sortKey: 'Symbol',
-        filterKey: 'Underlying',
-        filterLabel: 'Filter Underlying',
-        filterPlaceholder: '輸入標的代號 (例如 NVDA)'
+        filters: [
+          { key: 'Underlying', type: 'text', label: 'Filter Underlying', placeholder: '輸入標的代號 (例如 NVDA)' },
+          { key: 'Symbol', type: 'multi-select', label: 'Symbol Groups', transform: extractSymbolRoot, emptyLabel: '未提供' }
+        ]
       },
       {
         id: 'oi',
@@ -251,10 +274,11 @@
           { key: 'Bid', label: 'Bid', decorate: 'number' },
           { key: 'Ask', label: 'Ask', decorate: 'number' }
         ],
-        sortKey: 'Underlying',
-        filterKey: 'Underlying',
-        filterLabel: 'Filter Underlying',
-        filterPlaceholder: '輸入標的代號 (例如 NVDA)'
+        sortKey: 'Symbol',
+        filters: [
+          { key: 'Underlying', type: 'text', label: 'Filter Underlying', placeholder: '輸入標的代號 (例如 NVDA)' },
+          { key: 'Symbol', type: 'multi-select', label: 'Symbol Groups', transform: extractSymbolRoot, emptyLabel: '未提供' }
+        ]
       }
     ];
 
@@ -373,14 +397,46 @@
 
       const popover = document.createElement('div');
       popover.className = 'filter-popover';
-  const label = document.createElement('label');
-  label.textContent = source.filterLabel || 'Filter';
-      popover.appendChild(label);
+      const titleEl = document.createElement('div');
+      titleEl.className = 'filter-title';
+      titleEl.textContent = 'Filter';
+      popover.appendChild(titleEl);
 
+      const textWrap = document.createElement('div');
+      textWrap.className = 'filter-text';
       const input = document.createElement('input');
       input.type = 'text';
-  input.placeholder = source.filterPlaceholder || '輸入關鍵字以篩選';
-      popover.appendChild(input);
+      input.placeholder = '輸入關鍵字以篩選';
+      textWrap.appendChild(input);
+  textWrap.style.display = 'none';
+      popover.appendChild(textWrap);
+
+      const multiWrap = document.createElement('div');
+      multiWrap.className = 'filter-multi';
+  multiWrap.style.display = 'none';
+
+      const multiActions = document.createElement('div');
+      multiActions.className = 'filter-multi-actions';
+
+      const selectAllBtn = document.createElement('button');
+      selectAllBtn.type = 'button';
+      selectAllBtn.textContent = 'Select All';
+  selectAllBtn.disabled = true;
+      multiActions.appendChild(selectAllBtn);
+
+      const selectNoneBtn = document.createElement('button');
+      selectNoneBtn.type = 'button';
+      selectNoneBtn.textContent = 'Select None';
+  selectNoneBtn.disabled = true;
+      multiActions.appendChild(selectNoneBtn);
+
+      multiWrap.appendChild(multiActions);
+
+      const optionsEl = document.createElement('div');
+      optionsEl.className = 'filter-options';
+      multiWrap.appendChild(optionsEl);
+
+      popover.appendChild(multiWrap);
 
       const actions = document.createElement('div');
       actions.className = 'filter-actions';
@@ -403,19 +459,30 @@
       const record = { section, statusEl: status, downloadEl: download, tableEl: tableWrap, paginationEl: pagination };
       record.filterPopover = {
         el: popover,
+        label: titleEl,
+        textWrap,
         input,
+        multiWrap,
+        optionsEl,
+        selectAllBtn,
+        selectNoneBtn,
         applyBtn,
         clearBtn,
         anchorEl: null,
+        triggerEl: null,
+        activeIndex: null,
+        activeType: null,
         open: false,
         onClickAway: null
       };
+      record.stateId = source.id;
       const stateKey = source.id;
       input.addEventListener('keydown', evt => {
         if(evt.key === 'Enter'){
           const state = dataStates.get(stateKey);
-          if(state){
-            applyFilter(state, record, input.value);
+          const pop = record.filterPopover;
+          if(state && pop.activeType === 'text' && pop.activeIndex !== null){
+            applyTextFilter(state, record, pop.activeIndex, input.value, true);
           }
           evt.preventDefault();
         } else if(evt.key === 'Escape'){
@@ -425,23 +492,60 @@
       });
       input.addEventListener('input', () => {
         const state = dataStates.get(stateKey);
-        if(state){
-          applyFilter(state, record, input.value);
+        const pop = record.filterPopover;
+        if(state && pop.activeType === 'text' && pop.activeIndex !== null){
+          applyTextFilter(state, record, pop.activeIndex, input.value, false);
         }
       });
       clearBtn.addEventListener('click', () => {
-        input.value = '';
         const state = dataStates.get(stateKey);
-        if(state){
-          applyFilter(state, record, '');
+        const pop = record.filterPopover;
+        if(!state || pop.activeIndex === null) return;
+        if(pop.activeType === 'text'){
+          input.value = '';
         }
-        input.focus();
+        resetFilter(state, record, pop.activeIndex);
+        if(pop.activeType === 'text'){
+          input.focus();
+        }
       });
       applyBtn.addEventListener('click', () => {
         const state = dataStates.get(stateKey);
-        if(state){
-          applyFilter(state, record, input.value);
+        const pop = record.filterPopover;
+        if(!state) return;
+        if(pop.activeType === 'text' && pop.activeIndex !== null){
+          applyTextFilter(state, record, pop.activeIndex, input.value, true);
+        } else {
+          closeFilterPopover(record);
         }
+      });
+
+      optionsEl.addEventListener('change', evt => {
+        const target = evt.target;
+        if(!(target instanceof HTMLInputElement)) return;
+        if(target.type !== 'checkbox') return;
+        const state = dataStates.get(stateKey);
+        const pop = record.filterPopover;
+        if(!state || pop.activeIndex === null || pop.activeType !== 'multi-select') return;
+        const value = target.dataset.optionValue || '';
+        setMultiSelection(state, record, pop.activeIndex, value, target.checked);
+        syncMultiOptionChecks(pop, state, pop.activeIndex);
+      });
+
+      selectAllBtn.addEventListener('click', () => {
+        const state = dataStates.get(stateKey);
+        const pop = record.filterPopover;
+        if(!state || pop.activeIndex === null || pop.activeType !== 'multi-select') return;
+        selectAllOptions(state, record, pop.activeIndex);
+        renderMultiSelectOptions(pop, state, pop.activeIndex);
+      });
+
+      selectNoneBtn.addEventListener('click', () => {
+        const state = dataStates.get(stateKey);
+        const pop = record.filterPopover;
+        if(!state || pop.activeIndex === null || pop.activeType !== 'multi-select') return;
+        deselectAllOptions(state, record, pop.activeIndex);
+        renderMultiSelectOptions(pop, state, pop.activeIndex);
       });
       sections.set(source.id, record);
 
@@ -468,23 +572,51 @@
       const headerRow = document.createElement('tr');
       headers.forEach((h, idx) => {
         const th = document.createElement('th');
-        th.textContent = h;
+        th.dataset.columnIndex = String(idx);
+
+        const thContent = document.createElement('div');
+        thContent.className = 'th-content';
+
+        const labelSpan = document.createElement('span');
+        labelSpan.className = 'header-label';
+        labelSpan.textContent = h;
+        thContent.appendChild(labelSpan);
+
+        const filterState = getFilterState(state, idx);
+        if(filterState){
+          th.classList.add('filterable');
+          if(isFilterActive(filterState)){
+            th.classList.add('filtered');
+          }
+          const filterBtn = document.createElement('button');
+          filterBtn.type = 'button';
+          filterBtn.className = 'filter-trigger';
+          filterBtn.dataset.filterIndex = String(idx);
+          filterBtn.title = filterState.label || 'Filter';
+          filterBtn.textContent = 'Filter';
+          filterBtn.setAttribute('aria-label', filterState.label || 'Filter');
+          if(isFilterActive(filterState)){
+            filterBtn.classList.add('active');
+          }
+          filterBtn.addEventListener('click', evt => {
+            evt.stopPropagation();
+            toggleFilterPopover(view, state, idx, th, filterBtn);
+          });
+          thContent.appendChild(filterBtn);
+        }
+
+        th.appendChild(thContent);
+
         if(idx === state.sortableIndex){
           th.classList.add('sortable');
           if(state.sortDirection === 'asc') th.classList.add('sorted-asc');
           if(state.sortDirection === 'desc') th.classList.add('sorted-desc');
-          th.addEventListener('click', () => toggleSymbolSort(state, view));
-        }
-        if(idx === state.filterIndex){
-          th.classList.add('filterable');
-          if(state.filterTerm){
-            th.classList.add('filtered');
-          }
           th.addEventListener('click', evt => {
-            evt.stopPropagation();
-            toggleFilterPopover(view, state, th);
+            if(evt.target instanceof HTMLElement && evt.target.classList.contains('filter-trigger')) return;
+            toggleSymbolSort(state, view);
           });
         }
+
         headerRow.appendChild(th);
       });
       thead.appendChild(headerRow);
@@ -578,8 +710,35 @@
 
     function positionFilterPopover(view){
       const pop = view.filterPopover;
-      if(!pop || !pop.open || !pop.anchorEl) return;
-      const anchorRect = pop.anchorEl.getBoundingClientRect();
+      if(!pop || !pop.open) return;
+      if(pop.anchorEl && !document.contains(pop.anchorEl)){
+        let fallback = null;
+        if(pop.activeIndex !== null && pop.activeIndex !== undefined){
+          fallback = view.tableEl.querySelector(`th[data-column-index="${pop.activeIndex}"]`);
+        }
+        if(!fallback){
+          fallback = view.tableEl.querySelector('th.filterable');
+        }
+        if(fallback){
+          pop.anchorEl = fallback;
+        } else {
+          closeFilterPopover(view);
+          return;
+        }
+      }
+      if(!pop.anchorEl) return;
+      let anchorRect = pop.anchorEl.getBoundingClientRect();
+      if(anchorRect.width === 0 && anchorRect.height === 0){
+        const header = view.tableEl.querySelector(`th[data-column-index="${pop.activeIndex}"]`);
+        if(header){
+          pop.anchorEl = header;
+          anchorRect = header.getBoundingClientRect();
+        }
+      }
+      if(anchorRect.width === 0 && anchorRect.height === 0){
+        closeFilterPopover(view);
+        return;
+      }
       const margin = 12;
       const popRect = pop.el.getBoundingClientRect();
       const width = popRect.width || pop.el.offsetWidth || 240;
@@ -605,41 +764,194 @@
       pop.open = false;
       pop.el.classList.remove('open');
       pop.anchorEl = null;
+      if(pop.triggerEl){
+        pop.triggerEl.classList.remove('active');
+        pop.triggerEl = null;
+      }
+      pop.activeIndex = null;
+      pop.activeType = null;
       if(pop.onClickAway){
         document.removeEventListener('click', pop.onClickAway, true);
         pop.onClickAway = null;
       }
     }
 
-    function applyFilter(state, view, value){
-      state.filterTerm = value.trim();
-      if(view.filterPopover){
-        view.filterPopover.input.value = state.filterTerm;
+    function getFilterState(state, index){
+      if(!state || !state.filters) return null;
+      return state.filters.get(index) || null;
+    }
+
+    function isFilterActive(filterState){
+      if(!filterState) return false;
+      if(filterState.type === 'text'){
+        return Boolean(filterState.term && filterState.term.trim());
+      }
+      if(filterState.type === 'multi-select'){
+        return Boolean(filterState.excluded && filterState.excluded.size);
+      }
+      return false;
+    }
+
+    function applyTextFilter(state, view, index, value, closeAfter){
+      const filterState = getFilterState(state, index);
+      if(!filterState || filterState.type !== 'text') return;
+      filterState.term = (value || '').trim();
+      state.page = 0;
+      updateSectionView(view, state);
+      if(closeAfter) closeFilterPopover(view);
+    }
+
+    function resetFilter(state, view, index){
+      const filterState = getFilterState(state, index);
+      if(!filterState) return;
+      if(filterState.type === 'text'){
+        filterState.term = '';
+        if(view.filterPopover){
+          view.filterPopover.input.value = '';
+        }
+      } else if(filterState.type === 'multi-select'){
+        filterState.excluded.clear();
+      }
+      state.page = 0;
+      updateSectionView(view, state);
+      if(filterState.type === 'multi-select' && view.filterPopover){
+        syncMultiOptionChecks(view.filterPopover, state, index);
+      }
+    }
+
+    function setMultiSelection(state, view, index, optionValue, isChecked){
+      const filterState = getFilterState(state, index);
+      if(!filterState || filterState.type !== 'multi-select') return;
+      if(isChecked){
+        filterState.excluded.delete(optionValue);
+      } else {
+        filterState.excluded.add(optionValue);
       }
       state.page = 0;
       updateSectionView(view, state);
     }
 
-    function toggleFilterPopover(view, state, headerEl){
+    function selectAllOptions(state, view, index){
+      const filterState = getFilterState(state, index);
+      if(!filterState || filterState.type !== 'multi-select') return;
+      filterState.excluded.clear();
+      state.page = 0;
+      updateSectionView(view, state);
+      if(view.filterPopover){
+        syncMultiOptionChecks(view.filterPopover, state, index);
+      }
+    }
+
+    function deselectAllOptions(state, view, index){
+      const filterState = getFilterState(state, index);
+      if(!filterState || filterState.type !== 'multi-select') return;
+      filterState.excluded.clear();
+      (filterState.options || []).forEach(opt => {
+        filterState.excluded.add(opt.value);
+      });
+      state.page = 0;
+      updateSectionView(view, state);
+      if(view.filterPopover){
+        syncMultiOptionChecks(view.filterPopover, state, index);
+      }
+    }
+
+    function renderMultiSelectOptions(pop, state, index){
+      const filterState = getFilterState(state, index);
+      if(!filterState || filterState.type !== 'multi-select') return;
+      const container = pop.optionsEl;
+      container.innerHTML = '';
+      const options = filterState.options || [];
+      if(!options.length){
+        const empty = document.createElement('p');
+        empty.className = 'filter-empty';
+        empty.textContent = '沒有可用選項';
+        container.appendChild(empty);
+        pop.selectAllBtn.disabled = true;
+        pop.selectNoneBtn.disabled = true;
+        return;
+      }
+      pop.selectAllBtn.disabled = false;
+      pop.selectNoneBtn.disabled = false;
+      options.forEach(opt => {
+        const optionLabel = document.createElement('label');
+        optionLabel.className = 'filter-option';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.dataset.optionValue = opt.value;
+        checkbox.checked = !filterState.excluded.has(opt.value);
+        optionLabel.appendChild(checkbox);
+        const text = document.createElement('span');
+        text.className = 'filter-option-label';
+        text.textContent = opt.label || opt.value || filterState.emptyLabel || '未提供';
+        optionLabel.appendChild(text);
+        if(typeof opt.count === 'number'){
+          const count = document.createElement('span');
+          count.className = 'filter-option-count';
+          count.textContent = opt.count;
+          optionLabel.appendChild(count);
+        }
+        container.appendChild(optionLabel);
+      });
+    }
+
+    function syncMultiOptionChecks(pop, state, index){
+      const filterState = getFilterState(state, index);
+      if(!filterState || filterState.type !== 'multi-select') return;
+      const boxes = pop.optionsEl.querySelectorAll('input[type="checkbox"]');
+      boxes.forEach(box => {
+        const value = box.dataset.optionValue || '';
+        box.checked = !filterState.excluded.has(value);
+      });
+    }
+
+    function toggleFilterPopover(view, state, columnIndex, headerEl, triggerEl){
       const pop = view.filterPopover;
       if(!pop) return;
-      if(!state) return;
-      if(pop.open && pop.anchorEl === headerEl){
+      const filterState = getFilterState(state, columnIndex);
+      if(!filterState) return;
+      if(pop.open && pop.activeIndex === columnIndex){
         closeFilterPopover(view);
         return;
       }
+      if(pop.open){
+        closeFilterPopover(view);
+      }
       pop.open = true;
       pop.anchorEl = headerEl;
-      pop.input.value = state.filterTerm;
+      pop.triggerEl = triggerEl || headerEl;
+      pop.activeIndex = columnIndex;
+      pop.activeType = filterState.type;
       pop.el.classList.add('open');
+      if(pop.triggerEl){
+        pop.triggerEl.classList.add('active');
+      }
+      pop.label.textContent = filterState.label || 'Filter';
+      if(filterState.type === 'text'){
+        pop.textWrap.style.display = 'block';
+        pop.multiWrap.style.display = 'none';
+        pop.input.placeholder = filterState.placeholder || '輸入關鍵字以篩選';
+        pop.input.value = filterState.term || '';
+        pop.clearBtn.textContent = 'Clear';
+        pop.applyBtn.textContent = 'Apply';
+        setTimeout(() => pop.input.focus({ preventScroll: true }), 0);
+      } else if(filterState.type === 'multi-select'){
+        pop.textWrap.style.display = 'none';
+        pop.multiWrap.style.display = 'block';
+        pop.clearBtn.textContent = 'Reset';
+        pop.applyBtn.textContent = 'Done';
+        renderMultiSelectOptions(pop, state, columnIndex);
+      } else {
+        pop.textWrap.style.display = 'none';
+        pop.multiWrap.style.display = 'none';
+      }
       positionFilterPopover(view);
-      setTimeout(() => pop.input.focus({ preventScroll: true }), 0);
 
       if(pop.onClickAway){
         document.removeEventListener('click', pop.onClickAway, true);
       }
       pop.onClickAway = (event) => {
-        if(!pop.el.contains(event.target) && event.target !== headerEl){
+        if(!pop.el.contains(event.target) && event.target !== triggerEl && event.target !== headerEl){
           closeFilterPopover(view);
         }
       };
@@ -733,18 +1045,77 @@
       if(sortableIndex < 0){
         sortableIndex = columnMeta.findIndex(meta => normalizeKey(meta.label).includes('symbol'));
       }
-      let filterIndex = findTargetIndex(source.filterKey);
-      if(filterIndex < 0){
-        filterIndex = columnMeta.findIndex(meta => normalizeKey(meta.label).includes('underlying'));
+
+      const filterConfigs = new Map();
+      const filterSpecs = Array.isArray(source.filters) ? source.filters.slice() : [];
+      if(!filterSpecs.length && (source.filterKey || source.filterLabel || source.filterPlaceholder)){
+        filterSpecs.push({
+          key: source.filterKey,
+          label: source.filterLabel,
+          placeholder: source.filterPlaceholder,
+          type: 'text'
+        });
       }
+      filterSpecs.forEach(spec => {
+        if(!spec) return;
+        const specKey = spec.key || spec.label;
+        const idx = findTargetIndex(specKey);
+        if(idx < 0) return;
+        const config = {
+          type: spec.type === 'multi-select' ? 'multi-select' : 'text',
+          label: spec.label || 'Filter',
+          placeholder: spec.placeholder || '輸入關鍵字以篩選',
+          key: specKey || '',
+          transform: typeof spec.transform === 'function' ? spec.transform : null,
+          emptyLabel: spec.emptyLabel || ''
+        };
+        filterConfigs.set(idx, config);
+      });
       return {
         headers: displayHeaders,
         rows: dataRows,
         indices,
         sortableIndex,
-        filterIndex,
-        decorators: columnMeta.map(meta => meta.decorator || null)
+        decorators: columnMeta.map(meta => meta.decorator || null),
+        filterConfigs
       };
+    }
+
+    function createFilters(display){
+      const filters = new Map();
+      if(!display || !(display.filterConfigs instanceof Map) || display.filterConfigs.size === 0) return filters;
+      display.filterConfigs.forEach((config, index) => {
+        if(!config) return;
+        const filterState = {
+          type: config.type === 'multi-select' ? 'multi-select' : 'text',
+          label: config.label || 'Filter',
+          placeholder: config.placeholder || '輸入關鍵字以篩選',
+          key: config.key || '',
+          transform: typeof config.transform === 'function' ? config.transform : null,
+          emptyLabel: config.emptyLabel || ''
+        };
+        if(filterState.type === 'multi-select'){
+          const transform = filterState.transform || ((value) => value);
+          const counts = new Map();
+          (display.rows || []).forEach(row => {
+            const raw = row[index];
+            const derived = transform(raw, row);
+            const normalized = derived == null ? '' : String(derived).trim();
+            const label = normalized || filterState.emptyLabel || '未提供';
+            if(counts.has(normalized)){
+              counts.get(normalized).count += 1;
+            } else {
+              counts.set(normalized, { value: normalized, label, count: 1 });
+            }
+          });
+          filterState.options = Array.from(counts.values()).sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: 'base' }));
+          filterState.excluded = new Set();
+        } else {
+          filterState.term = '';
+        }
+        filters.set(index, filterState);
+      });
+      return filters;
     }
 
     function computeRows(state){
@@ -755,7 +1126,29 @@
           rows = rows.filter(row => row.some(cell => normalizeKey(cell).includes(term)));
         }
       }
-      if(state.filterTerm && typeof state.filterIndex === 'number' && state.filterIndex >= 0){
+      if(state.filters && state.filters.size){
+        state.filters.forEach((filterState, index) => {
+          if(!filterState) return;
+          if(filterState.type === 'text'){
+            const term = normalizeKey(filterState.term);
+            if(term){
+              rows = rows.filter(row => normalizeKey(row[index]).includes(term));
+            }
+          } else if(filterState.type === 'multi-select'){
+            if(filterState.excluded && filterState.excluded.size){
+              const transform = typeof filterState.transform === 'function'
+                ? filterState.transform
+                : (value) => value;
+              rows = rows.filter(row => {
+                const raw = row[index];
+                const derived = transform(raw, row);
+                const normalized = derived == null ? '' : String(derived).trim();
+                return !filterState.excluded.has(normalized);
+              });
+            }
+          }
+        });
+      } else if(state.filterTerm && typeof state.filterIndex === 'number' && state.filterIndex >= 0){
         const term = normalizeKey(state.filterTerm);
         rows = rows.filter(row => normalizeKey(row[state.filterIndex]).includes(term));
       }
@@ -863,9 +1256,21 @@
       renderTable(view, state, pageRows);
       renderPagination(view, state);
       if(view.filterPopover && view.filterPopover.open){
-        const header = view.tableEl.querySelector('th.filterable');
+        const pop = view.filterPopover;
+        let header = null;
+        if(pop.activeIndex !== null && pop.activeIndex !== undefined){
+          header = view.tableEl.querySelector(`th[data-column-index="${pop.activeIndex}"]`);
+        }
+        if(!header){
+          header = view.tableEl.querySelector('th.filterable');
+        }
         if(header){
-          view.filterPopover.anchorEl = header;
+          pop.anchorEl = header;
+          const trigger = header.querySelector('.filter-trigger');
+          if(trigger){
+            pop.triggerEl = trigger;
+            trigger.classList.add('active');
+          }
           positionFilterPopover(view);
         }
       }
@@ -923,16 +1328,17 @@
           page: 0,
           pageSize: PAGE_SIZE,
           sortableIndex: display.sortableIndex,
-          filterIndex: display.filterIndex,
           sortDirection: null,
-          filterTerm: '',
           searchTerm: globalSearchTerm,
           currentRows: null,
-          decorators: display.decorators
+          decorators: display.decorators,
+          filters: createFilters(display)
         };
         dataStates.set(source.id, state);
         if(view.filterPopover){
-          view.filterPopover.input.value = state.filterTerm;
+          view.filterPopover.input.value = '';
+          view.filterPopover.textWrap.style.display = 'none';
+          view.filterPopover.multiWrap.style.display = 'none';
         }
 
         updateSectionView(view, state);
@@ -990,16 +1396,17 @@
           page: 0,
           pageSize: PAGE_SIZE,
           sortableIndex: display.sortableIndex,
-          filterIndex: display.filterIndex,
           sortDirection: null,
-          filterTerm: '',
           searchTerm: globalSearchTerm,
           currentRows: null,
-          decorators: display.decorators
+          decorators: display.decorators,
+          filters: createFilters(display)
         };
         dataStates.set(source.id, state);
         if(view.filterPopover){
-          view.filterPopover.input.value = state.filterTerm;
+          view.filterPopover.input.value = '';
+          view.filterPopover.textWrap.style.display = 'none';
+          view.filterPopover.multiWrap.style.display = 'none';
         }
         updateSectionView(view, state);
         if(display.headers.length && display.rows.length){
