@@ -29,8 +29,8 @@
     .header-actions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
     .link-button{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:500}
     .link-button:hover{background:var(--accent);color:#fff;text-decoration:none}
-  main.content{flex:1;width:100%;margin:0;padding:0 5vw 56px}
-  .layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;align-items:start;max-width:1360px;width:100%}
+  main.content{flex:1;width:100%;margin:0;padding:0 32px 56px}
+  .layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px;align-items:start;width:100%;max-width:1200px;margin:0}
   aside.sidebar{position:sticky;top:112px;align-self:start;background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 20px;box-shadow:0 18px 32px rgba(0,0,0,0.35);min-width:0}
   .sidebar-inner{display:flex;flex-direction:column;gap:16px}
   .sidebar h2{margin:0;color:#f1f6ff;font-size:1.1rem;font-weight:600}
@@ -52,17 +52,21 @@
     #download-list ul{margin:0;padding-left:16px;display:grid;gap:8px}
     #download-list li{list-style:disc}
   #sources{display:grid;gap:28px}
-  section.source{background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 28px;scroll-margin-top:120px;box-shadow:0 18px 32px rgba(0,0,0,0.35)}
-    section.source h2{margin:0;font-size:1.4rem;font-weight:600}
-    section.source p.desc{margin:8px 0 16px;color:var(--muted)}
+  section.source{background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 26px;scroll-margin-top:120px;box-shadow:0 18px 32px rgba(0,0,0,0.35)}
+  section.source h2{margin:0;font-size:1.25rem;font-weight:600}
+  section.source p.desc{margin:6px 0 14px;color:var(--muted)}
     section.source .section-status{margin:0 0 12px;font-size:0.9rem;color:var(--muted)}
     section.source .download{margin-bottom:16px}
     section.source .download a{font-weight:500}
-    section.source .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--card-border);background:#0e182b}
-    table{width:100%;border-collapse:collapse;min-width:720px}
+  section.source .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--card-border);background:#0e182b;max-width:90%;margin:0 auto}
+  table{width:100%;border-collapse:collapse;min-width:680px}
     thead{background:rgba(255,255,255,0.04)}
     th,td{padding:12px 16px;text-align:left;font-size:0.95rem;border-bottom:1px solid rgba(255,255,255,0.05)}
-    th{font-weight:600;color:#f1f6ff;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em}
+  th{font-weight:600;color:#f1f6ff;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em;position:relative}
+  th.sortable{cursor:pointer;padding-right:28px}
+  th.sortable::after{content:'';position:absolute;right:12px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-top-color:rgba(255,255,255,0.4)}
+  th.sortable.sorted-asc::after{border-top-color:#fff;transform:translateY(-50%) rotate(180deg)}
+  th.sortable.sorted-desc::after{border-top-color:#fff}
     tbody tr:nth-child(even){background:var(--table-stripe)}
     tbody tr:hover{background:rgba(79,155,255,0.12)}
   .pagination{display:flex;align-items:center;justify-content:space-between;padding:18px 0 0;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:0.9rem}
@@ -152,18 +156,18 @@
         path: 'testing/active',
         dataUrl: 'data/active.json',
         displayColumns: [
-          'Símbolo',
-          'Nombre',
-          'Símbolo subyacente',
-          'Precio de ejercicio',
-          'Expiration Date',
-          'Precio',
-          'Cambio',
-          'Cambio (%)',
-          'Oferta',
-          'Demanda',
-          'Volumen',
-          'Open Interest'
+          { key: 'Símbolo', label: 'Symbol' },
+          { key: 'Nombre', label: 'Name' },
+          { key: 'Símbolo subyacente', label: 'Underlying' },
+          { key: 'Precio de ejercicio', label: 'Strike' },
+          { key: 'Expiration Date', label: 'Expiration' },
+          { key: 'Precio', label: 'Price' },
+          { key: 'Cambio', label: 'Change' },
+          { key: 'Cambio (%)', label: 'Change (%)' },
+          { key: 'Oferta', label: 'Bid' },
+          { key: 'Demanda', label: 'Ask' },
+          { key: 'Volumen', label: 'Volume' },
+          { key: 'Open Interest', label: 'Open Interest' }
         ],
         xlsxPattern: /^Mostactive-.*\.xlsx$/i
       },
@@ -284,10 +288,12 @@
       return record;
     }
 
-    function renderTable(container, headers, rows){
+    function renderTable(view, state, rows){
+      const container = view.tableEl;
       container.innerHTML = '';
+      const headers = state.headers;
       if(!headers || headers.length === 0){
-        container.textContent = '沒有資料';
+        container.textContent = 'No data available';
         return;
       }
       const table = document.createElement('table');
@@ -295,9 +301,15 @@
       const tbody = document.createElement('tbody');
 
       const headerRow = document.createElement('tr');
-      headers.forEach(h => {
+      headers.forEach((h, idx) => {
         const th = document.createElement('th');
         th.textContent = h;
+        if(idx === state.sortableIndex){
+          th.classList.add('sortable');
+          if(state.sortDirection === 'asc') th.classList.add('sorted-asc');
+          if(state.sortDirection === 'desc') th.classList.add('sorted-desc');
+          th.addEventListener('click', () => toggleSymbolSort(state, view));
+        }
         headerRow.appendChild(th);
       });
       thead.appendChild(headerRow);
@@ -317,6 +329,29 @@
       container.appendChild(table);
     }
 
+    function toggleSymbolSort(state, view){
+      if(typeof state.sortableIndex !== 'number' || state.sortableIndex < 0) return;
+      const nextDirection = state.sortDirection === 'asc' ? 'desc' : state.sortDirection === 'desc' ? null : 'asc';
+      state.sortDirection = nextDirection;
+
+      if(nextDirection){
+        const sorted = [...state.rows].sort((a, b) => {
+          const av = String(a[state.sortableIndex] ?? '').toUpperCase();
+          const bv = String(b[state.sortableIndex] ?? '').toUpperCase();
+          if(av < bv) return -1;
+          if(av > bv) return 1;
+          return 0;
+        });
+        if(nextDirection === 'desc') sorted.reverse();
+        state.sortedRows = sorted;
+      } else {
+        state.sortedRows = null;
+      }
+
+      state.page = 0;
+      updateSectionView(view, state);
+    }
+
     function pickLatest(files, pattern){
       if(!files) return null;
       const matches = files.filter(it => it.type === 'file' && pattern.test(it.name));
@@ -332,28 +367,40 @@
         .filter(row => row.length && row.some(cell => `${cell}`.trim() !== ''));
     }
 
+    function normalizeKey(value){
+      return String(value ?? '').trim().toLowerCase();
+    }
+
     function buildDisplay(rows, source){
       if(!rows || rows.length === 0) return { headers: [], rows: [], indices: [] };
       const headers = rows[0];
       const wanted = Array.isArray(source.displayColumns) ? source.displayColumns : [];
       const indices = [];
+      const labels = [];
       if(wanted.length){
-        const lowered = headers.map(h => String(h || '').trim().toLowerCase());
+        const lowered = headers.map(h => normalizeKey(h));
         wanted.forEach(col => {
-          const idx = lowered.indexOf(String(col || '').trim().toLowerCase());
-          if(idx >= 0) indices.push(idx);
+          const entry = typeof col === 'string' ? { key: col } : (col || {});
+          const idx = lowered.indexOf(normalizeKey(entry.key ?? entry.label ?? ''));
+          if(idx >= 0){
+            indices.push(idx);
+            labels.push(entry.label || headers[idx] || '');
+          }
         });
       }
       if(!indices.length){
         for(let i=0;i<headers.length;i++){ indices.push(i); }
       }
-      const displayHeaders = indices.map(i => headers[i] ?? '');
+      const displayHeaders = labels.length === indices.length && labels.length
+        ? labels
+        : indices.map(i => headers[i] ?? '');
       const dataRows = [];
       for(let i=1;i<rows.length;i++){
         const srcRow = rows[i] || [];
         dataRows.push(indices.map(idx => srcRow[idx] ?? ''));
       }
-      return { headers: displayHeaders, rows: dataRows, indices };
+      const sortableIndex = displayHeaders.findIndex(label => normalizeKey(label).includes('symbol'));
+      return { headers: displayHeaders, rows: dataRows, indices, sortableIndex };
     }
 
     function buildPageRange(totalPages, current){
@@ -382,7 +429,8 @@
     }
 
     function renderPagination(view, state){
-      const totalRows = state.rows.length;
+      const sourceRows = state.sortedRows || state.rows;
+      const totalRows = sourceRows.length;
       const totalPages = totalRows === 0 ? 1 : Math.ceil(totalRows / state.pageSize);
       if(state.page >= totalPages) state.page = Math.max(0, totalPages - 1);
 
@@ -427,7 +475,7 @@
         if(idx > 0 && page - pageNumbers[idx - 1] > 1){
           const ellipsis = document.createElement('span');
           ellipsis.className = 'ellipsis';
-          ellipsis.textContent = '…';
+          ellipsis.textContent = '...';
           controls.appendChild(ellipsis);
         }
         createButton(String(page + 1), page, disableNav, page === state.page ? 'current' : '');
@@ -438,9 +486,10 @@
     }
 
     function updateSectionView(view, state){
+      const sourceRows = state.sortedRows || state.rows;
       const start = state.page * state.pageSize;
-      const pageRows = state.rows.slice(start, start + state.pageSize);
-      renderTable(view.tableEl, state.headers, pageRows);
+      const pageRows = sourceRows.slice(start, start + state.pageSize);
+      renderTable(view, state, pageRows);
       renderPagination(view, state);
     }
 
@@ -494,7 +543,10 @@
           headers: display.headers,
           rows: display.rows,
           page: 0,
-          pageSize: PAGE_SIZE
+          pageSize: PAGE_SIZE,
+          sortableIndex: display.sortableIndex,
+          sortDirection: null,
+          sortedRows: null
         };
         dataStates.set(source.id, state);
 
@@ -547,7 +599,10 @@
           headers: display.headers,
           rows: display.rows,
           page: 0,
-          pageSize: PAGE_SIZE
+          pageSize: PAGE_SIZE,
+          sortableIndex: display.sortableIndex,
+          sortDirection: null,
+          sortedRows: null
         };
         dataStates.set(source.id, state);
         updateSectionView(view, state);
