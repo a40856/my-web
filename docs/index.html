@@ -58,7 +58,7 @@
     section.source .section-status{margin:0 0 12px;font-size:0.9rem;color:var(--muted)}
     section.source .download{margin-bottom:16px}
     section.source .download a{font-weight:500}
-  section.source .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--card-border);background:#0e182b;max-width:90%;margin:0 auto}
+  section.source .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--card-border);background:#0e182b;width:90%;margin:0}
   table{width:100%;border-collapse:collapse;min-width:680px}
     thead{background:rgba(255,255,255,0.04)}
     th,td{padding:12px 16px;text-align:left;font-size:0.95rem;border-bottom:1px solid rgba(255,255,255,0.05)}
@@ -77,6 +77,19 @@
   .pagination button:disabled{opacity:0.35;cursor:not-allowed}
   .pagination button.current{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
   .pagination .ellipsis{display:inline-flex;align-items:center;justify-content:center;padding:0 6px;font-size:0.9rem;color:var(--muted)}
+  section.source{position:relative}
+  .filter-popover{position:absolute;z-index:10;min-width:220px;background:#0f1d33;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 16px;box-shadow:0 16px 32px rgba(0,0,0,0.45);display:none}
+  .filter-popover.open{display:block}
+  .filter-popover label{display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;color:#c5d4ff;text-transform:uppercase;letter-spacing:0.05em}
+  .filter-popover input{width:100%;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:#091324;color:#fff;margin-bottom:10px}
+  .filter-popover input::placeholder{color:rgba(255,255,255,0.45)}
+  .filter-popover .filter-actions{display:flex;gap:8px;justify-content:flex-end}
+  .filter-popover button{padding:6px 12px;font-size:0.85rem;border-radius:6px;border:1px solid var(--card-border);background:transparent;color:var(--muted);cursor:pointer}
+  .filter-popover button.apply{background:var(--accent);border-color:var(--accent);color:#fff}
+  .filter-popover button:hover{border-color:var(--accent);color:#fff}
+  th.filterable{cursor:pointer;padding-right:34px}
+  th.filterable::after{content:'\1F50D';position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:0.9rem;opacity:0.5}
+  th.filterable.filtered::after{opacity:1}
     footer.site-footer{margin-top:auto;padding:24px 5vw 32px;color:var(--muted);font-size:0.85rem;text-align:center}
     @media(max-width:1200px){
       .layout{grid-template-columns:220px 1fr;gap:24px}
@@ -235,6 +248,10 @@
       setActiveNav(SOURCES[0].id);
     }
 
+    window.addEventListener('resize', () => {
+      sections.forEach(view => positionFilterPopover(view));
+    });
+
     async function listFiles(path){
       const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${DATA_REF}`;
       const res = await fetch(url);
@@ -277,8 +294,78 @@
       pagination.className = 'pagination';
       section.appendChild(pagination);
 
+      const popover = document.createElement('div');
+      popover.className = 'filter-popover';
+      const label = document.createElement('label');
+      label.textContent = 'Filter Underlying';
+      popover.appendChild(label);
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Type to filter (e.g. NVDA)';
+      popover.appendChild(input);
+
+      const actions = document.createElement('div');
+      actions.className = 'filter-actions';
+
+      const clearBtn = document.createElement('button');
+      clearBtn.type = 'button';
+      clearBtn.textContent = 'Clear';
+      actions.appendChild(clearBtn);
+
+      const applyBtn = document.createElement('button');
+      applyBtn.type = 'button';
+      applyBtn.className = 'apply';
+      applyBtn.textContent = 'Apply';
+      actions.appendChild(applyBtn);
+
+      popover.appendChild(actions);
+      section.appendChild(popover);
+
       sourcesEl.appendChild(section);
       const record = { section, statusEl: status, downloadEl: download, tableEl: tableWrap, paginationEl: pagination };
+      record.filterPopover = {
+        el: popover,
+        input,
+        applyBtn,
+        clearBtn,
+        anchorEl: null,
+        open: false,
+        onClickAway: null
+      };
+      const stateKey = source.id;
+      input.addEventListener('keydown', evt => {
+        if(evt.key === 'Enter'){
+          const state = dataStates.get(stateKey);
+          if(state){
+            applyFilter(state, record, input.value);
+          }
+          evt.preventDefault();
+        } else if(evt.key === 'Escape'){
+          closeFilterPopover(record);
+          evt.preventDefault();
+        }
+      });
+      input.addEventListener('input', () => {
+        const state = dataStates.get(stateKey);
+        if(state){
+          applyFilter(state, record, input.value);
+        }
+      });
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        const state = dataStates.get(stateKey);
+        if(state){
+          applyFilter(state, record, '');
+        }
+        input.focus();
+      });
+      applyBtn.addEventListener('click', () => {
+        const state = dataStates.get(stateKey);
+        if(state){
+          applyFilter(state, record, input.value);
+        }
+      });
       sections.set(source.id, record);
 
       const observer = getSectionObserver();
@@ -310,6 +397,16 @@
           if(state.sortDirection === 'desc') th.classList.add('sorted-desc');
           th.addEventListener('click', () => toggleSymbolSort(state, view));
         }
+        if(idx === state.filterIndex){
+          th.classList.add('filterable');
+          if(state.filterTerm){
+            th.classList.add('filtered');
+          }
+          th.addEventListener('click', evt => {
+            evt.stopPropagation();
+            toggleFilterPopover(view, state, th);
+          });
+        }
         headerRow.appendChild(th);
       });
       thead.appendChild(headerRow);
@@ -333,23 +430,66 @@
       if(typeof state.sortableIndex !== 'number' || state.sortableIndex < 0) return;
       const nextDirection = state.sortDirection === 'asc' ? 'desc' : state.sortDirection === 'desc' ? null : 'asc';
       state.sortDirection = nextDirection;
-
-      if(nextDirection){
-        const sorted = [...state.rows].sort((a, b) => {
-          const av = String(a[state.sortableIndex] ?? '').toUpperCase();
-          const bv = String(b[state.sortableIndex] ?? '').toUpperCase();
-          if(av < bv) return -1;
-          if(av > bv) return 1;
-          return 0;
-        });
-        if(nextDirection === 'desc') sorted.reverse();
-        state.sortedRows = sorted;
-      } else {
-        state.sortedRows = null;
-      }
-
       state.page = 0;
       updateSectionView(view, state);
+    }
+
+    function positionFilterPopover(view){
+      const pop = view.filterPopover;
+      if(!pop || !pop.open || !pop.anchorEl) return;
+      const sectionRect = view.section.getBoundingClientRect();
+      const anchorRect = pop.anchorEl.getBoundingClientRect();
+      const top = anchorRect.bottom - sectionRect.top + 8;
+      const left = anchorRect.left - sectionRect.left;
+      pop.el.style.top = `${top}px`;
+      pop.el.style.left = `${left}px`;
+    }
+
+    function closeFilterPopover(view){
+      const pop = view.filterPopover;
+      if(!pop || !pop.open) return;
+      pop.open = false;
+      pop.el.classList.remove('open');
+      pop.anchorEl = null;
+      if(pop.onClickAway){
+        document.removeEventListener('click', pop.onClickAway, true);
+        pop.onClickAway = null;
+      }
+    }
+
+    function applyFilter(state, view, value){
+      state.filterTerm = value.trim();
+      if(view.filterPopover){
+        view.filterPopover.input.value = state.filterTerm;
+      }
+      state.page = 0;
+      updateSectionView(view, state);
+    }
+
+    function toggleFilterPopover(view, state, headerEl){
+      const pop = view.filterPopover;
+      if(!pop) return;
+      if(!state) return;
+      if(pop.open && pop.anchorEl === headerEl){
+        closeFilterPopover(view);
+        return;
+      }
+      pop.open = true;
+      pop.anchorEl = headerEl;
+      pop.input.value = state.filterTerm;
+      pop.el.classList.add('open');
+      positionFilterPopover(view);
+      setTimeout(() => pop.input.focus({ preventScroll: true }), 0);
+
+      if(pop.onClickAway){
+        document.removeEventListener('click', pop.onClickAway, true);
+      }
+      pop.onClickAway = (event) => {
+        if(!pop.el.contains(event.target) && event.target !== headerEl){
+          closeFilterPopover(view);
+        }
+      };
+      document.addEventListener('click', pop.onClickAway, true);
     }
 
     function pickLatest(files, pattern){
@@ -400,7 +540,28 @@
         dataRows.push(indices.map(idx => srcRow[idx] ?? ''));
       }
       const sortableIndex = displayHeaders.findIndex(label => normalizeKey(label).includes('symbol'));
-      return { headers: displayHeaders, rows: dataRows, indices, sortableIndex };
+      const filterIndex = displayHeaders.findIndex(label => normalizeKey(label).includes('underlying'));
+      return { headers: displayHeaders, rows: dataRows, indices, sortableIndex, filterIndex };
+    }
+
+    function computeRows(state){
+      let rows = state.rows;
+      if(state.filterTerm && typeof state.filterIndex === 'number' && state.filterIndex >= 0){
+        const term = normalizeKey(state.filterTerm);
+        rows = rows.filter(row => normalizeKey(row[state.filterIndex]).includes(term));
+      }
+      if(state.sortDirection && typeof state.sortableIndex === 'number' && state.sortableIndex >= 0){
+        const sorted = [...rows].sort((a, b) => {
+          const av = normalizeKey(a[state.sortableIndex]);
+          const bv = normalizeKey(b[state.sortableIndex]);
+          if(av < bv) return -1;
+          if(av > bv) return 1;
+          return 0;
+        });
+        if(state.sortDirection === 'desc') sorted.reverse();
+        rows = sorted;
+      }
+      return rows;
     }
 
     function buildPageRange(totalPages, current){
@@ -429,7 +590,7 @@
     }
 
     function renderPagination(view, state){
-      const sourceRows = state.sortedRows || state.rows;
+      const sourceRows = state.currentRows || computeRows(state);
       const totalRows = sourceRows.length;
       const totalPages = totalRows === 0 ? 1 : Math.ceil(totalRows / state.pageSize);
       if(state.page >= totalPages) state.page = Math.max(0, totalPages - 1);
@@ -451,7 +612,7 @@
       controls.className = 'page-controls';
       pagination.appendChild(controls);
 
-      const disableNav = totalRows === 0 || totalPages === 1;
+  const disableNav = totalRows === 0 || totalPages === 1;
 
       const createButton = (label, targetPage, disabled, extraClass='') => {
         const btn = document.createElement('button');
@@ -470,7 +631,7 @@
       createButton('<<', 0, disableNav || state.page === 0);
       createButton('<', Math.max(0, state.page - 1), disableNav || state.page === 0);
 
-      const pageNumbers = buildPageRange(totalPages, state.page);
+  const pageNumbers = buildPageRange(totalPages, state.page);
       pageNumbers.forEach((page, idx) => {
         if(idx > 0 && page - pageNumbers[idx - 1] > 1){
           const ellipsis = document.createElement('span');
@@ -486,11 +647,19 @@
     }
 
     function updateSectionView(view, state){
-      const sourceRows = state.sortedRows || state.rows;
+      const effectiveRows = computeRows(state);
+      state.currentRows = effectiveRows;
       const start = state.page * state.pageSize;
-      const pageRows = sourceRows.slice(start, start + state.pageSize);
+      const pageRows = effectiveRows.slice(start, start + state.pageSize);
       renderTable(view, state, pageRows);
       renderPagination(view, state);
+      if(view.filterPopover && view.filterPopover.open){
+        const header = view.tableEl.querySelector('th.filterable');
+        if(header){
+          view.filterPopover.anchorEl = header;
+          positionFilterPopover(view);
+        }
+      }
     }
 
     async function loadStaticData(source){
@@ -545,10 +714,15 @@
           page: 0,
           pageSize: PAGE_SIZE,
           sortableIndex: display.sortableIndex,
+          filterIndex: display.filterIndex,
           sortDirection: null,
-          sortedRows: null
+          filterTerm: '',
+          currentRows: null
         };
         dataStates.set(source.id, state);
+        if(view.filterPopover){
+          view.filterPopover.input.value = state.filterTerm;
+        }
 
         updateSectionView(view, state);
         if(display.headers.length && display.rows.length){
@@ -601,10 +775,15 @@
           page: 0,
           pageSize: PAGE_SIZE,
           sortableIndex: display.sortableIndex,
+          filterIndex: display.filterIndex,
           sortDirection: null,
-          sortedRows: null
+          filterTerm: '',
+          currentRows: null
         };
         dataStates.set(source.id, state);
+        if(view.filterPopover){
+          view.filterPopover.input.value = state.filterTerm;
+        }
         updateSectionView(view, state);
         if(display.headers.length && display.rows.length){
           view.statusEl.textContent = `最新檔案：${picked.name}`;
@@ -624,6 +803,7 @@
       statusEl.textContent = '載入最新資料中…';
       downloadsEl.innerHTML = '';
       dataStates.clear();
+      sections.forEach(view => closeFilterPopover(view));
 
       const results = await Promise.all(SOURCES.map(src => loadSource(src)));
       const available = results.filter(Boolean);
