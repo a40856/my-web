@@ -5,12 +5,28 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>My-Web — Generated Stock Table</title>
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto, "Noto Sans", sans-serif;margin:24px}
-    table{border-collapse:collapse;width:100%;margin-top:12px}
-    th,td{border:1px solid #ddd;padding:6px;text-align:left}
-    th{background:#f4f4f4}
-    .meta{margin-bottom:12px}
-    .links a{margin-right:12px}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",sans-serif;margin:24px;line-height:1.5}
+    table{border-collapse:collapse;width:100%;margin-top:12px;font-size:0.95rem}
+    th,td{border:1px solid #ddd;padding:6px 8px;text-align:left}
+    th{background:#f4f4f4;font-weight:600}
+    .meta{margin-bottom:12px;max-width:720px}
+    .links{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+    #status{font-size:0.95rem;color:#555}
+    #downloads h3{margin:0 0 8px;font-size:1.1rem}
+    #downloads ul{margin:0;padding-left:20px}
+    #downloads li{margin:4px 0}
+    #sources{margin-top:20px}
+    section.source{margin-top:28px;padding:16px 18px;border:1px solid #e0e0e0;border-radius:8px;background:#fafafa}
+    section.source h2{margin:0 0 6px;font-size:1.25rem}
+    section.source p.desc{margin:0 0 8px;font-size:0.95rem;color:#555}
+    section.source .section-status{margin:0 0 8px;font-size:0.9rem;color:#666}
+    section.source .download{margin-bottom:12px}
+    section.source .download a{color:#0b5fff;text-decoration:none}
+    section.source .download a:hover{text-decoration:underline}
+    section.source .table-wrap{overflow-x:auto}
+    button{padding:6px 12px;font-size:0.95rem;border:1px solid #0b5fff;color:#0b5fff;background:#fff;border-radius:4px;cursor:pointer}
+    button:hover{background:#0b5fff;color:#fff}
+    button:disabled{opacity:0.6;cursor:not-allowed}
   </style>
 </head>
 <body>
@@ -24,10 +40,11 @@
 
   <div id="downloads"></div>
 
-  <div id="table-wrap"></div>
+  <div id="sources"></div>
 
   <!-- 使用 PapaParse 從 CSV 轉為 JSON -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.19.3/dist/xlsx.full.min.js"></script>
   <script>
     // Repo info — adjust if you rename repo/owner
     const OWNER = 'a40856';
@@ -36,7 +53,35 @@
 
     const statusEl = document.getElementById('status');
     const downloadsEl = document.getElementById('downloads');
-    const tableWrap = document.getElementById('table-wrap');
+    const sourcesEl = document.getElementById('sources');
+
+    const SOURCES = [
+      {
+        id: 'active',
+        title: '熱門期權（Active）',
+        desc: '整理最後一個交易日的熱門期權流量。',
+        path: 'testing/active',
+        dataUrl: 'data/active.json',
+        xlsxPattern: /^Mostactive-.*\.xlsx$/i
+      },
+      {
+        id: 'history',
+        title: '股票觀察名單（History）',
+        desc: '股票篩選研究的最新觀察名單。',
+        path: 'testing/history',
+        xlsxPattern: /^final_stock_data-.*\.xlsx$/i,
+        csvPattern: /^stock_data-.*\.csv$/i
+      },
+      {
+        id: 'oi',
+        title: '最高未平倉量（OI）',
+        desc: '追蹤未平倉量最高的期權合約供參考。',
+        path: 'testing/OI',
+        xlsxPattern: /^HighestOI-.*\.xlsx$/i
+      }
+    ];
+
+    const sections = new Map();
 
     async function listFiles(path){
       const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${DATA_REF}`;
@@ -45,9 +90,45 @@
       return res.json();
     }
 
-    function renderTable(rows){
-      tableWrap.innerHTML = '';
-      if(!rows || rows.length === 0){ tableWrap.textContent = '沒有資料'; return; }
+    function ensureSection(source){
+      if(sections.has(source.id)) return sections.get(source.id);
+      const section = document.createElement('section');
+      section.className = 'source';
+      section.dataset.source = source.id;
+
+      const h2 = document.createElement('h2');
+      h2.textContent = source.title;
+      section.appendChild(h2);
+
+      if(source.desc){
+        const desc = document.createElement('p');
+        desc.className = 'desc';
+        desc.textContent = source.desc;
+        section.appendChild(desc);
+      }
+
+      const status = document.createElement('p');
+      status.className = 'section-status';
+      status.textContent = '尚未載入';
+      section.appendChild(status);
+
+      const download = document.createElement('div');
+      download.className = 'download';
+      section.appendChild(download);
+
+      const tableWrap = document.createElement('div');
+      tableWrap.className = 'table-wrap';
+      section.appendChild(tableWrap);
+
+      sourcesEl.appendChild(section);
+      const record = { section, statusEl: status, downloadEl: download, tableEl: tableWrap };
+      sections.set(source.id, record);
+      return record;
+    }
+
+    function renderTable(rows, container){
+      container.innerHTML = '';
+      if(!rows || rows.length === 0){ container.textContent = '沒有資料'; return; }
       const table = document.createElement('table');
       const thead = document.createElement('thead');
       const tbody = document.createElement('tbody');
@@ -62,56 +143,151 @@
       }
       table.appendChild(thead);
       table.appendChild(tbody);
-      tableWrap.appendChild(table);
+      container.appendChild(table);
+    }
+
+    function pickLatest(files, pattern){
+      if(!files) return null;
+      const matches = files.filter(it => it.type === 'file' && pattern.test(it.name));
+      if(matches.length === 0) return null;
+      matches.sort((a,b) => a.name.localeCompare(b.name));
+      return matches[matches.length - 1];
+    }
+
+    function cleanRows(rows){
+      if(!Array.isArray(rows)) return [];
+      return rows
+        .map(row => Array.isArray(row) ? row.map(cell => cell == null ? '' : cell) : [])
+        .filter(row => row.length && row.some(cell => `${cell}`.trim() !== ''));
+    }
+
+    async function loadStaticData(source){
+      if(!source.dataUrl) return null;
+      try {
+        const res = await fetch(source.dataUrl, { cache: 'no-store' });
+        if(!res.ok) return null;
+        const data = await res.json();
+        if(!Array.isArray(data.rows)) data.rows = [];
+        return data;
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
+    }
+
+    async function fetchXlsxRows(url){
+      const res = await fetch(url);
+      if(!res.ok) throw new Error('下載 XLSX 失敗');
+      const buffer = await res.arrayBuffer();
+      const workbook = XLSX.read(buffer, { type: 'array' });
+      const sheetName = workbook.SheetNames[0];
+      if(!sheetName) return [];
+      const sheet = workbook.Sheets[sheetName];
+      const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+      return cleanRows(rows);
+    }
+
+    async function fetchCsvRows(url){
+      const res = await fetch(url);
+      if(!res.ok) throw new Error('下載 CSV 失敗');
+      const text = await res.text();
+      const parsed = Papa.parse(text.trim());
+      return cleanRows(parsed.data);
+    }
+
+    async function loadSource(source){
+      const view = ensureSection(source);
+      view.statusEl.textContent = '載入資料中…';
+      view.downloadEl.innerHTML = '';
+      view.tableEl.innerHTML = '';
+
+      const staticData = await loadStaticData(source);
+      if(staticData){
+        const name = staticData.sourceFile || staticData.name || '最新資料';
+        const downloadUrl = staticData.download || null;
+        if(staticData.rows.length){
+          renderTable(staticData.rows, view.tableEl);
+          view.statusEl.textContent = `最新檔案：${name}`;
+        } else {
+          view.statusEl.textContent = `最新檔案：${name}（無資料列）`;
+        }
+        if(downloadUrl){
+          view.downloadEl.innerHTML = `<a href="${downloadUrl}" target="_blank" rel="noopener">下載 ${name}</a>`;
+        }
+        return downloadUrl ? { id: source.id, name, url: downloadUrl } : null;
+      }
+
+      const files = await listFiles(source.path);
+      if(!files){
+        view.statusEl.textContent = '找不到對應資料夾或無法存取。';
+        return null;
+      }
+
+      let picked = null;
+      let format = null;
+      if(source.xlsxPattern){
+        const latestXlsx = pickLatest(files, source.xlsxPattern);
+        if(latestXlsx){
+          picked = latestXlsx;
+          format = 'xlsx';
+        }
+      }
+      if(!picked && source.csvPattern){
+        const latestCsv = pickLatest(files, source.csvPattern);
+        if(latestCsv){
+          picked = latestCsv;
+          format = 'csv';
+        }
+      }
+
+      if(!picked){
+        view.statusEl.textContent = '未找到符合命名規則的檔案。';
+        return null;
+      }
+
+      try {
+        const rows = format === 'xlsx' ? await fetchXlsxRows(picked.download_url) : await fetchCsvRows(picked.download_url);
+        if(!rows.length){
+          view.statusEl.textContent = `最新檔案：${picked.name}（無資料列）`;
+          view.downloadEl.innerHTML = `<a href="${picked.download_url}" target="_blank" rel="noopener">下載 ${picked.name}</a>`;
+          return { id: source.id, name: picked.name, url: picked.download_url };
+        }
+        renderTable(rows, view.tableEl);
+        view.statusEl.textContent = `最新檔案：${picked.name}`;
+        view.downloadEl.innerHTML = `<a href="${picked.download_url}" target="_blank" rel="noopener">下載 ${picked.name}</a>`;
+        return { id: source.id, name: picked.name, url: picked.download_url };
+      } catch (err) {
+        console.error(err);
+        view.statusEl.textContent = '資料解析失敗，請稍後再試。';
+        return null;
+      }
     }
 
     async function load(){
-      statusEl.textContent = '載入 testing 目錄…';
-      // list top-level testing
-      const testing = await listFiles('testing');
-      if(!testing){ statusEl.textContent = '找不到 testing 目錄（請確認 data 分支是否公開）'; return; }
+      statusEl.textContent = '載入最新資料中…';
+      downloadsEl.innerHTML = '';
 
-      // find stock_data.csv
-      const csvItem = testing.find(it => it.name === 'stock_data.csv');
-      const downloads = [];
-      if(csvItem){ downloads.push({name: 'stock_data.csv', url: csvItem.download_url}); }
+      const results = await Promise.all(SOURCES.map(src => loadSource(src)));
+      const available = results.filter(Boolean);
 
-      // list active and OI subfolders
-      const activeFiles = await listFiles('testing/active') || [];
-      const oiFiles = await listFiles('testing/OI') || [];
-
-      activeFiles.forEach(it => { if(it.type === 'file') downloads.push({name:`active/${it.name}`, url: it.download_url}); });
-      oiFiles.forEach(it => { if(it.type === 'file') downloads.push({name:`OI/${it.name}`, url: it.download_url}); });
-
-      // render download links
-      downloadsEl.innerHTML = '<h3>下載檔案</h3>';
-      if(downloads.length === 0){ downloadsEl.innerHTML += '<p>找不到任何產出檔案。</p>'; }
-      else{
+      if(available.length){
+        downloadsEl.innerHTML = '<h3>快速下載最新檔案</h3>';
         const ul = document.createElement('ul');
-        downloads.forEach(d => {
+        available.forEach(d => {
           const li = document.createElement('li');
           const a = document.createElement('a');
           a.href = d.url;
-          a.textContent = d.name;
+          a.textContent = `${d.name}`;
           a.target = '_blank';
           li.appendChild(a);
           ul.appendChild(li);
         });
         downloadsEl.appendChild(ul);
+      } else {
+        downloadsEl.innerHTML = '<p>目前找不到可下載的檔案。</p>';
       }
 
-      // fetch CSV and render table if present
-      if(csvItem){
-        statusEl.textContent = '載入 stock_data.csv…';
-        const r = await fetch(csvItem.download_url);
-        if(!r.ok){ statusEl.textContent = '無法下載 CSV'; return; }
-        const text = await r.text();
-        const parsed = Papa.parse(text.trim());
-        renderTable(parsed.data);
-        statusEl.textContent = '完成';
-      } else {
-        statusEl.textContent = '找不到 stock_data.csv';
-      }
+      statusEl.textContent = '完成';
     }
 
     document.getElementById('refresh').addEventListener('click', () => { statusEl.textContent='重新載入…'; load(); });
