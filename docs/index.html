@@ -18,7 +18,8 @@
       --accent-strong:#1f7bff;
       --table-stripe:rgba(79,155,255,0.08);
     }
-    *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  *{box-sizing:border-box}
     body{margin:0;font-family:'Segoe UI',Roboto,'Noto Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
@@ -28,9 +29,18 @@
     .header-actions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
     .link-button{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:500}
     .link-button:hover{background:var(--accent);color:#fff;text-decoration:none}
-    main.content{flex:1;width:100%;max-width:1200px;margin:0 auto;padding:0 5vw 48px}
-    section.panel{background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px;margin-top:-48px;box-shadow:0 20px 40px rgba(0,0,0,0.35)}
-    .controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  main.content{flex:1;width:100%;max-width:1280px;margin:0 auto;padding:0 5vw 48px}
+  .layout{display:flex;gap:32px;align-items:flex-start}
+  aside.sidebar{width:240px;position:sticky;top:120px;align-self:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px 20px;box-shadow:0 12px 24px rgba(0,0,0,0.28)}
+  .sidebar-inner{display:flex;flex-direction:column;gap:16px}
+  .sidebar h2{margin:0;color:#f1f6ff;font-size:1.1rem;font-weight:600}
+  #sidebar-nav{margin-top:16px}
+  #sidebar-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  #sidebar-nav a{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:8px;color:var(--muted);font-weight:500;background:rgba(255,255,255,0.02);border:1px solid transparent;transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease}
+  #sidebar-nav a:hover{color:#fff;border-color:var(--accent);background:rgba(79,155,255,0.12);text-decoration:none}
+  #sidebar-nav a.active{color:#fff;border-color:var(--accent);background:rgba(79,155,255,0.18)}
+  section.panel{flex:1;background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px;margin-top:-48px;box-shadow:0 20px 40px rgba(0,0,0,0.35)}
+  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
     button.primary{padding:10px 18px;font-size:0.95rem;border:1px solid var(--accent);color:#fff;background:var(--accent-strong);border-radius:6px;cursor:pointer;font-weight:600;transition:transform 0.15s ease,box-shadow 0.15s ease}
     button.primary:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(31,123,255,0.35)}
     button.primary:disabled{opacity:0.6;cursor:not-allowed}
@@ -41,8 +51,8 @@
     #download-list p{margin:0;color:var(--muted)}
     #download-list ul{margin:0;padding-left:16px;display:grid;gap:8px}
     #download-list li{list-style:disc}
-    #sources{margin-top:32px;display:grid;gap:24px}
-    section.source{background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px}
+  #sources{margin-top:32px;display:grid;gap:24px}
+  section.source{background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px;scroll-margin-top:120px}
     section.source h2{margin:0;font-size:1.4rem;font-weight:600}
     section.source p.desc{margin:8px 0 16px;color:var(--muted)}
     section.source .section-status{margin:0 0 12px;font-size:0.9rem;color:var(--muted)}
@@ -55,13 +65,22 @@
     th{font-weight:600;color:#f1f6ff;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em}
     tbody tr:nth-child(even){background:var(--table-stripe)}
     tbody tr:hover{background:rgba(79,155,255,0.12)}
-    .pagination{display:flex;align-items:center;justify-content:space-between;padding:16px 0 0;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:0.9rem}
-    .pagination .page-controls{display:flex;gap:8px}
-    .pagination button{padding:8px 14px;background:transparent;border:1px solid var(--card-border);border-radius:6px;color:var(--text);cursor:pointer}
-    .pagination button:hover{border-color:var(--accent);color:var(--accent)}
-    .pagination button:disabled{opacity:0.4;cursor:not-allowed}
+  .pagination{display:flex;align-items:center;justify-content:space-between;padding:16px 0 0;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:0.9rem}
+  .pagination .page-info{font-weight:500}
+  .pagination .page-controls{display:flex;gap:6px;flex-wrap:wrap}
+  .pagination button{padding:8px 12px;background:transparent;border:1px solid var(--card-border);border-radius:6px;color:var(--text);cursor:pointer;min-width:40px}
+  .pagination button:hover{border-color:var(--accent);color:var(--accent)}
+  .pagination button:disabled{opacity:0.35;cursor:not-allowed}
+  .pagination button.current{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .pagination .ellipsis{display:inline-flex;align-items:center;justify-content:center;padding:0 6px;font-size:0.9rem;color:var(--muted)}
     footer.site-footer{margin-top:auto;padding:24px 5vw 32px;color:var(--muted);font-size:0.85rem;text-align:center}
-    @media(max-width:900px){table{min-width:600px}section.panel{margin-top:-32px;padding:20px}}
+    @media(max-width:1024px){
+      main.content{padding:0 4vw 48px}
+      .layout{flex-direction:column}
+      aside.sidebar{position:relative;top:auto;width:100%;display:flex;justify-content:center}
+      .sidebar-inner{max-width:640px;width:100%}
+    }
+    @media(max-width:900px){table{min-width:600px}section.panel{margin-top:0;padding:20px}}
     @media(max-width:640px){table{min-width:520px}button.primary{width:100%;justify-content:center}}
   </style>
 </head>
@@ -76,20 +95,31 @@
   </header>
 
   <main class="content">
-    <section class="panel">
-      <div class="controls">
-        <button class="primary" id="refresh">立即重新整理</button>
-        <span id="status">載入中…</span>
-      </div>
-      <p class="meta">資料來源：<strong>data</strong> 分支的 <code>testing</code> 目錄。系統會自動抓取最新檔案並顯示精選欄位，每頁 15 筆。</p>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-inner">
+          <h2>資料總覽</h2>
+          <nav id="sidebar-nav">
+            <ul id="nav-links"></ul>
+          </nav>
+        </div>
+      </aside>
 
-      <div id="downloads">
-        <h3>最新資料檔案</h3>
-        <div id="download-list"><p>尚未載入。</p></div>
-      </div>
+      <section class="panel">
+        <div class="controls">
+          <button class="primary" id="refresh">立即重新整理</button>
+          <span id="status">載入中…</span>
+        </div>
+        <p class="meta">資料來源：<strong>data</strong> 分支的 <code>testing</code> 目錄。系統會自動抓取最新檔案並顯示精選欄位，每頁 15 筆。</p>
 
-      <div id="sources"></div>
-    </section>
+        <div id="downloads">
+          <h3>最新資料檔案</h3>
+          <div id="download-list"><p>尚未載入。</p></div>
+        </div>
+
+        <div id="sources"></div>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -105,10 +135,11 @@
     const REPO = 'my-web';
     const DATA_REF = 'data';
 
-    const statusEl = document.getElementById('status');
-    const downloadsContainer = document.getElementById('downloads');
-    const downloadsEl = document.getElementById('download-list');
-    const sourcesEl = document.getElementById('sources');
+  const statusEl = document.getElementById('status');
+  const downloadsContainer = document.getElementById('downloads');
+  const downloadsEl = document.getElementById('download-list');
+  const sourcesEl = document.getElementById('sources');
+  const navListEl = document.getElementById('nav-links');
     const PAGE_SIZE = 15;
 
     const SOURCES = [
@@ -153,6 +184,50 @@
 
   const sections = new Map();
   const dataStates = new Map();
+  const navLinks = new Map();
+  let sectionObserver = null;
+
+    function renderSidebar(){
+      if(!navListEl) return;
+      navListEl.innerHTML = '';
+      navLinks.clear();
+      SOURCES.forEach(source => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#source-${source.id}`;
+        a.textContent = source.title;
+        a.addEventListener('click', () => setActiveNav(source.id));
+        li.appendChild(a);
+        navListEl.appendChild(li);
+        navLinks.set(source.id, a);
+      });
+    }
+
+    function setActiveNav(id){
+      navLinks.forEach((el, key) => {
+        if(key === id) el.classList.add('active');
+        else el.classList.remove('active');
+      });
+    }
+
+    function getSectionObserver(){
+      if(sectionObserver !== null) return sectionObserver;
+      if(typeof IntersectionObserver === 'undefined') return null;
+      sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            const { source } = entry.target.dataset;
+            if(source) setActiveNav(source);
+          }
+        });
+      }, { rootMargin: '-35% 0px -45% 0px' });
+      return sectionObserver;
+    }
+
+    renderSidebar();
+    if(SOURCES.length){
+      setActiveNav(SOURCES[0].id);
+    }
 
     async function listFiles(path){
       const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${DATA_REF}`;
@@ -166,6 +241,7 @@
       const section = document.createElement('section');
       section.className = 'source';
       section.dataset.source = source.id;
+  section.id = `source-${source.id}`;
 
       const h2 = document.createElement('h2');
       h2.textContent = source.title;
@@ -198,6 +274,11 @@
       sourcesEl.appendChild(section);
       const record = { section, statusEl: status, downloadEl: download, tableEl: tableWrap, paginationEl: pagination };
       sections.set(source.id, record);
+
+      const observer = getSectionObserver();
+      if(observer){
+        observer.observe(section);
+      }
       return record;
     }
 
@@ -273,18 +354,44 @@
       return { headers: displayHeaders, rows: dataRows, indices };
     }
 
+    function buildPageRange(totalPages, current){
+      const pages = new Set([0, totalPages - 1, current]);
+      for(let offset=1; offset<=2; offset++){
+        pages.add(current - offset);
+        pages.add(current + offset);
+      }
+      const arr = Array.from(pages).filter(p => p >= 0 && p < totalPages).sort((a,b) => a - b);
+      while(arr.length > 7){
+        let removeIndex = -1;
+        let maxDist = -1;
+        for(let i=0;i<arr.length;i++){
+          const p = arr[i];
+          if(p === 0 || p === totalPages - 1) continue;
+          const dist = Math.abs(p - current);
+          if(dist > maxDist){
+            maxDist = dist;
+            removeIndex = i;
+          }
+        }
+        if(removeIndex === -1) break;
+        arr.splice(removeIndex, 1);
+      }
+      return arr;
+    }
+
     function renderPagination(view, state){
       const totalRows = state.rows.length;
       const totalPages = totalRows === 0 ? 1 : Math.ceil(totalRows / state.pageSize);
       if(state.page >= totalPages) state.page = Math.max(0, totalPages - 1);
 
       const start = totalRows === 0 ? 0 : state.page * state.pageSize + 1;
-      const end = totalRows === 0 ? 0 : Math.min(totalRows, state.page * state.pageSize + state.pageSize);
+      const end = totalRows === 0 ? 0 : Math.min(totalRows, start + state.pageSize - 1);
 
       const pagination = view.paginationEl;
       pagination.innerHTML = '';
 
       const info = document.createElement('span');
+      info.className = 'page-info';
       info.textContent = totalRows === 0
         ? '目前無資料'
         : `顯示第 ${start}–${end} 筆，共 ${totalRows} 筆`;
@@ -294,28 +401,38 @@
       controls.className = 'page-controls';
       pagination.appendChild(controls);
 
-      const prev = document.createElement('button');
-      prev.textContent = '上一頁';
-      prev.disabled = state.page === 0 || totalRows === 0;
-      prev.addEventListener('click', () => {
-        if(state.page > 0){
-          state.page -= 1;
-          updateSectionView(view, state);
+      const disableNav = totalRows === 0 || totalPages === 1;
+
+      const createButton = (label, targetPage, disabled, extraClass='') => {
+        const btn = document.createElement('button');
+        btn.textContent = label;
+        if(extraClass) btn.classList.add(extraClass);
+        btn.disabled = disabled;
+        if(!disabled){
+          btn.addEventListener('click', () => {
+            state.page = targetPage;
+            updateSectionView(view, state);
+          });
         }
+        controls.appendChild(btn);
+      };
+
+      createButton('<<', 0, disableNav || state.page === 0);
+      createButton('<', Math.max(0, state.page - 1), disableNav || state.page === 0);
+
+      const pageNumbers = buildPageRange(totalPages, state.page);
+      pageNumbers.forEach((page, idx) => {
+        if(idx > 0 && page - pageNumbers[idx - 1] > 1){
+          const ellipsis = document.createElement('span');
+          ellipsis.className = 'ellipsis';
+          ellipsis.textContent = '…';
+          controls.appendChild(ellipsis);
+        }
+        createButton(String(page + 1), page, disableNav, page === state.page ? 'current' : '');
       });
 
-      const next = document.createElement('button');
-      next.textContent = '下一頁';
-      next.disabled = state.page >= totalPages - 1 || totalRows === 0;
-      next.addEventListener('click', () => {
-        if(state.page < totalPages - 1){
-          state.page += 1;
-          updateSectionView(view, state);
-        }
-      });
-
-      controls.appendChild(prev);
-      controls.appendChild(next);
+      createButton('>', Math.min(totalPages - 1, state.page + 1), disableNav || state.page >= totalPages - 1);
+      createButton('>>', totalPages - 1, disableNav || state.page >= totalPages - 1);
     }
 
     function updateSectionView(view, state){
