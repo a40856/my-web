@@ -65,23 +65,45 @@
       tableWrap.appendChild(table);
     }
 
+    // helper: pick latest file by lexicographic order (timestamps in YYYY-MM-DD_HHMM keep sortable)
+    function pickLatest(files, matchRegex){
+      const candidates = files.filter(f => f && f.name && matchRegex.test(f.name));
+      if(candidates.length === 0) return null;
+      candidates.sort((a,b)=> a.name < b.name ? 1 : -1);
+      return candidates[0];
+    }
+
     async function load(){
       statusEl.textContent = '載入 testing 目錄…';
       // list top-level testing
       const testing = await listFiles('testing');
       if(!testing){ statusEl.textContent = '找不到 testing 目錄（請確認 data 分支是否公開）'; return; }
 
-      // find stock_data.csv
-      const csvItem = testing.find(it => it.name === 'stock_data.csv');
+      // prefer files in testing/history if present, otherwise fallback to testing root
+      const hist = await listFiles('testing/history') || [];
+      const rootCsv = testing.find(it => it.name === 'stock_data.csv');
       const downloads = [];
-      if(csvItem){ downloads.push({name: 'stock_data.csv', url: csvItem.download_url}); }
 
-      // list active and OI subfolders
+      // choose latest stock_data.csv: first from history, else root
+      const latestCsv = pickLatest(hist, /stock_data-\d{4}-\d{2}-\d{2}_\d{4}\.csv/) || rootCsv || null;
+      if(latestCsv){ downloads.push({name: 'stock_data.csv', url: latestCsv.download_url}); }
+
+      // find final_stock_data.xlsx similarly
+      const latestFinal = pickLatest(hist, /final_stock_data-\d{4}-\d{2}-\d{2}_\d{4}\.xlsx/) || testing.find(it=>it.name==='final_stock_data.xlsx') || null;
+      if(latestFinal){ downloads.push({name: 'final_stock_data.xlsx', url: latestFinal.download_url}); }
+
+      // list active and OI subfolders and pick latest per file type
       const activeFiles = await listFiles('testing/active') || [];
       const oiFiles = await listFiles('testing/OI') || [];
 
-      activeFiles.forEach(it => { if(it.type === 'file') downloads.push({name:`active/${it.name}`, url: it.download_url}); });
-      oiFiles.forEach(it => { if(it.type === 'file') downloads.push({name:`OI/${it.name}`, url: it.download_url}); });
+      // pick latest Mostactive, HighestOI, Sorted by name prefix
+      const mostActive = pickLatest(activeFiles, /^Mostactive/);
+      const highestOI = pickLatest(oiFiles, /^HighestOI/);
+      const sortedOI = pickLatest(oiFiles, /^Sorted/);
+
+      if(mostActive) downloads.push({name:`active/${mostActive.name}`, url: mostActive.download_url});
+      if(highestOI) downloads.push({name:`OI/${highestOI.name}`, url: highestOI.download_url});
+      if(sortedOI) downloads.push({name:`OI/${sortedOI.name}`, url: sortedOI.download_url});
 
       // render download links
       downloadsEl.innerHTML = '<h3>下載檔案</h3>';
@@ -101,9 +123,9 @@
       }
 
       // fetch CSV and render table if present
-      if(csvItem){
+      if(latestCsv){
         statusEl.textContent = '載入 stock_data.csv…';
-        const r = await fetch(csvItem.download_url);
+        const r = await fetch(latestCsv.download_url);
         if(!r.ok){ statusEl.textContent = '無法下載 CSV'; return; }
         const text = await r.text();
         const parsed = Papa.parse(text.trim());
