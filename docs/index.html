@@ -5,42 +5,96 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>My-Web — Generated Stock Table</title>
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",sans-serif;margin:24px;line-height:1.5}
-    table{border-collapse:collapse;width:100%;margin-top:12px;font-size:0.95rem}
-    th,td{border:1px solid #ddd;padding:6px 8px;text-align:left}
-    th{background:#f4f4f4;font-weight:600}
-    .meta{margin-bottom:12px;max-width:720px}
-    .links{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-    #status{font-size:0.95rem;color:#555}
-    #downloads h3{margin:0 0 8px;font-size:1.1rem}
-    #downloads ul{margin:0;padding-left:20px}
-    #downloads li{margin:4px 0}
-    #sources{margin-top:20px}
-    section.source{margin-top:28px;padding:16px 18px;border:1px solid #e0e0e0;border-radius:8px;background:#fafafa}
-    section.source h2{margin:0 0 6px;font-size:1.25rem}
-    section.source p.desc{margin:0 0 8px;font-size:0.95rem;color:#555}
-    section.source .section-status{margin:0 0 8px;font-size:0.9rem;color:#666}
-    section.source .download{margin-bottom:12px}
-    section.source .download a{color:#0b5fff;text-decoration:none}
-    section.source .download a:hover{text-decoration:underline}
-    section.source .table-wrap{overflow-x:auto}
-    button{padding:6px 12px;font-size:0.95rem;border:1px solid #0b5fff;color:#0b5fff;background:#fff;border-radius:4px;cursor:pointer}
-    button:hover{background:#0b5fff;color:#fff}
-    button:disabled{opacity:0.6;cursor:not-allowed}
+    :root{
+      color-scheme:dark;
+      --bg:#0b1220;
+      --panel:#111b2d;
+      --panel-border:rgba(255,255,255,0.08);
+      --card:#16243b;
+      --card-border:rgba(255,255,255,0.1);
+      --text:#e5ecff;
+      --muted:#8fa1c9;
+      --accent:#4f9bff;
+      --accent-strong:#1f7bff;
+      --table-stripe:rgba(79,155,255,0.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Segoe UI',Roboto,'Noto Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .site-header{padding:32px 5vw 24px;background:linear-gradient(135deg,#0f1f3d,#09152a)}
+    .site-header h1{margin:0;font-size:2rem;font-weight:600}
+    .site-header p{margin:8px 0 0;color:var(--muted);max-width:640px}
+    .header-actions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
+    .link-button{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:500}
+    .link-button:hover{background:var(--accent);color:#fff;text-decoration:none}
+    main.content{flex:1;width:100%;max-width:1200px;margin:0 auto;padding:0 5vw 48px}
+    section.panel{background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px;margin-top:-48px;box-shadow:0 20px 40px rgba(0,0,0,0.35)}
+    .controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+    button.primary{padding:10px 18px;font-size:0.95rem;border:1px solid var(--accent);color:#fff;background:var(--accent-strong);border-radius:6px;cursor:pointer;font-weight:600;transition:transform 0.15s ease,box-shadow 0.15s ease}
+    button.primary:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(31,123,255,0.35)}
+    button.primary:disabled{opacity:0.6;cursor:not-allowed}
+    #status{color:var(--muted);font-size:0.95rem}
+    .meta{margin:18px 0 0;color:var(--muted);font-size:0.95rem}
+    #downloads{margin-top:24px;padding:20px;border-radius:12px;background:var(--card);border:1px solid var(--card-border)}
+    #downloads h3{margin:0 0 12px;font-size:1.05rem;font-weight:600}
+    #download-list p{margin:0;color:var(--muted)}
+    #download-list ul{margin:0;padding-left:16px;display:grid;gap:8px}
+    #download-list li{list-style:disc}
+    #sources{margin-top:32px;display:grid;gap:24px}
+    section.source{background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px}
+    section.source h2{margin:0;font-size:1.4rem;font-weight:600}
+    section.source p.desc{margin:8px 0 16px;color:var(--muted)}
+    section.source .section-status{margin:0 0 12px;font-size:0.9rem;color:var(--muted)}
+    section.source .download{margin-bottom:16px}
+    section.source .download a{font-weight:500}
+    section.source .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--card-border);background:#0e182b}
+    table{width:100%;border-collapse:collapse;min-width:720px}
+    thead{background:rgba(255,255,255,0.04)}
+    th,td{padding:12px 16px;text-align:left;font-size:0.95rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+    th{font-weight:600;color:#f1f6ff;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em}
+    tbody tr:nth-child(even){background:var(--table-stripe)}
+    tbody tr:hover{background:rgba(79,155,255,0.12)}
+    .pagination{display:flex;align-items:center;justify-content:space-between;padding:16px 0 0;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:0.9rem}
+    .pagination .page-controls{display:flex;gap:8px}
+    .pagination button{padding:8px 14px;background:transparent;border:1px solid var(--card-border);border-radius:6px;color:var(--text);cursor:pointer}
+    .pagination button:hover{border-color:var(--accent);color:var(--accent)}
+    .pagination button:disabled{opacity:0.4;cursor:not-allowed}
+    footer.site-footer{margin-top:auto;padding:24px 5vw 32px;color:var(--muted);font-size:0.85rem;text-align:center}
+    @media(max-width:900px){table{min-width:600px}section.panel{margin-top:-32px;padding:20px}}
+    @media(max-width:640px){table{min-width:520px}button.primary{width:100%;justify-content:center}}
   </style>
 </head>
 <body>
-  <h1>自動產生資料 (testing)</h1>
-  <p class="meta">資料來源分支：<strong>data</strong>。頁面會從 <code>testing</code> 目錄抓取 CSV 與 XLSX 檔案。</p>
+  <header class="site-header">
+    <h1>期權觀察儀表板</h1>
+    <p>追蹤每日熱門期權、觀察名單與最高未平倉量，協助快速掌握市場情緒與可能的交易線索。</p>
+    <div class="header-actions">
+      <a class="link-button" href="https://github.com/a40856/my-web" target="_blank" rel="noopener">查看 GitHub 原始碼</a>
+      <a class="link-button" href="https://github.com/a40856/my-web/tree/data/testing" target="_blank" rel="noopener">資料來源資料夾</a>
+    </div>
+  </header>
 
-  <div class="links">
-    <button id="refresh">重新載入</button>
-    <span id="status">載入中…</span>
-  </div>
+  <main class="content">
+    <section class="panel">
+      <div class="controls">
+        <button class="primary" id="refresh">立即重新整理</button>
+        <span id="status">載入中…</span>
+      </div>
+      <p class="meta">資料來源：<strong>data</strong> 分支的 <code>testing</code> 目錄。系統會自動抓取最新檔案並顯示精選欄位，每頁 15 筆。</p>
 
-  <div id="downloads"></div>
+      <div id="downloads">
+        <h3>最新資料檔案</h3>
+        <div id="download-list"><p>尚未載入。</p></div>
+      </div>
 
-  <div id="sources"></div>
+      <div id="sources"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    由 a40856 研究整理。數據僅供參考，請自行評估投資風險。
+  </footer>
 
   <!-- 使用 PapaParse 從 CSV 轉為 JSON -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -52,8 +106,10 @@
     const DATA_REF = 'data';
 
     const statusEl = document.getElementById('status');
-    const downloadsEl = document.getElementById('downloads');
+    const downloadsContainer = document.getElementById('downloads');
+    const downloadsEl = document.getElementById('download-list');
     const sourcesEl = document.getElementById('sources');
+    const PAGE_SIZE = 15;
 
     const SOURCES = [
       {
@@ -62,6 +118,20 @@
         desc: '整理最後一個交易日的熱門期權流量。',
         path: 'testing/active',
         dataUrl: 'data/active.json',
+        displayColumns: [
+          'Símbolo',
+          'Nombre',
+          'Símbolo subyacente',
+          'Precio de ejercicio',
+          'Expiration Date',
+          'Precio',
+          'Cambio',
+          'Cambio (%)',
+          'Oferta',
+          'Demanda',
+          'Volumen',
+          'Open Interest'
+        ],
         xlsxPattern: /^Mostactive-.*\.xlsx$/i
       },
       {
@@ -81,7 +151,8 @@
       }
     ];
 
-    const sections = new Map();
+  const sections = new Map();
+  const dataStates = new Map();
 
     async function listFiles(path){
       const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${DATA_REF}`;
@@ -120,27 +191,44 @@
       tableWrap.className = 'table-wrap';
       section.appendChild(tableWrap);
 
+      const pagination = document.createElement('div');
+      pagination.className = 'pagination';
+      section.appendChild(pagination);
+
       sourcesEl.appendChild(section);
-      const record = { section, statusEl: status, downloadEl: download, tableEl: tableWrap };
+      const record = { section, statusEl: status, downloadEl: download, tableEl: tableWrap, paginationEl: pagination };
       sections.set(source.id, record);
       return record;
     }
 
-    function renderTable(rows, container){
+    function renderTable(container, headers, rows){
       container.innerHTML = '';
-      if(!rows || rows.length === 0){ container.textContent = '沒有資料'; return; }
+      if(!headers || headers.length === 0){
+        container.textContent = '沒有資料';
+        return;
+      }
       const table = document.createElement('table');
       const thead = document.createElement('thead');
       const tbody = document.createElement('tbody');
+
       const headerRow = document.createElement('tr');
-      rows[0].forEach(h => { const th = document.createElement('th'); th.textContent = h; headerRow.appendChild(th); });
+      headers.forEach(h => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        headerRow.appendChild(th);
+      });
       thead.appendChild(headerRow);
-      for(let i=1;i<rows.length;i++){
-        const r = rows[i];
+
+      rows.forEach(r => {
         const tr = document.createElement('tr');
-        r.forEach(c => { const td = document.createElement('td'); td.textContent = c; tr.appendChild(td); });
+        r.forEach(c => {
+          const td = document.createElement('td');
+          td.textContent = c;
+          tr.appendChild(td);
+        });
         tbody.appendChild(tr);
-      }
+      });
+
       table.appendChild(thead);
       table.appendChild(tbody);
       container.appendChild(table);
@@ -159,6 +247,82 @@
       return rows
         .map(row => Array.isArray(row) ? row.map(cell => cell == null ? '' : cell) : [])
         .filter(row => row.length && row.some(cell => `${cell}`.trim() !== ''));
+    }
+
+    function buildDisplay(rows, source){
+      if(!rows || rows.length === 0) return { headers: [], rows: [], indices: [] };
+      const headers = rows[0];
+      const wanted = Array.isArray(source.displayColumns) ? source.displayColumns : [];
+      const indices = [];
+      if(wanted.length){
+        const lowered = headers.map(h => String(h || '').trim().toLowerCase());
+        wanted.forEach(col => {
+          const idx = lowered.indexOf(String(col || '').trim().toLowerCase());
+          if(idx >= 0) indices.push(idx);
+        });
+      }
+      if(!indices.length){
+        for(let i=0;i<headers.length;i++){ indices.push(i); }
+      }
+      const displayHeaders = indices.map(i => headers[i] ?? '');
+      const dataRows = [];
+      for(let i=1;i<rows.length;i++){
+        const srcRow = rows[i] || [];
+        dataRows.push(indices.map(idx => srcRow[idx] ?? ''));
+      }
+      return { headers: displayHeaders, rows: dataRows, indices };
+    }
+
+    function renderPagination(view, state){
+      const totalRows = state.rows.length;
+      const totalPages = totalRows === 0 ? 1 : Math.ceil(totalRows / state.pageSize);
+      if(state.page >= totalPages) state.page = Math.max(0, totalPages - 1);
+
+      const start = totalRows === 0 ? 0 : state.page * state.pageSize + 1;
+      const end = totalRows === 0 ? 0 : Math.min(totalRows, state.page * state.pageSize + state.pageSize);
+
+      const pagination = view.paginationEl;
+      pagination.innerHTML = '';
+
+      const info = document.createElement('span');
+      info.textContent = totalRows === 0
+        ? '目前無資料'
+        : `顯示第 ${start}–${end} 筆，共 ${totalRows} 筆`;
+      pagination.appendChild(info);
+
+      const controls = document.createElement('div');
+      controls.className = 'page-controls';
+      pagination.appendChild(controls);
+
+      const prev = document.createElement('button');
+      prev.textContent = '上一頁';
+      prev.disabled = state.page === 0 || totalRows === 0;
+      prev.addEventListener('click', () => {
+        if(state.page > 0){
+          state.page -= 1;
+          updateSectionView(view, state);
+        }
+      });
+
+      const next = document.createElement('button');
+      next.textContent = '下一頁';
+      next.disabled = state.page >= totalPages - 1 || totalRows === 0;
+      next.addEventListener('click', () => {
+        if(state.page < totalPages - 1){
+          state.page += 1;
+          updateSectionView(view, state);
+        }
+      });
+
+      controls.appendChild(prev);
+      controls.appendChild(next);
+    }
+
+    function updateSectionView(view, state){
+      const start = state.page * state.pageSize;
+      const pageRows = state.rows.slice(start, start + state.pageSize);
+      renderTable(view.tableEl, state.headers, pageRows);
+      renderPagination(view, state);
     }
 
     async function loadStaticData(source){
@@ -205,12 +369,23 @@
       if(staticData){
         const name = staticData.sourceFile || staticData.name || '最新資料';
         const downloadUrl = staticData.download || null;
-        if(staticData.rows.length){
-          renderTable(staticData.rows, view.tableEl);
+        const rows = cleanRows(staticData.rows);
+        const display = buildDisplay(rows, source);
+        const state = {
+          headers: display.headers,
+          rows: display.rows,
+          page: 0,
+          pageSize: PAGE_SIZE
+        };
+        dataStates.set(source.id, state);
+
+        updateSectionView(view, state);
+        if(display.headers.length && display.rows.length){
           view.statusEl.textContent = `最新檔案：${name}`;
         } else {
           view.statusEl.textContent = `最新檔案：${name}（無資料列）`;
         }
+
         if(downloadUrl){
           view.downloadEl.innerHTML = `<a href="${downloadUrl}" target="_blank" rel="noopener">下載 ${name}</a>`;
         }
@@ -247,13 +422,21 @@
 
       try {
         const rows = format === 'xlsx' ? await fetchXlsxRows(picked.download_url) : await fetchCsvRows(picked.download_url);
-        if(!rows.length){
+        const cleaned = cleanRows(rows);
+        const display = buildDisplay(cleaned, source);
+        const state = {
+          headers: display.headers,
+          rows: display.rows,
+          page: 0,
+          pageSize: PAGE_SIZE
+        };
+        dataStates.set(source.id, state);
+        updateSectionView(view, state);
+        if(display.headers.length && display.rows.length){
+          view.statusEl.textContent = `最新檔案：${picked.name}`;
+        } else {
           view.statusEl.textContent = `最新檔案：${picked.name}（無資料列）`;
-          view.downloadEl.innerHTML = `<a href="${picked.download_url}" target="_blank" rel="noopener">下載 ${picked.name}</a>`;
-          return { id: source.id, name: picked.name, url: picked.download_url };
         }
-        renderTable(rows, view.tableEl);
-        view.statusEl.textContent = `最新檔案：${picked.name}`;
         view.downloadEl.innerHTML = `<a href="${picked.download_url}" target="_blank" rel="noopener">下載 ${picked.name}</a>`;
         return { id: source.id, name: picked.name, url: picked.download_url };
       } catch (err) {
@@ -266,12 +449,12 @@
     async function load(){
       statusEl.textContent = '載入最新資料中…';
       downloadsEl.innerHTML = '';
+      dataStates.clear();
 
       const results = await Promise.all(SOURCES.map(src => loadSource(src)));
       const available = results.filter(Boolean);
 
       if(available.length){
-        downloadsEl.innerHTML = '<h3>快速下載最新檔案</h3>';
         const ul = document.createElement('ul');
         available.forEach(d => {
           const li = document.createElement('li');
