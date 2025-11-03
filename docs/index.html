@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My-Web — Generated Stock Table</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto, "Noto Sans", sans-serif;margin:24px}
+    table{border-collapse:collapse;width:100%;margin-top:12px}
+    th,td{border:1px solid #ddd;padding:6px;text-align:left}
+    th{background:#f4f4f4}
+    .meta{margin-bottom:12px}
+    .links a{margin-right:12px}
+  </style>
+</head>
+<body>
+  <h1>自動產生資料 (testing)</h1>
+  <p class="meta">資料來源分支：<strong>data</strong>。頁面會從 <code>testing</code> 目錄抓取 CSV 與 XLSX 檔案。</p>
+
+  <div class="links">
+    <button id="refresh">重新載入</button>
+    <span id="status">載入中…</span>
+  </div>
+
+  <div id="downloads"></div>
+
+  <div id="table-wrap"></div>
+
+  <!-- 使用 PapaParse 從 CSV 轉為 JSON -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>
+    // Repo info — adjust if you rename repo/owner
+    const OWNER = 'a40856';
+    const REPO = 'my-web';
+    const DATA_REF = 'data';
+
+    const statusEl = document.getElementById('status');
+    const downloadsEl = document.getElementById('downloads');
+    const tableWrap = document.getElementById('table-wrap');
+
+    async function listFiles(path){
+      const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${DATA_REF}`;
+      const res = await fetch(url);
+      if(!res.ok) return null;
+      return res.json();
+    }
+
+    function renderTable(rows){
+      tableWrap.innerHTML = '';
+      if(!rows || rows.length === 0){ tableWrap.textContent = '沒有資料'; return; }
+      const table = document.createElement('table');
+      const thead = document.createElement('thead');
+      const tbody = document.createElement('tbody');
+      const headerRow = document.createElement('tr');
+      rows[0].forEach(h => { const th = document.createElement('th'); th.textContent = h; headerRow.appendChild(th); });
+      thead.appendChild(headerRow);
+      for(let i=1;i<rows.length;i++){
+        const r = rows[i];
+        const tr = document.createElement('tr');
+        r.forEach(c => { const td = document.createElement('td'); td.textContent = c; tr.appendChild(td); });
+        tbody.appendChild(tr);
+      }
+      table.appendChild(thead);
+      table.appendChild(tbody);
+      tableWrap.appendChild(table);
+    }
+
+    async function load(){
+      statusEl.textContent = '載入 testing 目錄…';
+      // list top-level testing
+      const testing = await listFiles('testing');
+      if(!testing){ statusEl.textContent = '找不到 testing 目錄（請確認 data 分支是否公開）'; return; }
+
+      // find stock_data.csv
+      const csvItem = testing.find(it => it.name === 'stock_data.csv');
+      const downloads = [];
+      if(csvItem){ downloads.push({name: 'stock_data.csv', url: csvItem.download_url}); }
+
+      // list active and OI subfolders
+      const activeFiles = await listFiles('testing/active') || [];
+      const oiFiles = await listFiles('testing/OI') || [];
+
+      activeFiles.forEach(it => { if(it.type === 'file') downloads.push({name:`active/${it.name}`, url: it.download_url}); });
+      oiFiles.forEach(it => { if(it.type === 'file') downloads.push({name:`OI/${it.name}`, url: it.download_url}); });
+
+      // render download links
+      downloadsEl.innerHTML = '<h3>下載檔案</h3>';
+      if(downloads.length === 0){ downloadsEl.innerHTML += '<p>找不到任何產出檔案。</p>'; }
+      else{
+        const ul = document.createElement('ul');
+        downloads.forEach(d => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = d.url;
+          a.textContent = d.name;
+          a.target = '_blank';
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+        downloadsEl.appendChild(ul);
+      }
+
+      // fetch CSV and render table if present
+      if(csvItem){
+        statusEl.textContent = '載入 stock_data.csv…';
+        const r = await fetch(csvItem.download_url);
+        if(!r.ok){ statusEl.textContent = '無法下載 CSV'; return; }
+        const text = await r.text();
+        const parsed = Papa.parse(text.trim());
+        renderTable(parsed.data);
+        statusEl.textContent = '完成';
+      } else {
+        statusEl.textContent = '找不到 stock_data.csv';
+      }
+    }
+
+    document.getElementById('refresh').addEventListener('click', () => { statusEl.textContent='重新載入…'; load(); });
+    load();
+  </script>
+</body>
+</html>
