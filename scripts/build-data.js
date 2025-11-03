@@ -13,6 +13,22 @@ const SOURCES = [
     filePattern: /^Mostactive-.*\.xlsx$/i,
     dataOutput: path.join(__dirname, '..', 'docs', 'data', 'active.json'),
     assetDir: path.join(__dirname, '..', 'docs', 'data', 'latest', 'active')
+  },
+  {
+    id: 'history',
+    title: '股票觀察名單（History）',
+    srcDir: path.join(__dirname, '..', 'testing', 'history'),
+    filePattern: /^final_stock_data-.*\.xlsx$/i,
+    dataOutput: path.join(__dirname, '..', 'docs', 'data', 'history.json'),
+    assetDir: path.join(__dirname, '..', 'docs', 'data', 'latest', 'history')
+  },
+  {
+    id: 'oi',
+    title: '最高未平倉量（OI）',
+    srcDir: path.join(__dirname, '..', 'testing', 'OI'),
+    filePattern: /^Sorted-.*\.xlsx$/i,
+    dataOutput: path.join(__dirname, '..', 'docs', 'data', 'oi.json'),
+    assetDir: path.join(__dirname, '..', 'docs', 'data', 'latest', 'oi')
   }
 ];
 
@@ -29,8 +45,12 @@ function findLatestFile(dirPath, pattern){
     const stats = fs.statSync(fullPath);
     return { name, fullPath, stats };
   });
-  withStats.sort((a, b) => b.stats.mtimeMs - a.stats.mtimeMs);
-  return withStats[0];
+  withStats.sort((a, b) => {
+    const nameCompare = a.name.localeCompare(b.name);
+    if(nameCompare !== 0) return nameCompare;
+    return a.stats.mtimeMs - b.stats.mtimeMs;
+  });
+  return withStats[withStats.length - 1];
 }
 
 function sheetRows(workbook){

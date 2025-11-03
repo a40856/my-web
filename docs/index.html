@@ -73,6 +73,11 @@
   th.sortable.sorted-desc::after{border-top-color:#fff}
     tbody tr:nth-child(even){background:var(--table-stripe)}
     tbody tr:hover{background:rgba(79,155,255,0.12)}
+  td.cell-number{text-align:right;font-variant-numeric:tabular-nums}
+  td.cell-positive{background:rgba(75,167,108,0.16);color:#8ff5bd;font-weight:600}
+  td.cell-negative{background:rgba(237,92,120,0.16);color:#ff94a7;font-weight:600}
+  td.cell-warning{background:rgba(255,199,110,0.16);color:#ffd88a;font-weight:600}
+  td.cell-neutral{color:var(--muted)}
   .pagination{display:flex;align-items:center;justify-content:space-between;padding:18px 0 0;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:0.9rem}
   .pagination .page-info{font-weight:500}
   .pagination .page-controls{display:flex;gap:6px;flex-wrap:wrap}
@@ -82,7 +87,7 @@
   .pagination button.current{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
   .pagination .ellipsis{display:inline-flex;align-items:center;justify-content:center;padding:0 6px;font-size:0.9rem;color:var(--muted)}
   section.source{position:relative}
-  .filter-popover{position:absolute;z-index:10;min-width:220px;background:#0f1d33;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 16px;box-shadow:0 16px 32px rgba(0,0,0,0.45);display:none}
+  .filter-popover{position:fixed;z-index:50;min-width:220px;background:#0f1d33;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:14px 16px;box-shadow:0 16px 32px rgba(0,0,0,0.45);display:none;max-width:320px}
   .filter-popover.open{display:block}
   .filter-popover label{display:block;font-size:0.8rem;font-weight:600;margin-bottom:6px;color:#c5d4ff;text-transform:uppercase;letter-spacing:0.05em}
   .filter-popover input{width:100%;padding:8px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:#091324;color:#fff;margin-bottom:10px}
@@ -175,39 +180,81 @@
 
     const SOURCES = [
       {
+        id: 'history',
+        title: '股票觀察名單（History）',
+        desc: '股票篩選研究的最新觀察名單。',
+        dataUrl: 'data/history.json',
+  path: 'testing/history',
+  xlsxPattern: /^final_stock_data-.*\.xlsx$/i,
+  csvPattern: /^stock_data-.*\.csv$/i,
+        displayColumns: [
+          { key: 'Ticker', label: 'Ticker' },
+          { key: 'Name', label: 'Name' },
+          { key: 'Price', label: 'Price', decorate: 'number' },
+          { key: '% Change', label: '% Change', decorate: 'percent-change' },
+          { key: '20 SMA', label: '20 SMA', decorate: 'percent' },
+          { key: '50 SMA', label: '50 SMA', decorate: 'percent' },
+          { key: '200 SMA', label: '200 SMA', decorate: 'percent' },
+          { key: 'YTD %', label: 'YTD %', decorate: 'percent' },
+          { key: '12M Return', label: '12M Return', decorate: 'percent' },
+          { key: 'RSI', label: 'RSI', decorate: 'rsi' },
+          { key: 'ATR', label: 'ATR', decorate: 'number' },
+          { key: 'Market Cap', label: 'Market Cap', decorate: 'number' },
+          { key: '52W High', label: '52W High', decorate: 'number' },
+          { key: '52W Low', label: '52W Low', decorate: 'number' }
+        ],
+        sortKey: 'Ticker',
+        filterKey: 'Ticker',
+        filterLabel: 'Filter Ticker',
+        filterPlaceholder: '輸入股票代號 (例如 NVDA)'
+      },
+      {
         id: 'active',
         title: '熱門期權（Active）',
         desc: '整理最後一個交易日的熱門期權流量。',
-        path: 'testing/active',
         dataUrl: 'data/active.json',
+  path: 'testing/active',
+  xlsxPattern: /^Mostactive-.*\.xlsx$/i,
         displayColumns: [
           { key: 'Símbolo', label: 'Symbol' },
           { key: 'Nombre', label: 'Name' },
           { key: 'Símbolo subyacente', label: 'Underlying' },
-          { key: 'Precio de ejercicio', label: 'Strike' },
+          { key: 'Precio de ejercicio', label: 'Strike', decorate: 'number' },
           { key: 'Expiration Date', label: 'Expiration' },
-          { key: 'Precio', label: 'Price' },
-          { key: 'Oferta', label: 'Bid' },
-          { key: 'Demanda', label: 'Ask' },
-          { key: 'Volumen', label: 'Volume' },
-          { key: 'Open Interest', label: 'Open Interest' }
+          { key: 'Precio', label: 'Price', decorate: 'number' },
+          { key: 'Volumen', label: 'Volume', decorate: 'number' },
+          { key: 'Open Interest', label: 'Open Interest', decorate: 'number' },
+          { key: 'Oferta', label: 'Bid', decorate: 'number' },
+          { key: 'Demanda', label: 'Ask', decorate: 'number' }
         ],
-        xlsxPattern: /^Mostactive-.*\.xlsx$/i
-      },
-      {
-        id: 'history',
-        title: '股票觀察名單（History）',
-        desc: '股票篩選研究的最新觀察名單。',
-        path: 'testing/history',
-        xlsxPattern: /^final_stock_data-.*\.xlsx$/i,
-        csvPattern: /^stock_data-.*\.csv$/i
+        sortKey: 'Symbol',
+        filterKey: 'Underlying',
+        filterLabel: 'Filter Underlying',
+        filterPlaceholder: '輸入標的代號 (例如 NVDA)'
       },
       {
         id: 'oi',
         title: '最高未平倉量（OI）',
         desc: '追蹤未平倉量最高的期權合約供參考。',
-        path: 'testing/OI',
-        xlsxPattern: /^HighestOI-.*\.xlsx$/i
+        dataUrl: 'data/oi.json',
+  path: 'testing/OI',
+  xlsxPattern: /^Sorted-.*\.xlsx$/i,
+        displayColumns: [
+          { key: 'Symbol', label: 'Symbol' },
+          { key: 'Name', label: 'Name' },
+          { key: 'Underlying Symbol', label: 'Underlying' },
+          { key: 'Strike', label: 'Strike', decorate: 'number' },
+          { key: 'Expiration Date', label: 'Expiration' },
+          { key: 'Price', label: 'Price', decorate: 'number' },
+          { key: 'Volume', label: 'Volume', decorate: 'number' },
+          { key: 'Open Interest', label: 'Open Interest', decorate: 'number' },
+          { key: 'Bid', label: 'Bid', decorate: 'number' },
+          { key: 'Ask', label: 'Ask', decorate: 'number' }
+        ],
+        sortKey: 'Underlying',
+        filterKey: 'Underlying',
+        filterLabel: 'Filter Underlying',
+        filterPlaceholder: '輸入標的代號 (例如 NVDA)'
       }
     ];
 
@@ -275,9 +322,12 @@
       setActiveNav(SOURCES[0].id);
     }
 
-    window.addEventListener('resize', () => {
+    const repositionPopovers = () => {
       sections.forEach(view => positionFilterPopover(view));
-    });
+    };
+
+    window.addEventListener('resize', repositionPopovers);
+    window.addEventListener('scroll', repositionPopovers, true);
 
     async function listFiles(path){
       const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${DATA_REF}`;
@@ -323,13 +373,13 @@
 
       const popover = document.createElement('div');
       popover.className = 'filter-popover';
-      const label = document.createElement('label');
-      label.textContent = 'Filter Underlying';
+  const label = document.createElement('label');
+  label.textContent = source.filterLabel || 'Filter';
       popover.appendChild(label);
 
       const input = document.createElement('input');
       input.type = 'text';
-      input.placeholder = 'Type to filter (e.g. NVDA)';
+  input.placeholder = source.filterPlaceholder || '輸入關鍵字以篩選';
       popover.appendChild(input);
 
       const actions = document.createElement('div');
@@ -410,9 +460,10 @@
         container.textContent = 'No data available';
         return;
       }
-      const table = document.createElement('table');
-      const thead = document.createElement('thead');
-      const tbody = document.createElement('tbody');
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  const tbody = document.createElement('tbody');
+  const decorators = Array.isArray(state.decorators) ? state.decorators : [];
 
       const headerRow = document.createElement('tr');
       headers.forEach((h, idx) => {
@@ -440,9 +491,11 @@
 
       rows.forEach(r => {
         const tr = document.createElement('tr');
-        r.forEach(c => {
+        r.forEach((c, idx) => {
           const td = document.createElement('td');
           td.textContent = c;
+          const decoratorId = decorators[idx] || null;
+          applyCellDecorator(td, c, decoratorId);
           tr.appendChild(td);
         });
         tbody.appendChild(tr);
@@ -451,6 +504,68 @@
       table.appendChild(thead);
       table.appendChild(tbody);
       container.appendChild(table);
+    }
+
+    function parseNumeric(value){
+      if(typeof value === 'number') return value;
+      if(value == null) return NaN;
+      const normalized = String(value).replace(/[%,$]/g, '').replace(/,/g, '').trim();
+      if(!normalized) return NaN;
+      const num = parseFloat(normalized);
+      return Number.isNaN(num) ? NaN : num;
+    }
+
+    function setTrendClass(td, num){
+      if(Number.isNaN(num)) return;
+      if(num > 0){
+        td.classList.add('cell-positive');
+      } else if(num < 0){
+        td.classList.add('cell-negative');
+      } else {
+        td.classList.add('cell-neutral');
+      }
+    }
+
+    function applyCellDecorator(td, value, decoratorId){
+      if(!decoratorId) return;
+      const text = value == null ? '' : String(value).trim();
+      if(!text){
+        td.classList.add('cell-neutral');
+      }
+      switch(decoratorId){
+        case 'number':
+          td.classList.add('cell-number');
+          break;
+        case 'percent':
+        case 'percent-change': {
+          td.classList.add('cell-number');
+          const num = parseNumeric(text);
+          if(Number.isNaN(num)){
+            td.classList.add('cell-neutral');
+            break;
+          }
+          setTrendClass(td, num);
+          break;
+        }
+        case 'rsi': {
+          td.classList.add('cell-number');
+          const num = parseNumeric(text);
+          if(Number.isNaN(num)){
+            td.classList.add('cell-neutral');
+            break;
+          }
+          if(num >= 70){
+            td.classList.add('cell-warning');
+          } else if(num <= 30){
+            td.classList.add('cell-positive');
+          } else {
+            td.classList.add('cell-neutral');
+          }
+          break;
+        }
+        default:
+          break;
+      }
     }
 
     function toggleSymbolSort(state, view){
@@ -464,10 +579,22 @@
     function positionFilterPopover(view){
       const pop = view.filterPopover;
       if(!pop || !pop.open || !pop.anchorEl) return;
-      const sectionRect = view.section.getBoundingClientRect();
       const anchorRect = pop.anchorEl.getBoundingClientRect();
-      const top = anchorRect.bottom - sectionRect.top + 8;
-      const left = anchorRect.left - sectionRect.left;
+      const margin = 12;
+      const popRect = pop.el.getBoundingClientRect();
+      const width = popRect.width || pop.el.offsetWidth || 240;
+      const height = popRect.height || pop.el.offsetHeight || 0;
+      let top = anchorRect.bottom + margin;
+      if(top + height > window.innerHeight - margin){
+        top = Math.max(margin, anchorRect.top - height - margin);
+      }
+      let left = anchorRect.left;
+      if(left + width > window.innerWidth - margin){
+        left = window.innerWidth - width - margin;
+      }
+      if(left < margin){
+        left = margin;
+      }
       pop.el.style.top = `${top}px`;
       pop.el.style.left = `${left}px`;
     }
@@ -544,6 +671,8 @@
       const wanted = Array.isArray(source.displayColumns) ? source.displayColumns : [];
       const indices = [];
       const labels = [];
+      const configs = [];
+      const decorators = [];
       if(wanted.length){
         const lowered = headers.map(h => normalizeKey(h));
         wanted.forEach(col => {
@@ -552,11 +681,17 @@
           if(idx >= 0){
             indices.push(idx);
             labels.push(entry.label || headers[idx] || '');
+            configs.push(entry);
+            decorators.push(entry.decorate || null);
           }
         });
       }
       if(!indices.length){
-        for(let i=0;i<headers.length;i++){ indices.push(i); }
+        for(let i=0;i<headers.length;i++){
+          indices.push(i);
+          configs.push(null);
+          decorators.push(null);
+        }
       }
       const displayHeaders = labels.length === indices.length && labels.length
         ? labels
@@ -566,9 +701,50 @@
         const srcRow = rows[i] || [];
         dataRows.push(indices.map(idx => srcRow[idx] ?? ''));
       }
-      const sortableIndex = displayHeaders.findIndex(label => normalizeKey(label).includes('symbol'));
-      const filterIndex = displayHeaders.findIndex(label => normalizeKey(label).includes('underlying'));
-      return { headers: displayHeaders, rows: dataRows, indices, sortableIndex, filterIndex };
+      const columnMeta = indices.map((idx, i) => ({
+        header: headers[idx] ?? '',
+        label: displayHeaders[i] ?? '',
+        config: configs[i] || null,
+        decorator: decorators[i] || null
+      }));
+      const normalizeTarget = (value) => {
+        if(!value) return '';
+        return normalizeKey(value);
+      };
+      const matchColumn = (target, meta) => {
+        if(!target) return false;
+        if(normalizeKey(meta.label) === target) return true;
+        if(normalizeKey(meta.header) === target) return true;
+        if(meta.config){
+          if(meta.config.label && normalizeKey(meta.config.label) === target) return true;
+          if(meta.config.key && normalizeKey(meta.config.key) === target) return true;
+        }
+        return false;
+      };
+      const findTargetIndex = (targetValue) => {
+        const target = normalizeTarget(targetValue);
+        if(!target) return -1;
+        for(let i=0;i<columnMeta.length;i++){
+          if(matchColumn(target, columnMeta[i])) return i;
+        }
+        return -1;
+      };
+      let sortableIndex = findTargetIndex(source.sortKey);
+      if(sortableIndex < 0){
+        sortableIndex = columnMeta.findIndex(meta => normalizeKey(meta.label).includes('symbol'));
+      }
+      let filterIndex = findTargetIndex(source.filterKey);
+      if(filterIndex < 0){
+        filterIndex = columnMeta.findIndex(meta => normalizeKey(meta.label).includes('underlying'));
+      }
+      return {
+        headers: displayHeaders,
+        rows: dataRows,
+        indices,
+        sortableIndex,
+        filterIndex,
+        decorators: columnMeta.map(meta => meta.decorator || null)
+      };
     }
 
     function computeRows(state){
@@ -751,7 +927,8 @@
           sortDirection: null,
           filterTerm: '',
           searchTerm: globalSearchTerm,
-          currentRows: null
+          currentRows: null,
+          decorators: display.decorators
         };
         dataStates.set(source.id, state);
         if(view.filterPopover){
@@ -769,6 +946,10 @@
           view.downloadEl.innerHTML = `<a href="${downloadUrl}" target="_blank" rel="noopener">下載 ${name}</a>`;
         }
         return downloadUrl ? { id: source.id, name, url: downloadUrl } : null;
+      }
+      if(!source.path){
+        view.statusEl.textContent = '找不到對應資料來源。';
+        return null;
       }
 
       const files = await listFiles(source.path);
@@ -813,7 +994,8 @@
           sortDirection: null,
           filterTerm: '',
           searchTerm: globalSearchTerm,
-          currentRows: null
+          currentRows: null,
+          decorators: display.decorators
         };
         dataStates.set(source.id, state);
         if(view.filterPopover){
