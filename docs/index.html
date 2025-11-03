@@ -29,9 +29,9 @@
     .header-actions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
     .link-button{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:500}
     .link-button:hover{background:var(--accent);color:#fff;text-decoration:none}
-  main.content{flex:1;width:100%;max-width:1280px;margin:0 auto;padding:0 5vw 48px}
-  .layout{display:flex;gap:32px;align-items:flex-start}
-  aside.sidebar{width:240px;position:sticky;top:120px;align-self:flex-start;background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px 20px;box-shadow:0 12px 24px rgba(0,0,0,0.28)}
+  main.content{flex:1;width:100%;max-width:1400px;margin:0 auto;padding:0 4vw 56px}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:32px;align-items:start}
+  aside.sidebar{position:sticky;top:112px;align-self:start;background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 20px;box-shadow:0 18px 32px rgba(0,0,0,0.35)}
   .sidebar-inner{display:flex;flex-direction:column;gap:16px}
   .sidebar h2{margin:0;color:#f1f6ff;font-size:1.1rem;font-weight:600}
   #sidebar-nav{margin-top:16px}
@@ -39,20 +39,20 @@
   #sidebar-nav a{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:8px;color:var(--muted);font-weight:500;background:rgba(255,255,255,0.02);border:1px solid transparent;transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease}
   #sidebar-nav a:hover{color:#fff;border-color:var(--accent);background:rgba(79,155,255,0.12);text-decoration:none}
   #sidebar-nav a.active{color:#fff;border-color:var(--accent);background:rgba(79,155,255,0.18)}
-  section.panel{flex:1;background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px;margin-top:-48px;box-shadow:0 20px 40px rgba(0,0,0,0.35)}
-  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
-    button.primary{padding:10px 18px;font-size:0.95rem;border:1px solid var(--accent);color:#fff;background:var(--accent-strong);border-radius:6px;cursor:pointer;font-weight:600;transition:transform 0.15s ease,box-shadow 0.15s ease}
-    button.primary:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(31,123,255,0.35)}
+  section.panel{flex:1;background:transparent;border:none;border-radius:0;padding:0;box-shadow:none;display:flex;flex-direction:column;gap:28px}
+  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:20px 24px;box-shadow:0 18px 32px rgba(0,0,0,0.35)}
+  button.primary{padding:10px 18px;font-size:0.95rem;border:1px solid var(--accent);color:#fff;background:var(--accent-strong);border-radius:10px;cursor:pointer;font-weight:600;transition:transform 0.15s ease,box-shadow 0.15s ease}
+  button.primary:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(31,123,255,0.35)}
     button.primary:disabled{opacity:0.6;cursor:not-allowed}
     #status{color:var(--muted);font-size:0.95rem}
-    .meta{margin:18px 0 0;color:var(--muted);font-size:0.95rem}
-    #downloads{margin-top:24px;padding:20px;border-radius:12px;background:var(--card);border:1px solid var(--card-border)}
+  .meta{margin:4px 0 0;color:var(--muted);font-size:0.95rem}
+  #downloads{padding:24px 28px;border-radius:18px;background:var(--panel);border:1px solid var(--panel-border);box-shadow:0 18px 32px rgba(0,0,0,0.35)}
     #downloads h3{margin:0 0 12px;font-size:1.05rem;font-weight:600}
     #download-list p{margin:0;color:var(--muted)}
     #download-list ul{margin:0;padding-left:16px;display:grid;gap:8px}
     #download-list li{list-style:disc}
-  #sources{margin-top:32px;display:grid;gap:24px}
-  section.source{background:var(--panel);border:1px solid var(--panel-border);border-radius:16px;padding:24px;scroll-margin-top:120px}
+  #sources{display:grid;gap:28px}
+  section.source{background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 28px;scroll-margin-top:120px;box-shadow:0 18px 32px rgba(0,0,0,0.35)}
     section.source h2{margin:0;font-size:1.4rem;font-weight:600}
     section.source p.desc{margin:8px 0 16px;color:var(--muted)}
     section.source .section-status{margin:0 0 12px;font-size:0.9rem;color:var(--muted)}
@@ -65,7 +65,7 @@
     th{font-weight:600;color:#f1f6ff;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em}
     tbody tr:nth-child(even){background:var(--table-stripe)}
     tbody tr:hover{background:rgba(79,155,255,0.12)}
-  .pagination{display:flex;align-items:center;justify-content:space-between;padding:16px 0 0;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:0.9rem}
+  .pagination{display:flex;align-items:center;justify-content:space-between;padding:18px 0 0;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:0.9rem}
   .pagination .page-info{font-weight:500}
   .pagination .page-controls{display:flex;gap:6px;flex-wrap:wrap}
   .pagination button{padding:8px 12px;background:transparent;border:1px solid var(--card-border);border-radius:6px;color:var(--text);cursor:pointer;min-width:40px}
@@ -74,13 +74,15 @@
   .pagination button.current{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
   .pagination .ellipsis{display:inline-flex;align-items:center;justify-content:center;padding:0 6px;font-size:0.9rem;color:var(--muted)}
     footer.site-footer{margin-top:auto;padding:24px 5vw 32px;color:var(--muted);font-size:0.85rem;text-align:center}
-    @media(max-width:1024px){
-      main.content{padding:0 4vw 48px}
-      .layout{flex-direction:column}
-      aside.sidebar{position:relative;top:auto;width:100%;display:flex;justify-content:center}
-      .sidebar-inner{max-width:640px;width:100%}
+    @media(max-width:1200px){
+      .layout{grid-template-columns:220px 1fr;gap:24px}
     }
-    @media(max-width:900px){table{min-width:600px}section.panel{margin-top:0;padding:20px}}
+    @media(max-width:992px){
+      main.content{padding:0 4vw 48px}
+      .layout{grid-template-columns:1fr;gap:24px}
+      aside.sidebar{position:relative;top:auto;width:100%;max-width:640px;margin:0 auto}
+    }
+    @media(max-width:900px){table{min-width:600px}}
     @media(max-width:640px){table{min-width:520px}button.primary{width:100%;justify-content:center}}
   </style>
 </head>
