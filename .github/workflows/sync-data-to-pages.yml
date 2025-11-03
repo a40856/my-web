@@ -39,6 +39,22 @@ jobs:
             echo "No testing/ in data branch"
           fi
 
+      - name: Generate manifest for testing files
+        run: |
+          # Create a manifest json listing files under docs/testing
+          if [ -d docs/testing ]; then
+            python3 - <<'PY'
+import os, json
+out=[]
+for root,dirs,files in os.walk('docs/testing'):
+    for f in files:
+        full=os.path.join(root,f)
+        rel=os.path.relpath(full,'docs/testing').replace('\\\\','/')
+        out.append({'name':os.path.basename(rel),'path':'testing/'+rel})
+print(json.dumps(out,ensure_ascii=False))
+PY
+          fi
+
       - name: Commit & push to main if changed
         run: |
           if [ -n "$(git status --porcelain)" ]; then

@@ -65,15 +65,69 @@
       tableWrap.appendChild(table);
     }
 
+    // Try to load a local manifest (generated at deploy time) under docs/testing/manifest.json
+    async function fetchLocalManifest(){
+      try{
+        const r = await fetch('testing/manifest.json', {cache: 'no-store'});
+        if(!r.ok) return null;
+        return await r.json();
+      }catch(e){ return null; }
+    }
+
     async function load(){
       statusEl.textContent = '載入 testing 目錄…';
-      // list top-level testing
+
+      // first try local static manifest (served by Pages when docs/testing is present)
+      const manifest = await fetchLocalManifest();
+      const downloads = [];
+
+      if(manifest && Array.isArray(manifest)){
+        // manifest entries have {name, path}
+        // find stock_data.csv
+        const csvItem = manifest.find(m => m.name === 'stock_data.csv' || m.path.endsWith('/stock_data.csv')) || null;
+        // build download links from manifest
+        manifest.forEach(m => downloads.push({name: m.path, url: m.path}));
+
+        // render download links
+        downloadsEl.innerHTML = '<h3>下載檔案</h3>';
+        if(downloads.length === 0){ downloadsEl.innerHTML += '<p>找不到任何產出檔案。</p>'; }
+        else{
+          const ul = document.createElement('ul');
+          downloads.forEach(d => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = d.url;
+            a.textContent = d.name;
+            a.target = '_blank';
+            li.appendChild(a);
+            ul.appendChild(li);
+          });
+          downloadsEl.appendChild(ul);
+        }
+
+        // fetch CSV and render table if present
+        if(csvItem){
+          statusEl.textContent = '載入 stock_data.csv…';
+          const r = await fetch(csvItem.path);
+          if(!r.ok){ statusEl.textContent = '無法下載 CSV'; return; }
+          const text = await r.text();
+          const parsed = Papa.parse(text.trim());
+          renderTable(parsed.data);
+          statusEl.textContent = '完成';
+        } else {
+          statusEl.textContent = '找不到 stock_data.csv';
+        }
+
+        return;
+      }
+
+      // fallback: try GitHub API (useful when browsing raw repo via GitHub and the branch is public)
+      statusEl.textContent = '嘗試使用 GitHub API 取得資料（若 repo 私有此步驟會失敗）…';
       const testing = await listFiles('testing');
       if(!testing){ statusEl.textContent = '找不到 testing 目錄（請確認 data 分支是否公開）'; return; }
 
       // find stock_data.csv
       const csvItem = testing.find(it => it.name === 'stock_data.csv');
-      const downloads = [];
       if(csvItem){ downloads.push({name: 'stock_data.csv', url: csvItem.download_url}); }
 
       // list active and OI subfolders
