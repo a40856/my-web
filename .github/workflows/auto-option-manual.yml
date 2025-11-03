@@ -63,10 +63,27 @@ jobs:
             TMPWT=$(mktemp -d)
             echo "Creating worktree at $TMPWT"
             git worktree add "$TMPWT" origin/data
-            # copy generated testing files into worktree
-            rsync -a --delete testing/ "$TMPWT/testing/" || true
+            # archive generated testing files into worktree with timestamped filenames
+            TS=$(date -u +%Y-%m-%d_%H%M)
+            mkdir -p "$TMPWT/testing/history" "$TMPWT/testing/active" "$TMPWT/testing/OI"
+            if [ -f testing/stock_data.csv ]; then
+              cp testing/stock_data.csv "$TMPWT/testing/history/stock_data-$TS.csv" || true
+            fi
+            if [ -f testing/final_stock_data.xlsx ]; then
+              cp testing/final_stock_data.xlsx "$TMPWT/testing/history/final_stock_data-$TS.xlsx" || true
+            fi
+            for f in testing/active/*.xlsx; do
+              [ -e "$f" ] || continue
+              base=$(basename "$f" .xlsx)
+              cp "$f" "$TMPWT/testing/active/${base}-$TS.xlsx" || true
+            done
+            for f in testing/OI/*.xlsx; do
+              [ -e "$f" ] || continue
+              base=$(basename "$f" .xlsx)
+              cp "$f" "$TMPWT/testing/OI/${base}-$TS.xlsx" || true
+            done
             pushd "$TMPWT"
-            git add testing/active testing/OI testing/stock_data.csv testing/final_stock_data.xlsx || true
+            git add testing/history testing/active testing/OI || true
             if git diff --staged --quiet; then
               echo "No changes to commit in worktree"
             else
@@ -81,12 +98,31 @@ jobs:
             rm -rf "$TMPWT" || true
           else
             echo "origin/data does not exist — creating local data branch"
+            TS=$(date -u +%Y-%m-%d_%H%M)
+            mkdir -p testing/history testing/active testing/OI || true
+            if [ -f testing/stock_data.csv ]; then
+              cp testing/stock_data.csv testing/history/stock_data-$TS.csv || true
+            fi
+            if [ -f testing/final_stock_data.xlsx ]; then
+              cp testing/final_stock_data.xlsx testing/history/final_stock_data-$TS.xlsx || true
+            fi
+            for f in testing/active/*.xlsx; do
+              [ -e "$f" ] || continue
+              base=$(basename "$f" .xlsx)
+              cp "$f" "testing/active/${base}-$TS.xlsx" || true
+            done
+            for f in testing/OI/*.xlsx; do
+              [ -e "$f" ] || continue
+              base=$(basename "$f" .xlsx)
+              cp "$f" "testing/OI/${base}-$TS.xlsx" || true
+            done
             git checkout -B data
-            git add testing/active testing/OI testing/stock_data.csv testing/final_stock_data.xlsx || true
+            git add testing/history testing/active testing/OI || true
             if git diff --staged --quiet; then
               echo "No changes to commit"
             else
-              git commit -m "chore(data): update generated testing artifacts from workflow"
+              git commit -m "chore(data): archive generated testing artifacts from workflow"
               git push origin data
             fi
+          fi
           fi
