@@ -1,0 +1,54 @@
+name: Sync data -> Pages (sync testing to main/docs)
+
+on:
+  push:
+    branches:
+      - data
+
+permissions:
+  contents: write
+
+jobs:
+  sync-to-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Fetch data branch to temp ref
+        run: |
+          git fetch origin data:data-temp || true
+
+      - name: Prepare docs dir
+        run: |
+          rm -rf docs/testing
+          mkdir -p docs
+
+      - name: Checkout testing from data-temp
+        run: |
+          if git ls-tree --name-only -r data-temp:testing >/dev/null 2>&1; then
+            git checkout data-temp -- testing
+            if [ -d testing ]; then
+              mv testing docs/testing
+            fi
+          else
+            echo "No testing/ in data branch"
+          fi
+
+      - name: Commit & push to main if changed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add docs/testing
+            git commit -m "chore(docs): sync testing from data (CI)"
+            git push origin main
+          else
+            echo "No changes to main/docs/testing"
+          fi
+
+      - name: Cleanup temp ref
+        run: |
+          git update-ref -d refs/heads/data-temp || true
