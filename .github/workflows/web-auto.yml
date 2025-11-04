@@ -1,0 +1,49 @@
+name: Build web data (scheduled)
+
+on:
+  schedule:
+    # Runs daily at 07:30 HKT (UTC+8) -> 23:30 UTC previous day
+    - cron: '30 23 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout data branch
+        uses: actions/checkout@v4
+        with:
+          ref: data
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build docs data bundle
+        run: npm run build:data
+
+      - name: Commit updated docs assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git pull --ff-only origin data
+          git status --short
+          git add docs/data
+          if git diff --staged --quiet; then
+            echo "No docs data changes to commit"
+          else
+            git commit -m "chore(data): refresh docs data bundle"
+            git push origin HEAD:data
+          fi
