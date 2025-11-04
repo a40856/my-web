@@ -6,6 +6,11 @@ import sys
 from pathlib import Path
 from bs4 import BeautifulSoup
 
+# Request timing and retry configuration
+REQUEST_DELAY = 1.2  # base delay in seconds between requests
+JITTER = 0.6         # jitter to add/subtract from base delay
+MAX_RETRIES = 5      # max retries on 429 or transient errors
+
 # List of tickers
 tickers = [
     "QQQ", "SPY", "IWM", "AAPL", "NVDA", "MSFT", "GOOG", "AMZN", "META", "BRK-B",
@@ -37,8 +42,10 @@ def fetch_data_from_finviz(ticker):
                 "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
             )
         }
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
+        # use safe_get which retries on 429 and other transient failures
+        response = safe_get(url, headers)
+        if response is None:
+            raise ValueError("Failed to fetch after retries")
         soup = BeautifulSoup(response.text, "html.parser")
         table = soup.find("table", class_="snapshot-table2")
         if not table:
@@ -95,6 +102,40 @@ def fetch_data_from_finviz(ticker):
         print(f"Error fetching data for {ticker}: {e}")
         return None
 
+
+def safe_get(url, headers):
+    """Perform requests.get with retry/backoff on 429 and transient errors.
+    Returns response object or None after exhausting retries."""
+    attempt = 0
+    backoff = 1.0
+    while attempt <= MAX_RETRIES:
+        try:
+            resp = requests.get(url, headers=headers, timeout=15)
+        except requests.RequestException as e:
+            # network-level error, retry
+            attempt += 1
+            wait = backoff + random.random() * 0.5
+            print(f"Request exception, retry {attempt}/{MAX_RETRIES} after {wait:.1f}s: {e}")
+            time.sleep(wait)
+            backoff *= 2
+            continue
+
+        if resp.status_code == 200:
+            return resp
+        if resp.status_code == 429:
+            attempt += 1
+            wait = backoff + random.random() * 0.5
+            print(f"429 received for {url}; retry {attempt}/{MAX_RETRIES} after {wait:.1f}s")
+            time.sleep(wait)
+            backoff *= 2
+            continue
+        try:
+            resp.raise_for_status()
+        except Exception as e:
+            print(f"HTTP error {resp.status_code} for {url}: {e}")
+            return None
+    return None
+
 # Ensure outputs are written relative to this script's directory (testing/)
 BASE_DIR = Path(__file__).resolve().parent
 output_file = BASE_DIR / "stock_data.csv"
@@ -134,7 +175,10 @@ with file as f:
             ])  # Save each result
             print(f"Saved data for {ticker}")
 
-    # sleep 1 second between ticker requests to avoid rate-limiting/glitches on the server
-    time.sleep(1)
+        # sleep with jitter between ticker requests to avoid rate-limiting/glitches on the server
+        sleep_time = REQUEST_DELAY + random.uniform(-JITTER, JITTER)
+        if sleep_time < 0.2:
+            sleep_time = 0.2
+        time.sleep(sleep_time)
 
 print(f"Data saved to {output_file}")
