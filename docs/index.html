@@ -238,21 +238,23 @@
   path: 'testing/active',
   xlsxPattern: /^Mostactive-.*\.xlsx$/i,
         displayColumns: [
-          { key: 'Símbolo', label: 'Symbol' },
-          { key: 'Nombre', label: 'Name' },
-          { key: 'Símbolo subyacente', label: 'Underlying' },
-          { key: 'Precio de ejercicio', label: 'Strike', decorate: 'number' },
-          { key: 'Expiration Date', label: 'Expiration' },
-          { key: 'Precio', label: 'Price', decorate: 'number' },
-          { key: 'Volumen', label: 'Volume', decorate: 'number' },
-          { key: 'Open Interest', label: 'Open Interest', decorate: 'number' },
-          { key: 'Oferta', label: 'Bid', decorate: 'number' },
-          { key: 'Demanda', label: 'Ask', decorate: 'number' }
+          { keys: ['Símbolo', 'Symbol'], label: 'Symbol' },
+          { keys: ['Nombre', 'Name'], label: 'Name' },
+          { keys: ['Símbolo subyacente', 'Underlying Symbol', 'Underlying'], label: 'Underlying' },
+          { keys: ['Precio de ejercicio', 'Strike'], label: 'Strike', decorate: 'number' },
+          { keys: ['Expiration Date', 'Expiration'], label: 'Expiration' },
+          { keys: ['Precio', 'Price'], label: 'Price', decorate: 'number' },
+          { keys: ['Cambio', 'Change'], label: 'Change', decorate: 'number' },
+          { keys: ['Cambio (%)', 'Change (%)', 'Change %'], label: 'Change %', decorate: 'number' },
+          { keys: ['Volumen', 'Volume'], label: 'Volume', decorate: 'number' },
+          { keys: ['Open Interest'], label: 'Open Interest', decorate: 'number' },
+          { keys: ['Oferta', 'Bid'], label: 'Bid', decorate: 'number' },
+          { keys: ['Demanda', 'Ask'], label: 'Ask', decorate: 'number' }
         ],
         sortKey: 'Symbol',
         filters: [
-          { key: 'Underlying', type: 'text', label: 'Filter Underlying', placeholder: '輸入標的代號 (例如 NVDA)' },
-          { key: 'Symbol', type: 'multi-select', label: 'Symbol Groups', transform: extractSymbolRoot, emptyLabel: '未提供' }
+          { keys: ['Underlying', 'Underlying Symbol', 'Símbolo subyacente'], type: 'text', label: 'Filter Underlying', placeholder: '輸入標的代號 (例如 NVDA)' },
+          { keys: ['Symbol', 'Símbolo'], type: 'multi-select', label: 'Symbol Groups', transform: extractSymbolRoot, emptyLabel: '未提供' }
         ]
       },
       {
@@ -974,22 +976,74 @@
     }
 
     function normalizeKey(value){
-      return String(value ?? '').trim().toLowerCase();
+      if(value == null) return '';
+      try {
+        return String(value)
+          .normalize('NFD')
+          .replace(/\p{Diacritic}/gu, '')
+          .trim()
+          .toLowerCase();
+      } catch (err) {
+        return String(value ?? '').trim().toLowerCase();
+      }
     }
 
     function buildDisplay(rows, source){
       if(!rows || rows.length === 0) return { headers: [], rows: [], indices: [] };
       const headers = rows[0];
+      const normalizedHeaders = headers.map(h => normalizeKey(h));
+      const usedIndices = new Set();
       const wanted = Array.isArray(source.displayColumns) ? source.displayColumns : [];
       const indices = [];
       const labels = [];
       const configs = [];
       const decorators = [];
+
+      const toEntry = (col) => {
+        if(typeof col === 'string') return { key: col };
+        return col || {};
+      };
+
+      const collectCandidates = (entry) => {
+        const candidates = [];
+        const push = (value) => {
+          if(typeof value === 'string' && value.trim()) candidates.push(value);
+        };
+        if(entry){
+          if(Array.isArray(entry.keys)) entry.keys.forEach(push);
+          push(entry.key);
+          push(entry.label);
+        }
+        return candidates;
+      };
+
+      const findColumnIndex = (candidates, { markUsed = false, allowUsed = false } = {}) => {
+        const normalizedCandidates = [...new Set((Array.isArray(candidates) ? candidates : [candidates]).map(normalizeKey).filter(Boolean))];
+        if(!normalizedCandidates.length) return -1;
+        const tryMatch = (matcher) => {
+          for(const candidate of normalizedCandidates){
+            for(let i = 0; i < normalizedHeaders.length; i++){
+              if(!allowUsed && usedIndices.has(i)) continue;
+              const headerKey = normalizedHeaders[i];
+              if(!headerKey) continue;
+              if(matcher(headerKey, candidate, i)){
+                if(markUsed) usedIndices.add(i);
+                return i;
+              }
+            }
+          }
+          return -1;
+        };
+        let index = tryMatch((header, candidate) => header === candidate);
+        if(index >= 0) return index;
+        index = tryMatch((header, candidate) => header.includes(candidate) || candidate.includes(header));
+        return index;
+      };
+
       if(wanted.length){
-        const lowered = headers.map(h => normalizeKey(h));
         wanted.forEach(col => {
-          const entry = typeof col === 'string' ? { key: col } : (col || {});
-          const idx = lowered.indexOf(normalizeKey(entry.key ?? entry.label ?? ''));
+          const entry = toEntry(col);
+          const idx = findColumnIndex(collectCandidates(entry), { markUsed: true });
           if(idx >= 0){
             indices.push(idx);
             labels.push(entry.label || headers[idx] || '');
@@ -1019,29 +1073,22 @@
         config: configs[i] || null,
         decorator: decorators[i] || null
       }));
-      const normalizeTarget = (value) => {
-        if(!value) return '';
-        return normalizeKey(value);
-      };
-      const matchColumn = (target, meta) => {
-        if(!target) return false;
-        if(normalizeKey(meta.label) === target) return true;
-        if(normalizeKey(meta.header) === target) return true;
-        if(meta.config){
-          if(meta.config.label && normalizeKey(meta.config.label) === target) return true;
-          if(meta.config.key && normalizeKey(meta.config.key) === target) return true;
+
+      const resolveSpecIndex = (spec, options = {}) => {
+        if(spec == null) return -1;
+        const entry = toEntry(spec);
+        const candidates = collectCandidates(entry);
+        if(!candidates.length && typeof spec === 'string'){
+          candidates.push(spec);
         }
-        return false;
-      };
-      const findTargetIndex = (targetValue) => {
-        const target = normalizeTarget(targetValue);
-        if(!target) return -1;
-        for(let i=0;i<columnMeta.length;i++){
-          if(matchColumn(target, columnMeta[i])) return i;
+        if(!candidates.length && entry && entry.key){
+          candidates.push(entry.key);
         }
-        return -1;
+        if(!candidates.length) return -1;
+        return findColumnIndex(candidates, options);
       };
-      let sortableIndex = findTargetIndex(source.sortKey);
+
+      let sortableIndex = resolveSpecIndex(source.sortKey, { allowUsed: true });
       if(sortableIndex < 0){
         sortableIndex = columnMeta.findIndex(meta => normalizeKey(meta.label).includes('symbol'));
       }
@@ -1058,19 +1105,21 @@
       }
       filterSpecs.forEach(spec => {
         if(!spec) return;
-        const specKey = spec.key || spec.label;
-        const idx = findTargetIndex(specKey);
+        const entry = toEntry(spec);
+        const candidates = entry.keys && entry.keys.length ? entry.keys : collectCandidates(entry);
+        const idx = findColumnIndex(candidates, { allowUsed: true });
         if(idx < 0) return;
         const config = {
-          type: spec.type === 'multi-select' ? 'multi-select' : 'text',
-          label: spec.label || 'Filter',
-          placeholder: spec.placeholder || '輸入關鍵字以篩選',
-          key: specKey || '',
-          transform: typeof spec.transform === 'function' ? spec.transform : null,
-          emptyLabel: spec.emptyLabel || ''
+          type: entry.type === 'multi-select' ? 'multi-select' : 'text',
+          label: entry.label || 'Filter',
+          placeholder: entry.placeholder || '輸入關鍵字以篩選',
+          key: entry.key || entry.label || '',
+          transform: typeof entry.transform === 'function' ? entry.transform : null,
+          emptyLabel: entry.emptyLabel || ''
         };
         filterConfigs.set(idx, config);
       });
+
       return {
         headers: displayHeaders,
         rows: dataRows,
