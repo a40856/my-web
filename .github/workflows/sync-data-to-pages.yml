@@ -1,70 +1,49 @@
-name: Sync data -> Pages (sync testing to main/docs)
+name: Build web data (scheduled)
 
 on:
-  push:
-    branches:
-      - data
+  schedule:
+    # Runs daily at 07:30 HKT (UTC+8) -> 23:30 UTC previous day
+    - cron: '30 23 * * *'
+  workflow_dispatch: {}
 
 permissions:
   contents: write
 
 jobs:
-  sync-to-pages:
+  build-and-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main
+      - name: Checkout data branch
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: data
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Fetch data branch to temp ref
-        run: |
-          git fetch origin data:data-temp || true
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
 
-      - name: Prepare docs dir
-        run: |
-          rm -rf docs/testing
-          mkdir -p docs
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Checkout testing from data-temp
+      - name: Build docs data bundle
+        run: npm run build:data
+
+      - name: Commit updated docs assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if git ls-tree --name-only -r data-temp:testing >/dev/null 2>&1; then
-            git checkout data-temp -- testing
-            if [ -d testing ]; then
-              mv testing docs/testing
-            fi
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git pull --ff-only origin data
+          git status --short
+          git add docs/data
+          if git diff --staged --quiet; then
+            echo "No docs data changes to commit"
           else
-            echo "No testing/ in data branch"
+            git commit -m "chore(data): refresh docs data bundle"
+            git push origin HEAD:data
           fi
-
-      - name: Generate manifest for testing files
-        run: |
-          # Create a manifest json listing files under docs/testing
-          if [ -d docs/testing ]; then
-            python3 - <<'PY'
-import os, json
-out=[]
-for root,dirs,files in os.walk('docs/testing'):
-    for f in files:
-        full=os.path.join(root,f)
-        rel=os.path.relpath(full,'docs/testing').replace('\\\\','/')
-        out.append({'name':os.path.basename(rel),'path':'testing/'+rel})
-print(json.dumps(out,ensure_ascii=False))
-PY
-          fi
-
-      - name: Commit & push to main if changed
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git add docs/testing
-            git commit -m "chore(docs): sync testing from data (CI)"
-            git push origin main
-          else
-            echo "No changes to main/docs/testing"
-          fi
-
-      - name: Cleanup temp ref
-        run: |
-          git update-ref -d refs/heads/data-temp || true
