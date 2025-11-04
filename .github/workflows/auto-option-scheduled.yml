@@ -55,6 +55,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
           git fetch origin
+          # fetch remote data branch so origin/data is available locally
+          git fetch origin data || true
           echo "Listing testing directory before add:"
           ls -la testing || true
           ls -la testing/active || true
