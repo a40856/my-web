@@ -30,7 +30,7 @@
     .link-button{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border:1px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:500}
     .link-button:hover{background:var(--accent);color:#fff;text-decoration:none}
   main.content{flex:1;width:100%;margin:0;padding:0 32px 56px}
-  .layout{width:100%;max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+  .layout{width:100%;margin:0;display:flex;flex-direction:column;gap:24px;align-items:stretch}
   .top-bar{position:sticky;top:16px;z-index:30;background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:20px 24px;box-shadow:0 18px 32px rgba(0,0,0,0.35);display:flex;flex-wrap:wrap;align-items:center;gap:20px}
   .top-bar-links{flex:1 1 320px;display:flex;flex-direction:column;gap:12px;min-width:0}
   .top-bar-links h2{margin:0;color:#f1f6ff;font-size:1.1rem;font-weight:600}
@@ -62,7 +62,7 @@
     section.source .section-status{margin:0 0 12px;font-size:0.9rem;color:var(--muted)}
     section.source .download{margin-bottom:16px}
     section.source .download a{font-weight:500}
-  section.source .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--card-border);background:#0e182b;width:90%;margin:0}
+  section.source .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--card-border);background:#0e182b;width:100%;margin:0}
   table{width:100%;border-collapse:collapse;min-width:680px}
     thead{background:rgba(255,255,255,0.04)}
     th,td{padding:12px 16px;text-align:left;font-size:0.95rem;border-bottom:1px solid rgba(255,255,255,0.05)}
@@ -85,6 +85,9 @@
   td.cell-negative{background:rgba(237,92,120,0.16);color:#ff94a7;font-weight:600}
   td.cell-warning{background:rgba(255,199,110,0.16);color:#ffd88a;font-weight:600}
   td.cell-neutral{color:var(--muted)}
+  @keyframes rowHighlightPulse{0%{box-shadow:0 0 0 0 rgba(79,155,255,0.35)}50%{box-shadow:0 0 0 6px rgba(79,155,255,0)}100%{box-shadow:0 0 0 0 rgba(79,155,255,0)}}
+  tr.row-highlight{background:rgba(79,155,255,0.18)!important;position:relative}
+  tr.row-highlight::after{content:'';position:absolute;inset:2px;border-radius:8px;border:1px solid rgba(79,155,255,0.55);pointer-events:none;animation:rowHighlightPulse 1.6s ease-out 2}
   .pagination{display:flex;align-items:center;justify-content:space-between;padding:18px 0 0;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:0.9rem}
   .pagination .page-info{font-weight:500}
   .pagination .page-controls{display:flex;gap:6px;flex-wrap:wrap}
@@ -113,9 +116,6 @@
   .filter-popover button.apply{background:var(--accent);border-color:var(--accent);color:#fff}
   .filter-popover button:hover{border-color:var(--accent);color:#fff}
     footer.site-footer{margin-top:auto;padding:24px 5vw 32px;color:var(--muted);font-size:0.85rem;text-align:center}
-    @media(max-width:1200px){
-      .layout{max-width:1040px}
-    }
     @media(max-width:992px){
       main.content{padding:0 4vw 48px}
       .top-bar{top:12px}
@@ -124,8 +124,56 @@
       .top-bar{position:static;padding:16px 18px;flex-direction:column;align-items:stretch}
       .top-bar-search{flex:1 1 auto;min-width:0;width:100%}
     }
-    @media(max-width:900px){table{min-width:600px}}
-    @media(max-width:640px){table{min-width:520px}button.primary{width:100%;justify-content:center}}
+  @media(max-width:900px){.flow-grid{grid-template-columns:1fr}table{min-width:600px}}
+  @media(max-width:640px){table{min-width:520px}button.primary{width:100%;justify-content:center}}
+  .page-body{display:flex;flex-direction:column;gap:24px;margin-top:24px}
+  .flow-section{background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 26px;box-shadow:0 18px 32px rgba(0,0,0,0.35);display:flex;flex-direction:column;gap:18px}
+  .flow-section .section-heading{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px}
+  .flow-section .section-heading h3{margin:0;font-size:1.15rem;font-weight:600;color:#f1f6ff}
+  .flow-section .section-heading .hint{margin:0;color:var(--muted);font-size:0.9rem}
+  .flow-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .flow-card{background:#0e182b;border:1px solid var(--card-border);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px}
+  .flow-card-header{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .flow-card-title{margin:0;font-size:1rem;font-weight:600;color:#f5f8ff}
+  .flow-card-count{font-size:0.85rem;color:var(--muted)}
+  .flow-chart{position:relative;min-height:220px;display:flex;align-items:center;justify-content:flex-start;overflow-x:auto;padding-bottom:8px}
+  .flow-empty{margin:0 auto;color:var(--muted);font-size:0.9rem;text-align:center;width:100%}
+  .flow-chart svg{height:220px}
+  .flow-baseline{stroke:rgba(255,255,255,0.24);stroke-width:1;stroke-dasharray:4 4}
+  .flow-call{fill:#2ecc71}
+  .flow-put{fill:#ff6b81}
+  .flow-label{font-size:0.75rem;fill:var(--muted)}
+  .flow-strike-label{margin:0;text-align:center;font-size:0.8rem;color:var(--muted)}
+  .flow-chart-legend{display:flex;gap:12px;font-size:0.8rem;color:var(--muted)}
+  .flow-chart-legend span{display:inline-flex;align-items:center;gap:6px}
+  .flow-legend-swatch{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .flow-legend-call{background:#2ecc71}
+  .flow-legend-put{background:#ff6b81}
+    .watchlist-strength{background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 26px;box-shadow:0 18px 32px rgba(0,0,0,0.35);display:flex;flex-direction:column;gap:16px}
+    .watchlist-strength .section-heading{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px}
+    .watchlist-strength .section-heading h3{margin:0;font-size:1.15rem;font-weight:600;color:#f1f6ff}
+    .watchlist-strength .section-heading .hint{margin:0;color:var(--muted);font-size:0.9rem}
+    .strength-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .strength-card{background:#0e182b;border:1px solid var(--card-border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:140px}
+    .strength-card-header{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+    .strength-card h4{margin:0;font-size:1rem;font-weight:600;color:#f5f8ff}
+    .strength-card-count{font-size:1.2rem;font-weight:600;color:#f5f8ff}
+  .strength-list{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+  .strength-list li{margin:0;padding:0}
+  .strength-symbol{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:8px;background:rgba(79,155,255,0.12);color:#f5f8ff;font-size:0.9rem;font-weight:500;letter-spacing:0.01em;border:1px solid transparent;cursor:pointer;transition:background 0.15s ease,color 0.15s ease,border-color 0.15s ease,transform 0.15s ease}
+  .strength-symbol:hover,.strength-symbol:focus-visible{color:#fff;border-color:var(--accent);background:rgba(79,155,255,0.22);transform:translateY(-1px)}
+  .strength-symbol:focus-visible{outline:none;box-shadow:0 0 0 2px rgba(79,155,255,0.32)}
+  .strength-empty{margin:0;color:var(--muted);font-size:0.9rem}
+  .strength-toggle{align-self:flex-start;margin-top:auto;padding:6px 12px;border-radius:8px;border:1px solid var(--card-border);background:rgba(255,255,255,0.04);color:var(--muted);font-size:0.85rem;font-weight:500;cursor:pointer;transition:background 0.15s ease,color 0.15s ease,border-color 0.15s ease}
+  .strength-toggle:hover{color:#fff;border-color:var(--accent);background:rgba(79,155,255,0.12)}
+    .market-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+    .overview-card{background:var(--panel);border:1px solid var(--panel-border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+    .overview-card .label{font-size:0.8rem;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase}
+    .overview-card .value{font-size:1.4rem;font-weight:600;color:#f5f8ff}
+    .overview-card .hint{font-size:0.85rem;color:var(--muted)}
+    @media(max-width:640px){
+      .strength-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+    }
   </style>
 </head>
 <body>
@@ -159,12 +207,57 @@
         </div>
         <p class="meta">資料來源：<strong>data</strong> 分支的 <code>testing</code> 目錄。系統會自動抓取最新檔案並顯示精選欄位，每頁 15 筆。</p>
 
-        <div id="downloads">
-          <h3>最新資料檔案</h3>
-          <div id="download-list"><p>尚未載入。</p></div>
-        </div>
+        <section class="market-overview" aria-label="Market overview">
+          <div class="overview-card">
+            <span class="label">Active Contracts</span>
+            <span class="value" id="metric-active-contracts">--</span>
+            <span class="hint">熱門期權總筆數</span>
+          </div>
+          <div class="overview-card">
+            <span class="label">Active Volume</span>
+            <span class="value" id="metric-active-volume">--</span>
+            <span class="hint">熱門期權成交量合計</span>
+          </div>
+          <div class="overview-card">
+            <span class="label">Top Underlying</span>
+            <span class="value" id="metric-top-underlying">--</span>
+            <span class="hint">依成交量排序</span>
+          </div>
+          <div class="overview-card">
+            <span class="label">OI Spotlight</span>
+            <span class="value" id="metric-oi-open-interest">--</span>
+            <span class="hint">最高未平倉量合計</span>
+          </div>
+        </section>
 
-        <div id="sources"></div>
+        <div class="page-body">
+          <section class="flow-section" aria-label="Most active option flow">
+            <div class="section-heading">
+              <h3>SPY / QQQ Most Active Flow</h3>
+              <p class="hint">整合熱門期權成交量，辨識 Call 與 Put 在不同履約價的熱度</p>
+            </div>
+            <div class="flow-chart-legend" aria-hidden="true">
+              <span><span class="flow-legend-swatch flow-legend-call"></span>Call Volume</span>
+              <span><span class="flow-legend-swatch flow-legend-put"></span>Put Volume</span>
+            </div>
+            <div id="flow-grid" class="flow-grid"></div>
+          </section>
+
+          <section class="watchlist-strength" aria-label="Watchlist strength signals">
+            <div class="section-heading">
+              <h3>Watchlist Strength Signals</h3>
+              <p class="hint">依最新觀察名單篩選</p>
+            </div>
+            <div id="strength-grid" class="strength-grid"></div>
+          </section>
+
+          <div id="downloads">
+            <h3>最新資料檔案</h3>
+            <div id="download-list"><p>尚未載入。</p></div>
+          </div>
+
+          <div id="sources"></div>
+        </div>
       </section>
     </div>
   </main>
@@ -191,16 +284,31 @@
       return base.replace(/^\^/, '').toUpperCase();
     }
 
-  const statusEl = document.getElementById('status');
-  const downloadsContainer = document.getElementById('downloads');
-  const downloadsEl = document.getElementById('download-list');
-  const sourcesEl = document.getElementById('sources');
-  const navListEl = document.getElementById('nav-links');
-  const globalSearchInput = document.getElementById('global-search');
-    const PAGE_SIZE = 15;
-    let globalSearchTerm = globalSearchInput ? globalSearchInput.value.trim() : '';
+    
+const statusEl = document.getElementById('status');
+const downloadsEl = document.getElementById('download-list');
+const sourcesEl = document.getElementById('sources');
+const navListEl = document.getElementById('nav-links');
+const globalSearchInput = document.getElementById('global-search');
+const metricActiveContractsEl = document.getElementById('metric-active-contracts');
+const metricActiveVolumeEl = document.getElementById('metric-active-volume');
+const metricTopUnderlyingEl = document.getElementById('metric-top-underlying');
+const metricOiOpenInterestEl = document.getElementById('metric-oi-open-interest');
+const flowGridEl = document.getElementById('flow-grid');
+const strengthGridEl = document.getElementById('strength-grid');
+const strengthCards = new Map();
+const flowCards = new Map();
+const STRENGTH_PREVIEW_LIMIT = 20;
+const FLOW_UNDERLYINGS = ['SPY','QQQ','VIX','IWM'];
+const FLOW_BAR_WIDTH = 20;
+const FLOW_BAR_GAP = 14;
+const FLOW_CHART_HEIGHT = 200;
+const MAX_FLOW_BARS = 18;
+const PAGE_SIZE = 15;
+let historyHighlightTimer = null;
+let globalSearchTerm = globalSearchInput ? globalSearchInput.value.trim() : '';
 
-    const SOURCES = [
+const SOURCES = [
       {
         id: 'history',
         title: '股票觀察名單（History）',
@@ -281,6 +389,19 @@
         ]
       }
     ];
+
+const WATCHLIST_STRENGTH_DEFS = [
+  { id: 'rsi-overbought', label: 'RSI > 70', columnNames: ['RSI', 'RSI (14)'], test: (value) => value > 70 },
+  { id: 'rsi-oversold', label: 'RSI < 30', columnNames: ['RSI', 'RSI (14)'], test: (value) => value < 30 },
+  { id: 'ytd-strong', label: 'YTD > 10%', columnNames: ['YTD %', 'YTD%'], test: (value) => value > 10 },
+  { id: 'ytd-weak', label: 'YTD < -10%', columnNames: ['YTD %', 'YTD%'], test: (value) => value < -10 },
+  { id: 'sma20-strong', label: '20MA > 10%', columnNames: ['20 SMA', '20MA', '20 MA'], test: (value) => value > 10 },
+  { id: 'sma20-weak', label: '20MA < -10%', columnNames: ['20 SMA', '20MA', '20 MA'], test: (value) => value < -10 },
+  { id: 'sma50-strong', label: '50MA > 10%', columnNames: ['50 SMA', '50MA', '50 MA'], test: (value) => value > 10 },
+  { id: 'sma50-weak', label: '50MA < -10%', columnNames: ['50 SMA', '50MA', '50 MA'], test: (value) => value < -10 },
+  { id: 'sma200-strong', label: '200MA > 10%', columnNames: ['200 SMA', '200MA', '200 MA'], test: (value) => value > 10 },
+  { id: 'sma200-weak', label: '200MA < -10%', columnNames: ['200 SMA', '200MA', '200 MA'], test: (value) => value < -10 }
+];
 
   const sections = new Map();
   const dataStates = new Map();
@@ -986,6 +1107,491 @@
       }
     }
 
+    function findHeaderIndexByNames(state, names){
+      if(!state || !Array.isArray(state.headers)) return -1;
+      const normalizedHeaders = state.headers.map(h => normalizeKey(h));
+      const candidates = (Array.isArray(names) ? names : [names]).map(normalizeKey).filter(Boolean);
+      for(const candidate of candidates){
+        for(let i=0;i<normalizedHeaders.length;i++){
+          if(normalizedHeaders[i].includes(candidate) || candidate.includes(normalizedHeaders[i])){
+            return i;
+          }
+        }
+      }
+      return -1;
+    }
+
+    function formatLargeNumber(value){
+      if(!Number.isFinite(value)) return '--';
+      const abs = Math.abs(value);
+      if(abs >= 1e12) return `${(value/1e12).toFixed(2)}T`;
+      if(abs >= 1e9) return `${(value/1e9).toFixed(2)}B`;
+      if(abs >= 1e6) return `${(value/1e6).toFixed(2)}M`;
+      if(abs >= 1e3) return `${(value/1e3).toFixed(1)}K`;
+      return value.toLocaleString('en-US');
+    }
+
+    function initFlowGrid(){
+      if(!flowGridEl) return;
+      flowGridEl.innerHTML = '';
+      flowCards.clear();
+      FLOW_UNDERLYINGS.forEach(ticker => {
+        const card = document.createElement('article');
+        card.className = 'flow-card';
+        card.dataset.underlying = ticker;
+
+        const header = document.createElement('div');
+        header.className = 'flow-card-header';
+
+        const title = document.createElement('h4');
+        title.className = 'flow-card-title';
+        title.textContent = `${ticker} Option Flow`;
+        header.appendChild(title);
+
+        const countEl = document.createElement('span');
+        countEl.className = 'flow-card-count';
+        countEl.textContent = '-- strikes';
+        header.appendChild(countEl);
+
+        card.appendChild(header);
+
+        const chartEl = document.createElement('div');
+        chartEl.className = 'flow-chart';
+        chartEl.id = `flow-chart-${ticker}`;
+        const emptyEl = document.createElement('p');
+        emptyEl.className = 'flow-empty';
+        emptyEl.textContent = '資料載入中…';
+        chartEl.appendChild(emptyEl);
+
+        card.appendChild(chartEl);
+
+        flowGridEl.appendChild(card);
+        flowCards.set(ticker, { ticker, chartEl, emptyEl, countEl });
+      });
+    }
+
+    function renderFlowEmpty(entry, message, countLabel='-- strikes'){
+      if(!entry) return;
+      if(entry.countEl){
+        entry.countEl.textContent = countLabel;
+        entry.countEl.removeAttribute('title');
+      }
+      if(entry.chartEl){
+        entry.chartEl.innerHTML = '';
+        const placeholder = document.createElement('p');
+        placeholder.className = 'flow-empty';
+        placeholder.textContent = message;
+        entry.chartEl.appendChild(placeholder);
+        entry.emptyEl = placeholder;
+      }
+    }
+
+    function setFlowCardsStatus(message){
+      flowCards.forEach(entry => renderFlowEmpty(entry, message));
+    }
+
+    function detectOptionSide(symbolValue, nameValue){
+      const symbolText = String(symbolValue || '').trim().toUpperCase();
+      if(/C\d{3,}$/i.test(symbolText)) return 'call';
+      if(/P\d{3,}$/i.test(symbolText)) return 'put';
+      const nameText = String(nameValue || '').trim().toLowerCase();
+      if(nameText.includes('call')) return 'call';
+      if(nameText.includes('put')) return 'put';
+      return null;
+    }
+
+    function formatStrikeLabel(value){
+      if(!Number.isFinite(value)) return '--';
+      if(Math.abs(value) >= 1000) return value.toFixed(0);
+      return Number.isInteger(value) ? value.toFixed(0) : value.toFixed(2);
+    }
+
+    function renderFlowChart(entry, points){
+      if(!entry || !entry.chartEl) return;
+      const data = Array.isArray(points) ? points : [];
+      if(!data.length){
+        renderFlowEmpty(entry, '尚無符合資料', '0 strikes');
+        return;
+      }
+
+      const maxValue = data.reduce((acc, item) => Math.max(acc, item.call || 0, item.put || 0), 0);
+      if(!maxValue){
+        renderFlowEmpty(entry, '成交量不足', `${data.length} strikes`);
+        return;
+      }
+
+      const chartHeight = FLOW_CHART_HEIGHT;
+      const labelOffset = 28;
+      const baseline = chartHeight / 2;
+      const width = Math.max((data.length * (FLOW_BAR_WIDTH + FLOW_BAR_GAP)) + FLOW_BAR_GAP, 240);
+      const totalHeight = chartHeight + labelOffset;
+      const ns = 'http://www.w3.org/2000/svg';
+
+      entry.chartEl.innerHTML = '';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('viewBox', `0 0 ${width} ${totalHeight}`);
+      svg.setAttribute('aria-label', `${entry.ticker} call vs put volume`);
+      svg.setAttribute('role', 'img');
+  svg.style.width = `${width}px`;
+  svg.style.height = `${totalHeight}px`;
+
+      const baselineLine = document.createElementNS(ns, 'line');
+      baselineLine.setAttribute('x1', '0');
+      baselineLine.setAttribute('y1', `${baseline}`);
+      baselineLine.setAttribute('x2', `${width}`);
+      baselineLine.setAttribute('y2', `${baseline}`);
+      baselineLine.setAttribute('class', 'flow-baseline');
+      svg.appendChild(baselineLine);
+
+      data.forEach((point, index) => {
+        const x = FLOW_BAR_GAP + index * (FLOW_BAR_WIDTH + FLOW_BAR_GAP);
+        const totalRange = baseline - 8;
+        if(point.call > 0){
+          const callHeight = Math.max(2, (point.call / maxValue) * totalRange);
+          const callRect = document.createElementNS(ns, 'rect');
+          callRect.setAttribute('x', `${x}`);
+          callRect.setAttribute('y', `${baseline - callHeight}`);
+          callRect.setAttribute('width', `${FLOW_BAR_WIDTH}`);
+          callRect.setAttribute('height', `${callHeight}`);
+          callRect.setAttribute('class', 'flow-call');
+          const title = document.createElementNS(ns, 'title');
+          title.textContent = `${entry.ticker} ${formatStrikeLabel(point.strike)} Call Volume: ${Math.round(point.call).toLocaleString('en-US')}`;
+          callRect.appendChild(title);
+          svg.appendChild(callRect);
+        }
+        if(point.put > 0){
+          const putHeight = Math.max(2, (point.put / maxValue) * totalRange);
+          const putRect = document.createElementNS(ns, 'rect');
+          putRect.setAttribute('x', `${x}`);
+          putRect.setAttribute('y', `${baseline}`);
+          putRect.setAttribute('width', `${FLOW_BAR_WIDTH}`);
+          putRect.setAttribute('height', `${putHeight}`);
+          putRect.setAttribute('class', 'flow-put');
+          const title = document.createElementNS(ns, 'title');
+          title.textContent = `${entry.ticker} ${formatStrikeLabel(point.strike)} Put Volume: ${Math.round(point.put).toLocaleString('en-US')}`;
+          putRect.appendChild(title);
+          svg.appendChild(putRect);
+        }
+
+        const label = document.createElementNS(ns, 'text');
+        label.setAttribute('x', `${x + FLOW_BAR_WIDTH / 2}`);
+        label.setAttribute('y', `${chartHeight + 18}`);
+        label.setAttribute('text-anchor', 'middle');
+        label.setAttribute('class', 'flow-label');
+        label.textContent = formatStrikeLabel(point.strike);
+        svg.appendChild(label);
+      });
+
+      entry.chartEl.appendChild(svg);
+    }
+
+    function renderMostActiveFlow(){
+      if(!flowGridEl || !flowCards.size) return;
+      const activeState = dataStates.get('active');
+      if(!activeState || !Array.isArray(activeState.rows) || activeState.rows.length === 0){
+        setFlowCardsStatus('資料尚未載入');
+        return;
+      }
+
+      const rows = activeState.currentRows || computeRows(activeState);
+      const symbolIdx = findHeaderIndexByNames(activeState, ['Symbol']);
+      const nameIdx = findHeaderIndexByNames(activeState, ['Name', 'Nombre']);
+      const underlyingIdx = findHeaderIndexByNames(activeState, ['Underlying', 'Underlying Symbol', 'Símbolo subyacente']);
+      const strikeIdx = findHeaderIndexByNames(activeState, ['Strike', 'Precio de ejercicio']);
+      const volumeIdx = findHeaderIndexByNames(activeState, ['Volume', 'Volumen']);
+
+      if([symbolIdx, nameIdx, underlyingIdx, strikeIdx, volumeIdx].some(idx => idx < 0)){
+        setFlowCardsStatus('缺少必要欄位');
+        return;
+      }
+
+      const aggregation = new Map();
+      FLOW_UNDERLYINGS.forEach(ticker => aggregation.set(ticker, new Map()));
+
+      rows.forEach(row => {
+        const underlying = String(row[underlyingIdx] || '').trim().toUpperCase();
+        if(!aggregation.has(underlying)) return;
+        const side = detectOptionSide(row[symbolIdx], row[nameIdx]);
+        if(!side) return;
+        const strikeValue = parseNumeric(row[strikeIdx]);
+        const volumeValue = parseNumeric(row[volumeIdx]);
+        if(Number.isNaN(strikeValue) || Number.isNaN(volumeValue) || volumeValue <= 0) return;
+        const strikeKey = strikeValue.toFixed(2);
+        const strikeMap = aggregation.get(underlying);
+        if(!strikeMap.has(strikeKey)){
+          strikeMap.set(strikeKey, { strike: strikeValue, call: 0, put: 0 });
+        }
+        strikeMap.get(strikeKey)[side] += volumeValue;
+      });
+
+      let hasAnyData = false;
+      FLOW_UNDERLYINGS.forEach(ticker => {
+        const entry = flowCards.get(ticker);
+        const dataMap = aggregation.get(ticker);
+        if(!entry){
+          return;
+        }
+        if(!dataMap || dataMap.size === 0){
+          renderFlowEmpty(entry, '尚無符合資料', '0 strikes');
+          return;
+        }
+        const points = Array.from(dataMap.values());
+        points.sort((a, b) => (b.call + b.put) - (a.call + a.put));
+        const limited = points.slice(0, MAX_FLOW_BARS).sort((a, b) => a.strike - b.strike);
+        if(entry.countEl){
+          const total = dataMap.size;
+          const displayCount = limited.length;
+          if(total > displayCount){
+            entry.countEl.textContent = `Top ${displayCount} / ${total} strikes`;
+            entry.countEl.title = `圖表僅顯示成交量最高的 ${displayCount} 個履約價，總共有 ${total} 個履約價符合條件。`;
+          } else {
+            entry.countEl.textContent = `${displayCount} strikes`;
+            entry.countEl.title = `共 ${displayCount} 個履約價符合條件。`;
+          }
+        }
+        renderFlowChart(entry, limited);
+        hasAnyData = true;
+      });
+
+      if(!hasAnyData){
+        setFlowCardsStatus('尚無符合資料');
+      }
+    }
+
+    function initStrengthGrid(){
+      if(!strengthGridEl) return;
+      strengthGridEl.innerHTML = '';
+      strengthCards.clear();
+      WATCHLIST_STRENGTH_DEFS.forEach(def => {
+        const card = document.createElement('article');
+        card.className = 'strength-card';
+
+        const header = document.createElement('div');
+        header.className = 'strength-card-header';
+
+        const title = document.createElement('h4');
+        title.textContent = def.label;
+        header.appendChild(title);
+
+        const countEl = document.createElement('span');
+        countEl.className = 'strength-card-count';
+        countEl.textContent = '--';
+        header.appendChild(countEl);
+
+        card.appendChild(header);
+
+        const listEl = document.createElement('ul');
+        listEl.className = 'strength-list';
+        listEl.style.display = 'none';
+        card.appendChild(listEl);
+
+        const emptyEl = document.createElement('p');
+        emptyEl.className = 'strength-empty';
+        emptyEl.textContent = '資料載入中…';
+        card.appendChild(emptyEl);
+
+        const toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'strength-toggle';
+        toggleBtn.textContent = '顯示全部';
+        toggleBtn.style.display = 'none';
+  toggleBtn.setAttribute('aria-expanded', 'false');
+        card.appendChild(toggleBtn);
+
+        const entry = { listEl, emptyEl, countEl, toggleBtn, expanded: false, symbols: [] };
+        toggleBtn.addEventListener('click', () => {
+          entry.expanded = !entry.expanded;
+          renderStrengthSymbols(entry);
+        });
+
+        strengthGridEl.appendChild(card);
+        strengthCards.set(def.id, entry);
+      });
+    }
+
+    function setStrengthCardsStatus(message, countValue='--'){
+      strengthCards.forEach(entry => {
+        if(entry.listEl){
+          entry.listEl.innerHTML = '';
+          entry.listEl.style.display = 'none';
+        }
+        if(entry.emptyEl){
+          entry.emptyEl.textContent = message;
+          entry.emptyEl.style.display = 'block';
+        }
+        if(entry.countEl){
+          entry.countEl.textContent = countValue;
+        }
+        if(entry.toggleBtn){
+          entry.toggleBtn.style.display = 'none';
+        }
+        entry.symbols = [];
+        entry.expanded = false;
+      });
+    }
+
+    function focusHistoryTicker(symbol){
+      const ticker = String(symbol || '').trim().toUpperCase();
+      if(!ticker) return;
+
+      const state = dataStates.get('history');
+      const view = sections.get('history');
+      if(!state || !view) return;
+
+      if(globalSearchTerm){
+        if(globalSearchInput) globalSearchInput.value = '';
+        applyGlobalSearch('');
+      } else if(globalSearchInput){
+        globalSearchInput.value = '';
+      }
+
+      closeFilterPopover(view);
+
+      if(state.filters && state.filters.size){
+        state.filters.forEach(filterState => {
+          if(!filterState) return;
+          if(filterState.type === 'text'){
+            filterState.term = '';
+          } else if(filterState.type === 'multi-select'){
+            filterState.excluded.clear();
+          }
+        });
+      }
+
+      state.searchTerm = '';
+      state.filterTerm = '';
+      state.filterIndex = null;
+
+      const tickerIdx = findHeaderIndexByNames(state, ['Ticker']);
+      if(tickerIdx < 0) return;
+
+      if(!Array.isArray(state.rows) || state.rows.length === 0) return;
+
+      const targetIndex = state.rows.findIndex(row => {
+        const raw = row[tickerIdx];
+        return String(raw || '').trim().toUpperCase() === ticker;
+      });
+      if(targetIndex < 0) return;
+
+      state.pageSize = state.pageSize || PAGE_SIZE;
+      const targetPage = Math.floor(targetIndex / state.pageSize);
+      state.page = targetPage < 0 ? 0 : targetPage;
+      state.highlightSymbol = ticker;
+
+      updateSectionView(view, state);
+      setActiveNav('history');
+    }
+
+    function renderStrengthSymbols(entry){
+      if(!entry || !entry.listEl) return;
+      const { listEl, emptyEl, toggleBtn, symbols, expanded } = entry;
+      listEl.innerHTML = '';
+      if(!Array.isArray(symbols) || symbols.length === 0){
+        listEl.style.display = 'none';
+        if(toggleBtn) toggleBtn.style.display = 'none';
+        if(emptyEl) emptyEl.style.display = 'block';
+        return;
+      }
+
+      const limit = STRENGTH_PREVIEW_LIMIT;
+      const subset = expanded ? symbols : symbols.slice(0, limit);
+      subset.forEach(symbol => {
+        const li = document.createElement('li');
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'strength-symbol';
+        chip.textContent = symbol;
+        chip.title = `在觀察名單中檢視 ${symbol}`;
+        chip.addEventListener('click', () => focusHistoryTicker(symbol));
+        li.appendChild(chip);
+        listEl.appendChild(li);
+      });
+      listEl.style.display = 'flex';
+      if(emptyEl) emptyEl.style.display = 'none';
+
+      if(toggleBtn){
+        if(symbols.length > limit){
+          toggleBtn.style.display = 'inline-flex';
+          toggleBtn.textContent = expanded ? '收合' : `顯示全部 (${symbols.length})`;
+          toggleBtn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        } else {
+          toggleBtn.style.display = 'none';
+          toggleBtn.removeAttribute('aria-expanded');
+        }
+      }
+    }
+
+    function updateWatchlistStrength(){
+      if(!strengthGridEl || !strengthCards.size) return;
+
+      const historyState = dataStates.get('history');
+      if(!historyState || !Array.isArray(historyState.rows) || historyState.rows.length === 0){
+        setStrengthCardsStatus('資料尚未載入');
+        return;
+      }
+
+      const rows = computeRows(historyState);
+      const tickerIdx = findHeaderIndexByNames(historyState, ['Ticker']);
+      if(tickerIdx < 0){
+        setStrengthCardsStatus('找不到 Ticker 欄位', '--');
+        return;
+      }
+
+      WATCHLIST_STRENGTH_DEFS.forEach(def => {
+        const entry = strengthCards.get(def.id);
+        if(!entry) return;
+
+        const { listEl, emptyEl, countEl, toggleBtn } = entry;
+        if(listEl) listEl.innerHTML = '';
+
+        const columnIdx = findHeaderIndexByNames(historyState, def.columnNames);
+        if(columnIdx < 0){
+          if(listEl) listEl.style.display = 'none';
+          if(emptyEl){
+            emptyEl.textContent = '缺少欄位';
+            emptyEl.style.display = 'block';
+          }
+          if(countEl) countEl.textContent = '--';
+          if(toggleBtn) toggleBtn.style.display = 'none';
+          entry.symbols = [];
+          entry.expanded = false;
+          return;
+        }
+
+        const matches = [];
+        rows.forEach(row => {
+          const numeric = parseNumeric(row[columnIdx]);
+          if(Number.isNaN(numeric)) return;
+          if(def.test(numeric)){
+            const symbol = String(row[tickerIdx] || '').trim();
+            if(symbol) matches.push(symbol);
+          }
+        });
+
+        const unique = Array.from(new Set(matches));
+        if(unique.length){
+          unique.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+          entry.symbols = unique;
+          if(countEl) countEl.textContent = unique.length.toLocaleString('en-US');
+          // Collapse preview automatically if full list fits within the preview limit.
+          if(unique.length <= STRENGTH_PREVIEW_LIMIT && entry.expanded){
+            entry.expanded = false;
+          }
+          renderStrengthSymbols(entry);
+        } else {
+          entry.symbols = [];
+          entry.expanded = false;
+          if(listEl) listEl.style.display = 'none';
+          if(emptyEl){
+            emptyEl.textContent = '尚無符合條件';
+            emptyEl.style.display = 'block';
+          }
+          if(countEl) countEl.textContent = '0';
+          if(toggleBtn) toggleBtn.style.display = 'none';
+        }
+      });
+    }
+
     function buildDisplay(rows, source){
       if(!rows || rows.length === 0) return { headers: [], rows: [], indices: [] };
       const headers = rows[0];
@@ -1295,6 +1901,46 @@
       createButton('>>', totalPages - 1, disableNav || state.page >= totalPages - 1);
     }
 
+    function applyHistoryHighlight(view, state){
+      if(!view || !state || !state.highlightSymbol) return;
+      const symbol = String(state.highlightSymbol || '').trim().toUpperCase();
+      state.highlightSymbol = null;
+      if(!symbol) return;
+
+      const table = view.tableEl ? view.tableEl.querySelector('table') : null;
+      if(!table) return;
+
+      const tickerIdx = findHeaderIndexByNames(state, ['Ticker']);
+      if(tickerIdx < 0) return;
+
+      view.tableEl.querySelectorAll('tr.row-highlight').forEach(row => row.classList.remove('row-highlight'));
+
+      const rows = table.querySelectorAll('tbody tr');
+      let targetRow = null;
+      rows.forEach(row => {
+        const cell = row.cells[tickerIdx];
+        if(!cell) return;
+        if(String(cell.textContent || '').trim().toUpperCase() === symbol){
+          targetRow = row;
+        }
+      });
+      if(!targetRow) return;
+
+      targetRow.classList.add('row-highlight');
+      if(historyHighlightTimer){
+        clearTimeout(historyHighlightTimer);
+        historyHighlightTimer = null;
+      }
+      historyHighlightTimer = setTimeout(() => {
+        targetRow.classList.remove('row-highlight');
+        historyHighlightTimer = null;
+      }, 3200);
+
+      const scrollIntoView = () => targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if(typeof requestAnimationFrame === 'function') requestAnimationFrame(scrollIntoView);
+      else scrollIntoView();
+    }
+
     function updateSectionView(view, state){
       const effectiveRows = computeRows(state);
       state.currentRows = effectiveRows;
@@ -1320,6 +1966,13 @@
           }
           positionFilterPopover(view);
         }
+      }
+      if(view.stateId === 'active'){
+        renderMostActiveFlow();
+      }
+      if(view.stateId === 'history'){
+        applyHistoryHighlight(view, state);
+        updateWatchlistStrength();
       }
     }
 
@@ -1355,6 +2008,68 @@
       const text = await res.text();
       const parsed = Papa.parse(text.trim());
       return cleanRows(parsed.data);
+    }
+
+    function updateMarketOverview(){
+      const fallback = '--';
+      const setMetric = (el, value) => { if(el) el.textContent = value; };
+
+      const activeState = dataStates.get('active');
+      const activeRows = activeState && Array.isArray(activeState.rows) ? activeState.rows : [];
+      setMetric(metricActiveContractsEl, activeRows.length ? activeRows.length.toLocaleString('en-US') : fallback);
+
+      let activeVolume = 0;
+      if(activeRows.length){
+        const volumeIdx = findHeaderIndexByNames(activeState, ['Volume', 'Volumen']);
+        if(volumeIdx >= 0){
+          activeRows.forEach(row => {
+            const v = parseNumeric(row[volumeIdx]);
+            if(!Number.isNaN(v)) activeVolume += v;
+          });
+        }
+      }
+      setMetric(metricActiveVolumeEl, activeVolume ? formatLargeNumber(activeVolume) : fallback);
+
+      let topUnderlyingText = fallback;
+      if(activeRows.length){
+        const underlyingIdx = findHeaderIndexByNames(activeState, ['Underlying', 'Underlying Symbol', 'Símbolo subyacente']);
+        const volumeIdx = findHeaderIndexByNames(activeState, ['Volume', 'Volumen']);
+        if(underlyingIdx >= 0 && volumeIdx >= 0){
+          const totals = new Map();
+          activeRows.forEach(row => {
+            const symbol = String(row[underlyingIdx] || '').trim().toUpperCase() || '未提供';
+            const vol = parseNumeric(row[volumeIdx]);
+            if(Number.isNaN(vol)) return;
+            totals.set(symbol, (totals.get(symbol) || 0) + vol);
+          });
+          let bestSymbol = null;
+          let bestVolume = 0;
+          totals.forEach((vol, symbol) => {
+            if(vol > bestVolume){
+              bestVolume = vol;
+              bestSymbol = symbol;
+            }
+          });
+          if(bestSymbol){
+            topUnderlyingText = `${bestSymbol} · ${formatLargeNumber(bestVolume)}`;
+          }
+        }
+      }
+      setMetric(metricTopUnderlyingEl, topUnderlyingText);
+
+      const oiState = dataStates.get('oi');
+      const oiRows = oiState && Array.isArray(oiState.rows) ? oiState.rows : [];
+      let totalOi = 0;
+      if(oiRows.length){
+        const oiIdx = findHeaderIndexByNames(oiState, ['Open Interest']);
+        if(oiIdx >= 0){
+          oiRows.forEach(row => {
+            const v = parseNumeric(row[oiIdx]);
+            if(!Number.isNaN(v)) totalOi += v;
+          });
+        }
+      }
+      setMetric(metricOiOpenInterestEl, totalOi ? formatLargeNumber(totalOi) : fallback);
     }
 
     async function loadSource(source){
@@ -1476,6 +2191,12 @@
       dataStates.clear();
       sections.forEach(view => closeFilterPopover(view));
       globalSearchTerm = globalSearchInput ? globalSearchInput.value.trim() : '';
+      if(strengthCards.size){
+        setStrengthCardsStatus('資料載入中…');
+      }
+      if(flowCards.size){
+        setFlowCardsStatus('資料載入中…');
+      }
 
       const results = await Promise.all(SOURCES.map(src => loadSource(src)));
       const available = results.filter(Boolean);
@@ -1497,9 +2218,13 @@
       }
 
       statusEl.textContent = '完成';
+      updateMarketOverview();
+      updateWatchlistStrength();
     }
 
     document.getElementById('refresh').addEventListener('click', () => { statusEl.textContent='重新載入…'; load(); });
+    initFlowGrid();
+    initStrengthGrid();
     load();
   </script>
 </body>
