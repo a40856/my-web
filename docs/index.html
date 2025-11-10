@@ -183,6 +183,7 @@
     <div class="header-actions">
       <a class="link-button" href="https://github.com/a40856/my-web" target="_blank" rel="noopener">查看 GitHub 原始碼</a>
       <a class="link-button" href="https://github.com/a40856/my-web/tree/data/testing" target="_blank" rel="noopener">資料來源資料夾</a>
+      <a class="link-button" href="watchlist.html">自選股即時追蹤</a>
     </div>
   </header>
 
@@ -1309,7 +1310,9 @@ const WATCHLIST_STRENGTH_DEFS = [
       FLOW_UNDERLYINGS.forEach(ticker => aggregation.set(ticker, new Map()));
 
       rows.forEach(row => {
-        const underlying = String(row[underlyingIdx] || '').trim().toUpperCase();
+        let underlying = String(row[underlyingIdx] || '').trim().toUpperCase();
+        // VIX 資料有時為 ^VIX，統一視為 VIX
+        if (underlying === '^VIX') underlying = 'VIX';
         if(!aggregation.has(underlying)) return;
         const side = detectOptionSide(row[symbolIdx], row[nameIdx]);
         if(!side) return;

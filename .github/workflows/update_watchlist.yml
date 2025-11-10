@@ -1,0 +1,42 @@
+name: Update Watchlist Data
+
+on:
+  schedule:
+    # every 12 hours
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Run fetch script
+        run: |
+          python scripts/fetch_watchlist.py
+
+      - name: Commit and push data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/watchlist.json || true
+          git add scripts/watchlist_config.json || true
+          git commit -m "chore: update watchlist data" || echo "no changes to commit"
+          git push origin HEAD:${{ github.ref_name }}

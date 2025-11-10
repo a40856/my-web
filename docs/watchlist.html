@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>自選股即時追蹤 Watchlist</title>
+  <style>
+    body{margin:0;font-family:'Segoe UI',Roboto,'Noto Sans',sans-serif;background:#181c24;color:#e5ecff;min-height:100vh;}
+    .container{max-width:1100px;margin:40px auto;padding:24px 18px;background:#23293a;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.25);}
+    h1{font-size:1.7rem;font-weight:600;margin:0 0 18px;}
+    .watchlist-form{display:flex;gap:12px;margin-bottom:24px;}
+    .watchlist-form input{padding:10px 14px;border-radius:8px;border:1px solid #3a4256;background:#181c24;color:#e5ecff;font-size:1rem;}
+    .watchlist-form button{padding:10px 18px;border-radius:8px;border:none;background:#4f9bff;color:#fff;font-weight:600;cursor:pointer;transition:background 0.15s;}
+    .watchlist-form button:hover{background:#1f7bff;}
+    table{width:100%;border-collapse:collapse;margin-top:12px;}
+    th,td{padding:12px 16px;text-align:left;font-size:0.98rem;border-bottom:1px solid #2a3142;}
+    th{font-weight:600;color:#f1f6ff;background:#23293a;}
+    tr{background:#23293a;}
+    tr:nth-child(even){background:#202534;}
+    .positive{color:#8ff5bd;}
+    .negative{color:#ff94a7;}
+    .muted{color:#8fa1c9;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>自選股即時追蹤 Watchlist</h1>
+    <form class="watchlist-form" id="watchlist-form">
+      <input type="text" id="ticker-input" placeholder="輸入股票代號 (如: AAPL)" required />
+      <button type="submit">新增到清單</button>
+      <button type="button" id="export-config">匯出設定</button>
+    </form>
+    <table id="watchlist-table">
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>% Change</th>
+          <th>Market Cap</th>
+          <th>1M Change</th>
+        </tr>
+      </thead>
+      <tbody id="watchlist-tbody">
+        <tr>
+          <td>AAPL</td>
+          <td>Apple Inc</td>
+          <td>170.12</td>
+          <td class="positive">+1.23%</td>
+          <td>2.8T</td>
+          <td>+1.23%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+  const STORAGE_KEY = 'my_watchlist_tickers';
+  const tableBody = document.getElementById('watchlist-tbody');
+  const form = document.getElementById('watchlist-form');
+  const input = document.getElementById('ticker-input');
+  const exportBtn = document.getElementById('export-config');
+
+    function getStoredTickers() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+    function setStoredTickers(arr) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    }
+
+    // The front-end will read the server-generated JSON at data/watchlist.json
+    async function fetchServerWatchlist() {
+      try {
+        const res = await fetch('data/watchlist.json', {cache: 'no-store'});
+        if (!res.ok) throw new Error('no server data');
+        return await res.json();
+      } catch (err) {
+        return null;
+      }
+    }
+
+    function renderTable(rows) {
+      tableBody.innerHTML = '';
+      rows.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.symbol}</td>
+          <td>${row.shortName || '-'}</td>
+          <td>${row.regularMarketPrice ?? '-'}</td>
+          <td class="${row.regularMarketChangePercent > 0 ? 'positive' : (row.regularMarketChangePercent < 0 ? 'negative' : 'muted')}">${row.regularMarketChangePercent ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-'}</td>
+          <td>${row.marketCap ? formatMarketCap(row.marketCap) : '-'}</td>
+          <td>${row.oneMonthChange !== undefined ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-'}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    }
+
+    function formatMarketCap(val) {
+      if (val >= 1e12) return (val/1e12).toFixed(2) + 'T';
+      if (val >= 1e9) return (val/1e9).toFixed(2) + 'B';
+      if (val >= 1e6) return (val/1e6).toFixed(2) + 'M';
+      return val;
+    }
+
+    async function updateTable() {
+      // Try server-generated data first
+      const serverRows = await fetchServerWatchlist();
+      const stored = getStoredTickers();
+      if ((!serverRows || serverRows.length === 0) && stored.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6">尚無自選股，請輸入股票代號</td></tr>';
+        return;
+      }
+
+      const rowsMap = new Map();
+      if (Array.isArray(serverRows)) {
+        serverRows.forEach(r => rowsMap.set((r.symbol || '').toUpperCase(), r));
+      }
+
+      // Merge stored tickers (from localStorage). If a stored ticker not present on server, show placeholder
+      const allTickers = new Set([...(serverRows || []).map(r => (r.symbol || '').toUpperCase()), ...stored.map(s => s.toUpperCase())]);
+      const finalRows = [];
+      allTickers.forEach(sym => {
+        if (rowsMap.has(sym)) {
+          finalRows.push(rowsMap.get(sym));
+        } else {
+          finalRows.push({ symbol: sym, shortName: '-', regularMarketPrice: null, regularMarketChangePercent: null, marketCap: null, oneMonthChange: null, notice: '等待伺服器資料（每 12 小時更新）' });
+        }
+      });
+
+      renderTable(finalRows);
+    }
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      const ticker = input.value.trim().toUpperCase();
+      if (!ticker) return;
+      let tickers = getStoredTickers();
+      if (tickers.includes(ticker)) {
+        alert('已在自選股清單中');
+        input.value = '';
+        return;
+      }
+      tickers.push(ticker);
+      setStoredTickers(tickers);
+      input.value = '';
+      // Inform user that server-side config needs to be updated for permanent server data
+      alert('已加入本地清單。若要讓伺服器每 12 小時自動抓取，請匯出設定並將其放入 `scripts/watchlist_config.json`（或直接在 repo 修改）。');
+      await updateTable();
+    });
+
+    exportBtn.addEventListener('click', function(){
+      const tickers = getStoredTickers();
+      const blob = new Blob([JSON.stringify(tickers, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'watchlist_config.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    window.addEventListener('DOMContentLoaded', updateTable);
+  </script>
+</body>
+</html>
