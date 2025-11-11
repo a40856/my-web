@@ -44,9 +44,14 @@
           <th>Ticker</th>
           <th>Name</th>
           <th>Price</th>
+          <th>Change ($)</th>
           <th>% Change</th>
           <th>Market Cap</th>
-          <th>1M Change</th>
+          <th>1M</th>
+          <th>3M</th>
+          <th>6M</th>
+          <th>12M</th>
+          <th>Trend</th>
         </tr>
       </thead>
       <tbody id="watchlist-tbody">
@@ -125,11 +130,16 @@
       tableBody.innerHTML = '';
       pageRows.forEach(row => {
         const tr = document.createElement('tr');
-        const changeClass = (row.regularMarketChangePercent > 0) ? 'positive' : ((row.regularMarketChangePercent < 0) ? 'negative' : 'muted');
-        const price = row.regularMarketPrice !== null && row.regularMarketPrice !== undefined ? row.regularMarketPrice : '-';
-        const changeText = row.regularMarketChangePercent !== null && row.regularMarketChangePercent !== undefined ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-';
-        const mc = row.marketCap ? formatMarketCap(row.marketCap) : '-';
-        const oneM = row.oneMonthChange !== undefined && row.oneMonthChange !== null ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-';
+  const changeClass = (row.regularMarketChangePercent > 0) ? 'positive' : ((row.regularMarketChangePercent < 0) ? 'negative' : 'muted');
+  const price = row.regularMarketPrice !== null && row.regularMarketPrice !== undefined ? Number(row.regularMarketPrice).toFixed(1) : '-';
+  const priceChangeVal = row.priceChange !== null && row.priceChange !== undefined ? row.priceChange : null;
+  const priceChangeText = priceChangeVal !== null ? (priceChangeVal > 0 ? '+' : '') + priceChangeVal.toFixed(1) : '-';
+  const changeText = row.regularMarketChangePercent !== null && row.regularMarketChangePercent !== undefined ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-';
+  const mc = row.marketCap ? formatMarketCap(row.marketCap) : '-';
+  const oneM = row.oneMonthChange !== undefined && row.oneMonthChange !== null ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-';
+  const threeM = row.threeMonthChange !== undefined && row.threeMonthChange !== null ? (row.threeMonthChange > 0 ? '+' : '') + (row.threeMonthChange * 100).toFixed(2) + '%' : '-';
+  const sixM = row.sixMonthChange !== undefined && row.sixMonthChange !== null ? (row.sixMonthChange > 0 ? '+' : '') + (row.sixMonthChange * 100).toFixed(2) + '%' : '-';
+  const twelveM = row.twelveMonthChange !== undefined && row.twelveMonthChange !== null ? (row.twelveMonthChange > 0 ? '+' : '') + (row.twelveMonthChange * 100).toFixed(2) + '%' : '-';
         // sparkline cell
         let spark = '';
         if(Array.isArray(row.history) && row.history.length > 1){
@@ -147,9 +157,13 @@
           <td style="white-space:nowrap">${row.symbol}</td>
           <td>${row.shortName || '-'}</td>
           <td>${price}</td>
+          <td>${priceChangeText}</td>
           <td class="${changeClass}">${changeText}</td>
           <td>${mc}</td>
           <td>${oneM}</td>
+          <td>${threeM}</td>
+          <td>${sixM}</td>
+          <td>${twelveM}</td>
           <td style="width:150px">${spark}</td>
         `;
         tableBody.appendChild(tr);
@@ -167,17 +181,51 @@
       wrapper.style.justifyContent = 'space-between';
       wrapper.style.alignItems = 'center';
       wrapper.style.marginTop = '12px';
-      wrapper.innerHTML = `
-        <div style="color:#9fb0d9">顯示 ${Math.min(pageSize, totalItems - (currentPage-1)*pageSize)} / ${totalItems} 筆</div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <button id="prev-page" ${currentPage===1?"disabled":""} style="padding:6px 10px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344">Prev</button>
-          <span style="color:#9fb0d9">${currentPage} / ${totalPages}</span>
-          <button id="next-page" ${currentPage===totalPages?"disabled":""} style="padding:6px 10px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344">Next</button>
-        </div>
-      `;
+
+      // summary
+      const shown = Math.min(pageSize, Math.max(0, totalItems - (currentPage-1)*pageSize));
+      const left = document.createElement('div');
+      left.style.color = '#9fb0d9';
+      left.textContent = `顯示 ${shown} / ${totalItems} 筆`;
+
+      // numbered pagination (show window of pages)
+      const right = document.createElement('div');
+      right.style.display = 'flex'; right.style.gap = '6px'; right.style.alignItems = 'center';
+
+      const makeBtn = (text, disabled, cls) => {
+        const b = document.createElement('button');
+        b.textContent = text;
+        b.disabled = !!disabled;
+        b.style.padding = '6px 10px'; b.style.borderRadius = '6px'; b.style.background = disabled ? '#2a2f38' : '#0e1622'; b.style.color = '#fff'; b.style.border = '1px solid #344';
+        if(cls) b.className = cls;
+        return b;
+      };
+
+      // prev
+      const prev = makeBtn('Prev', currentPage === 1);
+      prev.addEventListener('click', ()=>{ if(currentPage>1){ currentPage--; renderTable(lastRows); } });
+      right.appendChild(prev);
+
+      // page window
+      const maxButtons = 7;
+      let start = Math.max(1, currentPage - Math.floor(maxButtons/2));
+      let end = start + maxButtons - 1;
+      if(end > totalPages){ end = totalPages; start = Math.max(1, end - maxButtons + 1); }
+      for(let p = start; p <= end; p++){
+        const btn = makeBtn(p, false, p===currentPage ? 'active-page' : null);
+        if(p===currentPage){ btn.style.background = '#2b6cb0'; }
+        btn.addEventListener('click', ()=>{ if(currentPage===p) return; currentPage = p; renderTable(lastRows); });
+        right.appendChild(btn);
+      }
+
+      // next
+      const next = makeBtn('Next', currentPage === totalPages);
+      next.addEventListener('click', ()=>{ if(currentPage<totalPages){ currentPage++; renderTable(lastRows); } });
+      right.appendChild(next);
+
+      wrapper.appendChild(left);
+      wrapper.appendChild(right);
       document.querySelector('.container').appendChild(wrapper);
-      document.getElementById('prev-page').addEventListener('click', () => { currentPage = Math.max(1, currentPage-1); renderTable(lastRows); });
-      document.getElementById('next-page').addEventListener('click', () => { currentPage = Math.min(totalPages, currentPage+1); renderTable(lastRows); });
     }
 
     function formatMarketCap(val) {
@@ -192,7 +240,7 @@
       const serverRows = await fetchServerWatchlist();
       const stored = getStoredTickers();
       if ((!serverRows || serverRows.length === 0) && stored.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6">尚無自選股，請輸入股票代號</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="11">尚無自選股，請輸入股票代號</td></tr>';
         return;
       }
 
