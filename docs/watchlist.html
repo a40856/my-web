@@ -153,6 +153,12 @@
           <td style="width:150px">${spark}</td>
         `;
         tableBody.appendChild(tr);
+        // make row clickable to open larger chart
+        tr.style.cursor = 'pointer';
+        tr.title = '點擊以展開大圖';
+        tr.addEventListener('click', () => {
+          openChartModal(row.symbol, row.history || null, row.shortName || '');
+        });
       });
 
       renderPaginationControls(filtered.length, totalPages);
@@ -247,6 +253,84 @@
     });
 
     window.addEventListener('DOMContentLoaded', updateTable);
+  </script>
+  <!-- Chart modal -->
+  <div id="chart-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:9999">
+    <div style="width:min(960px,95%);background:#0e1622;border-radius:12px;padding:18px;color:#fff;box-shadow:0 20px 40px rgba(0,0,0,0.6);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <strong id="chart-title">Ticker</strong>
+        <div>
+          <button id="chart-download" style="margin-right:8px;padding:6px 10px;border-radius:6px;border:none;background:#234;color:#fff;">Download</button>
+          <button id="chart-close" style="padding:6px 10px;border-radius:6px;border:none;background:#334;color:#fff;">Close</button>
+        </div>
+      </div>
+      <canvas id="chart-canvas" style="width:100%;height:320px;background:#071018;border-radius:8px;padding:6px"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>
+    let chartInstance = null;
+    const modal = document.getElementById('chart-modal');
+    const chartTitle = document.getElementById('chart-title');
+    const chartCanvas = document.getElementById('chart-canvas');
+    const chartClose = document.getElementById('chart-close');
+    const chartDownload = document.getElementById('chart-download');
+
+    function openChartModal(symbol, history, name) {
+      chartTitle.textContent = `${symbol} — ${name}`;
+      modal.style.display = 'flex';
+      // prepare data
+      if (!history || history.length === 0) {
+        // show message in canvas area
+        if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+        const ctx = chartCanvas.getContext('2d');
+        ctx.clearRect(0,0,chartCanvas.width,chartCanvas.height);
+        ctx.fillStyle = '#9fb0d9';
+        ctx.textAlign = 'center';
+        ctx.font = '14px sans-serif';
+        ctx.fillText('No history data available', chartCanvas.width/2, chartCanvas.height/2);
+        return;
+      }
+      const labels = history.map((_,i)=> i+1 - history.length); // relative days
+      const data = {
+        labels: labels,
+        datasets: [{
+          label: symbol,
+          data: history,
+          borderColor: history[history.length-1] >= history[0] ? '#4fe583' : '#ff6b81',
+          backgroundColor: 'rgba(79,155,255,0.06)',
+          pointRadius: 2,
+          tension: 0.25
+        }]
+      };
+      const cfg = {
+        type: 'line',
+        data,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: { mode: 'index', intersect: false },
+            legend: { display: false }
+          },
+          scales: {
+            x: { display: false },
+            y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#9fb0d9' } }
+          }
+        }
+      };
+      if (chartInstance) chartInstance.destroy();
+      chartInstance = new Chart(chartCanvas, cfg);
+      chartDownload.onclick = () => {
+        const url = chartCanvas.toDataURL('image/png');
+        const a = document.createElement('a'); a.href = url; a.download = `${symbol}-history.png`; a.click();
+      };
+    }
+
+    chartClose.addEventListener('click', () => { modal.style.display = 'none'; if(chartInstance){chartInstance.destroy();chartInstance=null;} });
+    modal.addEventListener('click', (e)=>{ if(e.target===modal){ modal.style.display='none'; if(chartInstance){chartInstance.destroy();chartInstance=null;} } });
   </script>
 </body>
 </html>
