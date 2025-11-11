@@ -30,6 +30,14 @@
       <button type="submit">新增到清單</button>
       <button type="button" id="export-config">匯出設定</button>
     </form>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">
+      <input id="watchlist-search" placeholder="搜尋 ticker 或名稱" style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid #344; background:#0e1622;color:#fff;" />
+      <select id="page-size" style="padding:8px;border-radius:8px;background:#0e1622;color:#fff;border:1px solid #344;">
+        <option value="10">10 / page</option>
+        <option value="25" selected>25 / page</option>
+        <option value="50">50 / page</option>
+      </select>
+    </div>
     <table id="watchlist-table">
       <thead>
         <tr>
@@ -82,20 +90,94 @@
       }
     }
 
+    // Pagination / search state
+    let currentPage = 1;
+    let pageSize = parseInt(document.getElementById('page-size').value, 10) || 25;
+    let lastRows = [];
+
+    function sparklineSVG(values, w = 120, h = 28){
+      if(!values || values.length === 0) return '';
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const range = max - min || 1;
+      const step = w / (values.length - 1);
+      const points = values.map((v,i) => `${(i*step).toFixed(2)},${(h - ((v - min)/range*h)).toFixed(2)}`).join(' ');
+      const last = values[values.length-1];
+      const color = last >= values[0] ? '#4fe583' : '#ff6b81';
+      return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="${color}" stroke-width="1.6" points="${points}"/></svg>`;
+    }
+
     function renderTable(rows) {
+      // apply search
+      const q = document.getElementById('watchlist-search').value.trim().toUpperCase();
+      const filtered = rows.filter(r => {
+        if(!q) return true;
+        return (r.symbol || '').toString().toUpperCase().includes(q) || (r.shortName || '').toString().toUpperCase().includes(q);
+      });
+      lastRows = filtered;
+      // pagination
+      pageSize = parseInt(document.getElementById('page-size').value, 10) || 25;
+      const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+      if(currentPage > totalPages) currentPage = totalPages;
+      const start = (currentPage - 1) * pageSize;
+      const pageRows = filtered.slice(start, start + pageSize);
+
       tableBody.innerHTML = '';
-      rows.forEach(row => {
+      pageRows.forEach(row => {
         const tr = document.createElement('tr');
+        const changeClass = (row.regularMarketChangePercent > 0) ? 'positive' : ((row.regularMarketChangePercent < 0) ? 'negative' : 'muted');
+        const price = row.regularMarketPrice !== null && row.regularMarketPrice !== undefined ? row.regularMarketPrice : '-';
+        const changeText = row.regularMarketChangePercent !== null && row.regularMarketChangePercent !== undefined ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-';
+        const mc = row.marketCap ? formatMarketCap(row.marketCap) : '-';
+        const oneM = row.oneMonthChange !== undefined && row.oneMonthChange !== null ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-';
+        // sparkline cell
+        let spark = '';
+        if(Array.isArray(row.history) && row.history.length > 1){
+          spark = sparklineSVG(row.history, 140, 28);
+        } else if(row.oneMonthChange !== undefined && row.oneMonthChange !== null){
+          // mini bar proportional to 1M change
+          const width = Math.min(120, Math.abs(row.oneMonthChange) * 600);
+          const color = row.oneMonthChange >= 0 ? '#4fe583' : '#ff6b81';
+          spark = `<div style="width:120px;height:24px;background:#0b1220;border-radius:4px;padding:3px;box-sizing:border-box;"><div style="width:${width}px;height:100%;background:${color};border-radius:3px;"></div></div>`;
+        } else {
+          spark = '-';
+        }
+
         tr.innerHTML = `
-          <td>${row.symbol}</td>
+          <td style="white-space:nowrap">${row.symbol}</td>
           <td>${row.shortName || '-'}</td>
-          <td>${row.regularMarketPrice ?? '-'}</td>
-          <td class="${row.regularMarketChangePercent > 0 ? 'positive' : (row.regularMarketChangePercent < 0 ? 'negative' : 'muted')}">${row.regularMarketChangePercent ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-'}</td>
-          <td>${row.marketCap ? formatMarketCap(row.marketCap) : '-'}</td>
-          <td>${row.oneMonthChange !== undefined ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-'}</td>
+          <td>${price}</td>
+          <td class="${changeClass}">${changeText}</td>
+          <td>${mc}</td>
+          <td>${oneM}</td>
+          <td style="width:150px">${spark}</td>
         `;
         tableBody.appendChild(tr);
       });
+
+      renderPaginationControls(filtered.length, totalPages);
+    }
+
+    function renderPaginationControls(totalItems, totalPages){
+      const existing = document.getElementById('pagination-controls');
+      if(existing) existing.remove();
+      const wrapper = document.createElement('div');
+      wrapper.id = 'pagination-controls';
+      wrapper.style.display = 'flex';
+      wrapper.style.justifyContent = 'space-between';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.marginTop = '12px';
+      wrapper.innerHTML = `
+        <div style="color:#9fb0d9">顯示 ${Math.min(pageSize, totalItems - (currentPage-1)*pageSize)} / ${totalItems} 筆</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button id="prev-page" ${currentPage===1?"disabled":""} style="padding:6px 10px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344">Prev</button>
+          <span style="color:#9fb0d9">${currentPage} / ${totalPages}</span>
+          <button id="next-page" ${currentPage===totalPages?"disabled":""} style="padding:6px 10px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344">Next</button>
+        </div>
+      `;
+      document.querySelector('.container').appendChild(wrapper);
+      document.getElementById('prev-page').addEventListener('click', () => { currentPage = Math.max(1, currentPage-1); renderTable(lastRows); });
+      document.getElementById('next-page').addEventListener('click', () => { currentPage = Math.min(totalPages, currentPage+1); renderTable(lastRows); });
     }
 
     function formatMarketCap(val) {

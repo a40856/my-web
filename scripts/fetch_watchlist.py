@@ -58,8 +58,9 @@ def fetch_ticker(t):
             hist = tk.history(period='1d')
             if not hist.empty:
                 price = float(hist['Close'].iloc[-1])
-        # One month history
+        # One month history (also store series for frontend sparklines)
         one_month_change = None
+        history = None
         try:
             hist_month = tk.history(period='1mo', interval='1d')
             closes = hist_month['Close'].dropna()
@@ -67,8 +68,15 @@ def fetch_ticker(t):
                 first = float(closes.iloc[0])
                 if first != 0:
                     one_month_change = (float(price) - first) / first
+            # keep last N closes (e.g., 30) as floats
+            if len(closes) > 0:
+                history = [float(x) for x in closes.tolist()]
+                # limit to most recent 30
+                if len(history) > 30:
+                    history = history[-30:]
         except Exception:
             one_month_change = None
+            history = None
         # info for name and marketCap
         info = {}
         try:
@@ -91,7 +99,8 @@ def fetch_ticker(t):
             'regularMarketPrice': safe_float(price),
             'regularMarketChangePercent': safe_float(reg_pct),
             'marketCap': marketCap,
-            'oneMonthChange': one_month_change
+            'oneMonthChange': one_month_change,
+            'history': history
         }
     except Exception:
         traceback.print_exc()
