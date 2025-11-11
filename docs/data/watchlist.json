@@ -1,1 +1,1602 @@
-[]
+[
+  {
+    "symbol": "NVDA",
+    "shortName": "NVIDIA Corporation",
+    "regularMarketPrice": 199.0500030517578,
+    "regularMarketChangePercent": 5.793251688417649,
+    "marketCap": 4846270808064,
+    "oneMonthChange": 0.056977460228460494
+  },
+  {
+    "symbol": "AAPL",
+    "shortName": "Apple Inc.",
+    "regularMarketPrice": 269.42999267578125,
+    "regularMarketChangePercent": 0.45486472382881715,
+    "marketCap": 3981192724480,
+    "oneMonthChange": 0.0879027242661814
+  },
+  {
+    "symbol": "MSFT",
+    "shortName": "Microsoft Corporation",
+    "regularMarketPrice": 506.0,
+    "regularMarketChangePercent": 1.8477517008171986,
+    "marketCap": 3760783097856,
+    "oneMonthChange": -0.015659931882365582
+  },
+  {
+    "symbol": "GOOG",
+    "shortName": "Alphabet Inc.",
+    "regularMarketPrice": 290.5899963378906,
+    "regularMarketChangePercent": 3.893455966353463,
+    "marketCap": 3500529680384,
+    "oneMonthChange": 0.1878269991125028
+  },
+  {
+    "symbol": "AMZN",
+    "shortName": "Amazon.com, Inc.",
+    "regularMarketPrice": 248.39999389648438,
+    "regularMarketChangePercent": 1.6325002645081539,
+    "marketCap": 2655449513984,
+    "oneMonthChange": 0.12873170186489064
+  },
+  {
+    "symbol": "AVGO",
+    "shortName": "Broadcom Inc.",
+    "regularMarketPrice": 358.3900146484375,
+    "regularMarketChangePercent": 2.5641801357746883,
+    "marketCap": 1692448456704,
+    "oneMonthChange": 0.004737881647240765
+  },
+  {
+    "symbol": "META",
+    "shortName": "Meta Platforms, Inc.",
+    "regularMarketPrice": 631.760009765625,
+    "regularMarketChangePercent": 1.6165108757499418,
+    "marketCap": 1592368562176,
+    "oneMonthChange": -0.1172837795301376
+  },
+  {
+    "symbol": "TSM",
+    "shortName": "Taiwan Semiconductor Manufactur",
+    "regularMarketPrice": 295.2699890136719,
+    "regularMarketChangePercent": 3.061078189763307,
+    "marketCap": 1531424669696,
+    "oneMonthChange": -0.025157731408247775
+  },
+  {
+    "symbol": "TSLA",
+    "shortName": "Tesla, Inc.",
+    "regularMarketPrice": 445.2300109863281,
+    "regularMarketChangePercent": 3.6575738001322744,
+    "marketCap": 1480754462720,
+    "oneMonthChange": 0.02140403124680796
+  },
+  {
+    "symbol": "BRK-B",
+    "shortName": "Berkshire Hathaway Inc. New",
+    "regularMarketPrice": 496.9800109863281,
+    "regularMarketChangePercent": -0.41678135167552544,
+    "marketCap": 1072011804672,
+    "oneMonthChange": 0.010265725582370043
+  },
+  {
+    "symbol": "LLY",
+    "shortName": "Eli Lilly and Company",
+    "regularMarketPrice": 966.6400146484375,
+    "regularMarketChangePercent": 4.572845792100295,
+    "marketCap": 865160921088,
+    "oneMonthChange": 0.17969244062405726
+  },
+  {
+    "symbol": "JPM",
+    "shortName": "JP Morgan Chase & Co.",
+    "regularMarketPrice": 316.8900146484375,
+    "regularMarketChangePercent": 0.8529374139707587,
+    "marketCap": 862657708032,
+    "oneMonthChange": 0.028963903602227642
+  },
+  {
+    "symbol": "WMT",
+    "shortName": "Walmart Inc.",
+    "regularMarketPrice": 102.41999816894531,
+    "regularMarketChangePercent": -0.16570994351758545,
+    "marketCap": 816579411968,
+    "oneMonthChange": 0.0029376754239592118
+  },
+  {
+    "symbol": "ORCL",
+    "shortName": "Oracle Corporation",
+    "regularMarketPrice": 240.8300018310547,
+    "regularMarketChangePercent": 0.656190684215789,
+    "marketCap": 686556381184,
+    "oneMonthChange": -0.21810982047528196
+  },
+  {
+    "symbol": "V",
+    "shortName": "Visa Inc.",
+    "regularMarketPrice": 334.8500061035156,
+    "regularMarketChangePercent": -0.34819174349275545,
+    "marketCap": 646226116608,
+    "oneMonthChange": -0.024613987736431232
+  },
+  {
+    "symbol": "MA",
+    "shortName": "Mastercard Incorporated",
+    "regularMarketPrice": 552.9600219726562,
+    "regularMarketChangePercent": 0.17936155455119349,
+    "marketCap": 496555786240,
+    "oneMonthChange": -0.011229469228562935
+  },
+  {
+    "symbol": "XOM",
+    "shortName": "Exxon Mobil Corporation",
+    "regularMarketPrice": 118.22000122070312,
+    "regularMarketChangePercent": 0.8530977825483076,
+    "marketCap": 498533728256,
+    "oneMonthChange": 0.05327871944715981
+  },
+  {
+    "symbol": "NFLX",
+    "shortName": "Netflix, Inc.",
+    "regularMarketPrice": 1120.0699462890625,
+    "regularMarketChangePercent": 1.48686609001526,
+    "marketCap": 474609844224,
+    "oneMonthChange": -0.08117936443689722
+  },
+  {
+    "symbol": "JNJ",
+    "shortName": "Johnson & Johnson",
+    "regularMarketPrice": 188.41000366210938,
+    "regularMarketChangePercent": 0.9862269722406506,
+    "marketCap": 453935300608,
+    "oneMonthChange": -0.01304342752218839
+  },
+  {
+    "symbol": "PLTR",
+    "shortName": "Palantir Technologies Inc.",
+    "regularMarketPrice": 193.61000061035156,
+    "regularMarketChangePercent": 8.812454679003853,
+    "marketCap": 461457096704,
+    "oneMonthChange": 0.09254552945740072
+  },
+  {
+    "symbol": "COST",
+    "shortName": "Costco Wholesale Corporation",
+    "regularMarketPrice": 915.5599975585938,
+    "regularMarketChangePercent": -0.7781176107469341,
+    "marketCap": 405757132800,
+    "oneMonthChange": -0.019993061798340057
+  },
+  {
+    "symbol": "ASML",
+    "shortName": "ASML Holding N.V. - New York Re",
+    "regularMarketPrice": 1038.7900390625,
+    "regularMarketChangePercent": 2.1465976107713147,
+    "marketCap": 408070422528,
+    "oneMonthChange": 0.05684503410249987
+  },
+  {
+    "symbol": "BAC",
+    "shortName": "Bank of America Corporation",
+    "regularMarketPrice": 53.41999816894531,
+    "regularMarketChangePercent": 0.41353039275434145,
+    "marketCap": 390099304448,
+    "oneMonthChange": 0.09332782442961454
+  },
+  {
+    "symbol": "ABBV",
+    "shortName": "AbbVie Inc.",
+    "regularMarketPrice": 218.7100067138672,
+    "regularMarketChangePercent": -0.20532637622413266,
+    "marketCap": 386544697344,
+    "oneMonthChange": -0.043479331511634405
+  },
+  {
+    "symbol": "AMD",
+    "shortName": "Advanced Micro Devices, Inc.",
+    "regularMarketPrice": 243.97999572753906,
+    "regularMarketChangePercent": 4.470324453001229,
+    "marketCap": 397209567232,
+    "oneMonthChange": 0.1273449671553893
+  },
+  {
+    "symbol": "BABA",
+    "shortName": "Alibaba Group Holding Limited",
+    "regularMarketPrice": 165.88999938964844,
+    "regularMarketChangePercent": -0.27053060619908975,
+    "marketCap": 395812929536,
+    "oneMonthChange": -0.005515245982916303
+  },
+  {
+    "symbol": "HD",
+    "shortName": "Home Depot, Inc. (The)",
+    "regularMarketPrice": 370.42999267578125,
+    "regularMarketChangePercent": -0.18323605513695768,
+    "marketCap": 368721068032,
+    "oneMonthChange": -0.023565391455496316
+  },
+  {
+    "symbol": "PG",
+    "shortName": "Procter & Gamble Company (The)",
+    "regularMarketPrice": 145.5,
+    "regularMarketChangePercent": -1.0069397196897467,
+    "marketCap": 339994705920,
+    "oneMonthChange": -0.006593858115942014
+  },
+  {
+    "symbol": "GE",
+    "shortName": "GE Aerospace",
+    "regularMarketPrice": 311.94000244140625,
+    "regularMarketChangePercent": 1.5198367694230706,
+    "marketCap": 329038659584,
+    "oneMonthChange": 0.04843210338866869
+  },
+  {
+    "symbol": "CVX",
+    "shortName": "Chevron Corporation",
+    "regularMarketPrice": 155.64999389648438,
+    "regularMarketChangePercent": 0.4063952370560991,
+    "marketCap": 311199367168,
+    "oneMonthChange": 0.024417476605667666
+  },
+  {
+    "symbol": "KO",
+    "shortName": "Coca-Cola Company (The)",
+    "regularMarketPrice": 70.5199966430664,
+    "regularMarketChangePercent": -0.042527791543006246,
+    "marketCap": 303349465088,
+    "oneMonthChange": 0.05568852427186684
+  },
+  {
+    "symbol": "UNH",
+    "shortName": "UnitedHealth Group Incorporated",
+    "regularMarketPrice": 321.5799865722656,
+    "regularMarketChangePercent": -0.811206757266696,
+    "marketCap": 291299557376,
+    "oneMonthChange": -0.10338486787274036
+  },
+  {
+    "symbol": "SAP",
+    "shortName": "SAP  SE",
+    "regularMarketPrice": 251.75999450683594,
+    "regularMarketChangePercent": -0.07937985916973744,
+    "marketCap": 293200756736,
+    "oneMonthChange": -0.06693355691626565
+  },
+  {
+    "symbol": "IBM",
+    "shortName": "International Business Machines",
+    "regularMarketPrice": 309.1300048828125,
+    "regularMarketChangePercent": 1.4538906737159538,
+    "marketCap": 288954712064,
+    "oneMonthChange": 0.11510714783059563
+  },
+  {
+    "symbol": "CSCO",
+    "shortName": "Cisco Systems, Inc.",
+    "regularMarketPrice": 72.08999633789062,
+    "regularMarketChangePercent": 1.4351995749129476,
+    "marketCap": 284086861824,
+    "oneMonthChange": 0.06863322437375574
+  },
+  {
+    "symbol": "WFC",
+    "shortName": "Wells Fargo & Company",
+    "regularMarketPrice": 86.0999984741211,
+    "regularMarketChangePercent": 0.06973323352055728,
+    "marketCap": 270275182592,
+    "oneMonthChange": 0.09671422046432979
+  },
+  {
+    "symbol": "MU",
+    "shortName": "Micron Technology, Inc.",
+    "regularMarketPrice": 253.3000030517578,
+    "regularMarketChangePercent": 6.464359049999086,
+    "marketCap": 284320661504,
+    "oneMonthChange": 0.31400112796461754
+  },
+  {
+    "symbol": "CAT",
+    "shortName": "Caterpillar, Inc.",
+    "regularMarketPrice": 570.8499755859375,
+    "regularMarketChangePercent": 1.376305378429671,
+    "marketCap": 267431182336,
+    "oneMonthChange": 0.13418266819430202
+  },
+  {
+    "symbol": "TM",
+    "shortName": "Toyota Motor Corporation",
+    "regularMarketPrice": 203.94000244140625,
+    "regularMarketChangePercent": 0.9703943169651749,
+    "marketCap": 268235079680,
+    "oneMonthChange": 0.08548007846077578
+  },
+  {
+    "symbol": "AZN",
+    "shortName": "Astrazeneca PLC",
+    "regularMarketPrice": 87.4800033569336,
+    "regularMarketChangePercent": 3.428710518956722,
+    "marketCap": 271235350528,
+    "oneMonthChange": 0.035143783524173515
+  },
+  {
+    "symbol": "MS",
+    "shortName": "Morgan Stanley",
+    "regularMarketPrice": 165.0500030517578,
+    "regularMarketChangePercent": 1.6568139022898487,
+    "marketCap": 262315507712,
+    "oneMonthChange": 0.0704235819584227
+  },
+  {
+    "symbol": "AXP",
+    "shortName": "American Express Company",
+    "regularMarketPrice": 367.8800048828125,
+    "regularMarketChangePercent": -0.17908371335201617,
+    "marketCap": 253414752256,
+    "oneMonthChange": 0.13852441954077052
+  },
+  {
+    "symbol": "NVS",
+    "shortName": "Novartis AG",
+    "regularMarketPrice": 127.19999694824219,
+    "regularMarketChangePercent": 0.6727320524275372,
+    "marketCap": 244373471232,
+    "oneMonthChange": -0.01486987485712611
+  },
+  {
+    "symbol": "PM",
+    "shortName": "Philip Morris International Inc",
+    "regularMarketPrice": 155.07000732421875,
+    "regularMarketChangePercent": 1.0952521834661737,
+    "marketCap": 241387978752,
+    "oneMonthChange": -0.02759135801594982
+  },
+  {
+    "symbol": "RTX",
+    "shortName": "RTX Corporation",
+    "regularMarketPrice": 179.02999877929688,
+    "regularMarketChangePercent": 1.1640384128930756,
+    "marketCap": 240038395904,
+    "oneMonthChange": 0.12703803525591828
+  },
+  {
+    "symbol": "GS",
+    "shortName": "Goldman Sachs Group, Inc. (The)",
+    "regularMarketPrice": 797.2000122070312,
+    "regularMarketChangePercent": 1.3810835271042066,
+    "marketCap": 239103016960,
+    "oneMonthChange": 0.013243832484498012
+  },
+  {
+    "symbol": "TMUS",
+    "shortName": "T-Mobile US, Inc.",
+    "regularMarketPrice": 205.8699951171875,
+    "regularMarketChangePercent": -0.5458960786533816,
+    "marketCap": 230266945536,
+    "oneMonthChange": -0.08526616302130807
+  },
+  {
+    "symbol": "CRM",
+    "shortName": "Salesforce, Inc.",
+    "regularMarketPrice": 241.7100067138672,
+    "regularMarketChangePercent": 0.7628842395644456,
+    "marketCap": 230107922432,
+    "oneMonthChange": -0.02830148054726759
+  },
+  {
+    "symbol": "ABT",
+    "shortName": "Abbott Laboratories",
+    "regularMarketPrice": 125.88999938964844,
+    "regularMarketChangePercent": -0.371953632756855,
+    "marketCap": 218906591232,
+    "oneMonthChange": -0.03752623949457781
+  },
+  {
+    "symbol": "SHEL",
+    "shortName": "Shell PLC",
+    "regularMarketPrice": 76.55999755859375,
+    "regularMarketChangePercent": 1.283235293813661,
+    "marketCap": 219786608640,
+    "oneMonthChange": 0.062005846133656756
+  },
+  {
+    "symbol": "TMO",
+    "shortName": "Thermo Fisher Scientific Inc",
+    "regularMarketPrice": 576.3499755859375,
+    "regularMarketChangePercent": 0.6883135490186286,
+    "marketCap": 216539332608,
+    "oneMonthChange": 0.09868839225575612
+  },
+  {
+    "symbol": "MRK",
+    "shortName": "Merck & Company, Inc.",
+    "regularMarketPrice": 86.75,
+    "regularMarketChangePercent": 0.5447380621233181,
+    "marketCap": 215315464192,
+    "oneMonthChange": 0.012252078053071032
+  },
+  {
+    "symbol": "MCD",
+    "shortName": "McDonald's Corporation",
+    "regularMarketPrice": 299.1000061035156,
+    "regularMarketChangePercent": -0.1868764254436361,
+    "marketCap": 213005369344,
+    "oneMonthChange": -0.003365363691127236
+  },
+  {
+    "symbol": "APP",
+    "shortName": "Applovin Corporation",
+    "regularMarketPrice": 651.3200073242188,
+    "regularMarketChangePercent": 5.063476089916411,
+    "marketCap": 220116860928,
+    "oneMonthChange": 0.10372646369674615
+  },
+  {
+    "symbol": "LRCX",
+    "shortName": "Lam Research Corporation",
+    "regularMarketPrice": 166.3699951171875,
+    "regularMarketChangePercent": 4.405393860801698,
+    "marketCap": 208965697536,
+    "oneMonthChange": 0.20724184068322526
+  },
+  {
+    "symbol": "DIS",
+    "shortName": "Walt Disney Company (The)",
+    "regularMarketPrice": 112.23999786376953,
+    "regularMarketChangePercent": 1.3545221814787216,
+    "marketCap": 201800089600,
+    "oneMonthChange": 0.017865251479782244
+  },
+  {
+    "symbol": "ISRG",
+    "shortName": "Intuitive Surgical, Inc.",
+    "regularMarketPrice": 576.2000122070312,
+    "regularMarketChangePercent": 2.8928593226841515,
+    "marketCap": 204260638720,
+    "oneMonthChange": 0.32237853184069676
+  },
+  {
+    "symbol": "SHOP",
+    "shortName": "Shopify Inc.",
+    "regularMarketPrice": 158.8800048828125,
+    "regularMarketChangePercent": 4.297824425969751,
+    "marketCap": 205986922496,
+    "oneMonthChange": 0.03397111217165948
+  },
+  {
+    "symbol": "LIN",
+    "shortName": "Linde plc",
+    "regularMarketPrice": 420.6700134277344,
+    "regularMarketChangePercent": 0.03805222889690711,
+    "marketCap": 196431413248,
+    "oneMonthChange": -0.07877102327179115
+  },
+  {
+    "symbol": "PEP",
+    "shortName": "Pepsico, Inc.",
+    "regularMarketPrice": 142.6199951171875,
+    "regularMarketChangePercent": -0.2308533632826084,
+    "marketCap": 195010052096,
+    "oneMonthChange": -0.04211165490069079
+  },
+  {
+    "symbol": "UBER",
+    "shortName": "Uber Technologies, Inc.",
+    "regularMarketPrice": 94.0999984741211,
+    "regularMarketChangePercent": 2.293725920340362,
+    "marketCap": 195523837952,
+    "oneMonthChange": 0.00021254934818470205
+  },
+  {
+    "symbol": "PDD",
+    "shortName": "PDD Holdings Inc.",
+    "regularMarketPrice": 138.1300048828125,
+    "regularMarketChangePercent": 1.730744500524745,
+    "marketCap": 196095770624,
+    "oneMonthChange": 0.08294787595388364
+  },
+  {
+    "symbol": "AMAT",
+    "shortName": "Applied Materials, Inc.",
+    "regularMarketPrice": 235.0800018310547,
+    "regularMarketChangePercent": 2.1775989181791173,
+    "marketCap": 187274706944,
+    "oneMonthChange": 0.07107712049931586
+  },
+  {
+    "symbol": "QCOM",
+    "shortName": "QUALCOMM Incorporated",
+    "regularMarketPrice": 171.57000732421875,
+    "regularMarketChangePercent": 0.39792107450334346,
+    "marketCap": 183751475200,
+    "oneMonthChange": 0.06051433192478618
+  },
+  {
+    "symbol": "INTU",
+    "shortName": "Intuit Inc.",
+    "regularMarketPrice": 653.27001953125,
+    "regularMarketChangePercent": 0.6812082193496151,
+    "marketCap": 182134947840,
+    "oneMonthChange": -0.0036755325333267057
+  },
+  {
+    "symbol": "C",
+    "shortName": "Citigroup, Inc.",
+    "regularMarketPrice": 101.48999786376953,
+    "regularMarketChangePercent": 0.6945112250913037,
+    "marketCap": 181592621056,
+    "oneMonthChange": 0.06238427276395912
+  },
+  {
+    "symbol": "BX",
+    "shortName": "Blackstone Inc.",
+    "regularMarketPrice": 144.3000030517578,
+    "regularMarketChangePercent": -1.1237473949857375,
+    "marketCap": 177532764160,
+    "oneMonthChange": -0.07953540157860757
+  },
+  {
+    "symbol": "BLK",
+    "shortName": "BlackRock, Inc.",
+    "regularMarketPrice": 1082.6300048828125,
+    "regularMarketChangePercent": 0.039734326632087834,
+    "marketCap": 167971028992,
+    "oneMonthChange": -0.06275537653299894
+  },
+  {
+    "symbol": "T",
+    "shortName": "AT&T Inc.",
+    "regularMarketPrice": 24.829999923706055,
+    "regularMarketChangePercent": -3.072651776367195e-07,
+    "marketCap": 176031023104,
+    "oneMonthChange": -0.029699109978511582
+  },
+  {
+    "symbol": "NEE",
+    "shortName": "NextEra Energy, Inc.",
+    "regularMarketPrice": 84.7699966430664,
+    "regularMarketChangePercent": 1.0008300286743708,
+    "marketCap": 176542810112,
+    "oneMonthChange": 0.005575249991628482
+  },
+  {
+    "symbol": "SCHW",
+    "shortName": "Charles Schwab Corporation (The",
+    "regularMarketPrice": 95.58000183105469,
+    "regularMarketChangePercent": 0.35699478271177304,
+    "marketCap": 173498662912,
+    "oneMonthChange": 0.022355375067294788
+  },
+  {
+    "symbol": "AMGN",
+    "shortName": "Amgen Inc.",
+    "regularMarketPrice": 323.6600036621094,
+    "regularMarketChangePercent": 1.0805757845438433,
+    "marketCap": 174284652544,
+    "oneMonthChange": 0.10690838036300264
+  },
+  {
+    "symbol": "VZ",
+    "shortName": "Verizon Communications Inc.",
+    "regularMarketPrice": 39.849998474121094,
+    "regularMarketChangePercent": -0.44966656477368816,
+    "marketCap": 168024555520,
+    "oneMonthChange": 0.0025156848835495285
+  },
+  {
+    "symbol": "ARM",
+    "shortName": "Arm Holdings plc",
+    "regularMarketPrice": 154.83999633789062,
+    "regularMarketChangePercent": 1.614382686632517,
+    "marketCap": 164285022208,
+    "oneMonthChange": -0.09945333174775875
+  },
+  {
+    "symbol": "BKNG",
+    "shortName": "Booking Holdings Inc. Common St",
+    "regularMarketPrice": 4958.39990234375,
+    "regularMarketChangePercent": 0.37246765878036436,
+    "marketCap": 159828148224,
+    "oneMonthChange": -0.05623498764159654
+  },
+  {
+    "symbol": "KLAC",
+    "shortName": "KLA Corporation",
+    "regularMarketPrice": 1217.949951171875,
+    "regularMarketChangePercent": 2.0597091574176587,
+    "marketCap": 160029294592,
+    "oneMonthChange": 0.18824385480182926
+  },
+  {
+    "symbol": "GEV",
+    "shortName": "GE Vernova Inc.",
+    "regularMarketPrice": 579.7999877929688,
+    "regularMarketChangePercent": 0.8119882101383609,
+    "marketCap": 157311598592,
+    "oneMonthChange": -0.10521912019608719
+  },
+  {
+    "symbol": "NVO",
+    "shortName": "Novo Nordisk A/S",
+    "regularMarketPrice": 45.939998626708984,
+    "regularMarketChangePercent": 0.5691738763331537,
+    "marketCap": 211224068096,
+    "oneMonthChange": -0.2010435021441916
+  },
+  {
+    "symbol": "ACN",
+    "shortName": "Accenture plc",
+    "regularMarketPrice": 244.5500030517578,
+    "regularMarketChangePercent": -0.49234901865323016,
+    "marketCap": 151654957056,
+    "oneMonthChange": 0.004064729442797333
+  },
+  {
+    "symbol": "SPGI",
+    "shortName": "S&P Global Inc.",
+    "regularMarketPrice": 493.8399963378906,
+    "regularMarketChangePercent": -0.5197219415231842,
+    "marketCap": 149534752768,
+    "oneMonthChange": 0.03024992721404127
+  },
+  {
+    "symbol": "DHR",
+    "shortName": "Danaher Corporation",
+    "regularMarketPrice": 211.1699981689453,
+    "regularMarketChangePercent": 0.5858808083001404,
+    "marketCap": 149159837696,
+    "oneMonthChange": 0.029394553949682593
+  },
+  {
+    "symbol": "BA",
+    "shortName": "Boeing Company (The)",
+    "regularMarketPrice": 194.80999755859375,
+    "regularMarketChangePercent": 0.10276838733556157,
+    "marketCap": 148074201088,
+    "oneMonthChange": -0.09626090292731476
+  },
+  {
+    "symbol": "GILD",
+    "shortName": "Gilead Sciences, Inc.",
+    "regularMarketPrice": 118.1500015258789,
+    "regularMarketChangePercent": -0.5806113043765543,
+    "marketCap": 146742296576,
+    "oneMonthChange": -0.0005075506222690675
+  },
+  {
+    "symbol": "TXN",
+    "shortName": "Texas Instruments Incorporated",
+    "regularMarketPrice": 160.5800018310547,
+    "regularMarketChangePercent": 0.01868690816236445,
+    "marketCap": 145906696192,
+    "oneMonthChange": -0.0747912674360672
+  },
+  {
+    "symbol": "PANW",
+    "shortName": "Palo Alto Networks, Inc.",
+    "regularMarketPrice": 216.5399932861328,
+    "regularMarketChangePercent": 2.0043777403645175,
+    "marketCap": 146569625600,
+    "oneMonthChange": 0.015285045599655104
+  },
+  {
+    "symbol": "ADBE",
+    "shortName": "Adobe Inc.",
+    "regularMarketPrice": 328.8500061035156,
+    "regularMarketChangePercent": 0.5811304797417454,
+    "marketCap": 137656614912,
+    "oneMonthChange": -0.030855832237145643
+  },
+  {
+    "symbol": "CRWD",
+    "shortName": "CrowdStrike Holdings, Inc.",
+    "regularMarketPrice": 557.530029296875,
+    "regularMarketChangePercent": 3.282641910463877,
+    "marketCap": 139915018240,
+    "oneMonthChange": 0.0961838055764829
+  },
+  {
+    "symbol": "TTE",
+    "shortName": "TotalEnergies SE",
+    "regularMarketPrice": 62.93000030517578,
+    "regularMarketChangePercent": 1.0761328383806348,
+    "marketCap": 135866327040,
+    "oneMonthChange": 0.09272443372875959
+  },
+  {
+    "symbol": "LOW",
+    "shortName": "Lowe's Companies, Inc.",
+    "regularMarketPrice": 233.02999877929688,
+    "regularMarketChangePercent": -0.055756227784835126,
+    "marketCap": 130689024000,
+    "oneMonthChange": -0.0012976323033342867
+  },
+  {
+    "symbol": "PGR",
+    "shortName": "Progressive Corporation (The)",
+    "regularMarketPrice": 217.52999877929688,
+    "regularMarketChangePercent": 0.11966621222297821,
+    "marketCap": 127558991872,
+    "oneMonthChange": -0.0793550029493351
+  },
+  {
+    "symbol": "DE",
+    "shortName": "Deere & Company",
+    "regularMarketPrice": 474.3900146484375,
+    "regularMarketChangePercent": 1.4108926331126102,
+    "marketCap": 128241573888,
+    "oneMonthChange": 0.08034440225409341
+  },
+  {
+    "symbol": "SPOT",
+    "shortName": "Spotify Technology S.A.",
+    "regularMarketPrice": 622.9299926757812,
+    "regularMarketChangePercent": 0.975829971273165,
+    "marketCap": 128257556480,
+    "oneMonthChange": -0.09986415170487714
+  },
+  {
+    "symbol": "PLD",
+    "shortName": "Prologis, Inc.",
+    "regularMarketPrice": 124.9000015258789,
+    "regularMarketChangePercent": -0.557323625892586,
+    "marketCap": 116015489024,
+    "oneMonthChange": 0.10805535994741186
+  },
+  {
+    "symbol": "MDT",
+    "shortName": "Medtronic plc.",
+    "regularMarketPrice": 92.66000366210938,
+    "regularMarketChangePercent": 0.4989193732205772,
+    "marketCap": 118847209472,
+    "oneMonthChange": -0.030550304593074222
+  },
+  {
+    "symbol": "CB",
+    "shortName": "Chubb Limited",
+    "regularMarketPrice": 288.25,
+    "regularMarketChangePercent": 0.24343592418709392,
+    "marketCap": 113441030144,
+    "oneMonthChange": 0.020245642039489767
+  },
+  {
+    "symbol": "HCA",
+    "shortName": "HCA Healthcare, Inc.",
+    "regularMarketPrice": 459.29998779296875,
+    "regularMarketChangePercent": -3.6319028570594956,
+    "marketCap": 104809455616,
+    "oneMonthChange": 0.11838900356553633
+  },
+  {
+    "symbol": "MELI",
+    "shortName": "MercadoLibre, Inc.",
+    "regularMarketPrice": 2092.0400390625,
+    "regularMarketChangePercent": -0.7853533594565072,
+    "marketCap": 106060537856,
+    "oneMonthChange": -0.03854473596545626
+  },
+  {
+    "symbol": "LMT",
+    "shortName": "Lockheed Martin Corporation",
+    "regularMarketPrice": 452.1000061035156,
+    "regularMarketChangePercent": -1.3635854470348854,
+    "marketCap": 104614944768,
+    "oneMonthChange": -0.10267348480126685
+  },
+  {
+    "symbol": "ADP",
+    "shortName": "Automatic Data Processing, Inc.",
+    "regularMarketPrice": 254.05999755859375,
+    "regularMarketChangePercent": -0.03934625488127423,
+    "marketCap": 102754246656,
+    "oneMonthChange": -0.1065236781950165
+  },
+  {
+    "symbol": "DELL",
+    "shortName": "Dell Technologies Inc.",
+    "regularMarketPrice": 142.69000244140625,
+    "regularMarketChangePercent": -2.7334680017680566,
+    "marketCap": 95630868480,
+    "oneMonthChange": -0.06650312666926145
+  },
+  {
+    "symbol": "MO",
+    "shortName": "Altria Group, Inc.",
+    "regularMarketPrice": 57.54999923706055,
+    "regularMarketChangePercent": -0.8271596810950443,
+    "marketCap": 96607551488,
+    "oneMonthChange": -0.11393376534072208
+  },
+  {
+    "symbol": "SBUX",
+    "shortName": "Starbucks Corporation",
+    "regularMarketPrice": 84.5999984741211,
+    "regularMarketChangePercent": -1.133576634192941,
+    "marketCap": 96181739520,
+    "oneMonthChange": 0.05710358321292942
+  },
+  {
+    "symbol": "BMY",
+    "shortName": "Bristol-Myers Squibb Company",
+    "regularMarketPrice": 47.2599983215332,
+    "regularMarketChangePercent": 1.2208145674302964,
+    "marketCap": 96209690624,
+    "oneMonthChange": 0.0854386157047421
+  },
+  {
+    "symbol": "NKE",
+    "shortName": "Nike, Inc.",
+    "regularMarketPrice": 60.79999923706055,
+    "regularMarketChangePercent": -0.4747106939588419,
+    "marketCap": 89874636800,
+    "oneMonthChange": -0.09765506507235187
+  },
+  {
+    "symbol": "SNOW",
+    "shortName": "Snowflake Inc.",
+    "regularMarketPrice": 268.510009765625,
+    "regularMarketChangePercent": 2.149436873478272,
+    "marketCap": 90971193344,
+    "oneMonthChange": 0.08589802695906538
+  },
+  {
+    "symbol": "MMC",
+    "shortName": "Marsh & McLennan Companies, Inc",
+    "regularMarketPrice": 178.1199951171875,
+    "regularMarketChangePercent": -1.0719271773465766,
+    "marketCap": 87262715904,
+    "oneMonthChange": -0.13264513737925543
+  },
+  {
+    "symbol": "MMM",
+    "shortName": "3M Company",
+    "regularMarketPrice": 167.6699981689453,
+    "regularMarketChangePercent": 1.7168151959144073,
+    "marketCap": 89070501888,
+    "oneMonthChange": 0.10966241824026078
+  },
+  {
+    "symbol": "ICE",
+    "shortName": "Intercontinental Exchange Inc.",
+    "regularMarketPrice": 149.5,
+    "regularMarketChangePercent": 0.33557046979865773,
+    "marketCap": 85241692160,
+    "oneMonthChange": -0.05826771653543307
+  },
+  {
+    "symbol": "COIN",
+    "shortName": "Coinbase Global, Inc.",
+    "regularMarketPrice": 317.92999267578125,
+    "regularMarketChangePercent": 2.8433695658217197,
+    "marketCap": 85727854592,
+    "oneMonthChange": -0.10941482570127428
+  },
+  {
+    "symbol": "SE",
+    "shortName": "Sea Limited",
+    "regularMarketPrice": 155.0500030517578,
+    "regularMarketChangePercent": 3.4080319139374518,
+    "marketCap": 91792687104,
+    "oneMonthChange": -0.15087624387120646
+  },
+  {
+    "symbol": "NET",
+    "shortName": "Cloudflare, Inc.",
+    "regularMarketPrice": 240.52999877929688,
+    "regularMarketChangePercent": 3.316008238175711,
+    "marketCap": 84253122560,
+    "oneMonthChange": 0.08074227811748665
+  },
+  {
+    "symbol": "UPS",
+    "shortName": "United Parcel Service, Inc.",
+    "regularMarketPrice": 93.05999755859375,
+    "regularMarketChangePercent": -3.0119879535239735,
+    "marketCap": 78950760448,
+    "oneMonthChange": 0.118778519081145
+  },
+  {
+    "symbol": "NOC",
+    "shortName": "Northrop Grumman Corporation",
+    "regularMarketPrice": 562.97998046875,
+    "regularMarketChangePercent": -0.9901372700532903,
+    "marketCap": 80348536832,
+    "oneMonthChange": -0.09032449581990842
+  },
+  {
+    "symbol": "EQIX",
+    "shortName": "Equinix, Inc.",
+    "regularMarketPrice": 828.1300048828125,
+    "regularMarketChangePercent": 0.40982174996210974,
+    "marketCap": 81310842880,
+    "oneMonthChange": 0.02708706228608002
+  },
+  {
+    "symbol": "NU",
+    "shortName": "Nu Holdings Ltd.",
+    "regularMarketPrice": 16.020000457763672,
+    "regularMarketChangePercent": 0.9451824685801681,
+    "marketCap": 77414318080,
+    "oneMonthChange": 0.062334253236959104
+  },
+  {
+    "symbol": "APO",
+    "shortName": "Apollo Global Management, Inc. ",
+    "regularMarketPrice": 130.9199981689453,
+    "regularMarketChangePercent": -1.095415752099941,
+    "marketCap": 75984543744,
+    "oneMonthChange": 0.06925837600825899
+  },
+  {
+    "symbol": "ABNB",
+    "shortName": "Airbnb, Inc.",
+    "regularMarketPrice": 120.19999694824219,
+    "regularMarketChangePercent": -0.5625438879531832,
+    "marketCap": 72883240960,
+    "oneMonthChange": 0.01127373658934614
+  },
+  {
+    "symbol": "USB",
+    "shortName": "U.S. Bancorp",
+    "regularMarketPrice": 47.58000183105469,
+    "regularMarketChangePercent": 0.5494544189659494,
+    "marketCap": 73959972864,
+    "oneMonthChange": 0.030762608066217063
+  },
+  {
+    "symbol": "RACE",
+    "shortName": "Ferrari N.V.",
+    "regularMarketPrice": 411.3999938964844,
+    "regularMarketChangePercent": -0.4500813297961612,
+    "marketCap": 73052708864,
+    "oneMonthChange": 0.08629064366932296
+  },
+  {
+    "symbol": "GLW",
+    "shortName": "Corning Incorporated",
+    "regularMarketPrice": 88.55999755859375,
+    "regularMarketChangePercent": 3.603179174770409,
+    "marketCap": 75927830528,
+    "oneMonthChange": 0.03578944512975146
+  },
+  {
+    "symbol": "CI",
+    "shortName": "The Cigna Group",
+    "regularMarketPrice": 258.1600036621094,
+    "regularMarketChangePercent": -2.4264858787098835,
+    "marketCap": 68961206272,
+    "oneMonthChange": -0.1260959329007918
+  },
+  {
+    "symbol": "ELV",
+    "shortName": "Elevance Health, Inc.",
+    "regularMarketPrice": 303.7799987792969,
+    "regularMarketChangePercent": -4.405563981592013,
+    "marketCap": 67511693312,
+    "oneMonthChange": -0.13556431855931889
+  },
+  {
+    "symbol": "RCL",
+    "shortName": "Royal Caribbean Cruises Ltd.",
+    "regularMarketPrice": 264.9800109863281,
+    "regularMarketChangePercent": 3.5037736753752333,
+    "marketCap": 72263483392,
+    "oneMonthChange": -0.13467438465801568
+  },
+  {
+    "symbol": "MSTR",
+    "shortName": "Strategy Inc",
+    "regularMarketPrice": 238.8800048828125,
+    "regularMarketChangePercent": -1.2606932241505835,
+    "marketCap": 68643061760,
+    "oneMonthChange": -0.2427806005056823
+  },
+  {
+    "symbol": "REGN",
+    "shortName": "Regeneron Pharmaceuticals, Inc.",
+    "regularMarketPrice": 654.739990234375,
+    "regularMarketChangePercent": -0.4243167255676506,
+    "marketCap": 68812824576,
+    "oneMonthChange": 0.17393723336172806
+  },
+  {
+    "symbol": "VRT",
+    "shortName": "Vertiv Holdings, LLC",
+    "regularMarketPrice": 187.83999633789062,
+    "regularMarketChangePercent": 4.471633113398561,
+    "marketCap": 71818428416,
+    "oneMonthChange": 0.049385454401623605
+  },
+  {
+    "symbol": "DDOG",
+    "shortName": "Datadog, Inc.",
+    "regularMarketPrice": 199.72000122070312,
+    "regularMarketChangePercent": 4.434219420990962,
+    "marketCap": 70035963904,
+    "oneMonthChange": 0.21632158911462873
+  },
+  {
+    "symbol": "GM",
+    "shortName": "General Motors Company",
+    "regularMarketPrice": 71.05000305175781,
+    "regularMarketChangePercent": 0.424032581989841,
+    "marketCap": 66279800832,
+    "oneMonthChange": 0.27741827429319904
+  },
+  {
+    "symbol": "VST",
+    "shortName": "Vistra Corp.",
+    "regularMarketPrice": 188.27999877929688,
+    "regularMarketChangePercent": -1.4240844087450917,
+    "marketCap": 63794065408,
+    "oneMonthChange": -0.1015032400987718
+  },
+  {
+    "symbol": "CL",
+    "shortName": "Colgate-Palmolive Company",
+    "regularMarketPrice": 78.47000122070312,
+    "regularMarketChangePercent": -0.3682056618802439,
+    "marketCap": 63251918848,
+    "oneMonthChange": 0.026189983263034754
+  },
+  {
+    "symbol": "ADSK",
+    "shortName": "Autodesk, Inc.",
+    "regularMarketPrice": 298.7200012207031,
+    "regularMarketChangePercent": 0.5182048659745333,
+    "marketCap": 63627362304,
+    "oneMonthChange": -0.030035392938713844
+  },
+  {
+    "symbol": "PYPL",
+    "shortName": "PayPal Holdings, Inc.",
+    "regularMarketPrice": 66.25,
+    "regularMarketChangePercent": 0.045303533675628414,
+    "marketCap": 61986942976,
+    "oneMonthChange": -0.03790300010481277
+  },
+  {
+    "symbol": "WDAY",
+    "shortName": "Workday, Inc.",
+    "regularMarketPrice": 227.97000122070312,
+    "regularMarketChangePercent": 1.2435054495284175,
+    "marketCap": 60867989504,
+    "oneMonthChange": -0.03647508309461649
+  },
+  {
+    "symbol": "CHTR",
+    "shortName": "Charter Communications, Inc.",
+    "regularMarketPrice": 210.4499969482422,
+    "regularMarketChangePercent": -4.279997749366791,
+    "marketCap": 27234201600,
+    "oneMonthChange": -0.18660384179644765
+  },
+  {
+    "symbol": "WDC",
+    "shortName": "Western Digital Corporation",
+    "regularMarketPrice": 174.22000122070312,
+    "regularMarketChangePercent": 6.912952177412851,
+    "marketCap": 59565694976,
+    "oneMonthChange": 0.4657580374059853
+  },
+  {
+    "symbol": "SLB",
+    "shortName": "SLB Limited",
+    "regularMarketPrice": 36.90999984741211,
+    "regularMarketChangePercent": 0.681941755079413,
+    "marketCap": 55140720640,
+    "oneMonthChange": 0.14378677793083589
+  },
+  {
+    "symbol": "ZTS",
+    "shortName": "Zoetis Inc.",
+    "regularMarketPrice": 119.79000091552734,
+    "regularMarketChangePercent": -0.3742507355893639,
+    "marketCap": 52790640640,
+    "oneMonthChange": -0.155018227169003
+  },
+  {
+    "symbol": "F",
+    "shortName": "Ford Motor Company",
+    "regularMarketPrice": 13.15999984741211,
+    "regularMarketChangePercent": -0.37850229059721024,
+    "marketCap": 52436000768,
+    "oneMonthChange": 0.15356996384116597
+  },
+  {
+    "symbol": "CRWV",
+    "shortName": "CoreWeave, Inc.",
+    "regularMarketPrice": 105.61000061035156,
+    "regularMarketChangePercent": 1.5383142105101022,
+    "marketCap": 52287778816,
+    "oneMonthChange": -0.2542719654596686
+  },
+  {
+    "symbol": "ZS",
+    "shortName": "Zscaler, Inc.",
+    "regularMarketPrice": 328.8999938964844,
+    "regularMarketChangePercent": 2.7780362790176505,
+    "marketCap": 52065136640,
+    "oneMonthChange": 0.050664403650137774
+  },
+  {
+    "symbol": "EW",
+    "shortName": "Edwards Lifesciences Corporatio",
+    "regularMarketPrice": 84.08000183105469,
+    "regularMarketChangePercent": 0.8274395383795261,
+    "marketCap": 48791625728,
+    "oneMonthChange": 0.1525703269146016
+  },
+  {
+    "symbol": "MSCI",
+    "shortName": "MSCI Inc.",
+    "regularMarketPrice": 576.9500122070312,
+    "regularMarketChangePercent": -1.0122652128281329,
+    "marketCap": 43351756800,
+    "oneMonthChange": 0.052156538514537686
+  },
+  {
+    "symbol": "JD",
+    "shortName": "JD.com, Inc.",
+    "regularMarketPrice": 31.40999984741211,
+    "regularMarketChangePercent": -1.1953449279266743,
+    "marketCap": 45697642496,
+    "oneMonthChange": -0.05533835045377115
+  },
+  {
+    "symbol": "TGT",
+    "shortName": "Target Corporation",
+    "regularMarketPrice": 90.7300033569336,
+    "regularMarketChangePercent": -0.5589616868329692,
+    "marketCap": 41227636736,
+    "oneMonthChange": 0.03881391299729521
+  },
+  {
+    "symbol": "OXY",
+    "shortName": "Occidental Petroleum Corporatio",
+    "regularMarketPrice": 41.79999923706055,
+    "regularMarketChangePercent": 1.1861516268713255,
+    "marketCap": 41149579264,
+    "oneMonthChange": -0.014615722740380794
+  },
+  {
+    "symbol": "CMG",
+    "shortName": "Chipotle Mexican Grill, Inc.",
+    "regularMarketPrice": 30.479999542236328,
+    "regularMarketChangePercent": -0.3595961352195872,
+    "marketCap": 40303034368,
+    "oneMonthChange": -0.2547677651564259
+  },
+  {
+    "symbol": "XYZ",
+    "shortName": "Block, Inc.",
+    "regularMarketPrice": 66.80000305175781,
+    "regularMarketChangePercent": 2.0626479018453927,
+    "marketCap": 40592023552,
+    "oneMonthChange": -0.10957070060157505
+  },
+  {
+    "symbol": "RDDT",
+    "shortName": "Reddit, Inc.",
+    "regularMarketPrice": 204.19000244140625,
+    "regularMarketChangePercent": 4.93884389012552,
+    "marketCap": 38693138432,
+    "oneMonthChange": 0.0025039757657338286
+  },
+  {
+    "symbol": "SNDK",
+    "shortName": "Sandisk Corporation",
+    "regularMarketPrice": 267.95001220703125,
+    "regularMarketChangePercent": 11.88826298940674,
+    "marketCap": 39229104128,
+    "oneMonthChange": 0.9905654185579565
+  },
+  {
+    "symbol": "CCL",
+    "shortName": "Carnival Corporation",
+    "regularMarketPrice": 26.889999389648438,
+    "regularMarketChangePercent": 0.5985760929608569,
+    "marketCap": 35310567424,
+    "oneMonthChange": -0.04271985604916057
+  },
+  {
+    "symbol": "FI",
+    "shortName": "Fiserv, Inc.",
+    "regularMarketPrice": 63.79999923706055,
+    "regularMarketChangePercent": 0.15698467356443332,
+    "marketCap": 34314950656,
+    "oneMonthChange": -0.47939618402036893
+  },
+  {
+    "symbol": "SOFI",
+    "shortName": "SoFi Technologies, Inc.",
+    "regularMarketPrice": 30.540000915527344,
+    "regularMarketChangePercent": 8.25948569843085,
+    "marketCap": 36828282880,
+    "oneMonthChange": 0.12527640391825923
+  },
+  {
+    "symbol": "EL",
+    "shortName": "Estee Lauder Companies, Inc. (T",
+    "regularMarketPrice": 89.62999725341797,
+    "regularMarketChangePercent": 2.1424470124421298,
+    "marketCap": 32299087872,
+    "oneMonthChange": -0.03353462025004572
+  },
+  {
+    "symbol": "FSLR",
+    "shortName": "First Solar, Inc.",
+    "regularMarketPrice": 272.6400146484375,
+    "regularMarketChangePercent": 1.8681866120301576,
+    "marketCap": 29256493056,
+    "oneMonthChange": 0.20557162063525414
+  },
+  {
+    "symbol": "ALAB",
+    "shortName": "Astera Labs, Inc.",
+    "regularMarketPrice": 173.74000549316406,
+    "regularMarketChangePercent": 4.985198799422354,
+    "marketCap": 29345314816,
+    "oneMonthChange": -0.1292537134461646
+  },
+  {
+    "symbol": "NBIS",
+    "shortName": "Nebius Group N.V.",
+    "regularMarketPrice": 109.94999694824219,
+    "regularMarketChangePercent": -1.1951860637651093,
+    "marketCap": 27612950528,
+    "oneMonthChange": -0.1883213384117861
+  },
+  {
+    "symbol": "DKNG",
+    "shortName": "DraftKings Inc.",
+    "regularMarketPrice": 30.540000915527344,
+    "regularMarketChangePercent": 0.4605293273925828,
+    "marketCap": 15201973248,
+    "oneMonthChange": -0.09053009975466886
+  },
+  {
+    "symbol": "RKLB",
+    "shortName": "Rocket Lab Corporation",
+    "regularMarketPrice": 51.900001525878906,
+    "regularMarketChangePercent": 0.503488624862327,
+    "marketCap": 25117558784,
+    "oneMonthChange": -0.20666458302477161
+  },
+  {
+    "symbol": "ZM",
+    "shortName": "Zoom Communications, Inc.",
+    "regularMarketPrice": 83.16000366210938,
+    "regularMarketChangePercent": 1.7808012509753095,
+    "marketCap": 24888905728,
+    "oneMonthChange": 0.05039794853410967
+  },
+  {
+    "symbol": "AFRM",
+    "shortName": "Affirm Holdings, Inc.",
+    "regularMarketPrice": 76.08999633789062,
+    "regularMarketChangePercent": 3.3550615836601745,
+    "marketCap": 25115301888,
+    "oneMonthChange": 0.03976490872614863
+  },
+  {
+    "symbol": "CRCL",
+    "shortName": "Circle Internet Group, Inc.",
+    "regularMarketPrice": 104.0999984741211,
+    "regularMarketChangePercent": 0.9307722262178526,
+    "marketCap": 26065594368,
+    "oneMonthChange": -0.24274388921411078
+  },
+  {
+    "symbol": "SMCI",
+    "shortName": "Super Micro Computer, Inc.",
+    "regularMarketPrice": 40.189998626708984,
+    "regularMarketChangePercent": 1.0814854796503681,
+    "marketCap": 23883841536,
+    "oneMonthChange": -0.2659360981423017
+  },
+  {
+    "symbol": "GRAB",
+    "shortName": "Grab Holdings Limited",
+    "regularMarketPrice": 5.900000095367432,
+    "regularMarketChangePercent": 6.115109628910648,
+    "marketCap": 24113301504,
+    "oneMonthChange": -0.005058977038722153
+  },
+  {
+    "symbol": "GRAB",
+    "shortName": "Grab Holdings Limited",
+    "regularMarketPrice": 5.900000095367432,
+    "regularMarketChangePercent": 6.115109628910648,
+    "marketCap": 24113301504,
+    "oneMonthChange": -0.005058977038722153
+  },
+  {
+    "symbol": "IONQ",
+    "shortName": "IonQ, Inc.",
+    "regularMarketPrice": 55.369998931884766,
+    "regularMarketChangePercent": -6.580059166720495,
+    "marketCap": 19616460800,
+    "oneMonthChange": -0.3254963893045345
+  },
+  {
+    "symbol": "TWLO",
+    "shortName": "Twilio Inc.",
+    "regularMarketPrice": 130.61000061035156,
+    "regularMarketChangePercent": 2.2947999767791005,
+    "marketCap": 19802150912,
+    "oneMonthChange": 0.18167015337754466
+  },
+  {
+    "symbol": "ILMN",
+    "shortName": "Illumina, Inc.",
+    "regularMarketPrice": 121.72000122070312,
+    "regularMarketChangePercent": -0.14766101665043535,
+    "marketCap": 18598815744,
+    "oneMonthChange": 0.28085870550617015
+  },
+  {
+    "symbol": "PINS",
+    "shortName": "Pinterest, Inc.",
+    "regularMarketPrice": 27.010000228881836,
+    "regularMarketChangePercent": -0.29531107832470993,
+    "marketCap": 18246817792,
+    "oneMonthChange": -0.1629996948951502
+  },
+  {
+    "symbol": "Z",
+    "shortName": "Zillow Group, Inc.",
+    "regularMarketPrice": 73.05000305175781,
+    "regularMarketChangePercent": 0.06849733117508562,
+    "marketCap": 17559402496,
+    "oneMonthChange": 0.04716170892745218
+  },
+  {
+    "symbol": "IREN",
+    "shortName": "IREN LIMITED",
+    "regularMarketPrice": 60.16999816894531,
+    "regularMarketChangePercent": -3.5428051155092817,
+    "marketCap": 17056118784,
+    "oneMonthChange": -0.06189587244280274
+  },
+  {
+    "symbol": "OKLO",
+    "shortName": "Oklo Inc.",
+    "regularMarketPrice": 111.5199966430664,
+    "regularMarketChangePercent": -1.0031099484541495,
+    "marketCap": 16461377536,
+    "oneMonthChange": -0.3478743919928697
+  },
+  {
+    "symbol": "AVAV",
+    "shortName": "AeroVironment, Inc.",
+    "regularMarketPrice": 333.8699951171875,
+    "regularMarketChangePercent": 1.2801441277680943,
+    "marketCap": 16670866432,
+    "oneMonthChange": -0.18534512833087688
+  },
+  {
+    "symbol": "ROKU",
+    "shortName": "Roku, Inc.",
+    "regularMarketPrice": 105.0,
+    "regularMarketChangePercent": 2.6392961876832874,
+    "marketCap": 15513936896,
+    "oneMonthChange": 0.1190450596927134
+  },
+  {
+    "symbol": "TXRH",
+    "shortName": "Texas Roadhouse, Inc.",
+    "regularMarketPrice": 161.74000549316406,
+    "regularMarketChangePercent": -1.9935735968223587,
+    "marketCap": 10747722752,
+    "oneMonthChange": -0.05943243092394555
+  },
+  {
+    "symbol": "RGTI",
+    "shortName": "Rigetti Computing, Inc.",
+    "regularMarketPrice": 33.08000183105469,
+    "regularMarketChangePercent": -2.0432282171907477,
+    "marketCap": 10723385344,
+    "oneMonthChange": -0.39755960803169194
+  },
+  {
+    "symbol": "CELH",
+    "shortName": "Celsius Holdings, Inc.",
+    "regularMarketPrice": 44.560001373291016,
+    "regularMarketChangePercent": 7.3217759472326875,
+    "marketCap": 11486913536,
+    "oneMonthChange": -0.27118086656645546
+  },
+  {
+    "symbol": "MBLY",
+    "shortName": "Mobileye Global Inc.",
+    "regularMarketPrice": 12.90999984741211,
+    "regularMarketChangePercent": 2.379063024679698,
+    "marketCap": 10505821184,
+    "oneMonthChange": -0.15065789411768027
+  },
+  {
+    "symbol": "MRNA",
+    "shortName": "Moderna, Inc.",
+    "regularMarketPrice": 24.760000228881836,
+    "regularMarketChangePercent": 0.8964964502112338,
+    "marketCap": 9673225216,
+    "oneMonthChange": -0.07404635599043359
+  },
+  {
+    "symbol": "HIMS",
+    "shortName": "Hims & Hers Health, Inc.",
+    "regularMarketPrice": 41.04999923706055,
+    "regularMarketChangePercent": 0.04874296139543197,
+    "marketCap": 9344970752,
+    "oneMonthChange": -0.24995432887987928
+  },
+  {
+    "symbol": "BROS",
+    "shortName": "Dutch Bros Inc.",
+    "regularMarketPrice": 56.68000030517578,
+    "regularMarketChangePercent": 6.082725631996596,
+    "marketCap": 9325115392,
+    "oneMonthChange": 0.0835404094276328
+  },
+  {
+    "symbol": "APLD",
+    "shortName": "Applied Digital Corporation",
+    "regularMarketPrice": 31.440000534057617,
+    "regularMarketChangePercent": 1.4848306457637728,
+    "marketCap": 8793324544,
+    "oneMonthChange": -0.0817757303490459
+  },
+  {
+    "symbol": "SMR",
+    "shortName": "NuScale Power Corporation",
+    "regularMarketPrice": 28.43000030517578,
+    "regularMarketChangePercent": -6.295318704100919,
+    "marketCap": 4766553600,
+    "oneMonthChange": -0.3685028872479044
+  },
+  {
+    "symbol": "MARA",
+    "shortName": "MARA Holdings, Inc.",
+    "regularMarketPrice": 15.579999923706055,
+    "regularMarketChangePercent": -1.8273476767104255,
+    "marketCap": 5892112384,
+    "oneMonthChange": -0.23023714921488195
+  },
+  {
+    "symbol": "S",
+    "shortName": "SentinelOne, Inc.",
+    "regularMarketPrice": 17.190000534057617,
+    "regularMarketChangePercent": 1.5957478372199494,
+    "marketCap": 5761417216,
+    "oneMonthChange": 0.002332414951433787
+  },
+  {
+    "symbol": "LMND",
+    "shortName": "Lemonade, Inc.",
+    "regularMarketPrice": 78.87000274658203,
+    "regularMarketChangePercent": 5.131968470517243,
+    "marketCap": 5894035968,
+    "oneMonthChange": 0.5661239434212835
+  },
+  {
+    "symbol": "LEU",
+    "shortName": "Centrus Energy Corp.",
+    "regularMarketPrice": 290.20001220703125,
+    "regularMarketChangePercent": -1.3462019965218843,
+    "marketCap": 5285131776,
+    "oneMonthChange": -0.27583964845308756
+  },
+  {
+    "symbol": "PRMB",
+    "shortName": "Primo Brands Corporation",
+    "regularMarketPrice": 15.5600004196167,
+    "regularMarketChangePercent": 7.607195156408703,
+    "marketCap": 5761647616,
+    "oneMonthChange": -0.28852309910738355
+  },
+  {
+    "symbol": "CRSP",
+    "shortName": "CRISPR Therapeutics AG",
+    "regularMarketPrice": 54.58000183105469,
+    "regularMarketChangePercent": -0.9796773747193578,
+    "marketCap": 4964074496,
+    "oneMonthChange": -0.2007614423879055
+  },
+  {
+    "symbol": "OSCR",
+    "shortName": "Oscar Health, Inc.",
+    "regularMarketPrice": 14.609999656677246,
+    "regularMarketChangePercent": -17.55079200520741,
+    "marketCap": 4207054336,
+    "oneMonthChange": -0.2838235328491722
+  },
+  {
+    "symbol": "TMDX",
+    "shortName": "TransMedics Group, Inc.",
+    "regularMarketPrice": 122.38999938964844,
+    "regularMarketChangePercent": 2.702021808885152,
+    "marketCap": 4182595584,
+    "oneMonthChange": 0.09560469423242765
+  },
+  {
+    "symbol": "FLNC",
+    "shortName": "Fluence Energy, Inc.",
+    "regularMarketPrice": 21.790000915527344,
+    "regularMarketChangePercent": 4.810009213695741,
+    "marketCap": 3976809728,
+    "oneMonthChange": 0.3713027340923796
+  },
+  {
+    "symbol": "UPST",
+    "shortName": "Upstart Holdings, Inc.",
+    "regularMarketPrice": 38.77000045776367,
+    "regularMarketChangePercent": 0.4404156936882654,
+    "marketCap": 3771796992,
+    "oneMonthChange": -0.2183467409179054
+  },
+  {
+    "symbol": "QUBT",
+    "shortName": "Quantum Computing Inc.",
+    "regularMarketPrice": 12.699999809265137,
+    "regularMarketChangePercent": -1.244169445838746,
+    "marketCap": 2843966720,
+    "oneMonthChange": -0.4082012883936142
+  },
+  {
+    "symbol": "ONDS",
+    "shortName": "Ondas Holdings Inc.",
+    "regularMarketPrice": 5.880000114440918,
+    "regularMarketChangePercent": 1.2048212468316415,
+    "marketCap": 2166484992,
+    "oneMonthChange": -0.4560592149681516
+  },
+  {
+    "symbol": "AI",
+    "shortName": "C3.ai, Inc.",
+    "regularMarketPrice": 16.079999923706055,
+    "regularMarketChangePercent": 3.6082469310957164,
+    "marketCap": 2216623104,
+    "oneMonthChange": -0.16985032385045323
+  },
+  {
+    "symbol": "NNE",
+    "shortName": "Nano Nuclear Energy Inc.",
+    "regularMarketPrice": 37.900001525878906,
+    "regularMarketChangePercent": -3.2669690508450575,
+    "marketCap": 1904481024,
+    "oneMonthChange": -0.3038206744684842
+  },
+  {
+    "symbol": "PENN",
+    "shortName": "PENN Entertainment, Inc.",
+    "regularMarketPrice": 15.600000381469727,
+    "regularMarketChangePercent": 7.290236461277355,
+    "marketCap": 2078699520,
+    "oneMonthChange": -0.06810032289339095
+  },
+  {
+    "symbol": "FSLY",
+    "shortName": "Fastly, Inc.",
+    "regularMarketPrice": 11.930000305175781,
+    "regularMarketChangePercent": 3.2006946814513904,
+    "marketCap": 1758482048,
+    "oneMonthChange": 0.45133818949229604
+  },
+  {
+    "symbol": "TDOC",
+    "shortName": "Teladoc Health, Inc.",
+    "regularMarketPrice": 7.5,
+    "regularMarketChangePercent": -0.39840637450199534,
+    "marketCap": 1331050496,
+    "oneMonthChange": -0.09090909090909091
+  },
+  {
+    "symbol": "ASPI",
+    "shortName": "ASP Isotopes Inc.",
+    "regularMarketPrice": 8.920000076293945,
+    "regularMarketChangePercent": -0.8888880411783854,
+    "marketCap": 995166080,
+    "oneMonthChange": -0.330330309259691
+  }
+]
