@@ -44,9 +44,13 @@
           <th>Ticker</th>
           <th>Name</th>
           <th>Price</th>
+          <th>Change ($)</th>
           <th>% Change</th>
           <th>Market Cap</th>
-          <th>1M Change</th>
+          <th>1M</th>
+          <th>3M</th>
+          <th>6M</th>
+          <th>Trend</th>
         </tr>
       </thead>
       <tbody id="watchlist-tbody">
@@ -126,10 +130,14 @@
       pageRows.forEach(row => {
         const tr = document.createElement('tr');
         const changeClass = (row.regularMarketChangePercent > 0) ? 'positive' : ((row.regularMarketChangePercent < 0) ? 'negative' : 'muted');
-        const price = row.regularMarketPrice !== null && row.regularMarketPrice !== undefined ? row.regularMarketPrice : '-';
-        const changeText = row.regularMarketChangePercent !== null && row.regularMarketChangePercent !== undefined ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-';
-        const mc = row.marketCap ? formatMarketCap(row.marketCap) : '-';
-        const oneM = row.oneMonthChange !== undefined && row.oneMonthChange !== null ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-';
+  const price = row.regularMarketPrice !== null && row.regularMarketPrice !== undefined ? row.regularMarketPrice.toFixed(1) : '-';
+  const priceChangeVal = row.priceChange !== null && row.priceChange !== undefined ? row.priceChange : null;
+  const priceChangeText = priceChangeVal !== null ? (priceChangeVal > 0 ? '+' : '') + '$' + priceChangeVal.toFixed(1) : '-';
+  const changeText = row.regularMarketChangePercent !== null && row.regularMarketChangePercent !== undefined ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-';
+  const mc = row.marketCap ? formatMarketCap(row.marketCap) : '-';
+  const oneM = row.oneMonthChange !== undefined && row.oneMonthChange !== null ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-';
+  const threeM = row.threeMonthChange !== undefined && row.threeMonthChange !== null ? (row.threeMonthChange > 0 ? '+' : '') + (row.threeMonthChange * 100).toFixed(2) + '%' : '-';
+  const sixM = row.sixMonthChange !== undefined && row.sixMonthChange !== null ? (row.sixMonthChange > 0 ? '+' : '') + (row.sixMonthChange * 100).toFixed(2) + '%' : '-';
         // sparkline cell
         let spark = '';
         if(Array.isArray(row.history) && row.history.length > 1){
@@ -147,9 +155,12 @@
           <td style="white-space:nowrap">${row.symbol}</td>
           <td>${row.shortName || '-'}</td>
           <td>${price}</td>
+          <td class="${changeClass}">${priceChangeText}</td>
           <td class="${changeClass}">${changeText}</td>
           <td>${mc}</td>
           <td>${oneM}</td>
+          <td>${threeM}</td>
+          <td>${sixM}</td>
           <td style="width:150px">${spark}</td>
         `;
         tableBody.appendChild(tr);

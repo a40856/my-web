@@ -58,24 +58,34 @@ def fetch_ticker(t):
             hist = tk.history(period='1d')
             if not hist.empty:
                 price = float(hist['Close'].iloc[-1])
-        # One month history (also store series for frontend sparklines)
+        # History series and multi-period changes (1M/3M/6M)
         one_month_change = None
+        three_month_change = None
+        six_month_change = None
         history = None
         try:
-            hist_month = tk.history(period='1mo', interval='1d')
-            closes = hist_month['Close'].dropna()
-            if len(closes) >= 1 and price is not None:
-                first = float(closes.iloc[0])
-                if first != 0:
-                    one_month_change = (float(price) - first) / first
-            # keep last N closes (e.g., 30) as floats
-            if len(closes) > 0:
-                history = [float(x) for x in closes.tolist()]
-                # limit to most recent 30
-                if len(history) > 30:
-                    history = history[-30:]
+            hist_6mo = tk.history(period='6mo', interval='1d')
+            closes = hist_6mo['Close'].dropna()
+            closes_list = [float(x) for x in closes.tolist()]
+            if len(closes_list) > 0 and price is not None:
+                # 1M ~ 21 trading days, 3M ~63, 6M ~126
+                def pct_change_from_n(n):
+                    if len(closes_list) > n:
+                        base = closes_list[-(n+1)]
+                        if base and base != 0:
+                            return (float(price) - base) / base
+                    return None
+
+                one_month_change = pct_change_from_n(21)
+                three_month_change = pct_change_from_n(63)
+                six_month_change = pct_change_from_n(126)
+            # keep last N closes (e.g., 30) as floats for sparkline
+            if len(closes_list) > 0:
+                history = closes_list[-30:]
         except Exception:
             one_month_change = None
+            three_month_change = None
+            six_month_change = None
             history = None
         # info for name and marketCap
         info = {}
@@ -85,21 +95,27 @@ def fetch_ticker(t):
             info = {}
         name = info.get('shortName') or info.get('longName') or ''
         marketCap = info.get('marketCap')
-        # percent change from previous close
+        # percent change and absolute price change from previous close
         reg_prev = info.get('regularMarketPreviousClose')
         reg_pct = None
+        price_change = None
         if reg_prev and price is not None:
             try:
-                reg_pct = (float(price) - float(reg_prev)) / float(reg_prev) * 100.0
+                price_change = float(price) - float(reg_prev)
+                reg_pct = (float(price_change) / float(reg_prev)) * 100.0
             except Exception:
                 reg_pct = None
+                price_change = None
         return {
             'symbol': t,
             'shortName': name,
             'regularMarketPrice': safe_float(price),
             'regularMarketChangePercent': safe_float(reg_pct),
+            'priceChange': safe_float(price_change),
             'marketCap': marketCap,
             'oneMonthChange': one_month_change,
+            'threeMonthChange': three_month_change,
+            'sixMonthChange': six_month_change,
             'history': history
         }
     except Exception:
