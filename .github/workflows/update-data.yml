@@ -1,0 +1,46 @@
+name: Update Watchlist Data
+
+on:
+  schedule:
+    # 7am HKT is 23:00 UTC (previous day)
+    - cron: '0 23 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install yfinance pandas numpy
+
+    - name: Run data fetch script
+      run: python scripts/fetch_watchlist.py
+
+    - name: Check for changes
+      id: verify-changed-files
+      run: |
+        if [ -n "$(git status --porcelain docs/data/watchlist.json)" ]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Commit and push changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/data/watchlist.json
+        git commit -m "Update watchlist data [automated]"
+        git push
