@@ -81,12 +81,50 @@ def fetch_ticker(t):
                 six_month_change = pct_change_from_n(126)
             # keep last N closes (e.g., 30) as floats for sparkline
             if len(closes_list) > 0:
+                # keep last N closes (e.g., 30) as floats for sparkline
                 history = closes_list[-30:]
+                # extract the corresponding dates as ISO strings and volumes
+                try:
+                    idx = hist_6mo.index
+                    dates = [d.strftime('%Y-%m-%d') for d in idx.tolist()]
+                    history_dates = dates[-30:]
+                except Exception:
+                    history_dates = None
+                try:
+                    vols = hist_6mo['Volume'].dropna().tolist()
+                    volumes = [int(v) for v in vols][-30:]
+                except Exception:
+                    volumes = None
+                # extract OHLC arrays for precise candlesticks (keep full length matching hist_6mo)
+                try:
+                    opens = hist_6mo['Open'].dropna().tolist()
+                    highs = hist_6mo['High'].dropna().tolist()
+                    lows = hist_6mo['Low'].dropna().tolist()
+                    closes = hist_6mo['Close'].dropna().tolist()
+                    # build list of ohlc dicts aligned by index
+                    ohlc = []
+                    L = min(len(opens), len(highs), len(lows), len(closes))
+                    for i in range(L):
+                        try:
+                            ohlc.append({
+                                'open': float(opens[i]),
+                                'high': float(highs[i]),
+                                'low': float(lows[i]),
+                                'close': float(closes[i])
+                            })
+                        except Exception:
+                            # skip malformed row
+                            continue
+                except Exception:
+                    ohlc = None
+            else:
+                history_dates = None
         except Exception:
             one_month_change = None
             three_month_change = None
             six_month_change = None
             history = None
+            history_dates = None
         # info for name and marketCap
         info = {}
         try:
@@ -106,7 +144,7 @@ def fetch_ticker(t):
             except Exception:
                 reg_pct = None
                 price_change = None
-        return {
+        out_row = {
             'symbol': t,
             'shortName': name,
             'regularMarketPrice': safe_float(price),
@@ -116,8 +154,14 @@ def fetch_ticker(t):
             'oneMonthChange': one_month_change,
             'threeMonthChange': three_month_change,
             'sixMonthChange': six_month_change,
-            'history': history
+            'history': history,
+            'historyDates': history_dates,
+            'volumes': volumes if 'volumes' in locals() else None
         }
+        # include OHLC if available (keep as list of dicts): backward-compatible
+        if 'ohlc' in locals() and ohlc:
+            out_row['ohlc'] = ohlc
+        return out_row
     except Exception:
         traceback.print_exc()
         return {

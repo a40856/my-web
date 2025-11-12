@@ -1,0 +1,50 @@
+[
+	{
+		"id": 1,
+		"title": "腦力激盪：列出選項流（option flow）分析想法",
+		"description": "快速蒐集並分類可用的選項流/交易流分析點子（例如：CPR、VWCPR、OI 變化、異常成交量、put/call 比、希臘值曝險、成交偏好偵測、買賣壓力等），評估每個想法的可行性與所需資料。標註優先推薦的 3 項指標與理由。",
+		"status": "in-progress"
+	},
+	{
+		"id": 2,
+		"title": "定義指標與公式（可量化）",
+		"description": "把第 1 項選出的主指標拆成明確公式與輸入輸出（例如：VWCPR = (sum(call_volume*price) - sum(put_volume*price)) / total_volume），包含邊界條件與資料清理規則。",
+		"status": "not-started"
+	},
+	{
+		"id": 3,
+		"title": "資料來源與所需欄位地圖",
+		"description": "列出可用資料來源（repo 內 JSON/CSV、GitHub data、第三方 API）、每個指標需要的欄位（Symbol、Side、Volume、Open Interest、Price、Delta/Gamma if available、Timestamp），並標註目前資料是否已存在於 `testing/` 或 `data/`。",
+		"status": "not-started"
+	},
+	{
+		"id": 4,
+		"title": "實作聚合函數（JS）",
+		"description": "在 `docs/index.html` 或獨立模組新增可重用的 JS 函數，能夠對 Active/OI 資料計算 Count、Volume‑Weighted、OI‑Weighted、Delta/Gamma 聚合，並回傳可供前端繪圖的資料結構。",
+		"status": "in-progress"
+	},
+	{
+		"id": 5,
+		"title": "UI：在 `docs/index.html` 新增互動圖表區與控制元件",
+		"description": "新增圖表容器與控制（選擇 ticker、mode：Count/VW、時間範圍、聚合粒度），以及 call vs put 條形圖和可切換的數值標籤。採用輕量圖表庫或純 svg/canvas。",
+		"status": "in-progress"
+	},
+	{
+		"id": 6,
+		"title": "視覺化原型（快速驗證）",
+		"description": "用測試資料生成簡單的 call vs put 條形圖與時間序列（2 個情境：Count 與 Volume‑Weighted），提供 hover 提示、切換 ticker 功能，並將 UI 綁定到已實作的聚合函數。",
+		"status": "not-started"
+	},
+	{
+		"id": 7,
+		"title": "測試與驗證",
+		"description": "建立小型單元測試或簡易驗證程式來確認聚合函數的正確性（包含空資料、極端值、NaN、不同時間窗），以及視覺化與資料同步的行為。",
+		"status": "not-started"
+	},
+	{
+		"id": 8,
+		"title": "記錄與交付物（README + 使用說明）",
+		"description": "撰寫簡短 README 與說明文件（如何執行、資料來源假設、參數說明、範例輸出），並列出下一步改進建議。",
+		"status": "not-started"
+	}
+]

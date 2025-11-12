@@ -6,6 +6,38 @@
   <title>自選股即時追蹤 Watchlist</title>
   <style>
     body{margin:0;font-family:'Segoe UI',Roboto,'Noto Sans',sans-serif;background:#181c24;color:#e5ecff;min-height:100vh;}
+  /* sidebar and pagination styles */
+  /* slim sticky sidebar placed to the right of the stocks table */
+  #stocks-page-sidebar{width:64px;padding-left:12px;display:flex;flex-direction:column;align-items:center;position:relative}
+  .stocks-area table{width:calc(100% - 84px)}
+  /* circular compact page buttons */
+  .page-btn{padding:6px 8px;border-radius:999px;background:#0f2230;color:#fff;border:1px solid rgba(100,120,150,0.12);cursor:pointer;min-width:36px;min-height:36px;display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:0.95rem;box-shadow:0 4px 12px rgba(0,0,0,0.25);transition:transform .12s,box-shadow .12s}
+    .page-btn:hover{background:#163044;transform:translateY(-2px)}
+    .page-btn.active{background:#2b6cb0;border-color:#1f6fbf;box-shadow:0 6px 18px rgba(43,108,176,0.18)}
+    #stocks-page-sidebar .page-btn{width:40px;height:40px;text-align:center;border-radius:50%}
+  /* pagination wrapper under stocks table */
+  .pagination-wrapper{box-sizing:border-box;padding:6px 8px;margin-top:10px;display:flex;justify-content:flex-start;gap:8px}
+  .page-control-btn{padding:6px 10px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344;cursor:pointer;transition:transform .12s ease,background .12s ease}
+  .page-control-btn:hover{background:#163044;transform:translateY(-2px)}
+  .page-control-btn:active{transform:scale(.98)}
+  .page-control-btn:disabled{opacity:0.5;cursor:not-allowed;background:#1b232e}
+  /* small prev/next in sidebar */
+  .small-nav-btn{padding:6px 8px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344;cursor:pointer;transition:transform .12s}
+  .small-nav-btn:hover{background:#163044;transform:translateY(-2px)}
+  .small-nav-btn:disabled{opacity:0.5;cursor:not-allowed}
+    @media (max-width: 900px){
+      /* hide sidebar on small screens */
+      #stocks-page-sidebar{display:none}
+      .stocks-area table{width:100%}
+    }
+  /* subtle animation for trend sparkline hover */
+  .trend-cell svg polyline{transition:stroke-width .12s ease, opacity .12s}
+  .trend-cell:hover svg polyline{stroke-width:2.6}
+  /* modal fullscreen and drag styles */
+  #trend-modal-card.fullscreen{width:96% !important;height:92% !important;max-width:96%;max-height:92%;display:flex;flex-direction:column}
+  #trend-modal-card.fullscreen #trend-content{flex:1;display:flex;align-items:center;justify-content:center}
+  #trend-modal-card #trend-header{cursor:grab;padding-bottom:8px}
+  #trend-modal-card.dragging #trend-header{cursor:grabbing}
     .container{max-width:1100px;margin:40px auto;padding:24px 18px;background:#23293a;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.25);}
     h1{font-size:1.7rem;font-weight:600;margin:0 0 18px;}
     .watchlist-form{display:flex;gap:12px;margin-bottom:24px;}
@@ -34,11 +66,14 @@
       <input id="watchlist-search" placeholder="搜尋 ticker 或名稱" style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid #344; background:#0e1622;color:#fff;" />
       <select id="page-size" style="padding:8px;border-radius:8px;background:#0e1622;color:#fff;border:1px solid #344;">
         <option value="10">10 / page</option>
-        <option value="25" selected>25 / page</option>
+        <option value="15" selected>15 / page</option>
+        <option value="25">25 / page</option>
         <option value="50">50 / page</option>
       </select>
     </div>
-    <table id="watchlist-table">
+    <h2 style="margin-top:18px">Stocks</h2>
+    <div class="stocks-area" style="display:flex;gap:12px;align-items:flex-start;">
+      <table id="watchlist-table-stocks">
       <thead>
         <tr>
           <th>Ticker</th>
@@ -50,25 +85,40 @@
           <th>1M</th>
           <th>3M</th>
           <th>6M</th>
-          <th>12M</th>
           <th>Trend</th>
         </tr>
       </thead>
-      <tbody id="watchlist-tbody">
+      <tbody id="watchlist-tbody-stocks"></tbody>
+      </table>
+      <!-- restored sidebar for pagination -->
+      <div id="stocks-page-sidebar"></div>
+    </div>
+
+    <h2 style="margin-top:18px">ETFs / Indexes</h2>
+    <table id="watchlist-table-etfs">
+      <thead>
         <tr>
-          <td>AAPL</td>
-          <td>Apple Inc</td>
-          <td>170.12</td>
-          <td class="positive">+1.23%</td>
-          <td>2.8T</td>
-          <td>+1.23%</td>
+          <th>Ticker</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Change ($)</th>
+          <th>% Change</th>
+          <th>Market Cap</th>
+          <th>1M</th>
+          <th>3M</th>
+          <th>6M</th>
+          <th>Trend</th>
         </tr>
-      </tbody>
+      </thead>
+      <tbody id="watchlist-tbody-etfs"></tbody>
     </table>
+
+    <h2 style="margin-top:18px">Sector Trends & Money Flow</h2>
+    <div id="sector-trends" style="display:flex; flex-wrap:wrap; gap:16px; margin-top:12px;"></div>
   </div>
   <script>
   const STORAGE_KEY = 'my_watchlist_tickers';
-  const tableBody = document.getElementById('watchlist-tbody');
+  // tableBody removed: we now render two separate tables (stocks & etfs)
   const form = document.getElementById('watchlist-form');
   const input = document.getElementById('ticker-input');
   const exportBtn = document.getElementById('export-config');
@@ -84,6 +134,8 @@
       localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
     }
 
+    function escapeHtml(str){ return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
     // The front-end will read the server-generated JSON at data/watchlist.json
     async function fetchServerWatchlist() {
       try {
@@ -95,10 +147,15 @@
       }
     }
 
-    // Pagination / search state
-    let currentPage = 1;
-    let pageSize = parseInt(document.getElementById('page-size').value, 10) || 25;
-    let lastRows = [];
+  // Pagination / search state (separate for stocks and etfs)
+  let currentPageStocks = { value: 1 };
+  let currentPageETFs = { value: 1 };
+  let pageSize = parseInt(document.getElementById('page-size').value, 10) || 25;
+  let lastRowsStocks = [];
+  let lastRowsETFs = [];
+
+  // ETF / Index detection set
+  const ETF_SET = new Set(['SPY','QQQ','IWM','VIX','XLY','XLP','XLE','XLF','XLV','XLI','XLB','XLK','XLU','XLC']);
 
     function sparklineSVG(values, w = 120, h = 28){
       if(!values || values.length === 0) return '';
@@ -112,46 +169,77 @@
       return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><polyline fill="none" stroke="${color}" stroke-width="1.6" points="${points}"/></svg>`;
     }
 
-    function renderTable(rows) {
-      // apply search
-      const q = document.getElementById('watchlist-search').value.trim().toUpperCase();
-      const filtered = rows.filter(r => {
-        if(!q) return true;
-        return (r.symbol || '').toString().toUpperCase().includes(q) || (r.shortName || '').toString().toUpperCase().includes(q);
-      });
-      lastRows = filtered;
-      // pagination
-      pageSize = parseInt(document.getElementById('page-size').value, 10) || 25;
-      const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
-      if(currentPage > totalPages) currentPage = totalPages;
-      const start = (currentPage - 1) * pageSize;
-      const pageRows = filtered.slice(start, start + pageSize);
+    function renderSectorTrends(etfs) {
+      const container = document.getElementById('sector-trends');
+      container.innerHTML = '';
+      etfs.forEach(etf => {
+        const card = document.createElement('div');
+        card.style.background = '#23293a';
+        card.style.padding = '12px';
+        card.style.borderRadius = '8px';
+        card.style.width = '200px';
+        card.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
 
-      tableBody.innerHTML = '';
+        const symbol = etf.symbol;
+        const name = etf.shortName || symbol;
+        const change = etf.regularMarketChangePercent || 0;
+        const strength = change > 0 ? 'Strengthening' : change < 0 ? 'Weakening' : 'Neutral';
+        const color = change > 0 ? '#4fe583' : change < 0 ? '#ff6b81' : '#8fa1c9';
+
+        // Calculate money flow: average volume or recent volume change
+        const volumes = etf.volumes || [];
+        const recentVol = volumes.slice(-5); // last 5 days
+        const avgVol = recentVol.length ? recentVol.reduce((a,b)=>a+b,0)/recentVol.length : 0;
+        const flow = avgVol > 1000000 ? 'High Flow' : avgVol > 500000 ? 'Medium Flow' : 'Low Flow';
+
+        card.innerHTML = `
+          <h4 style="margin:0 0 8px; color:#e5ecff;">${symbol} - ${name}</h4>
+          <p style="margin:4px 0; color:${color};">Trend: ${strength}</p>
+          <p style="margin:4px 0; color:#8fa1c9;">Money Flow: ${flow}</p>
+          <small style="color:#8fa1c9;">Avg Vol: ${Math.round(avgVol/1000)}K</small>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+  function renderTableGeneric(rows, tbodyId, currentPageRef){
+  try {
+    if(!Array.isArray(rows)) rows = [];
+    // remove any leftover global pagination-controls from previous versions
+    const oldPg = document.getElementById('pagination-controls'); if(oldPg) oldPg.remove();
+      // rows: already filtered list for that table
+      const tbody = document.getElementById(tbodyId);
+      if(!tbody) return { totalItems: 0, totalPages: 1 };
+  // sort by market cap (desc)
+  const sortedRows = Array.isArray(rows) ? rows.slice().sort((a,b)=> (b.marketCap||0) - (a.marketCap||0)) : [];
+  // pagination (only for stocks table). ETFs table shows full list without page buttons
+  pageSize = parseInt(document.getElementById('page-size').value, 10) || 25;
+  const totalPages = Math.max(1, Math.ceil(sortedRows.length / pageSize));
+  if(currentPageRef && typeof currentPageRef.value === 'number' && currentPageRef.value > totalPages) currentPageRef.value = totalPages;
+  const isETFTable = String(tbodyId).toLowerCase().includes('etf');
+  const pageRows = isETFTable ? sortedRows : sortedRows.slice(((currentPageRef.value-1)||0) * pageSize, ((currentPageRef.value-1)||0) * pageSize + pageSize);
+
+      tbody.innerHTML = '';
       pageRows.forEach(row => {
         const tr = document.createElement('tr');
-  const changeClass = (row.regularMarketChangePercent > 0) ? 'positive' : ((row.regularMarketChangePercent < 0) ? 'negative' : 'muted');
-  const price = row.regularMarketPrice !== null && row.regularMarketPrice !== undefined ? Number(row.regularMarketPrice).toFixed(1) : '-';
-  const priceChangeVal = row.priceChange !== null && row.priceChange !== undefined ? row.priceChange : null;
-  const priceChangeText = priceChangeVal !== null ? (priceChangeVal > 0 ? '+' : '') + priceChangeVal.toFixed(1) : '-';
-  const changeText = row.regularMarketChangePercent !== null && row.regularMarketChangePercent !== undefined ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-';
-  const mc = row.marketCap ? formatMarketCap(row.marketCap) : '-';
-  const oneM = row.oneMonthChange !== undefined && row.oneMonthChange !== null ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-';
-  const threeM = row.threeMonthChange !== undefined && row.threeMonthChange !== null ? (row.threeMonthChange > 0 ? '+' : '') + (row.threeMonthChange * 100).toFixed(2) + '%' : '-';
-  const sixM = row.sixMonthChange !== undefined && row.sixMonthChange !== null ? (row.sixMonthChange > 0 ? '+' : '') + (row.sixMonthChange * 100).toFixed(2) + '%' : '-';
-  const twelveM = row.twelveMonthChange !== undefined && row.twelveMonthChange !== null ? (row.twelveMonthChange > 0 ? '+' : '') + (row.twelveMonthChange * 100).toFixed(2) + '%' : '-';
-        // sparkline cell
+        const changeClass = (row.regularMarketChangePercent > 0) ? 'positive' : ((row.regularMarketChangePercent < 0) ? 'negative' : 'muted');
+        const price = row.regularMarketPrice !== null && row.regularMarketPrice !== undefined ? Number(row.regularMarketPrice).toFixed(1) : '-';
+        const priceChangeVal = row.priceChange !== null && row.priceChange !== undefined ? row.priceChange : null;
+        const priceChangeText = priceChangeVal !== null ? (priceChangeVal > 0 ? '+' : '') + priceChangeVal.toFixed(1) : '-';
+        const changeText = row.regularMarketChangePercent !== null && row.regularMarketChangePercent !== undefined ? (row.regularMarketChangePercent > 0 ? '+' : '') + row.regularMarketChangePercent.toFixed(2) + '%' : '-';
+        const mc = row.marketCap ? formatMarketCap(row.marketCap) : '-';
+        const oneM = row.oneMonthChange !== undefined && row.oneMonthChange !== null ? (row.oneMonthChange > 0 ? '+' : '') + (row.oneMonthChange * 100).toFixed(2) + '%' : '-';
+        const threeM = row.threeMonthChange !== undefined && row.threeMonthChange !== null ? (row.threeMonthChange > 0 ? '+' : '') + (row.threeMonthChange * 100).toFixed(2) + '%' : '-';
+        const sixM = row.sixMonthChange !== undefined && row.sixMonthChange !== null ? (row.sixMonthChange > 0 ? '+' : '') + (row.sixMonthChange * 100).toFixed(2) + '%' : '-';
+        // sparkline
         let spark = '';
         if(Array.isArray(row.history) && row.history.length > 1){
           spark = sparklineSVG(row.history, 140, 28);
         } else if(row.oneMonthChange !== undefined && row.oneMonthChange !== null){
-          // mini bar proportional to 1M change
           const width = Math.min(120, Math.abs(row.oneMonthChange) * 600);
           const color = row.oneMonthChange >= 0 ? '#4fe583' : '#ff6b81';
           spark = `<div style="width:120px;height:24px;background:#0b1220;border-radius:4px;padding:3px;box-sizing:border-box;"><div style="width:${width}px;height:100%;background:${color};border-radius:3px;"></div></div>`;
-        } else {
-          spark = '-';
-        }
+        } else { spark = '-'; }
 
         tr.innerHTML = `
           <td style="white-space:nowrap">${row.symbol}</td>
@@ -163,70 +251,48 @@
           <td>${oneM}</td>
           <td>${threeM}</td>
           <td>${sixM}</td>
-          <td>${twelveM}</td>
-          <td style="width:150px">${spark}</td>
+          <td style="width:150px"><div class="trend-cell" data-symbol="${escapeHtml(row.symbol || '')}" data-history='${escapeHtml(JSON.stringify(row.history || []))}' data-historydates='${escapeHtml(JSON.stringify(row.historyDates || []))}'>${spark}</div></td>
         `;
-        tableBody.appendChild(tr);
+        tbody.appendChild(tr);
+        // attach click handler for trend expansion
+        try{
+          const trendEl = tr.querySelector('.trend-cell');
+          if(trendEl){
+            trendEl.style.cursor = 'pointer';
+            trendEl.addEventListener('click', (e)=>{
+              try{ const history = JSON.parse(trendEl.getAttribute('data-history')||'[]'); const dates = JSON.parse(trendEl.getAttribute('data-historydates')||'[]'); showTrendModal({ symbol: trendEl.getAttribute('data-symbol'), history, historyDates: dates, shortName: row.shortName, regularMarketPrice: row.regularMarketPrice }); } catch(err){ console.error('trend click parse', err); }
+            });
+          }
+        }catch(e){/* ignore */}
       });
 
-      renderPaginationControls(filtered.length, totalPages);
-    }
-
-    function renderPaginationControls(totalItems, totalPages){
-      const existing = document.getElementById('pagination-controls');
-      if(existing) existing.remove();
-      const wrapper = document.createElement('div');
-      wrapper.id = 'pagination-controls';
-      wrapper.style.display = 'flex';
-      wrapper.style.justifyContent = 'space-between';
-      wrapper.style.alignItems = 'center';
-      wrapper.style.marginTop = '12px';
-
-      // summary
-      const shown = Math.min(pageSize, Math.max(0, totalItems - (currentPage-1)*pageSize));
-      const left = document.createElement('div');
-      left.style.color = '#9fb0d9';
-      left.textContent = `顯示 ${shown} / ${totalItems} 筆`;
-
-      // numbered pagination (show window of pages)
-      const right = document.createElement('div');
-      right.style.display = 'flex'; right.style.gap = '6px'; right.style.alignItems = 'center';
-
-      const makeBtn = (text, disabled, cls) => {
-        const b = document.createElement('button');
-        b.textContent = text;
-        b.disabled = !!disabled;
-        b.style.padding = '6px 10px'; b.style.borderRadius = '6px'; b.style.background = disabled ? '#2a2f38' : '#0e1622'; b.style.color = '#fff'; b.style.border = '1px solid #344';
-        if(cls) b.className = cls;
-        return b;
-      };
-
-      // prev
-      const prev = makeBtn('Prev', currentPage === 1);
-      prev.addEventListener('click', ()=>{ if(currentPage>1){ currentPage--; renderTable(lastRows); } });
-      right.appendChild(prev);
-
-      // page window
-      const maxButtons = 7;
-      let start = Math.max(1, currentPage - Math.floor(maxButtons/2));
-      let end = start + maxButtons - 1;
-      if(end > totalPages){ end = totalPages; start = Math.max(1, end - maxButtons + 1); }
-      for(let p = start; p <= end; p++){
-        const btn = makeBtn(p, false, p===currentPage ? 'active-page' : null);
-        if(p===currentPage){ btn.style.background = '#2b6cb0'; }
-        btn.addEventListener('click', ()=>{ if(currentPage===p) return; currentPage = p; renderTable(lastRows); });
-        right.appendChild(btn);
+      // render pagination specifically for this tbody (skip for ETF table)
+      if(!isETFTable){
+        const sidebar = document.getElementById('stocks-page-sidebar');
+        if(sidebar){
+          sidebar.innerHTML = ''; // clear existing
+          // add prev/next small buttons
+          const prevBtn = document.createElement('button'); prevBtn.className = 'small-nav-btn'; prevBtn.textContent = '↑'; prevBtn.disabled = currentPageRef.value <= 1; prevBtn.addEventListener('click', ()=>{ if(currentPageRef.value > 1){ currentPageRef.value--; renderTableGeneric(sortedRows, tbodyId, currentPageRef); } }); sidebar.appendChild(prevBtn);
+          // add page number buttons
+          const maxButtons = 5; // fewer for sidebar
+          let pageStart = Math.max(1, currentPageRef.value - Math.floor(maxButtons/2)); let pageEnd = pageStart + maxButtons -1; if(pageEnd > totalPages){ pageEnd = totalPages; pageStart = Math.max(1, pageEnd - maxButtons +1); }
+          for(let p=pageStart; p<=pageEnd; p++){
+            const btn = document.createElement('button'); btn.className = 'page-btn'; if(p === currentPageRef.value) btn.classList.add('active'); btn.textContent = p; btn.addEventListener('click', ()=>{ if(currentPageRef.value !== p){ currentPageRef.value = p; renderTableGeneric(sortedRows, tbodyId, currentPageRef); } }); sidebar.appendChild(btn);
+          }
+          const nextBtn = document.createElement('button'); nextBtn.className = 'small-nav-btn'; nextBtn.textContent = '↓'; nextBtn.disabled = currentPageRef.value >= totalPages; nextBtn.addEventListener('click', ()=>{ if(currentPageRef.value < totalPages){ currentPageRef.value++; renderTableGeneric(sortedRows, tbodyId, currentPageRef); } }); sidebar.appendChild(nextBtn);
+        }
       }
 
-      // next
-      const next = makeBtn('Next', currentPage === totalPages);
-      next.addEventListener('click', ()=>{ if(currentPage<totalPages){ currentPage++; renderTable(lastRows); } });
-      right.appendChild(next);
-
-      wrapper.appendChild(left);
-      wrapper.appendChild(right);
-      document.querySelector('.container').appendChild(wrapper);
+      return { totalItems: rows.length, totalPages };
+      } catch (err) {
+        console.error('renderTableGeneric error for', tbodyId, err);
+        const tbody = document.getElementById(tbodyId);
+        if(tbody){ tbody.innerHTML = `<tr><td colspan="10" style="color:#ffb4b4">渲染錯誤：${escapeHtml(String(err))}</td></tr>`; }
+        return { totalItems: 0, totalPages: 1 };
+      }
     }
+
+    // per-table pagination handled inside renderTableGeneric
 
     function formatMarketCap(val) {
       if (val >= 1e12) return (val/1e12).toFixed(2) + 'T';
@@ -235,32 +301,282 @@
       return val;
     }
 
-    async function updateTable() {
-      // Try server-generated data first
-      const serverRows = await fetchServerWatchlist();
-      const stored = getStoredTickers();
-      if ((!serverRows || serverRows.length === 0) && stored.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="11">尚無自選股，請輸入股票代號</td></tr>';
-        return;
-      }
+    // --- Trend modal ---
+    function createTrendModal(){
+      if(document.getElementById('trend-modal')) return;
+      const modal = document.createElement('div'); modal.id='trend-modal';
+      modal.style.position='fixed'; modal.style.left='0'; modal.style.top='0'; modal.style.right='0'; modal.style.bottom='0'; modal.style.background='rgba(0,0,0,0.6)'; modal.style.display='flex'; modal.style.alignItems='center'; modal.style.justifyContent='center'; modal.style.zIndex='9999';
+  modal.innerHTML = `<div id="trend-modal-card" style="width:760px;max-width:96%;background:#0f1520;padding:12px;border-radius:10px;color:#fff;box-shadow:0 8px 40px rgba(0,0,0,0.6);position:relative;display:block"><div id="trend-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="display:flex;gap:8px;align-items:center"><h3 id="trend-title" style="margin:0">Trend</h3><div id="trend-range" style="display:flex;gap:6px;margin-left:12px"><button class="range-btn" data-range="1M" style="padding:6px 8px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344;cursor:pointer">1M</button><button class="range-btn" data-range="3M" style="padding:6px 8px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344;cursor:pointer">3M</button><button class="range-btn" data-range="6M" style="padding:6px 8px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344;cursor:pointer">6M</button><button class="range-btn" data-range="ALL" style="padding:6px 8px;border-radius:6px;background:#0e1622;color:#fff;border:1px solid #344;cursor:pointer">All</button></div></div><div style="display:flex;gap:8px;align-items:center"><button id="trend-full" title="Fullscreen" style="background:#173047;color:#fff;border:none;padding:6px 8px;border-radius:6px;cursor:pointer">Fullscreen</button><button id="trend-close" style="background:#1f2a3a;color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer">Close</button></div></div><div id="trend-content" style="min-height:220px;display:flex;align-items:center;justify-content:center"></div></div>`;
+      document.body.appendChild(modal);
+      // tooltip for svg points
+      const tip = document.createElement('div'); tip.id = 'trend-tooltip'; tip.style.position='fixed'; tip.style.pointerEvents='none'; tip.style.padding='8px 10px'; tip.style.background='rgba(6,12,20,0.95)'; tip.style.color='#eaf6ff'; tip.style.border='1px solid rgba(100,140,200,0.12)'; tip.style.borderRadius='6px'; tip.style.fontSize='0.85rem'; tip.style.display='none'; tip.style.zIndex='10000'; document.body.appendChild(tip);
+      // enable fullscreen toggle, drag, and range button wiring
+      setTimeout(()=>{
+        const card = document.getElementById('trend-modal-card');
+        const fullBtn = document.getElementById('trend-full');
+        fullBtn.addEventListener('click', ()=>{ card.classList.toggle('fullscreen'); });
+        const header = document.getElementById('trend-header');
+        let dragging = false; let startY=0, startX=0;
+        header.addEventListener('mousedown', (ev)=>{ dragging=true; card.classList.add('dragging'); startY = ev.clientY; startX = ev.clientX; document.addEventListener('mousemove', onDrag); document.addEventListener('mouseup', endDrag); });
+        function onDrag(e){ if(!dragging) return; const dy = e.clientY - startY; const dx = e.clientX - startX; card.style.transform = `translate(${dx}px, ${dy}px)`; }
+        function endDrag(){ dragging=false; card.classList.remove('dragging'); card.style.transform = ''; document.removeEventListener('mousemove', onDrag); document.removeEventListener('mouseup', endDrag); }
+        // attach range buttons (they will call a render callback attached to modal card)
+        const rangeBtns = Array.from(document.querySelectorAll('#trend-range .range-btn'));
+        rangeBtns.forEach(b=> b.addEventListener('click', (ev)=>{ const r = b.getAttribute('data-range'); try{ const cb = card._renderRangeCallback; if(typeof cb === 'function'){ cb(r); rangeBtns.forEach(x=>x.style.background='#0e1622'); b.style.background='#234e6f'; } }catch(e){} }));
+      }, 40);
+      modal.addEventListener('click',(e)=>{ if(e.target===modal) modal.remove(); });
+      modal.querySelector('#trend-close').addEventListener('click', ()=> modal.remove());
+    }
 
-      const rowsMap = new Map();
-      if (Array.isArray(serverRows)) {
-        serverRows.forEach(r => rowsMap.set((r.symbol || '').toUpperCase(), r));
-      }
+  function showTrendModal(data){
+      try{
+        createTrendModal();
+        const modal = document.getElementById('trend-modal');
+        const title = modal.querySelector('#trend-title');
+        const content = modal.querySelector('#trend-content');
+        const tooltip = document.getElementById('trend-tooltip');
+        title.textContent = `${data.symbol} — ${data.shortName || ''}`;
+        const rows = Array.isArray(data.history) ? data.history.map((p,i)=>({ date: (data.historyDates && data.historyDates[i]) || '', price: p })) : [];
+        const volumes = Array.isArray(data.volumes) && data.volumes.length === data.history.length ? data.volumes.map(v=>Number(v)||0) : (Array.isArray(data.history) ? data.history.map((p,i)=>{ if(i===0) return 0; const prev = data.history[i-1]||p; return Math.round(Math.abs(p - prev) * 1000); }) : []);
 
-      // Merge stored tickers (from localStorage). If a stored ticker not present on server, show placeholder
-      const allTickers = new Set([...(serverRows || []).map(r => (r.symbol || '').toUpperCase()), ...stored.map(s => s.toUpperCase())]);
-      const finalRows = [];
-      allTickers.forEach(sym => {
-        if (rowsMap.has(sym)) {
-          finalRows.push(rowsMap.get(sym));
-        } else {
-          finalRows.push({ symbol: sym, shortName: '-', regularMarketPrice: null, regularMarketChangePercent: null, marketCap: null, oneMonthChange: null, notice: '等待伺服器資料（每 12 小時更新）' });
+  // history table removed: chart-only modal (trader-friendly view)
+
+        // right: chart container with range rendering support
+  const chartW_default = 760; const hPrice = 240; const hVol = 80; const totalH = hPrice + hVol + 24;
+
+        const ohlcFull = Array.isArray(data.ohlc) && data.ohlc.length ? data.ohlc.slice() : null;
+        const historyFull = ohlcFull ? ohlcFull.map(o=> Number(o.close)) : (Array.isArray(data.history) ? data.history.slice() : []);
+        const datesFull = (Array.isArray(data.historyDates) ? data.historyDates.slice() : (ohlcFull ? ohlcFull.map((o, i)=> (data.historyDates && data.historyDates[i]) ? data.historyDates[i] : null) : []));
+        const volumesFull = (Array.isArray(data.volumes) ? data.volumes.slice() : (historyFull.map((p,i)=>{ if(i===0) return 0; const prev = historyFull[i-1]||p; return Math.round(Math.abs(p - prev) * 1000); })));
+
+        const chartContainer = document.createElement('div'); chartContainer.style.width = chartW_default + 'px'; chartContainer.style.background = '#071021'; chartContainer.style.borderRadius='8px'; chartContainer.style.padding='10px';
+
+        function renderRange(rangeKey){
+          // determine number of days
+          const map = { '1M': 22, '3M': 66, '6M': 132, 'ALL': historyFull.length };
+          const n = map[rangeKey] || 22;
+          const start = Math.max(0, historyFull.length - n);
+          const history = historyFull.slice(start);
+          const dates = datesFull.slice(start);
+          const volumes = volumesFull.slice(start);
+          const ohlcRange = ohlcFull ? ohlcFull.slice(start) : null;
+
+          // compute min/max using OHLC if available
+          const min = (ohlcRange && ohlcRange.length) ? Math.min(...ohlcRange.map(o=>Number(o.low))) : (history.length ? Math.min(...history) : 0);
+          const max = (ohlcRange && ohlcRange.length) ? Math.max(...ohlcRange.map(o=>Number(o.high))) : (history.length ? Math.max(...history) : 0);
+          const range = (max - min) || 1;
+
+          // build chart
+          chartContainer.innerHTML = '';
+          const curDiv = document.createElement('div'); curDiv.style.fontSize='0.95rem'; curDiv.style.marginBottom='8px'; curDiv.textContent = `Current: ${data.regularMarketPrice!=null?Number(data.regularMarketPrice).toFixed(2):'-'}`;
+          chartContainer.appendChild(curDiv);
+
+          if(history.length > 1){
+            const svgNS = 'http://www.w3.org/2000/svg';
+            const chartW = Math.max(420, Math.min(1200, Math.floor(Math.max(320, history.length * 12))));
+            const svg = document.createElementNS(svgNS, 'svg'); svg.setAttribute('width', chartW); svg.setAttribute('height', totalH + 30); svg.setAttribute('viewBox', `0 0 ${chartW} ${totalH + 30}`); svg.style.background = 'transparent'; svg.style.borderRadius='6px';
+            const step = chartW / Math.max(1, history.length);
+
+            // gridlines + Y labels (moved outside chart area)
+            const chartLeftMargin = 60; // increased left margin for labels
+            for(let i=0;i<6;i++){  // 6 horizontal gridlines
+              const y = Math.round((i/5) * (hPrice)) + 6;
+              const line = document.createElementNS(svgNS,'line'); line.setAttribute('x1',chartLeftMargin); line.setAttribute('x2',chartW-10); line.setAttribute('y1',y); line.setAttribute('y2',y); line.setAttribute('stroke','rgba(255,255,255,0.04)'); line.setAttribute('stroke-width','1'); svg.appendChild(line);
+              const label = document.createElementNS(svgNS,'text'); const priceVal = (max - (i/5)*range).toFixed(2); label.setAttribute('x',chartLeftMargin - 8); label.setAttribute('y',y + 4); label.setAttribute('fill','rgba(200,220,255,0.8)'); label.setAttribute('font-size','12'); label.setAttribute('text-anchor','end'); label.textContent = priceVal; svg.appendChild(label);
+            }
+
+            // separator between price and volume
+            const sep = document.createElementNS(svgNS,'line'); sep.setAttribute('x1',chartLeftMargin); sep.setAttribute('x2',chartW-10); sep.setAttribute('y1',hPrice+6); sep.setAttribute('y2',hPrice+6); sep.setAttribute('stroke','rgba(255,255,255,0.1)'); sep.setAttribute('stroke-width','2'); svg.appendChild(sep);
+
+            // volume bars + right-side Y-axis for quantities (e.g., option quantities)
+            const volMax = Math.max(...volumes.map(v=>v||0)) || 1;
+            // draw volume axis ticks/labels on the right side of the chart within the volume area
+            try{
+              const volTicks = 3; // 0%, 50%, 100%
+              for(let t=0;t<volTicks;t++){
+                const pct = 1 - (t/(volTicks-1)); // 1.0 -> 0.0
+                const vy = Math.round(hPrice + 12 + (pct * hVol));
+                const val = Math.round(volMax * pct);
+                // small horizontal guide line (subtle)
+                const guide = document.createElementNS(svgNS,'line');
+                guide.setAttribute('x1',40);
+                guide.setAttribute('x2',chartW-14);
+                guide.setAttribute('y1', (vy).toFixed(2));
+                guide.setAttribute('y2', (vy).toFixed(2));
+                guide.setAttribute('stroke','rgba(255,255,255,0.03)');
+                guide.setAttribute('stroke-width','1');
+                svg.appendChild(guide);
+                // numeric label at right
+                const lab = document.createElementNS(svgNS,'text');
+                lab.setAttribute('x', chartW - 6);
+                lab.setAttribute('y', (vy + 4).toFixed(2));
+                lab.setAttribute('fill','rgba(200,220,255,0.55)');
+                lab.setAttribute('font-size','11');
+                lab.setAttribute('text-anchor','end');
+                lab.textContent = String(val);
+                svg.appendChild(lab);
+              }
+              // small 'Vol' label above the top tick
+              const volLabel = document.createElementNS(svgNS,'text');
+              volLabel.setAttribute('x', chartW - 6);
+              volLabel.setAttribute('y', (hPrice + 6).toFixed(2));
+              volLabel.setAttribute('fill','rgba(200,220,255,0.6)');
+              volLabel.setAttribute('font-size','11');
+              volLabel.setAttribute('text-anchor','end');
+              volLabel.textContent = 'Vol';
+              svg.appendChild(volLabel);
+            }catch(e){}
+
+            history.forEach((v,i)=>{
+              const vol = volumes[i]||0; const barH = Math.round((vol/volMax) * hVol); const x = i*step + step/2; const barW = Math.max(4, Math.floor(step*0.6)); const bx = x - barW/2; const by = hPrice + 12 + (hVol - barH);
+              const up = (i>0 ? history[i] >= history[i-1] : true);
+              const color = up ? 'rgba(74,206,129,0.22)' : 'rgba(200,200,220,0.12)';
+              const rect = document.createElementNS(svgNS,'rect'); rect.setAttribute('x', bx.toFixed(2)); rect.setAttribute('y', by.toFixed(2)); rect.setAttribute('width', barW); rect.setAttribute('height', barH); rect.setAttribute('fill',color); rect.setAttribute('data-index', i);
+              rect.addEventListener('mouseenter', (ev)=>{ const idx = Number(ev.target.getAttribute('data-index')); const html = `${escapeHtml(dates[idx]||'')}<br/>Price: ${history[idx]!=null?Number(history[idx]).toFixed(2):'-'}<br/>Vol: ${volumes[idx]||0}`; showTrendTooltip(ev.clientX+8, ev.clientY+8, html); });
+              rect.addEventListener('mouseleave', ()=> hideTrendTooltip());
+              svg.appendChild(rect);
+            });
+
+            // candlesticks (prefer OHLC if available)
+            for(let i=0;i<history.length;i++){
+              const ohlc = (ohlcRange && ohlcRange[i]) ? ohlcRange[i] : null;
+              const open = ohlc ? Number(ohlc.open) : (i>0? history[i-1] : history[i]);
+              const close = ohlc ? Number(ohlc.close) : history[i];
+              const high = ohlc ? Number(ohlc.high) : history[i];
+              const low = ohlc ? Number(ohlc.low) : history[i];
+              const x = i*step + step/2; const cw = Math.max(4, Math.floor(step*0.5)); const left = x - cw/2;
+              const top = hPrice - ((Math.max(open,close) - min)/range*hPrice);
+              const bottom = hPrice - ((Math.min(open,close) - min)/range*hPrice);
+              const wickTop = hPrice - ((high - min)/range*hPrice);
+              const wickBottom = hPrice - ((low - min)/range*hPrice);
+              const up = close >= open;
+              const fill = up ? '#4fe583' : '#ff6b81';
+              const rect = document.createElementNS(svgNS,'rect'); rect.setAttribute('x', left.toFixed(2)); rect.setAttribute('y', top.toFixed(2)); rect.setAttribute('width', cw); rect.setAttribute('height', Math.max(1, bottom - top)); rect.setAttribute('fill', fill); rect.setAttribute('stroke','rgba(0,0,0,0.25)'); rect.setAttribute('data-index', i);
+              const wick = document.createElementNS(svgNS,'line'); wick.setAttribute('x1', (x).toFixed(2)); wick.setAttribute('x2', (x).toFixed(2)); wick.setAttribute('y1', wickTop.toFixed(2)); wick.setAttribute('y2', wickBottom.toFixed(2)); wick.setAttribute('stroke', fill); wick.setAttribute('stroke-width',1);
+              rect.addEventListener('mouseenter', (ev)=>{ const idx = Number(ev.target.getAttribute('data-index')); const openTxt = ohlc ? Number(ohlcRange[idx].open).toFixed(2) : (idx>0?Number(history[idx-1]).toFixed(2):'-'); const html = `${escapeHtml(dates[idx]||'')}<br/>Open: ${openTxt}<br/>Close: ${Number(history[idx]).toFixed(2)}<br/>Vol: ${volumes[idx]||0}`; showTrendTooltip(ev.clientX+8, ev.clientY+8, html); });
+              rect.addEventListener('mouseleave', ()=> hideTrendTooltip());
+              wick.addEventListener('mouseenter', (ev)=>{ const idx = Number(ev.target.getAttribute('data-index')); const html = `${escapeHtml(dates[idx]||'')}<br/>Price: ${Number(history[idx]).toFixed(2)}<br/>Vol: ${volumes[idx]||0}`; showTrendTooltip(ev.clientX+8, ev.clientY+8, html); });
+              wick.addEventListener('mouseleave', ()=> hideTrendTooltip());
+              svg.appendChild(wick); svg.appendChild(rect);
+            }
+
+            // X-axis date labels: show up to ~6 labels, spaced evenly, moved below chart
+            try{
+              const maxLabels = 6; const stepLabels = Math.max(1, Math.ceil(history.length / maxLabels));
+              for(let i=0;i<history.length;i+=stepLabels){ 
+                const tx = i*step + step/2 + chartLeftMargin - 40; // adjust for margin
+                const t = (dates[i]||''); 
+                const txt = t ? (t.length>5? t.slice(5) : t) : ''; 
+                const lab = document.createElementNS(svgNS,'text'); 
+                lab.setAttribute('x', tx.toFixed(2)); 
+                lab.setAttribute('y', totalH + 15); // below chart
+                lab.setAttribute('fill','rgba(200,220,255,0.8)'); 
+                lab.setAttribute('font-size','11'); 
+                lab.setAttribute('text-anchor','middle'); 
+                lab.textContent = txt; 
+                svg.appendChild(lab);
+                // vertical gridline
+                const vline = document.createElementNS(svgNS,'line'); 
+                vline.setAttribute('x1', tx.toFixed(2)); 
+                vline.setAttribute('x2', tx.toFixed(2)); 
+                vline.setAttribute('y1', 6); 
+                vline.setAttribute('y2', totalH - 20); 
+                vline.setAttribute('stroke','rgba(255,255,255,0.03)'); 
+                vline.setAttribute('stroke-width','1'); 
+                svg.appendChild(vline);
+              }
+            }catch(e){}
+
+            // Add legend outside chart
+            const legend = document.createElementNS(svgNS,'g');
+            legend.setAttribute('transform', `translate(${chartW - 120}, 10)`);
+            // Green box for up
+            const greenRect = document.createElementNS(svgNS,'rect'); greenRect.setAttribute('x',0); greenRect.setAttribute('y',0); greenRect.setAttribute('width',12); greenRect.setAttribute('height',12); greenRect.setAttribute('fill','#4fe583'); legend.appendChild(greenRect);
+            const greenText = document.createElementNS(svgNS,'text'); greenText.setAttribute('x',18); greenText.setAttribute('y',10); greenText.setAttribute('fill','rgba(200,220,255,0.8)'); greenText.setAttribute('font-size','11'); greenText.textContent = 'Up'; legend.appendChild(greenText);
+            // Red box for down
+            const redRect = document.createElementNS(svgNS,'rect'); redRect.setAttribute('x',0); redRect.setAttribute('y',16); redRect.setAttribute('width',12); redRect.setAttribute('height',12); redRect.setAttribute('fill','#ff6b81'); legend.appendChild(redRect);
+            const redText = document.createElementNS(svgNS,'text'); redText.setAttribute('x',18); redText.setAttribute('y',26); redText.setAttribute('fill','rgba(200,220,255,0.8)'); redText.setAttribute('font-size','11'); redText.textContent = 'Down'; legend.appendChild(redText);
+            svg.appendChild(legend);
+
+            // current price label
+            const curLabel = document.createElement('div'); curLabel.style.position='absolute'; curLabel.style.right='28px'; curLabel.style.top='8px'; curLabel.style.background='rgba(0,0,0,0.25)'; curLabel.style.padding='6px 10px'; curLabel.style.borderRadius='6px'; curLabel.style.color='#dff5e0'; curLabel.style.fontWeight='700'; curLabel.textContent = `Current: ${data.regularMarketPrice!=null?Number(data.regularMarketPrice).toFixed(2):'-'}`;
+            const holder = document.createElement('div'); holder.style.position='relative'; holder.appendChild(svg); holder.appendChild(curLabel);
+            chartContainer.appendChild(holder);
+          }
         }
-      });
 
-      renderTable(finalRows);
+        // attach render callback to modal card so range buttons can call it
+        const cardEl = document.getElementById('trend-modal-card');
+        if(cardEl) cardEl._renderRangeCallback = renderRange;
+
+  // initial render default to 1M (if available)
+  renderRange('1M');
+  // set active style for range buttons
+  setTimeout(()=>{ const rb = document.querySelectorAll('#trend-range .range-btn'); rb.forEach(b=>b.style.background='#0e1622'); const one = document.querySelector('#trend-range .range-btn[data-range="1M"]'); if(one) one.style.background='#234e6f'; }, 30);
+
+  // assemble content: chart only
+  content.innerHTML = '';
+  content.appendChild(chartContainer);
+
+        // helper tooltip functions
+        function showTrendTooltip(x,y,html){ if(!tooltip) return; tooltip.innerHTML = html; tooltip.style.display='block'; tooltip.style.left = (x + 6) + 'px'; tooltip.style.top = (y + 6) + 'px'; }
+        function hideTrendTooltip(){ if(!tooltip) return; tooltip.style.display='none'; }
+
+      }catch(err){ console.error('showTrendModal',err); }
+    }
+
+    async function updateTable() {
+      try {
+        // Try server-generated data first
+        const serverRows = await fetchServerWatchlist();
+        const stored = getStoredTickers();
+        if ((!serverRows || serverRows.length === 0) && stored.length === 0) {
+          document.getElementById('watchlist-tbody-stocks').innerHTML = '<tr><td colspan="10">尚無自選股，請輸入股票代號</td></tr>';
+          document.getElementById('watchlist-tbody-etfs').innerHTML = '';
+          return;
+        }
+
+        const rowsMap = new Map();
+        if (Array.isArray(serverRows)) {
+          serverRows.forEach(r => rowsMap.set((r.symbol || '').toUpperCase(), r));
+        }
+
+        // Merge stored tickers (from localStorage). If a stored ticker not present on server, show placeholder
+        const allTickers = new Set([...(serverRows || []).map(r => (r.symbol || '').toUpperCase()), ...stored.map(s => s.toUpperCase())]);
+        const finalRows = [];
+        allTickers.forEach(sym => {
+          if (rowsMap.has(sym)) {
+            finalRows.push(rowsMap.get(sym));
+          } else {
+            finalRows.push({ symbol: sym, shortName: '-', regularMarketPrice: null, regularMarketChangePercent: null, marketCap: null, oneMonthChange: null, notice: '等待伺服器資料（每 12 小時更新）' });
+          }
+        });
+
+        // apply search filter
+        const q = (document.getElementById('watchlist-search') && document.getElementById('watchlist-search').value) ? document.getElementById('watchlist-search').value.trim().toUpperCase() : '';
+        let filtered = finalRows;
+        if (q) {
+          filtered = finalRows.filter(r => ((r.symbol || '').toUpperCase().includes(q) || (r.shortName || '').toUpperCase().includes(q)));
+        }
+
+        // split into stocks and etfs
+        const stocks = filtered.filter(r => !ETF_SET.has((r.symbol || '').toUpperCase()));
+        const etfs = filtered.filter(r => ETF_SET.has((r.symbol || '').toUpperCase()));
+
+        // render each table
+        renderTableGeneric(stocks, 'watchlist-tbody-stocks', currentPageStocks);
+        renderTableGeneric(etfs, 'watchlist-tbody-etfs', currentPageETFs);
+        renderSectorTrends(etfs);
+      } catch (err) {
+        console.error('updateTable error', err);
+        const container = document.querySelector('.container');
+        if(container){
+          const errDiv = document.getElementById('watchlist-error-msg') || document.createElement('div');
+          errDiv.id = 'watchlist-error-msg'; errDiv.style.color = '#ffb4b4'; errDiv.style.marginTop = '12px';
+          errDiv.textContent = '載入或渲染資料時發生錯誤，請檢查控制台（Console）以取得詳細資訊。';
+          container.prepend(errDiv);
+        }
+      }
     }
 
     form.addEventListener('submit', async function(e){
@@ -293,6 +609,10 @@
       a.remove();
       URL.revokeObjectURL(url);
     });
+
+  // instant search and page-size handlers
+  document.getElementById('watchlist-search').addEventListener('input', ()=>{ currentPageStocks.value = 1; currentPageETFs.value = 1; updateTable(); });
+  document.getElementById('page-size').addEventListener('change', ()=>{ currentPageStocks.value = 1; currentPageETFs.value = 1; updateTable(); });
 
     window.addEventListener('DOMContentLoaded', updateTable);
   </script>
