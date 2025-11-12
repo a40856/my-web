@@ -143,6 +143,7 @@
   .flow-call{fill:#2ecc71}
   .flow-put{fill:#ff6b81}
   .flow-label{font-size:0.75rem;fill:var(--muted)}
+  .flow-y-label{font-size:0.75rem;fill:var(--muted)}
   .flow-strike-label{margin:0;text-align:center;font-size:0.8rem;color:var(--muted)}
   .flow-chart-legend{display:flex;gap:12px;font-size:0.8rem;color:var(--muted)}
   .flow-chart-legend span{display:inline-flex;align-items:center;gap:6px}
@@ -1236,16 +1237,35 @@ const WATCHLIST_STRENGTH_DEFS = [
   svg.style.width = `${width}px`;
   svg.style.height = `${totalHeight}px`;
 
+      // Add Y-axis labels for quantities
+      const yAxisMargin = 40;
+      svg.setAttribute('viewBox', `0 0 ${width + yAxisMargin} ${totalHeight}`);
+      svg.style.width = `${width + yAxisMargin}px`;
+
+      // Y-axis labels
+      for(let i=0; i<4; i++){
+        const pct = i / 3;
+        const y = baseline - (pct * (baseline - 8));
+        const value = Math.round(maxValue * pct);
+        const label = document.createElementNS(ns, 'text');
+        label.setAttribute('x', yAxisMargin - 8);
+        label.setAttribute('y', y + 4);
+        label.setAttribute('text-anchor', 'end');
+        label.setAttribute('class', 'flow-y-label');
+        label.textContent = value.toLocaleString('en-US');
+        svg.appendChild(label);
+      }
+
       const baselineLine = document.createElementNS(ns, 'line');
-      baselineLine.setAttribute('x1', '0');
+      baselineLine.setAttribute('x1', yAxisMargin);
       baselineLine.setAttribute('y1', `${baseline}`);
-      baselineLine.setAttribute('x2', `${width}`);
+      baselineLine.setAttribute('x2', `${width + yAxisMargin}`);
       baselineLine.setAttribute('y2', `${baseline}`);
       baselineLine.setAttribute('class', 'flow-baseline');
       svg.appendChild(baselineLine);
 
       data.forEach((point, index) => {
-        const x = FLOW_BAR_GAP + index * (FLOW_BAR_WIDTH + FLOW_BAR_GAP);
+        const x = yAxisMargin + FLOW_BAR_GAP + index * (FLOW_BAR_WIDTH + FLOW_BAR_GAP);
         const totalRange = baseline - 8;
         if(point.call > 0){
           const callHeight = Math.max(2, (point.call / maxValue) * totalRange);
