@@ -145,6 +145,11 @@
   .flow-label{font-size:0.75rem;fill:var(--muted)}
   .flow-y-label{font-size:0.75rem;fill:var(--muted)}
   .flow-strike-label{margin:0;text-align:center;font-size:0.8rem;color:var(--muted)}
+  .call-put-filter{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:10px 12px}
+  .call-put-filter select{background:#0b1220;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:6px 10px;border-radius:6px;min-width:120px}
+  .call-put-filter button{padding:6px 12px;border-radius:6px;border:none;color:#fff;font-weight:600;cursor:pointer;background:#4f9bff;transition:background 0.15s ease}
+  .call-put-filter button.secondary{background:#1f7bff}
+  .call-put-filter-status{flex:1;color:var(--muted);font-size:0.85rem}
   .flow-chart-legend{display:flex;gap:12px;font-size:0.8rem;color:var(--muted)}
   .flow-chart-legend span{display:inline-flex;align-items:center;gap:6px}
   .flow-legend-swatch{width:12px;height:12px;border-radius:3px;display:inline-block}
@@ -243,6 +248,19 @@
               <span><span class="flow-legend-swatch flow-legend-put"></span>Put Volume</span>
             </div>
             <div id="flow-grid" class="flow-grid"></div>
+            <div class="call-put-filter" id="call-put-filter">
+              <label for="call-put-underlying" style="font-size:0.85rem;color:#fff;margin-right:6px">Focus Underlying</label>
+              <select id="call-put-underlying">
+                <option value="SPY">SPY</option>
+                <option value="QQQ">QQQ</option>
+                <option value="IWM">IWM</option>
+                <option value="VIX">VIX</option>
+              </select>
+              <button id="call-put-call" type="button">Show Call Flow</button>
+              <button id="call-put-put" type="button" class="secondary">Show Put Flow</button>
+              <button id="call-put-clear" type="button" class="secondary">Clear Filter</button>
+              <span id="call-put-status" class="call-put-filter-status">選擇標的 + Call/Put 以篩選 OI/Most Active 表格。</span>
+            </div>
           </section>
 
           <section class="watchlist-strength" aria-label="Watchlist strength signals">
@@ -1381,6 +1399,68 @@ const WATCHLIST_STRENGTH_DEFS = [
       }
     }
 
+    function applyCallPutFilterToTables(side){
+      const select = document.getElementById('call-put-underlying');
+      if(!select) return;
+      const underlying = String(select.value || '').trim().toUpperCase();
+      if(!underlying) return;
+      updateCallPutStatus(`正在篩選 ${underlying} ${side === 'call' ? 'Call' : 'Put'}`);
+      ['active', 'oi'].forEach(sectionId => applyCallPutFilterToSection(sectionId, underlying, side));
+    }
+
+    function applyCallPutFilterToSection(sectionId, underlying, side){
+      const state = dataStates.get(sectionId);
+      const view = sections.get(sectionId);
+      if(!state || !view) return;
+      const underlyingIdx = findHeaderIndexByNames(state, ['Underlying', 'Underlying Symbol', 'Símbolo subyacente']);
+      const symbolIdx = findHeaderIndexByNames(state, ['Symbol', 'Símbolo', 'Contract Symbol']);
+      const nameIdx = findHeaderIndexByNames(state, ['Name', 'Nombre']);
+      state.callPutFilter = { underlying, side, underlyingIdx, symbolIdx, nameIdx };
+      state.page = 0;
+      updateSectionView(view, state);
+    }
+
+    function clearCallPutFilters(){
+      ['active', 'oi'].forEach(sectionId => {
+        const state = dataStates.get(sectionId);
+        const view = sections.get(sectionId);
+        if(!state || !view) return;
+        delete state.callPutFilter;
+        state.page = 0;
+        updateSectionView(view, state);
+      });
+      updateCallPutStatus('Call/Put filters 已清除。');
+    }
+
+    function updateCallPutStatus(text){
+      const statusEl = document.getElementById('call-put-status');
+      if(!statusEl) return;
+      statusEl.textContent = text;
+    }
+
+    function initCallPutControls(){
+      const callBtn = document.getElementById('call-put-call');
+      const putBtn = document.getElementById('call-put-put');
+      const clearBtn = document.getElementById('call-put-clear');
+      if(callBtn){
+        callBtn.addEventListener('click', () => {
+          applyCallPutFilterToTables('call');
+          updateCallPutStatus(`正在篩選 ${document.getElementById('call-put-underlying').value.toUpperCase()} Call`);
+        });
+      }
+      if(putBtn){
+        putBtn.addEventListener('click', () => {
+          applyCallPutFilterToTables('put');
+          updateCallPutStatus(`正在篩選 ${document.getElementById('call-put-underlying').value.toUpperCase()} Put`);
+        });
+      }
+      if(clearBtn){
+        clearBtn.addEventListener('click', () => {
+          clearCallPutFilters();
+        });
+      }
+    }
+
     function initStrengthGrid(){
       if(!strengthGridEl) return;
       strengthGridEl.innerHTML = '';
@@ -1828,6 +1908,26 @@ const WATCHLIST_STRENGTH_DEFS = [
         const term = normalizeKey(state.filterTerm);
         rows = rows.filter(row => normalizeKey(row[state.filterIndex]).includes(term));
       }
+
+      if(state.callPutFilter){
+        const { underlying, side, underlyingIdx, symbolIdx, nameIdx } = state.callPutFilter;
+        const normalizedUnderlying = underlying ? String(underlying).toUpperCase() : '';
+        if((normalizedUnderlying && underlyingIdx >= 0) || side){
+          rows = rows.filter(row => {
+            let matchesUnderlying = true;
+            if(normalizedUnderlying && underlyingIdx >= 0){
+              const raw = String(row[underlyingIdx] || '').trim().toUpperCase();
+              matchesUnderlying = raw.includes(normalizedUnderlying);
+            }
+            let matchesSide = true;
+            if(side && (symbolIdx >= 0 || nameIdx >= 0)){
+              const optionSide = detectOptionSide(row[symbolIdx], row[nameIdx]);
+              matchesSide = optionSide === side;
+            }
+            return matchesUnderlying && matchesSide;
+          });
+        }
+      }
       if(state.sortDirection && typeof state.sortableIndex === 'number' && state.sortableIndex >= 0){
         const sorted = [...rows].sort((a, b) => {
           const av = normalizeKey(a[state.sortableIndex]);
@@ -2247,6 +2347,7 @@ const WATCHLIST_STRENGTH_DEFS = [
 
     document.getElementById('refresh').addEventListener('click', () => { statusEl.textContent='重新載入…'; load(); });
     initFlowGrid();
+    initCallPutControls();
     initStrengthGrid();
     load();
   </script>
