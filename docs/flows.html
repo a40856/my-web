@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <title>MAG7 Flows · my-web</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    :root{
+      --bg:#040c18;
+      --surface:#09132a;
+      --panel-border:rgba(255,255,255,0.12);
+      --text:#f5f8ff;
+      --muted:rgba(245,248,255,0.65);
+      --accent:#4f9bff;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans TC','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+    .site-header{padding:24px 5vw;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .site-header h1{margin:0;font-size:1.35rem}
+    .site-header p{margin:4px 0 0;font-size:0.95rem;color:var(--muted)}
+    .header-actions{display:flex;gap:10px}
+    .header-actions button{background:transparent;border:1px solid var(--panel-border);color:var(--text);padding:8px 14px;border-radius:8px;font-size:0.9rem;cursor:pointer;transition:border-color 0.2s ease,color 0.2s ease}
+    .header-actions button:hover{border-color:var(--accent);color:var(--accent)}
+    main{padding:24px 5vw 48px}
+    .page-title{margin:0 0 12px;font-size:1.2rem}
+    .subtitle{margin:0;color:var(--muted);font-size:0.9rem}
+    .mag7-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:24px}
+    .mag-card{background:var(--surface);border:1px solid var(--panel-border);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;min-height:260px}
+    .mag-card-header{display:flex;align-items:center;justify-content:space-between;font-size:1rem;font-weight:600}
+    .mag-card-header span{font-size:0.85rem;color:var(--muted)}
+    .mag-card-bars{display:flex;flex-direction:column;gap:8px}
+    .mag-entry{display:flex;align-items:center;gap:10px}
+    .mag-entry-label{flex:1;font-size:0.85rem;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+    .mag-entry-label span{font-size:0.95rem;color:#fff}
+    .mag-entry-visual{flex:1;display:flex;gap:6px;height:80px;align-items:flex-end}
+    .mag-entry-bar{flex:1;border-radius:8px;position:relative;overflow:hidden}
+    .mag-entry-bar span{position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);font-size:0.7rem;color:#fff;text-shadow:0 0 4px rgba(0,0,0,0.5);pointer-events:none}
+    .mag-call{background:linear-gradient(180deg,#2ecc71,#0f8f4d)}
+    .mag-put{background:linear-gradient(0deg,#ff6b81,#a12644)}
+    .mag-card-meta{font-size:0.8rem;color:var(--muted);display:flex;flex-direction:column;gap:3px;margin-top:6px}
+    .mag-card-meta strong{color:#fff;font-size:0.85rem}
+    .mag-entry-meta{font-size:0.78rem;color:var(--muted);display:flex;flex-direction:column;gap:2px;margin-top:6px}
+    .mag-entry-meta strong{color:#fff;font-size:0.85rem}
+    .link-button{background:var(--accent);border:none;color:#fff;padding:8px 14px;border-radius:10px;font-weight:600;cursor:pointer;transition:opacity 0.2s ease}
+    .link-button:hover{opacity:0.85}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <h1>MAG7 Flows</h1>
+      <p>View recent call/put pressure per expiration for the MAG7 names using the latest Active option snapshot.</p>
+    </div>
+    <div class="header-actions">
+      <button id="back-home">回到首頁</button>
+      <button id="open-active">回到 Active 表格</button>
+    </div>
+  </header>
+  <main>
+    <p class="page-title">Call/Put Trend by Strike Date</p>
+    <p class="subtitle">Each card summarizes the top expirations for the MAG7 names. Bars are sized by call/put volumes from the most active snapshot.</p>
+    <div class="mag7-grid" id="mag7-grid"></div>
+  </main>
+  <script>
+    const MAG7_TICKERS = ['AAPL','MSFT','NVDA','TSLA','AMZN','GOOGL','META'];
+    const DATA_PATH = 'data/active.json';
+    const gridEl = document.getElementById('mag7-grid');
+    document.getElementById('back-home').addEventListener('click', () => window.location.href = 'index.html');
+    document.getElementById('open-active').addEventListener('click', () => window.location.href = 'index.html#source-active');
+
+    async function loadActiveSnapshot(){
+      try {
+        const res = await fetch(DATA_PATH, { cache: 'no-store' });
+        if(!res.ok) throw new Error('Fetch failed');
+        const data = await res.json();
+        return Array.isArray(data.rows) ? data.rows.slice(1) : [];
+      } catch (err) {
+        console.error(err);
+        return [];
+      }
+    }
+
+    function parseNumeric(value){
+      if(typeof value === 'number') return value;
+      if(value == null) return NaN;
+      const normalized = String(value).replace(/[%,$]/g, '').replace(/,/g, '').trim();
+      if(!normalized) return NaN;
+      const num = parseFloat(normalized);
+      return Number.isNaN(num) ? NaN : num;
+    }
+
+    function formatLargeNumber(value){
+      if(!Number.isFinite(value)) return '--';
+      const abs = Math.abs(value);
+      if(abs >= 1e12) return `${(value/1e12).toFixed(2)}T`;
+      if(abs >= 1e9) return `${(value/1e9).toFixed(2)}B`;
+      if(abs >= 1e6) return `${(value/1e6).toFixed(2)}M`;
+      if(abs >= 1e3) return `${(value/1e3).toFixed(1)}K`;
+      return value.toLocaleString('en-US');
+    }
+
+    function formatDateLabel(value){
+      if(!value) return '--';
+      const parsed = new Date(String(value));
+      if(Number.isNaN(parsed.getTime())) return String(value);
+      return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    function formatStrikeLabel(value){
+      if(!Number.isFinite(value)) return '--';
+      if(Math.abs(value) >= 1000) return value.toFixed(0);
+      return Number.isInteger(value) ? value.toFixed(0) : value.toFixed(2);
+    }
+
+    function detectOptionSide(symbolValue, nameValue){
+      const symbolText = String(symbolValue || '').trim().toUpperCase();
+      if(/C\d{3,}$/i.test(symbolText)) return 'call';
+      if(/P\d{3,}$/i.test(symbolText)) return 'put';
+      const nameText = String(nameValue || '').trim().toLowerCase();
+      if(nameText.includes('call')) return 'call';
+      if(nameText.includes('put')) return 'put';
+      return null;
+    }
+
+    function buildTimeline(rows, ticker){
+      const stats = new Map();
+      rows.forEach(row => {
+        const underlying = String(row[2] || '').trim().toUpperCase();
+        if(underlying !== ticker) return;
+        const symbol = row[0];
+        const name = row[1];
+        const strike = parseNumeric(row[3]);
+        const expiration = String(row[4] || '').trim();
+        const volume = parseNumeric(row[10]);
+        if(Number.isNaN(strike) || Number.isNaN(volume) || volume <= 0 || !expiration) return;
+        const side = detectOptionSide(symbol, name);
+        if(!side) return;
+        if(!stats.has(expiration)){
+          stats.set(expiration, { expiration, callVolume: 0, putVolume: 0, callCount: 0, putCount: 0, totalVolume: 0, topStrikes: new Map() });
+        }
+        const bucket = stats.get(expiration);
+        const strikeKey = strike.toFixed(2);
+        if(!bucket.topStrikes.has(strikeKey)){
+          bucket.topStrikes.set(strikeKey, { strike, callVolume: 0, putVolume: 0 });
+        }
+        bucket.totalVolume += volume;
+        if(side === 'call'){
+          bucket.callVolume += volume;
+          bucket.callCount += 1;
+          bucket.topStrikes.get(strikeKey).callVolume += volume;
+        } else {
+          bucket.putVolume += volume;
+          bucket.putCount += 1;
+          bucket.topStrikes.get(strikeKey).putVolume += volume;
+        }
+      });
+      return Array.from(stats.values()).sort((a,b) => new Date(a.expiration) - new Date(b.expiration));
+    }
+
+    function renderTickerCard(ticker, entries){
+      const card = document.createElement('article');
+      card.className = 'mag-card';
+      const totalCalls = entries.reduce((sum, e) => sum + e.callVolume, 0);
+      const totalPuts = entries.reduce((sum, e) => sum + e.putVolume, 0);
+      const header = document.createElement('div');
+      header.className = 'mag-card-header';
+      header.innerHTML = `<span>${ticker}</span><span>Calls ${formatLargeNumber(totalCalls)} · Puts ${formatLargeNumber(totalPuts)}</span>`;
+      card.appendChild(header);
+      const bars = document.createElement('div');
+      bars.className = 'mag-card-bars';
+      const maxVolume = Math.max(1, ...entries.map(e => e.totalVolume));
+      entries.slice(-4).forEach(entry => {
+        const row = document.createElement('div');
+        row.className = 'mag-entry';
+        const label = document.createElement('div');
+        label.className = 'mag-entry-label';
+        const totalVolume = entry.totalVolume;
+        const ratioPercent = totalVolume ? Math.round((entry.callVolume / totalVolume) * 100) : 0;
+        label.innerHTML = `<span>${formatDateLabel(entry.expiration)}</span><span>Call ratio ${ratioPercent}%</span>`;
+        row.appendChild(label);
+        const visual = document.createElement('div');
+        visual.className = 'mag-entry-visual';
+        const callBar = document.createElement('div');
+        callBar.className = 'mag-entry-bar mag-call';
+        callBar.style.height = `${Math.max(6, Math.min(100, (entry.callVolume / maxVolume) * 100))}%`;
+        callBar.innerHTML = `<span>${formatLargeNumber(entry.callVolume)}</span>`;
+        const putBar = document.createElement('div');
+        putBar.className = 'mag-entry-bar mag-put';
+        putBar.style.height = `${Math.max(6, Math.min(100, (entry.putVolume / maxVolume) * 100))}%`;
+        putBar.innerHTML = `<span>${formatLargeNumber(entry.putVolume)}</span>`;
+        visual.appendChild(callBar);
+        visual.appendChild(putBar);
+        row.appendChild(visual);
+        const meta = document.createElement('div');
+        meta.className = 'mag-entry-meta';
+        const ratioLabel = document.createElement('strong');
+        ratioLabel.textContent = totalVolume ? `Call ${ratioPercent}%` : 'Call 0%';
+        meta.appendChild(ratioLabel);
+        const counts = document.createElement('span');
+        counts.textContent = `Calls ${entry.callCount} · Puts ${entry.putCount}`;
+        meta.appendChild(counts);
+        const strikeList = Array.from(entry.topStrikes.values())
+          .map(strike => ({
+            ...strike,
+            total: strike.callVolume + strike.putVolume
+          }))
+          .sort((a,b) => b.total - a.total)
+          .slice(0, 2);
+        if(strikeList.length){
+          strikeList.forEach(strike => {
+            const strikeLabel = document.createElement('span');
+            const callText = formatLargeNumber(strike.callVolume);
+            const putText = formatLargeNumber(strike.putVolume);
+            strikeLabel.textContent = `${formatStrikeLabel(strike.strike)} · Call ${callText} · Put ${putText}`;
+            meta.appendChild(strikeLabel);
+          });
+        }
+        row.appendChild(meta);
+        bars.appendChild(row);
+      });
+      card.appendChild(bars);
+      const meta = document.createElement('div');
+      meta.className = 'mag-card-meta';
+      const title = document.createElement('strong');
+      title.textContent = 'Top strikes';
+      meta.appendChild(title);
+      const latestEntry = entries.length ? entries[entries.length - 1] : null;
+      if(latestEntry){
+        const label = document.createElement('span');
+        label.textContent = `Latest expiration ${formatDateLabel(latestEntry.expiration)}`;
+        meta.appendChild(label);
+      }
+      if(latestEntry && latestEntry.topStrikes.size){
+        const strikeDetails = Array.from(latestEntry.topStrikes.values())
+          .map(strike => ({
+            ...strike,
+            total: strike.callVolume + strike.putVolume
+          }))
+          .sort((a, b) => b.total - a.total)
+          .slice(0, 2);
+        if(strikeDetails.length){
+          strikeDetails.forEach(strike => {
+            const span = document.createElement('span');
+            const callText = formatLargeNumber(strike.callVolume) || '0';
+            const putText = formatLargeNumber(strike.putVolume) || '0';
+            span.textContent = `${formatStrikeLabel(strike.strike)} · Call ${callText} · Put ${putText}`;
+            meta.appendChild(span);
+          });
+        } else {
+          const empty = document.createElement('span');
+          empty.textContent = '無資料';
+          meta.appendChild(empty);
+        }
+      } else {
+        const empty = document.createElement('span');
+        empty.textContent = '無資料';
+        meta.appendChild(empty);
+      }
+      card.appendChild(meta);
+      return card;
+    }
+
+    async function renderMag7Flows(){
+      if(!gridEl) return;
+      gridEl.innerHTML = '<p style="color:var(--muted);">Loading…</p>';
+      const rows = await loadActiveSnapshot();
+      if(!rows.length){
+        gridEl.innerHTML = '<p style="color:var(--muted);">無法讀取 Active 資料</p>';
+        return;
+      }
+      gridEl.innerHTML = '';
+      MAG7_TICKERS.forEach(ticker => {
+        const timeline = buildTimeline(rows, ticker);
+        if(!timeline.length){
+          const card = document.createElement('article');
+          card.className = 'mag-card';
+          card.innerHTML = `<div class="mag-card-header"><span>${ticker}</span><span>暫無資料</span></div><p style="color:var(--muted);font-size:0.85rem;">目前資料中找不到 ${ticker} 的熱門合約。</p>`;
+          gridEl.appendChild(card);
+          return;
+        }
+        gridEl.appendChild(renderTickerCard(ticker, timeline));
+      });
+    }
+
+    renderMag7Flows();
+  </script>
+</body>
+</html>

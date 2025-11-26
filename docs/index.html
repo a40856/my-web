@@ -106,6 +106,11 @@
   .filter-multi{display:none;max-height:320px;overflow-y:auto;padding-right:4px}
   .filter-multi-actions{display:flex;gap:8px;justify-content:flex-end;margin-bottom:6px}
   .filter-options{display:grid;gap:6px}
+  .filter-quick-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:0.75rem;color:var(--muted);margin-bottom:8px}
+  .filter-quick-actions span{font-size:0.75rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted)}
+  .filter-quick-actions button{padding:4px 10px;font-size:0.75rem;border-radius:6px;border:1px solid rgba(255,255,255,0.18);background:transparent;color:var(--muted);cursor:pointer}
+  .filter-quick-actions button.active{border-color:#7b9bff;color:#fff;background:rgba(123,155,255,0.15)}
+  .filter-quick-actions button:hover{border-color:var(--accent);color:#fff}
   .filter-option{display:flex;align-items:center;gap:8px;padding:2px 0;color:var(--text);font-size:0.85rem}
   .filter-option input{margin:0}
   .filter-option-label{flex:1;min-width:0}
@@ -150,11 +155,41 @@
   .call-put-filter button{padding:6px 12px;border-radius:6px;border:none;color:#fff;font-weight:600;cursor:pointer;background:#4f9bff;transition:background 0.15s ease}
   .call-put-filter button.secondary{background:#1f7bff}
   .call-put-filter-status{flex:1;color:var(--muted);font-size:0.85rem}
+  .nvda-flow{margin-top:18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:16px}
+  .nvda-flow-header{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap}
+  .nvda-flow-header h4{margin:0;font-size:1rem;font-weight:600;color:#f5f8ff}
+  .nvda-flow-header p{margin:0;color:var(--muted);font-size:0.85rem;max-width:640px}
+  .detail-flow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;grid-auto-rows:minmax(320px,auto)}
+  .detail-flow-card{background:#0e182b;border:1px solid var(--card-border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:220px;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease}
+  .detail-flow-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,0.35)}
+  .detail-flow-card header{display:flex;align-items:center;justify-content:space-between;font-size:0.85rem;color:var(--muted)}
+  .detail-flow-card h5{margin:0;font-size:1rem;font-weight:600;color:#f5f5ff}
+  .detail-flow-card .detail-flow-chart{position:relative;min-height:160px}
+  .detail-flow-card .detail-flow-chart svg{width:100%;height:auto;max-width:100%}
+  .detail-flow-card .detail-flow-meta{font-size:0.78rem;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+  .detail-flow-card .detail-flow-meta strong{color:#fff;font-size:0.85rem}
+  .detail-flow-empty{color:var(--muted);text-align:center;font-size:0.85rem;padding:18px 0}
+  @media(max-width:992px){.detail-flow-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}}
+  .detail-flow-modal{position:fixed;inset:0;background:rgba(4,12,24,0.85);display:none;align-items:center;justify-content:center;padding:26px;z-index:50}
+  .detail-flow-modal.open{display:flex}
+  .detail-flow-modal-content{background:var(--panel);border:1px solid var(--panel-border);border-radius:22px;padding:28px;max-width:960px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 20px 48px rgba(0,0,0,0.35)}
+  .detail-flow-modal-close{position:absolute;top:16px;right:16px;background:transparent;border:none;color:var(--text);font-size:1.1rem;padding:6px 9px;border-radius:8px;cursor:pointer;transition:background 0.2s ease}
+  .detail-flow-modal-close:hover{background:rgba(255,255,255,0.08)}
+  .detail-flow-modal-chart{min-height:240px;margin-bottom:12px}
+  .detail-flow-modal-meta{display:flex;flex-direction:column;gap:4px;margin-bottom:12px;font-size:0.85rem;color:var(--muted)}
+  .detail-flow-modal-meta strong{color:#fff}
+  .detail-flow-modal-table{max-height:260px;overflow:auto;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:10px}
+  .detail-flow-modal-table table{width:100%;border-collapse:collapse;font-size:0.8rem}
+  .detail-flow-modal-table th,.detail-flow-modal-table td{padding:6px 8px;text-align:left;font-variant-numeric:tabular-nums;border-bottom:1px solid rgba(255,255,255,0.08)}
+  .detail-flow-modal-table th{color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.04em}
+  .detail-flow-modal-table tbody tr:last-child td{border-bottom:none}
   .flow-chart-legend{display:flex;gap:12px;font-size:0.8rem;color:var(--muted)}
   .flow-chart-legend span{display:inline-flex;align-items:center;gap:6px}
   .flow-legend-swatch{width:12px;height:12px;border-radius:3px;display:inline-block}
   .flow-legend-call{background:#2ecc71}
   .flow-legend-put{background:#ff6b81}
+  .jump-links{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+  .link-button.small{padding:6px 10px;font-size:0.8rem;border-radius:8px}
     .watchlist-strength{background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 26px;box-shadow:0 18px 32px rgba(0,0,0,0.35);display:flex;flex-direction:column;gap:16px}
     .watchlist-strength .section-heading{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px}
     .watchlist-strength .section-heading h3{margin:0;font-size:1.15rem;font-weight:600;color:#f1f6ff}
@@ -202,6 +237,10 @@
             <nav id="sidebar-nav">
               <ul id="nav-links"></ul>
             </nav>
+            <div class="jump-links">
+              <a class="link-button small" href="#flow-section">前往熱門 Flow 圖</a>
+              <a class="link-button small" href="#detail-flow-section">前往 Detail Flow</a>
+            </div>
           </div>
           <div class="top-bar-search">
             <label for="global-search">搜尋全表</label>
@@ -210,6 +249,7 @@
         </div>
         <div class="controls">
           <button class="primary" id="refresh">立即重新整理</button>
+          <button class="secondary" id="goto-flows">MAG7 流程圖</button>
           <span id="status">載入中…</span>
         </div>
         <p class="meta">資料來源：<strong>data</strong> 分支的 <code>testing</code> 目錄。系統會自動抓取最新檔案並顯示精選欄位，每頁 15 筆。</p>
@@ -238,7 +278,7 @@
         </section>
 
         <div class="page-body">
-          <section class="flow-section" aria-label="Most active option flow">
+          <section class="flow-section" aria-label="Most active option flow" id="flow-section">
             <div class="section-heading">
               <h3>SPY / QQQ Most Active Flow</h3>
               <p class="hint">整合熱門期權成交量，辨識 Call 與 Put 在不同履約價的熱度</p>
@@ -260,6 +300,27 @@
               <button id="call-put-put" type="button" class="secondary">Show Put Flow</button>
               <button id="call-put-clear" type="button" class="secondary">Clear Filter</button>
               <span id="call-put-status" class="call-put-filter-status">選擇標的 + Call/Put 以篩選 OI/Most Active 表格。</span>
+            </div>
+            <div class="nvda-flow" id="detail-flow-section">
+              <div class="nvda-flow-header">
+                <h4>Detail option flow analysis</h4>
+                <p>輸入標的（預設 NVDA）以查看每個到期日的選擇權成交結構，每張圖表只會顯示最活躍的履約價。</p>
+              </div>
+              <div class="call-put-filter" style="margin-bottom:12px;" aria-label="detail flow controls">
+                <label for="detail-flow-input" style="font-size:0.75rem;color:#fff;letter-spacing:0.05em;">輸入標的</label>
+                <input id="detail-flow-input" type="text" value="NVDA" placeholder="e.g., NVDA" style="background:#091324;border-radius:8px;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:6px 10px;max-width:160px;" />
+                <button id="detail-flow-refresh" type="button" class="secondary" style="font-size:0.75rem;padding:6px 10px;">更新圖表</button>
+              </div>
+              <div class="nvda-flow-entries detail-flow-grid" id="detail-flow-grid"></div>
+            </div>
+            <div id="detail-flow-modal" class="detail-flow-modal" aria-hidden="true">
+              <div class="detail-flow-modal-content" role="dialog" aria-modal="true">
+                <button class="detail-flow-modal-close" id="detail-flow-modal-close" aria-label="Close detail flow">×</button>
+                <h4 id="detail-flow-modal-title" style="margin-top:0;margin-bottom:12px;font-size:1.2rem;color:#fff"></h4>
+                <div class="detail-flow-modal-chart" id="detail-flow-modal-chart"></div>
+                <div class="detail-flow-modal-meta" id="detail-flow-modal-meta"></div>
+                <div class="detail-flow-modal-table" id="detail-flow-modal-table"></div>
+              </div>
             </div>
           </section>
 
@@ -325,6 +386,21 @@ const FLOW_BAR_GAP = 14;
 const FLOW_CHART_HEIGHT = 200;
 const MAX_FLOW_BARS = 18;
 const PAGE_SIZE = 15;
+const NVDA_UNDERLYING = 'NVDA';
+const nvdaFlowEntriesEl = document.getElementById('nvda-flow-entries');
+const detailFlowGridEl = document.getElementById('detail-flow-grid');
+const detailFlowInputEl = document.getElementById('detail-flow-input');
+const QUICK_EXCLUDE_SYMBOLS = ['SPY','QQQ','SPX','SPXW','IWM'];
+const DETAIL_FLOW_STRIKE_LIMIT = 28;
+const DETAIL_FLOW_MODAL_STRIKE_LIMIT = 60;
+const DETAIL_FLOW_MODAL_TABLE_LIMIT = 40;
+const detailFlowModalEl = document.getElementById('detail-flow-modal');
+const detailFlowModalTitleEl = document.getElementById('detail-flow-modal-title');
+const detailFlowModalChartEl = document.getElementById('detail-flow-modal-chart');
+const detailFlowModalMetaEl = document.getElementById('detail-flow-modal-meta');
+const detailFlowModalTableEl = document.getElementById('detail-flow-modal-table');
+const detailFlowModalCloseEl = document.getElementById('detail-flow-modal-close');
+let detailFlowTicker = NVDA_UNDERLYING;
 let historyHighlightTimer = null;
 let globalSearchTerm = globalSearchInput ? globalSearchInput.value.trim() : '';
 
@@ -573,6 +649,23 @@ const WATCHLIST_STRENGTH_DEFS = [
 
       multiWrap.appendChild(multiActions);
 
+      const quickActions = document.createElement('div');
+      quickActions.className = 'filter-quick-actions';
+      const quickLabel = document.createElement('span');
+      quickLabel.textContent = 'Exclude:';
+      quickActions.appendChild(quickLabel);
+
+      const quickButtons = [];
+      QUICK_EXCLUDE_SYMBOLS.forEach(symbol => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.excludeSymbol = symbol;
+        button.textContent = symbol;
+        quickActions.appendChild(button);
+        quickButtons.push(button);
+      });
+      multiWrap.appendChild(quickActions);
+
       const optionsEl = document.createElement('div');
       optionsEl.className = 'filter-options';
       multiWrap.appendChild(optionsEl);
@@ -614,7 +707,8 @@ const WATCHLIST_STRENGTH_DEFS = [
         activeIndex: null,
         activeType: null,
         open: false,
-        onClickAway: null
+        onClickAway: null,
+        quickButtons
       };
       record.stateId = source.id;
       const stateKey = source.id;
@@ -687,6 +781,17 @@ const WATCHLIST_STRENGTH_DEFS = [
         if(!state || pop.activeIndex === null || pop.activeType !== 'multi-select') return;
         deselectAllOptions(state, record, pop.activeIndex);
         renderMultiSelectOptions(pop, state, pop.activeIndex);
+      });
+
+      quickButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const symbol = button.dataset.excludeSymbol;
+          if(!symbol) return;
+          const state = dataStates.get(stateKey);
+          const pop = record.filterPopover;
+          if(!state || pop.activeIndex === null || pop.activeType !== 'multi-select') return;
+          toggleMultiSelectExclusion(state, record, pop.activeIndex, symbol);
+        });
       });
       sections.set(source.id, record);
 
@@ -786,6 +891,20 @@ const WATCHLIST_STRENGTH_DEFS = [
       if(!normalized) return NaN;
       const num = parseFloat(normalized);
       return Number.isNaN(num) ? NaN : num;
+    }
+
+    function formatDateLabel(value){
+      if(!value) return '--';
+      const parsed = new Date(String(value));
+      if(Number.isNaN(parsed.getTime())) return String(value);
+      return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    function formatDateLabelWithYear(value){
+      if(!value) return '--';
+      const parsed = new Date(String(value));
+      if(Number.isNaN(parsed.getTime())) return String(value);
+      return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
     function setTrendClass(td, num){
@@ -970,6 +1089,9 @@ const WATCHLIST_STRENGTH_DEFS = [
       }
       state.page = 0;
       updateSectionView(view, state);
+      if(view.filterPopover){
+        syncQuickExcludeButtons(view.filterPopover, state, index);
+      }
     }
 
     function selectAllOptions(state, view, index){
@@ -980,6 +1102,7 @@ const WATCHLIST_STRENGTH_DEFS = [
       updateSectionView(view, state);
       if(view.filterPopover){
         syncMultiOptionChecks(view.filterPopover, state, index);
+        syncQuickExcludeButtons(view.filterPopover, state, index);
       }
     }
 
@@ -994,7 +1117,35 @@ const WATCHLIST_STRENGTH_DEFS = [
       updateSectionView(view, state);
       if(view.filterPopover){
         syncMultiOptionChecks(view.filterPopover, state, index);
+        syncQuickExcludeButtons(view.filterPopover, state, index);
       }
+    }
+
+    function setMultiSelectExclusion(state, view, index, value, exclude){
+      const filterState = getFilterState(state, index);
+      if(!filterState || filterState.type !== 'multi-select') return;
+      const normalized = normalizeFilterOptionValue(value);
+      if(!normalized) return;
+      if(exclude){
+        filterState.excluded.add(normalized);
+      } else {
+        filterState.excluded.delete(normalized);
+      }
+      state.page = 0;
+      updateSectionView(view, state);
+      if(view.filterPopover){
+        syncMultiOptionChecks(view.filterPopover, state, index);
+        syncQuickExcludeButtons(view.filterPopover, state, index);
+      }
+    }
+
+    function toggleMultiSelectExclusion(state, view, index, value){
+      const filterState = getFilterState(state, index);
+      if(!filterState || filterState.type !== 'multi-select') return;
+      const normalized = normalizeFilterOptionValue(value);
+      if(!normalized) return;
+      const currentlyExcluded = filterState.excluded.has(normalized);
+      setMultiSelectExclusion(state, view, index, normalized, !currentlyExcluded);
     }
 
     function renderMultiSelectOptions(pop, state, index){
@@ -1034,6 +1185,7 @@ const WATCHLIST_STRENGTH_DEFS = [
         }
         container.appendChild(optionLabel);
       });
+      syncQuickExcludeButtons(pop, state, index);
     }
 
     function syncMultiOptionChecks(pop, state, index){
@@ -1043,6 +1195,18 @@ const WATCHLIST_STRENGTH_DEFS = [
       boxes.forEach(box => {
         const value = box.dataset.optionValue || '';
         box.checked = !filterState.excluded.has(value);
+      });
+    }
+
+    function syncQuickExcludeButtons(pop, state, index){
+      if(!pop || !pop.quickButtons) return;
+      const filterState = getFilterState(state, index);
+      pop.quickButtons.forEach(button => {
+        const symbol = button.dataset.excludeSymbol || '';
+        const normalized = normalizeFilterOptionValue(symbol);
+        const isActive = Boolean(filterState && filterState.excluded && filterState.excluded.has(normalized));
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
     }
 
@@ -1125,6 +1289,11 @@ const WATCHLIST_STRENGTH_DEFS = [
       } catch (err) {
         return String(value ?? '').trim().toLowerCase();
       }
+    }
+
+    function normalizeFilterOptionValue(value){
+      if(value == null) return '';
+      return String(value).trim();
     }
 
     function findHeaderIndexByNames(state, names){
@@ -1252,13 +1421,13 @@ const WATCHLIST_STRENGTH_DEFS = [
       svg.setAttribute('viewBox', `0 0 ${width} ${totalHeight}`);
       svg.setAttribute('aria-label', `${entry.ticker} call vs put volume`);
       svg.setAttribute('role', 'img');
-  svg.style.width = `${width}px`;
-  svg.style.height = `${totalHeight}px`;
+      svg.style.height = `${totalHeight}px`;
 
       // Add Y-axis labels for quantities
       const yAxisMargin = 40;
       svg.setAttribute('viewBox', `0 0 ${width + yAxisMargin} ${totalHeight}`);
-      svg.style.width = `${width + yAxisMargin}px`;
+      svg.style.width = '100%';
+      svg.style.maxWidth = `${width + yAxisMargin}px`;
 
       // Y-axis labels
       for(let i=0; i<4; i++){
@@ -1397,6 +1566,392 @@ const WATCHLIST_STRENGTH_DEFS = [
       if(!hasAnyData){
         setFlowCardsStatus('尚無符合資料');
       }
+      renderNvdaFlow(activeState);
+      renderDetailFlowCharts();
+    }
+
+    function renderNvdaFlow(state){
+      if(!nvdaFlowEntriesEl) return;
+      nvdaFlowEntriesEl.innerHTML = '';
+      if(!state || !state.rows || !state.rows.length){
+        nvdaFlowEntriesEl.innerHTML = '<p class="nvda-flow-empty">NVDA 資料尚未載入</p>';
+        return;
+      }
+      const rows = state.currentRows || computeRows(state);
+      if(!Array.isArray(rows) || rows.length === 0){
+        nvdaFlowEntriesEl.innerHTML = '<p class="nvda-flow-empty">NVDA 資料尚未載入</p>';
+        return;
+      }
+      const underlyingIdx = findHeaderIndexByNames(state, ['Underlying', 'Underlying Symbol', 'Símbolo subyacente']);
+      const symbolIdx = findHeaderIndexByNames(state, ['Symbol', 'Símbolo', 'Contract Symbol']);
+      const nameIdx = findHeaderIndexByNames(state, ['Name', 'Nombre']);
+      const strikeIdx = findHeaderIndexByNames(state, ['Strike', 'Precio de ejercicio']);
+      const expirationIdx = findHeaderIndexByNames(state, ['Expiration Date', 'Expiration']);
+      const volumeIdx = findHeaderIndexByNames(state, ['Volume', 'Volumen']);
+      if([underlyingIdx, symbolIdx, nameIdx, strikeIdx, expirationIdx, volumeIdx].some(idx => idx < 0)){
+        nvdaFlowEntriesEl.innerHTML = '<p class="nvda-flow-empty">缺少必要欄位，無法繪製 NVDA 走勢</p>';
+        return;
+      }
+      const timeline = new Map();
+      rows.forEach(row => {
+        const underlying = String(row[underlyingIdx] || '').trim().toUpperCase();
+        if(underlying !== NVDA_UNDERLYING) return;
+        const expiration = String(row[expirationIdx] || '').trim();
+        if(!expiration) return;
+        const volumeValue = parseNumeric(row[volumeIdx]);
+        if(Number.isNaN(volumeValue) || volumeValue <= 0) return;
+        const strikeValue = parseNumeric(row[strikeIdx]);
+        if(Number.isNaN(strikeValue)) return;
+        const side = detectOptionSide(row[symbolIdx], row[nameIdx]);
+        if(!side) return;
+        if(!timeline.has(expiration)){
+          timeline.set(expiration, { expiration, callVolume: 0, putVolume: 0, callCount: 0, putCount: 0, strikes: new Map() });
+        }
+        const bucket = timeline.get(expiration);
+        if(side === 'call'){
+          bucket.callVolume += volumeValue;
+          bucket.callCount += 1;
+        } else {
+          bucket.putVolume += volumeValue;
+          bucket.putCount += 1;
+        }
+        const strikeKey = strikeValue.toFixed(2);
+        if(!bucket.strikes.has(strikeKey)){
+          bucket.strikes.set(strikeKey, { strike: strikeValue, callVolume: 0, putVolume: 0 });
+        }
+        const strikeEntry = bucket.strikes.get(strikeKey);
+        if(side === 'call') strikeEntry.callVolume += volumeValue;
+        else strikeEntry.putVolume += volumeValue;
+      });
+      const entries = Array.from(timeline.values()).sort((a, b) => {
+        const da = new Date(a.expiration);
+        const db = new Date(b.expiration);
+        return da - db;
+      });
+      if(!entries.length){
+        nvdaFlowEntriesEl.innerHTML = '<p class="nvda-flow-empty">NVDA 尚無流程資料</p>';
+        return;
+      }
+      const maxTotalVolume = Math.max(1, ...entries.map(entry => entry.callVolume + entry.putVolume));
+      entries.forEach(entry => {
+        const totalVolume = entry.callVolume + entry.putVolume;
+        const callRatio = totalVolume ? entry.callVolume / totalVolume : 0;
+        const entryEl = document.createElement('article');
+        entryEl.className = 'nvda-flow-entry';
+        const labelRow = document.createElement('div');
+        labelRow.className = 'nvda-flow-labels';
+        const dateLabel = document.createElement('span');
+        dateLabel.textContent = formatDateLabel(entry.expiration);
+        const ratioLabel = document.createElement('span');
+        ratioLabel.textContent = totalVolume ? `Call ${Math.round(callRatio * 100)}%` : 'Call 0%';
+        labelRow.appendChild(dateLabel);
+        labelRow.appendChild(ratioLabel);
+        entryEl.appendChild(labelRow);
+        const bars = document.createElement('div');
+        bars.className = 'nvda-flow-bars';
+        const callBar = document.createElement('div');
+        callBar.className = 'nvda-flow-bar nvda-call-bar';
+        const callHeight = Math.max(6, (entry.callVolume / maxTotalVolume) * 100);
+        callBar.style.height = `${Math.min(callHeight, 100)}%`;
+        callBar.innerHTML = `<span>Call ${formatLargeNumber(entry.callVolume)}</span>`;
+        const putBar = document.createElement('div');
+        putBar.className = 'nvda-flow-bar nvda-put-bar';
+        const putHeight = Math.max(6, (entry.putVolume / maxTotalVolume) * 100);
+        putBar.style.height = `${Math.min(putHeight, 100)}%`;
+        putBar.innerHTML = `<span>Put ${formatLargeNumber(entry.putVolume)}</span>`;
+        bars.appendChild(callBar);
+        bars.appendChild(putBar);
+        entryEl.appendChild(bars);
+        const meta = document.createElement('div');
+        meta.className = 'nvda-flow-meta';
+        const ratioText = totalVolume ? `${(callRatio * 100).toFixed(0)}% Call` : 'Call Ratio 0%';
+        const counts = document.createElement('span');
+        counts.textContent = `Calls ${entry.callCount} · Puts ${entry.putCount}`;
+        const ratioMeta = document.createElement('strong');
+        ratioMeta.textContent = `${ratioText}`;
+        meta.appendChild(ratioMeta);
+        meta.appendChild(counts);
+        const strikeList = Array.from(entry.strikes.values())
+          .sort((a, b) => (b.callVolume + b.putVolume) - (a.callVolume + a.putVolume))
+          .slice(0, 2);
+        strikeList.forEach(strike => {
+          const text = document.createElement('span');
+          text.textContent = `${formatStrikeLabel(strike.strike)} · ${formatLargeNumber(strike.callVolume + strike.putVolume)}`;
+          meta.appendChild(text);
+        });
+        entryEl.appendChild(meta);
+        nvdaFlowEntriesEl.appendChild(entryEl);
+      });
+    }
+
+    function buildDetailFlowTimeline(state, ticker){
+      if(!state) return [];
+      const rows = state.currentRows || computeRows(state);
+      if(!Array.isArray(rows) || !rows.length) return [];
+      const underlyingIdx = findHeaderIndexByNames(state, ['Underlying', 'Underlying Symbol', 'Símbolo subyacente']);
+      const symbolIdx = findHeaderIndexByNames(state, ['Symbol', 'Símbolo', 'Contract Symbol']);
+      const nameIdx = findHeaderIndexByNames(state, ['Name', 'Nombre']);
+      const strikeIdx = findHeaderIndexByNames(state, ['Strike', 'Precio de ejercicio']);
+      const expirationIdx = findHeaderIndexByNames(state, ['Expiration Date', 'Expiration']);
+      const volumeIdx = findHeaderIndexByNames(state, ['Volume', 'Volumen']);
+      const poiIdx = findHeaderIndexByNames(state, ['Open Interest']);
+      const priceIdx = findHeaderIndexByNames(state, ['Price', 'Precio']);
+      if([underlyingIdx, symbolIdx, nameIdx, strikeIdx, expirationIdx, volumeIdx].some(idx => idx < 0)){
+        return [];
+      }
+      const normalizedTarget = ticker ? ticker.trim().toUpperCase() : '';
+      const timeline = new Map();
+      rows.forEach(row => {
+        let underlying = String(row[underlyingIdx] || '').trim().toUpperCase();
+        if(!underlying) return;
+        if(underlying === '^VIX') underlying = 'VIX';
+        if(normalizedTarget && underlying !== normalizedTarget) return;
+        const expiration = String(row[expirationIdx] || '').trim();
+        if(!expiration) return;
+        const volume = parseNumeric(row[volumeIdx]);
+        if(Number.isNaN(volume) || volume <= 0) return;
+        const strike = parseNumeric(row[strikeIdx]);
+        if(Number.isNaN(strike)) return;
+        const side = detectOptionSide(row[symbolIdx], row[nameIdx]);
+        if(!side) return;
+        if(!timeline.has(expiration)){
+          timeline.set(expiration, {
+            expiration,
+            callVolume: 0,
+            putVolume: 0,
+            callCount: 0,
+            putCount: 0,
+            totalVolume: 0,
+            strikes: new Map(),
+            rows: []
+          });
+        }
+        const bucket = timeline.get(expiration);
+        bucket.totalVolume += volume;
+        if(side === 'call'){
+          bucket.callVolume += volume;
+          bucket.callCount += 1;
+        } else {
+          bucket.putVolume += volume;
+          bucket.putCount += 1;
+        }
+        const strikeKey = strike.toFixed(2);
+        if(!bucket.strikes.has(strikeKey)){
+          bucket.strikes.set(strikeKey, { strike, callVolume: 0, putVolume: 0 });
+        }
+        const strikeEntry = bucket.strikes.get(strikeKey);
+        if(side === 'call') strikeEntry.callVolume += volume;
+        else strikeEntry.putVolume += volume;
+          bucket.rows.push({
+          symbol: String(row[symbolIdx] || '').trim(),
+          name: String(row[nameIdx] || '').trim(),
+          strike,
+          volume,
+          side,
+            oi: poiIdx >= 0 ? parseNumeric(row[poiIdx]) : null,
+            price: priceIdx >= 0 ? parseNumeric(row[priceIdx]) : null
+        });
+      });
+      return Array.from(timeline.values()).sort((a, b) => new Date(a.expiration) - new Date(b.expiration));
+    }
+
+    function renderDetailFlowCharts(){
+      if(!detailFlowGridEl) return;
+      detailFlowGridEl.innerHTML = '<p class="nvda-flow-empty">讀取中…</p>';
+      const state = dataStates.get('active');
+      if(!state){
+        detailFlowGridEl.innerHTML = '<p class="nvda-flow-empty">Active 資料尚未載入</p>';
+        return;
+      }
+      const timeline = buildDetailFlowTimeline(state, detailFlowTicker);
+      if(!timeline.length){
+        detailFlowGridEl.innerHTML = `<p class="nvda-flow-empty">尚無 ${detailFlowTicker} 的選擇權流程</p>`;
+        return;
+      }
+      detailFlowGridEl.innerHTML = '';
+      timeline.forEach(entry => {
+        const card = document.createElement('article');
+        card.className = 'detail-flow-card';
+        const header = document.createElement('header');
+        const title = document.createElement('h5');
+        title.textContent = formatDateLabelWithYear(entry.expiration);
+        const ratioLabel = document.createElement('span');
+        const ratioPercent = entry.totalVolume ? Math.round((entry.callVolume / entry.totalVolume) * 100) : 0;
+        ratioLabel.textContent = `Call ${ratioPercent}%`;
+        header.appendChild(title);
+        header.appendChild(ratioLabel);
+        card.appendChild(header);
+        const chartContainer = document.createElement('div');
+        chartContainer.className = 'detail-flow-chart';
+        card.appendChild(chartContainer);
+        const strikes = Array.from(entry.strikes.values());
+        if(!strikes.length){
+          chartContainer.innerHTML = '<p class="nvda-flow-empty">履約價資料不足</p>';
+        } else {
+          const sorted = strikes
+            .map(strike => ({ strike: strike.strike, call: strike.callVolume, put: strike.putVolume }))
+            .sort((a, b) => (b.call + b.put) - (a.call + a.put));
+          const limited = sorted.slice(0, DETAIL_FLOW_STRIKE_LIMIT).sort((a, b) => a.strike - b.strike);
+          renderFlowChart({ ticker: detailFlowTicker, chartEl: chartContainer }, limited);
+        }
+        const meta = document.createElement('div');
+        meta.className = 'detail-flow-meta';
+        const counts = document.createElement('strong');
+        counts.textContent = `Calls ${formatLargeNumber(entry.callVolume)} · Puts ${formatLargeNumber(entry.putVolume)}`;
+        const totals = document.createElement('span');
+        totals.textContent = `${entry.callCount} call trades · ${entry.putCount} put trades`;
+        meta.appendChild(counts);
+        meta.appendChild(totals);
+        const callLeader = strikes
+          .filter(strike => strike.call > 0)
+          .sort((a, b) => b.call - a.call)[0];
+        const putLeader = strikes
+          .filter(strike => strike.put > 0)
+          .sort((a, b) => b.put - a.put)[0];
+        if(callLeader){
+          const line = document.createElement('span');
+          line.textContent = `Top call strike ${formatStrikeLabel(callLeader.strike)} · ${formatLargeNumber(callLeader.call)} call vol`;
+          meta.appendChild(line);
+        }
+        if(putLeader){
+          const line = document.createElement('span');
+          line.textContent = `Top put strike ${formatStrikeLabel(putLeader.strike)} · ${formatLargeNumber(putLeader.put)} put vol`;
+          meta.appendChild(line);
+        }
+        const topStrikes = strikes
+          .map(strike => ({ strike: strike.strike, total: strike.call + strike.put, call: strike.call, put: strike.put }))
+          .sort((a, b) => b.total - a.total)
+          .slice(0, 2);
+        topStrikes.forEach(strike => {
+          const row = document.createElement('span');
+          row.textContent = `Combined ${formatStrikeLabel(strike.strike)} · Call ${formatLargeNumber(strike.call)} · Put ${formatLargeNumber(strike.put)}`;
+          meta.appendChild(row);
+        });
+        card.appendChild(meta);
+        card.addEventListener('click', () => openDetailFlowModal(entry));
+        detailFlowGridEl.appendChild(card);
+      });
+    }
+
+    function closeDetailFlowModal(){
+      if(!detailFlowModalEl) return;
+      detailFlowModalEl.classList.remove('open');
+      detailFlowModalEl.setAttribute('aria-hidden', 'true');
+    }
+
+    function openDetailFlowModal(entry){
+      if(!detailFlowModalEl || !entry) return;
+      detailFlowModalTitleEl.textContent = `${detailFlowTicker} · ${formatDateLabelWithYear(entry.expiration)}`;
+      detailFlowModalChartEl.innerHTML = '';
+      const strikes = Array.from(entry.strikes.values())
+        .map(strike => ({ strike: strike.strike, call: strike.callVolume, put: strike.putVolume }))
+        .sort((a, b) => (b.call + b.put) - (a.call + a.put));
+      const modalStrikes = strikes
+        .slice(0, DETAIL_FLOW_MODAL_STRIKE_LIMIT)
+        .sort((a, b) => a.strike - b.strike);
+      if(modalStrikes.length){
+        renderFlowChart({ ticker: detailFlowTicker, chartEl: detailFlowModalChartEl }, modalStrikes);
+      } else {
+        detailFlowModalChartEl.innerHTML = '<p class="nvda-flow-empty">履約價資料不足</p>';
+      }
+      detailFlowModalMetaEl.innerHTML = '';
+      const summary = document.createElement('strong');
+      summary.textContent = `Calls ${formatLargeNumber(entry.callVolume)} · Puts ${formatLargeNumber(entry.putVolume)}`;
+      detailFlowModalMetaEl.appendChild(summary);
+      const counts = document.createElement('span');
+      counts.textContent = `${entry.callCount} call trades · ${entry.putCount} put trades`;
+      detailFlowModalMetaEl.appendChild(counts);
+      detailFlowModalTableEl.innerHTML = '';
+      const rows = (entry.rows || []).slice().sort((a, b) => b.volume - a.volume);
+      if(!rows.length){
+        detailFlowModalTableEl.innerHTML = '<p class="nvda-flow-empty">尚無相關合約資料</p>';
+      } else {
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        ['Symbol','Side','Strike','Volume','Open Interest'].forEach(text => {
+          const th = document.createElement('th');
+          th.textContent = text;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        const tbody = document.createElement('tbody');
+        rows.slice(0, DETAIL_FLOW_MODAL_TABLE_LIMIT).forEach(item => {
+          const tr = document.createElement('tr');
+          const oiValue = Number.isFinite(item.oi) ? formatLargeNumber(item.oi) : '--';
+          const cells = [
+            item.symbol,
+            item.side === 'call' ? 'Call' : 'Put',
+            formatStrikeLabel(item.strike),
+            formatLargeNumber(item.volume),
+            oiValue
+          ];
+          cells.forEach(value => {
+            const td = document.createElement('td');
+            td.textContent = value;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        detailFlowModalTableEl.appendChild(table);
+        if(rows.length > DETAIL_FLOW_MODAL_TABLE_LIMIT){
+          const hint = document.createElement('p');
+          hint.textContent = `顯示成交量前 ${DETAIL_FLOW_MODAL_TABLE_LIMIT} 筆合約。`;
+          hint.style.fontSize = '0.75rem';
+          hint.style.color = 'var(--muted)';
+          hint.style.marginTop = '6px';
+          detailFlowModalTableEl.appendChild(hint);
+        }
+      }
+      detailFlowModalEl.classList.add('open');
+      detailFlowModalEl.setAttribute('aria-hidden', 'false');
+    }
+
+    function updateDetailTickerFromInput(){
+      if(!detailFlowInputEl) return;
+      const normalized = String(detailFlowInputEl.value || '').trim().toUpperCase();
+      detailFlowTicker = normalized || NVDA_UNDERLYING;
+      detailFlowInputEl.value = detailFlowTicker;
+      return detailFlowTicker;
+    }
+
+    function initDetailFlowControls(){
+      const refreshBtn = document.getElementById('detail-flow-refresh');
+      const triggerUpdate = () => {
+        updateDetailTickerFromInput();
+        renderDetailFlowCharts();
+      };
+      if(detailFlowInputEl){
+        detailFlowInputEl.addEventListener('keydown', evt => {
+          if(evt.key === 'Enter'){
+            evt.preventDefault();
+            triggerUpdate();
+          }
+        });
+      }
+      if(refreshBtn){
+        refreshBtn.addEventListener('click', triggerUpdate);
+      }
+    }
+
+    function initDetailFlowModal(){
+      if(detailFlowModalCloseEl){
+        detailFlowModalCloseEl.addEventListener('click', closeDetailFlowModal);
+      }
+      if(detailFlowModalEl){
+        detailFlowModalEl.addEventListener('click', evt => {
+          if(evt.target === detailFlowModalEl){
+            closeDetailFlowModal();
+          }
+        });
+      }
+      document.addEventListener('keydown', evt => {
+        if(evt.key === 'Escape'){
+          closeDetailFlowModal();
+        }
+      });
     }
 
     function applyCallPutFilterToTables(side){
@@ -2346,8 +2901,16 @@ const WATCHLIST_STRENGTH_DEFS = [
     }
 
     document.getElementById('refresh').addEventListener('click', () => { statusEl.textContent='重新載入…'; load(); });
+    const flowsBtn = document.getElementById('goto-flows');
+    if(flowsBtn){
+      flowsBtn.addEventListener('click', () => {
+        window.location.href = 'flows.html';
+      });
+    }
     initFlowGrid();
     initCallPutControls();
+    initDetailFlowControls();
+    initDetailFlowModal();
     initStrengthGrid();
     load();
   </script>
