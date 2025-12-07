@@ -9,12 +9,12 @@ data1_dir = os.path.join(base_dir, "data1")
 # 執行 Mostactive.py
 mostactive_path = os.path.join(data1_dir, "Mostactive.py")
 print("Running Mostactive.py...")
-subprocess.run(["python3", mostactive_path], check=True)
+subprocess.run([sys.executable, mostactive_path], check=True)
 
 # 執行 optionsOI.py
 optionsOI_path = os.path.join(data1_dir, "optionsOI.py")
 print("Running optionsOI.py...")
-subprocess.run(["python3", optionsOI_path], check=True)
+subprocess.run([sys.executable, optionsOI_path], check=True)
 
 # 自動執行 step1.py 與 step2.py
 # 先執行 step1.py（建立 sheet）
