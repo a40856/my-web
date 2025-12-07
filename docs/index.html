@@ -170,6 +170,9 @@
   .detail-flow-card .detail-flow-meta strong{color:#fff;font-size:0.85rem}
   .detail-flow-empty{color:var(--muted);text-align:center;font-size:0.85rem;padding:18px 0}
   @media(max-width:992px){.detail-flow-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}}
+  .oi-detail-flow{background:var(--panel);border:1px solid var(--panel-border);border-radius:18px;padding:24px 26px;box-shadow:0 18px 32px rgba(0,0,0,0.35);display:flex;flex-direction:column;gap:16px;margin-top:24px}
+  .oi-detail-flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;grid-auto-rows:minmax(280px,auto)}
+  .oi-detail-flow .detail-flow-card header span{font-size:0.8rem;color:#9fd1ff}
   .detail-flow-modal{position:fixed;inset:0;background:rgba(4,12,24,0.85);display:none;align-items:center;justify-content:center;padding:26px;z-index:50}
   .detail-flow-modal.open{display:flex}
   .detail-flow-modal-content{background:var(--panel);border:1px solid var(--panel-border);border-radius:22px;padding:28px;max-width:960px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 20px 48px rgba(0,0,0,0.35)}
@@ -240,6 +243,7 @@
             <div class="jump-links">
               <a class="link-button small" href="#flow-section">前往熱門 Flow 圖</a>
               <a class="link-button small" href="#detail-flow-section">前往 Detail Flow</a>
+              <a class="link-button small" href="#oi-detail-flow-section">前往 OI Detail Flow</a>
             </div>
           </div>
           <div class="top-bar-search">
@@ -338,6 +342,19 @@
           </div>
 
           <div id="sources"></div>
+
+          <section class="oi-detail-flow" aria-label="Open interest detail flow" id="oi-detail-flow-section">
+            <div class="section-heading">
+              <h3>Open Interest Detail Flow</h3>
+              <p class="hint">直接利用最高 OI 表格，依到期日檢視最活躍的履約價與其 Call / Put OI。</p>
+            </div>
+            <div class="call-put-filter" style="margin-bottom:12px;" aria-label="oi detail flow controls">
+              <label for="oi-detail-flow-input" style="font-size:0.75rem;color:#fff;letter-spacing:0.05em;">搜尋標的</label>
+              <input id="oi-detail-flow-input" type="text" value="" placeholder="e.g., NVDA" style="background:#091324;border-radius:8px;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:6px 10px;max-width:160px;" />
+              <button id="oi-detail-flow-refresh" type="button" class="secondary" style="font-size:0.75rem;padding:6px 10px;">查詢 OI</button>
+            </div>
+            <div class="oi-detail-flow-grid detail-flow-grid" id="oi-detail-flow-grid"></div>
+          </section>
         </div>
       </section>
     </div>
@@ -394,13 +411,18 @@ const QUICK_EXCLUDE_SYMBOLS = ['SPY','QQQ','SPX','SPXW','IWM'];
 const DETAIL_FLOW_STRIKE_LIMIT = 28;
 const DETAIL_FLOW_MODAL_STRIKE_LIMIT = 60;
 const DETAIL_FLOW_MODAL_TABLE_LIMIT = 40;
+const OI_DETAIL_STRIKE_LIMIT = 28;
 const detailFlowModalEl = document.getElementById('detail-flow-modal');
 const detailFlowModalTitleEl = document.getElementById('detail-flow-modal-title');
 const detailFlowModalChartEl = document.getElementById('detail-flow-modal-chart');
 const detailFlowModalMetaEl = document.getElementById('detail-flow-modal-meta');
 const detailFlowModalTableEl = document.getElementById('detail-flow-modal-table');
 const detailFlowModalCloseEl = document.getElementById('detail-flow-modal-close');
+const oiDetailFlowGridEl = document.getElementById('oi-detail-flow-grid');
+const oiDetailFlowInputEl = document.getElementById('oi-detail-flow-input');
+const oiDetailFlowRefreshEl = document.getElementById('oi-detail-flow-refresh');
 let detailFlowTicker = NVDA_UNDERLYING;
+let oiDetailFlowTicker = 'NVDA';
 let historyHighlightTimer = null;
 let globalSearchTerm = globalSearchInput ? globalSearchInput.value.trim() : '';
 
@@ -1833,6 +1855,154 @@ const WATCHLIST_STRENGTH_DEFS = [
       });
     }
 
+    function buildOiDetailTimeline(state, ticker){
+      if(!state) return [];
+      const rows = state.currentRows || computeRows(state);
+      if(!Array.isArray(rows) || rows.length === 0) return [];
+      const underlyingIdx = findHeaderIndexByNames(state, ['Underlying', 'Underlying Symbol', 'Símbolo subyacente']);
+      const symbolIdx = findHeaderIndexByNames(state, ['Symbol', 'Contract Symbol']);
+      const nameIdx = findHeaderIndexByNames(state, ['Name', 'Nombre']);
+      const strikeIdx = findHeaderIndexByNames(state, ['Strike', 'Precio de ejercicio']);
+      const expirationIdx = findHeaderIndexByNames(state, ['Expiration Date', 'Expiration']);
+      const oiIdx = findHeaderIndexByNames(state, ['Open Interest']);
+      if([underlyingIdx, symbolIdx, nameIdx, strikeIdx, expirationIdx, oiIdx].some(idx => idx < 0)){
+        return [];
+      }
+      const normalizedTarget = ticker ? ticker.trim().toUpperCase() : '';
+      const timeline = new Map();
+      rows.forEach(row => {
+        let underlying = String(row[underlyingIdx] || '').trim().toUpperCase();
+        if(!underlying) return;
+        if(underlying === '^VIX') underlying = 'VIX';
+        if(normalizedTarget && underlying !== normalizedTarget) return;
+        const expiration = String(row[expirationIdx] || '').trim();
+        if(!expiration) return;
+        const strike = parseNumeric(row[strikeIdx]);
+        if(Number.isNaN(strike)) return;
+        const oiValue = parseNumeric(row[oiIdx]);
+        if(Number.isNaN(oiValue) || oiValue <= 0) return;
+        const side = detectOptionSide(row[symbolIdx], row[nameIdx]);
+        if(!side) return;
+        if(!timeline.has(expiration)){
+          timeline.set(expiration, {
+            expiration,
+            totalOi: 0,
+            callOi: 0,
+            putOi: 0,
+            callCount: 0,
+            putCount: 0,
+            strikes: new Map(),
+            rows: []
+          });
+        }
+        const bucket = timeline.get(expiration);
+        bucket.totalOi += oiValue;
+        if(side === 'call'){
+          bucket.callOi += oiValue;
+          bucket.callCount += 1;
+        } else {
+          bucket.putOi += oiValue;
+          bucket.putCount += 1;
+        }
+        const strikeKey = strike.toFixed(2);
+        if(!bucket.strikes.has(strikeKey)){
+          bucket.strikes.set(strikeKey, { strike, call: 0, put: 0 });
+        }
+        const strikeRecord = bucket.strikes.get(strikeKey);
+        strikeRecord[side] += oiValue;
+        bucket.rows.push({
+          symbol: String(row[symbolIdx] || '').trim(),
+          side,
+          strike,
+          oi: oiValue
+        });
+      });
+      const timelineArray = Array.from(timeline.values());
+      timelineArray.sort((a, b) => {
+        const dateA = new Date(a.expiration);
+        const dateB = new Date(b.expiration);
+        if(!Number.isNaN(dateA.getTime()) && !Number.isNaN(dateB.getTime())){
+          return dateA - dateB;
+        }
+        return String(a.expiration).localeCompare(String(b.expiration));
+      });
+      return timelineArray;
+    }
+
+    function renderOiDetailFlowCharts(){
+      if(!oiDetailFlowGridEl) return;
+      oiDetailFlowGridEl.innerHTML = '<p class="nvda-flow-empty">讀取中…</p>';
+      const state = dataStates.get('oi');
+      if(!state){
+        oiDetailFlowGridEl.innerHTML = '<p class="nvda-flow-empty">OI 資料尚未載入</p>';
+        return;
+      }
+      const timeline = buildOiDetailTimeline(state, oiDetailFlowTicker);
+      if(!timeline.length){
+        const emptyLabel = oiDetailFlowTicker
+          ? `<p class="nvda-flow-empty">尚無 ${oiDetailFlowTicker} 的 OI 流程資料</p>`
+          : '<p class="nvda-flow-empty">尚無 OI 流程資料</p>';
+        oiDetailFlowGridEl.innerHTML = emptyLabel;
+        return;
+      }
+      oiDetailFlowGridEl.innerHTML = '';
+      timeline.forEach(entry => {
+        const card = document.createElement('article');
+        card.className = 'detail-flow-card oi-detail-flow-card';
+        const header = document.createElement('header');
+        const title = document.createElement('h5');
+        title.textContent = formatDateLabelWithYear(entry.expiration);
+        const label = document.createElement('span');
+        label.textContent = `Total OI ${formatLargeNumber(entry.totalOi)}`;
+        header.appendChild(title);
+        header.appendChild(label);
+        card.appendChild(header);
+        const chartContainer = document.createElement('div');
+        chartContainer.className = 'detail-flow-chart';
+        card.appendChild(chartContainer);
+        const strikes = Array.from(entry.strikes.values()).map(strike => ({ strike: strike.strike, call: strike.call, put: strike.put }));
+        if(!strikes.length){
+          chartContainer.innerHTML = '<p class="nvda-flow-empty">履約價資料不足</p>';
+        } else {
+          const sorted = strikes.sort((a, b) => (b.call + b.put) - (a.call + a.put));
+          const limited = sorted.slice(0, OI_DETAIL_STRIKE_LIMIT).sort((a, b) => a.strike - b.strike);
+          renderFlowChart({ ticker: 'OI Detail', chartEl: chartContainer }, limited);
+        }
+        const meta = document.createElement('div');
+        meta.className = 'detail-flow-meta';
+        const summary = document.createElement('strong');
+        summary.textContent = `Call OI ${formatLargeNumber(entry.callOi)} · Put OI ${formatLargeNumber(entry.putOi)}`;
+        meta.appendChild(summary);
+        const counts = document.createElement('span');
+        counts.textContent = `${entry.callCount} call rows · ${entry.putCount} put rows`;
+        meta.appendChild(counts);
+        const callLeader = Array.from(entry.strikes.values())
+          .filter(point => point.call > 0)
+          .sort((a, b) => b.call - a.call)[0];
+        const putLeader = Array.from(entry.strikes.values())
+          .filter(point => point.put > 0)
+          .sort((a, b) => b.put - a.put)[0];
+        if(callLeader){
+          const line = document.createElement('span');
+          line.textContent = `Top call strike ${formatStrikeLabel(callLeader.strike)} · ${formatLargeNumber(callLeader.call)} OI`;
+          meta.appendChild(line);
+        }
+        if(putLeader){
+          const line = document.createElement('span');
+          line.textContent = `Top put strike ${formatStrikeLabel(putLeader.strike)} · ${formatLargeNumber(putLeader.put)} OI`;
+          meta.appendChild(line);
+        }
+        const topRow = (entry.rows || []).slice().sort((a, b) => (b.oi || 0) - (a.oi || 0))[0];
+        if(topRow && Number.isFinite(topRow.oi)){
+          const rowLine = document.createElement('span');
+          rowLine.textContent = `${topRow.side === 'call' ? 'Call' : 'Put'} ${topRow.symbol} ${formatStrikeLabel(topRow.strike)} · ${formatLargeNumber(topRow.oi)} OI`;
+          meta.appendChild(rowLine);
+        }
+        card.appendChild(meta);
+        oiDetailFlowGridEl.appendChild(card);
+      });
+    }
+
     function closeDetailFlowModal(){
       if(!detailFlowModalEl) return;
       detailFlowModalEl.classList.remove('open');
@@ -1933,6 +2103,33 @@ const WATCHLIST_STRENGTH_DEFS = [
       }
       if(refreshBtn){
         refreshBtn.addEventListener('click', triggerUpdate);
+      }
+    }
+
+    function updateOiDetailTickerFromInput(){
+      if(!oiDetailFlowInputEl) return oiDetailFlowTicker;
+      const normalized = String(oiDetailFlowInputEl.value || '').trim().toUpperCase();
+      oiDetailFlowTicker = normalized || '';
+      oiDetailFlowInputEl.value = oiDetailFlowTicker;
+      return oiDetailFlowTicker;
+    }
+
+    function initOiDetailFlowControls(){
+      const triggerUpdate = () => {
+        updateOiDetailTickerFromInput();
+        renderOiDetailFlowCharts();
+      };
+      if(oiDetailFlowInputEl){
+        oiDetailFlowInputEl.value = oiDetailFlowTicker;
+        oiDetailFlowInputEl.addEventListener('keydown', evt => {
+          if(evt.key === 'Enter'){
+            evt.preventDefault();
+            triggerUpdate();
+          }
+        });
+      }
+      if(oiDetailFlowRefreshEl){
+        oiDetailFlowRefreshEl.addEventListener('click', triggerUpdate);
       }
     }
 
@@ -2652,6 +2849,9 @@ const WATCHLIST_STRENGTH_DEFS = [
         applyHistoryHighlight(view, state);
         updateWatchlistStrength();
       }
+      if(view.stateId === 'oi'){
+        renderOiDetailFlowCharts();
+      }
     }
 
     async function loadStaticData(source){
@@ -2912,6 +3112,7 @@ const WATCHLIST_STRENGTH_DEFS = [
     initDetailFlowControls();
     initDetailFlowModal();
     initStrengthGrid();
+    initOiDetailFlowControls();
     load();
   </script>
 </body>
