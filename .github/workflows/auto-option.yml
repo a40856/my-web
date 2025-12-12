@@ -6,6 +6,10 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
 
+# Ensure the GITHUB_TOKEN has write permission for pushes
+permissions:
+  contents: write
+
 jobs:
   run-auto-option:
     runs-on: ubuntu-latest
@@ -16,6 +20,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Use the workflow token and keep credentials so later git push works
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -41,4 +50,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git diff --staged --quiet || git commit -m "Auto-update: Daily auto-option results $(date +'%Y-%m-%d %H:%M:%S')"
-          git push
+          # Explicitly push to main using the checked-out credentials
+          git push origin HEAD:main
