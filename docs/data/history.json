@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2025-12-20T23:36:58.927Z",
-  "sourceFile": "final_stock_data-2025-12-20_2228.xlsx",
-  "download": "data/latest/history/final_stock_data-2025-12-20_2228.xlsx",
+  "generatedAt": "2025-12-21T23:37:28.885Z",
+  "sourceFile": "final_stock_data-2025-12-21_2229.xlsx",
+  "download": "data/latest/history/final_stock_data-2025-12-21_2229.xlsx",
   "rows": [
     [
       "Ticker",
@@ -3319,7 +3319,7 @@
     ],
     [
       "IBIT",
-      "iShares Bitcoin Trust Beneficial Interest",
+      "iShares Bitcoin Trust",
       null,
       null,
       null,
