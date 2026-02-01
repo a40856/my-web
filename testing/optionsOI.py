@@ -44,8 +44,13 @@ df.to_excel(file_path, index=False)
 # 進行過濾與排序
 # 排除 C 欄（index 2）為 "HYG" 的資料
 df_filtered = df[df.iloc[:, 2] != "HYG"].copy()
-# 將 L 欄（index 11, Open Interest）轉為數字（去除逗號）
-df_filtered[df.columns[11]] = df_filtered[df.columns[11]].replace({',': ''}, regex=True).astype(int)
+# 將 L 欄（index 11, Open Interest）轉為數字（去除逗號），更健壯地處理非數字與空值
+df_filtered = df_filtered.assign(**{
+    df.columns[11]: pd.to_numeric(
+        df_filtered[df.columns[11]].astype(str).str.replace(',', '', regex=False),
+        errors='coerce'
+    ).fillna(0).astype(int)
+})
 # 依 Open Interest 由大到小排序
 df_sorted = df_filtered.sort_values(by=df.columns[11], ascending=False)
 
