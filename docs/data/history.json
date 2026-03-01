@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-02-28T23:41:11.655Z",
-  "sourceFile": "final_stock_data-2026-02-28_2232.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-02-28_2232.xlsx",
+  "generatedAt": "2026-03-01T23:43:41.367Z",
+  "sourceFile": "final_stock_data-2026-03-01_2234.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-03-01_2234.xlsx",
   "rows": [
     [
       "Ticker",
