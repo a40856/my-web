@@ -7,7 +7,7 @@ from datetime import datetime
 all_rows = []
 base_url = "https://finance.yahoo.com/markets/options/most-active/?start={}&count=100"
 
-for page in range(0, 50):
+for page in range(0, 75):
     start = page * 100
     url = base_url.format(start)
     print(f"Fetching: {url}")
