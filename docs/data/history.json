@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-03-27T23:50:50.489Z",
-  "sourceFile": "final_stock_data-2026-03-27_2243.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-03-27_2243.xlsx",
+  "generatedAt": "2026-03-28T23:52:23.744Z",
+  "sourceFile": "final_stock_data-2026-03-28_2239.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-03-28_2239.xlsx",
   "rows": [
     [
       "Ticker",
@@ -39,7 +39,7 @@
     ],
     [
       "SPY",
-      "State Street SPDR S&P 500 ETF Trust",
+      "Units of undivided interest in SPDR Trust Series 1",
       null,
       null,
       null,
@@ -113,7 +113,7 @@
       "66.85%",
       "24.13%",
       "7.62",
-      "3.31284E+12",
+      "3.31554E+12",
       "350.15 -21.82",
       "142.66 91.90"
     ],
@@ -225,7 +225,7 @@
       "-12.35%",
       "29.25%",
       "7.26",
-      "1.01049E+12",
+      "1.01118E+12",
       "542.07 -13.57",
       "455.18 2.92"
     ],
@@ -2417,7 +2417,7 @@
       "16.41%",
       "36.86%",
       "1.36",
-      "33510000000",
+      "33530000000",
       "34.03 -28.92",
       "15.07 60.52"
     ],
@@ -2833,7 +2833,7 @@
       "-42.52%",
       "35.05%",
       "2.52",
-      "9710000000",
+      "9700000000",
       "93.88 -56.92",
       "41.13 -1.69"
     ],
