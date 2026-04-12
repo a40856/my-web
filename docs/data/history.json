@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-04-11T23:56:13.755Z",
-  "sourceFile": "final_stock_data-2026-04-11_2243.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-04-11_2243.xlsx",
+  "generatedAt": "2026-04-12T23:58:26.249Z",
+  "sourceFile": "final_stock_data-2026-04-12_2245.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-04-12_2245.xlsx",
   "rows": [
     [
       "Ticker",
@@ -39,7 +39,7 @@
     ],
     [
       "SPY",
-      "SPDR S&P 500 ETF TRUST",
+      "SPDR S&P 500 ETF Trust",
       null,
       null,
       null,
