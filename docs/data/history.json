@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-06-28T01:31:20.774Z",
-  "sourceFile": "final_stock_data-2026-06-27_2311.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-06-27_2311.xlsx",
+  "generatedAt": "2026-06-29T01:35:09.146Z",
+  "sourceFile": "final_stock_data-2026-06-28_2312.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-06-28_2312.xlsx",
   "rows": [
     [
       "Ticker",
@@ -961,7 +961,7 @@
       "-16.78%",
       "16.54%",
       "3.84",
-      "2.2746E+11",
+      "2.2762E+11",
       "192.67 -50.79",
       "94.71 0.11"
     ],
