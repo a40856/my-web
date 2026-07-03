@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-07-02T01:29:52.998Z",
-  "sourceFile": "final_stock_data-2026-07-01_2325.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-07-01_2325.xlsx",
+  "generatedAt": "2026-07-03T01:08:08.942Z",
+  "sourceFile": "final_stock_data-2026-07-02_2317.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-07-02_2317.xlsx",
   "rows": [
     [
       "Ticker",
@@ -75,7 +75,7 @@
       null,
       null,
       null,
-      "4.32366E+12"
+      "4.53296E+12"
     ],
     [
       "NVDA",
@@ -89,7 +89,7 @@
       null,
       null,
       null,
-      "4.78144E+12"
+      "4.71489E+12"
     ],
     [
       "GOOG",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.36349E+12"
+      "4.33752E+12"
     ],
     [
       "MSFT",
@@ -117,7 +117,7 @@
       null,
       null,
       null,
-      "2.8546E+12"
+      "2.90073E+12"
     ],
     [
       "AMZN",
@@ -131,7 +131,7 @@
       null,
       null,
       null,
-      "2.59999E+12"
+      "2.61043E+12"
     ],
     [
       "TSM",
@@ -145,7 +145,7 @@
       null,
       null,
       null,
-      "2.30399E+12"
+      "2.25176E+12"
     ],
     [
       "AVGO",
@@ -159,21 +159,7 @@
       null,
       null,
       null,
-      "1.75716E+12"
-    ],
-    [
-      "TSLA",
-      "Tesla Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.59731E+12"
+      "1.71487E+12"
     ],
     [
       "META",
@@ -187,11 +173,11 @@
       null,
       null,
       null,
-      "1.55582E+12"
+      "1.47965E+12"
     ],
     [
-      "MU",
-      "Micron Technology Inc",
+      "TSLA",
+      "Tesla Inc",
       null,
       null,
       null,
@@ -201,7 +187,7 @@
       null,
       null,
       null,
-      "1.16585E+12"
+      "1.47769E+12"
     ],
     [
       "LLY",
@@ -215,7 +201,21 @@
       null,
       null,
       null,
-      "1.12231E+12"
+      "1.14319E+12"
+    ],
+    [
+      "MU",
+      "Micron Technology Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.10179E+12"
     ],
     [
       "BRK-B",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "1.07699E+12"
+      "1.09592E+12"
     ],
     [
       "JPM",
@@ -243,21 +243,7 @@
       null,
       null,
       null,
-      "8.9514E+11"
-    ],
-    [
-      "AMD",
-      "Advanced Micro Devices Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "8.8196E+11"
+      "8.9622E+11"
     ],
     [
       "WMT",
@@ -271,11 +257,11 @@
       null,
       null,
       null,
-      "8.66E+11"
+      "8.9003E+11"
     ],
     [
-      "ASML",
-      "ASML Holding NV",
+      "AMD",
+      "Advanced Micro Devices Inc",
       null,
       null,
       null,
@@ -285,7 +271,7 @@
       null,
       null,
       null,
-      "7.1034E+11"
+      "8.4436E+11"
     ],
     [
       "V",
@@ -299,7 +285,21 @@
       null,
       null,
       null,
-      "6.6148E+11"
+      "6.823E+11"
+    ],
+    [
+      "ASML",
+      "ASML Holding NV",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "6.8193E+11"
     ],
     [
       "JNJ",
@@ -313,11 +313,11 @@
       null,
       null,
       null,
-      "6.1138E+11"
+      "6.3319E+11"
     ],
     [
       "XOM",
-      "Exxon Mobil Corp",
+      "ExxonMobil Holdings Corp",
       null,
       null,
       null,
@@ -327,7 +327,7 @@
       null,
       null,
       null,
-      "5.6487E+11"
+      "5.6823E+11"
     ],
     [
       "AMAT",
@@ -341,21 +341,7 @@
       null,
       null,
       null,
-      "5.168E+11"
-    ],
-    [
-      "LRCX",
-      "Lam Research Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "4.893E+11"
+      "4.7879E+11"
     ],
     [
       "MA",
@@ -369,35 +355,7 @@
       null,
       null,
       null,
-      "4.6162E+11"
-    ],
-    [
-      "CSCO",
-      "Cisco Systems Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "4.6119E+11"
-    ],
-    [
-      "CAT",
-      "Caterpillar Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "4.5668E+11"
+      "4.766E+11"
     ],
     [
       "ABBV",
@@ -411,11 +369,11 @@
       null,
       null,
       null,
-      "4.4357E+11"
+      "4.6126E+11"
     ],
     [
-      "BAC",
-      "Bank Of America Corp",
+      "CSCO",
+      "Cisco Systems Inc",
       null,
       null,
       null,
@@ -425,11 +383,11 @@
       null,
       null,
       null,
-      "4.1416E+11"
+      "4.4416E+11"
     ],
     [
-      "ORCL",
-      "Oracle Corp",
+      "CAT",
+      "Caterpillar Inc",
       null,
       null,
       null,
@@ -439,7 +397,21 @@
       null,
       null,
       null,
-      "4.1047E+11"
+      "4.4384E+11"
+    ],
+    [
+      "LRCX",
+      "Lam Research Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "4.3946E+11"
     ],
     [
       "COST",
@@ -453,7 +425,35 @@
       null,
       null,
       null,
-      "4.1007E+11"
+      "4.2205E+11"
+    ],
+    [
+      "BAC",
+      "Bank Of America Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "4.1678E+11"
+    ],
+    [
+      "ORCL",
+      "Oracle Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "4.0404E+11"
     ],
     [
       "GE",
@@ -467,7 +467,7 @@
       null,
       null,
       null,
-      "3.9119E+11"
+      "3.9388E+11"
     ],
     [
       "UNH",
@@ -481,35 +481,7 @@
       null,
       null,
       null,
-      "3.8736E+11"
-    ],
-    [
-      "ARM",
-      "Arm Holdings Plc ADR",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "3.5907E+11"
-    ],
-    [
-      "HD",
-      "Home Depot Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "3.4983E+11"
+      "3.8629E+11"
     ],
     [
       "KO",
@@ -523,11 +495,11 @@
       null,
       null,
       null,
-      "3.4975E+11"
+      "3.6201E+11"
     ],
     [
-      "KLAC",
-      "KLA Corp",
+      "HD",
+      "Home Depot Inc",
       null,
       null,
       null,
@@ -537,7 +509,7 @@
       null,
       null,
       null,
-      "3.4772E+11"
+      "3.5687E+11"
     ],
     [
       "PG",
@@ -551,7 +523,7 @@
       null,
       null,
       null,
-      "3.4331E+11"
+      "3.5257E+11"
     ],
     [
       "MS",
@@ -565,7 +537,7 @@
       null,
       null,
       null,
-      "3.3416E+11"
+      "3.3743E+11"
     ],
     [
       "CVX",
@@ -579,7 +551,21 @@
       null,
       null,
       null,
-      "3.2999E+11"
+      "3.3698E+11"
+    ],
+    [
+      "ARM",
+      "Arm Holdings Plc ADR",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "3.3546E+11"
     ],
     [
       "NFLX",
@@ -593,7 +579,7 @@
       null,
       null,
       null,
-      "3.124E+11"
+      "3.2697E+11"
     ],
     [
       "MRK",
@@ -607,21 +593,7 @@
       null,
       null,
       null,
-      "3.0964E+11"
-    ],
-    [
-      "GEV",
-      "GE Vernova Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "3.0482E+11"
+      "3.1999E+11"
     ],
     [
       "PLTR",
@@ -635,11 +607,11 @@
       null,
       null,
       null,
-      "3.0141E+11"
+      "3.0997E+11"
     ],
     [
-      "SNDK",
-      "Sandisk Corp",
+      "KLAC",
+      "KLA Corp",
       null,
       null,
       null,
@@ -649,35 +621,7 @@
       null,
       null,
       null,
-      "3.0095E+11"
-    ],
-    [
-      "GS",
-      "Goldman Sachs Group Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "3.0079E+11"
-    ],
-    [
-      "PANW",
-      "Palo Alto Networks Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "2.8691E+11"
+      "3.0769E+11"
     ],
     [
       "AZN",
@@ -691,7 +635,35 @@
       null,
       null,
       null,
-      "2.8514E+11"
+      "3.0265E+11"
+    ],
+    [
+      "GS",
+      "Goldman Sachs Group Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "3.012E+11"
+    ],
+    [
+      "GEV",
+      "GE Vernova Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.9911E+11"
     ],
     [
       "NVS",
@@ -705,7 +677,7 @@
       null,
       null,
       null,
-      "2.8216E+11"
+      "2.927E+11"
     ],
     [
       "PM",
@@ -719,11 +691,11 @@
       null,
       null,
       null,
-      "2.7694E+11"
+      "2.8408E+11"
     ],
     [
-      "DELL",
-      "Dell Technologies Inc",
+      "PANW",
+      "Palo Alto Networks Inc",
       null,
       null,
       null,
@@ -733,21 +705,7 @@
       null,
       null,
       null,
-      "2.7568E+11"
-    ],
-    [
-      "TXN",
-      "Texas Instruments Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "2.7158E+11"
+      "2.8367E+11"
     ],
     [
       "IBM",
@@ -761,21 +719,7 @@
       null,
       null,
       null,
-      "2.6904E+11"
-    ],
-    [
-      "WFC",
-      "Wells Fargo & Co",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "2.6299E+11"
+      "2.7212E+11"
     ],
     [
       "RTX",
@@ -789,7 +733,63 @@
       null,
       null,
       null,
-      "2.5827E+11"
+      "2.6833E+11"
+    ],
+    [
+      "TXN",
+      "Texas Instruments Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.6673E+11"
+    ],
+    [
+      "WFC",
+      "Wells Fargo & Co",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.6168E+11"
+    ],
+    [
+      "SNDK",
+      "Sandisk Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.5842E+11"
+    ],
+    [
+      "DELL",
+      "Dell Technologies Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.5563E+11"
     ],
     [
       "LIN",
@@ -803,21 +803,7 @@
       null,
       null,
       null,
-      "2.4682E+11"
-    ],
-    [
-      "C",
-      "Citigroup Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "2.4031E+11"
+      "2.5288E+11"
     ],
     [
       "AXP",
@@ -831,7 +817,21 @@
       null,
       null,
       null,
-      "2.3745E+11"
+      "2.4015E+11"
+    ],
+    [
+      "C",
+      "Citigroup Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.4004E+11"
     ],
     [
       "BABA",
@@ -845,7 +845,7 @@
       null,
       null,
       null,
-      "2.3525E+11"
+      "2.3081E+11"
     ],
     [
       "SHEL",
@@ -859,21 +859,7 @@
       null,
       null,
       null,
-      "2.1348E+11"
-    ],
-    [
-      "WDC",
-      "Western Digital Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "2.0625E+11"
+      "2.1753E+11"
     ],
     [
       "TM",
@@ -887,21 +873,7 @@
       null,
       null,
       null,
-      "2.009E+11"
-    ],
-    [
-      "CRWD",
-      "Crowdstrike Holdings Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.9671E+11"
+      "2.0673E+11"
     ],
     [
       "AMGN",
@@ -915,35 +887,7 @@
       null,
       null,
       null,
-      "1.9501E+11"
-    ],
-    [
-      "PEP",
-      "PepsiCo Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.9293E+11"
-    ],
-    [
-      "QCOM",
-      "Qualcomm Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.9174E+11"
+      "2.0193E+11"
     ],
     [
       "MCD",
@@ -957,7 +901,35 @@
       null,
       null,
       null,
-      "1.9143E+11"
+      "1.9939E+11"
+    ],
+    [
+      "CRWD",
+      "Crowdstrike Holdings Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.9752E+11"
+    ],
+    [
+      "PEP",
+      "PepsiCo Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.9712E+11"
     ],
     [
       "TMO",
@@ -971,35 +943,7 @@
       null,
       null,
       null,
-      "1.9076E+11"
-    ],
-    [
-      "GLW",
-      "Corning Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.8988E+11"
-    ],
-    [
-      "APP",
-      "Applovin Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.8968E+11"
+      "1.9452E+11"
     ],
     [
       "TMUS",
@@ -1013,7 +957,7 @@
       null,
       null,
       null,
-      "1.8729E+11"
+      "1.9211E+11"
     ],
     [
       "SAP",
@@ -1027,7 +971,35 @@
       null,
       null,
       null,
-      "1.8582E+11"
+      "1.8983E+11"
+    ],
+    [
+      "WDC",
+      "Western Digital Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.8578E+11"
+    ],
+    [
+      "QCOM",
+      "Qualcomm Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.8577E+11"
     ],
     [
       "NEE",
@@ -1041,21 +1013,7 @@
       null,
       null,
       null,
-      "1.8013E+11"
-    ],
-    [
-      "VZ",
-      "Verizon Communications Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.7533E+11"
+      "1.8424E+11"
     ],
     [
       "BA",
@@ -1069,11 +1027,11 @@
       null,
       null,
       null,
-      "1.7231E+11"
+      "1.7854E+11"
     ],
     [
-      "DE",
-      "Deere & Co",
+      "VZ",
+      "Verizon Communications Inc",
       null,
       null,
       null,
@@ -1083,11 +1041,11 @@
       null,
       null,
       null,
-      "1.6942E+11"
+      "1.7771E+11"
     ],
     [
-      "SCHW",
-      "Charles Schwab Corp",
+      "APP",
+      "Applovin Corp",
       null,
       null,
       null,
@@ -1097,21 +1055,7 @@
       null,
       null,
       null,
-      "1.6657E+11"
-    ],
-    [
-      "TTE",
-      "TotalEnergies SE",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.6656E+11"
+      "1.7706E+11"
     ],
     [
       "DIS",
@@ -1125,7 +1069,35 @@
       null,
       null,
       null,
-      "1.662E+11"
+      "1.7278E+11"
+    ],
+    [
+      "TTE",
+      "TotalEnergies SE",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.7077E+11"
+    ],
+    [
+      "GLW",
+      "Corning Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.6936E+11"
     ],
     [
       "NVO",
@@ -1139,7 +1111,35 @@
       null,
       null,
       null,
-      "1.6377E+11"
+      "1.6934E+11"
+    ],
+    [
+      "SCHW",
+      "Charles Schwab Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.687E+11"
+    ],
+    [
+      "DE",
+      "Deere & Co",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.677E+11"
     ],
     [
       "ABT",
@@ -1153,35 +1153,7 @@
       null,
       null,
       null,
-      "1.6056E+11"
-    ],
-    [
-      "BLK",
-      "Blackrock Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.5965E+11"
-    ],
-    [
-      "SHOP",
-      "Shopify Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.5783E+11"
+      "1.6617E+11"
     ],
     [
       "GILD",
@@ -1195,7 +1167,35 @@
       null,
       null,
       null,
-      "1.564E+11"
+      "1.6298E+11"
+    ],
+    [
+      "BLK",
+      "Blackrock Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.6215E+11"
+    ],
+    [
+      "SHOP",
+      "Shopify Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.5502E+11"
     ],
     [
       "UBER",
@@ -1209,21 +1209,7 @@
       null,
       null,
       null,
-      "1.4791E+11"
-    ],
-    [
-      "BX",
-      "Blackstone Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.4603E+11"
+      "1.5151E+11"
     ],
     [
       "ISRG",
@@ -1237,11 +1223,11 @@
       null,
       null,
       null,
-      "1.4251E+11"
+      "1.5088E+11"
     ],
     [
-      "T",
-      "AT&T Inc",
+      "BX",
+      "Blackstone Inc",
       null,
       null,
       null,
@@ -1251,7 +1237,7 @@
       null,
       null,
       null,
-      "1.423E+11"
+      "1.4998E+11"
     ],
     [
       "BKNG",
@@ -1265,7 +1251,21 @@
       null,
       null,
       null,
-      "1.4152E+11"
+      "1.4301E+11"
+    ],
+    [
+      "T",
+      "AT&T Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.43E+11"
     ],
     [
       "DHR",
@@ -1279,7 +1279,7 @@
       null,
       null,
       null,
-      "1.3711E+11"
+      "1.4009E+11"
     ],
     [
       "CB",
@@ -1293,7 +1293,7 @@
       null,
       null,
       null,
-      "1.3642E+11"
+      "1.4008E+11"
     ],
     [
       "CRM",
@@ -1307,7 +1307,7 @@
       null,
       null,
       null,
-      "1.3369E+11"
+      "1.3604E+11"
     ],
     [
       "PGR",
@@ -1321,7 +1321,7 @@
       null,
       null,
       null,
-      "1.3165E+11"
+      "1.3569E+11"
     ],
     [
       "SPGI",
@@ -1335,7 +1335,7 @@
       null,
       null,
       null,
-      "1.2986E+11"
+      "1.3021E+11"
     ],
     [
       "PLD",
@@ -1349,7 +1349,7 @@
       null,
       null,
       null,
-      "1.2754E+11"
+      "1.3E+11"
     ],
     [
       "LOW",
@@ -1363,7 +1363,7 @@
       null,
       null,
       null,
-      "1.2443E+11"
+      "1.2756E+11"
     ],
     [
       "LMT",
@@ -1377,21 +1377,7 @@
       null,
       null,
       null,
-      "1.2031E+11"
-    ],
-    [
-      "VRT",
-      "Vertiv Holdings Co",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.1962E+11"
+      "1.2587E+11"
     ],
     [
       "MO",
@@ -1405,7 +1391,7 @@
       null,
       null,
       null,
-      "1.1946E+11"
+      "1.2142E+11"
     ],
     [
       "SBUX",
@@ -1419,21 +1405,7 @@
       null,
       null,
       null,
-      "1.1783E+11"
-    ],
-    [
-      "PDD",
-      "PDD Holdings Inc ADR",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.1746E+11"
+      "1.1884E+11"
     ],
     [
       "BMY",
@@ -1447,7 +1419,35 @@
       null,
       null,
       null,
-      "1.1525E+11"
+      "1.1871E+11"
+    ],
+    [
+      "PDD",
+      "PDD Holdings Inc ADR",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.1727E+11"
+    ],
+    [
+      "VRT",
+      "Vertiv Holdings Co",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.1544E+11"
     ],
     [
       "MDT",
@@ -1461,21 +1461,7 @@
       null,
       null,
       null,
-      "1.0138E+11"
-    ],
-    [
-      "EQIX",
-      "Equinix Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "99970000000"
+      "1.0649E+11"
     ],
     [
       "SPOT",
@@ -1489,11 +1475,11 @@
       null,
       null,
       null,
-      "97250000000"
+      "1.0003E+11"
     ],
     [
-      "USB",
-      "U.S. Bancorp",
+      "EQIX",
+      "Equinix Inc",
       null,
       null,
       null,
@@ -1503,7 +1489,7 @@
       null,
       null,
       null,
-      "96180000000"
+      "98820000000"
     ],
     [
       "ADP",
@@ -1517,11 +1503,11 @@
       null,
       null,
       null,
-      "94230000000"
+      "96840000000"
     ],
     [
-      "DDOG",
-      "Datadog Inc",
+      "USB",
+      "U.S. Bancorp",
       null,
       null,
       null,
@@ -1531,7 +1517,7 @@
       null,
       null,
       null,
-      "94140000000"
+      "96160000000"
     ],
     [
       "UPS",
@@ -1545,11 +1531,11 @@
       null,
       null,
       null,
-      "93110000000"
+      "94060000000"
     ],
     [
-      "SNOW",
-      "Snowflake Inc",
+      "DDOG",
+      "Datadog Inc",
       null,
       null,
       null,
@@ -1559,63 +1545,7 @@
       null,
       null,
       null,
-      "90530000000"
-    ],
-    [
-      "ELV",
-      "Elevance Health Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "90380000000"
-    ],
-    [
-      "ABNB",
-      "Airbnb Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "88780000000"
-    ],
-    [
-      "MELI",
-      "MercadoLibre Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "88320000000"
-    ],
-    [
-      "NET",
-      "Cloudflare Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "87470000000"
+      "92680000000"
     ],
     [
       "HCA",
@@ -1629,7 +1559,63 @@
       null,
       null,
       null,
-      "87240000000"
+      "91070000000"
+    ],
+    [
+      "ELV",
+      "Elevance Health Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "90750000000"
+    ],
+    [
+      "SNOW",
+      "Snowflake Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "90170000000"
+    ],
+    [
+      "ABNB",
+      "Airbnb Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "89760000000"
+    ],
+    [
+      "MELI",
+      "MercadoLibre Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "89400000000"
     ],
     [
       "ADBE",
@@ -1643,11 +1629,11 @@
       null,
       null,
       null,
-      "83860000000"
+      "87340000000"
     ],
     [
-      "MMM",
-      "3M Co",
+      "NET",
+      "Cloudflare Inc",
       null,
       null,
       null,
@@ -1657,7 +1643,7 @@
       null,
       null,
       null,
-      "83430000000"
+      "86090000000"
     ],
     [
       "MMC",
@@ -1671,21 +1657,7 @@
       null,
       null,
       null,
-      "82940000000"
-    ],
-    [
-      "RCL",
-      "Royal Caribbean Group",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "82150000000"
+      "86020000000"
     ],
     [
       "ACN",
@@ -1699,11 +1671,11 @@
       null,
       null,
       null,
-      "80240000000"
+      "84050000000"
     ],
     [
-      "CL",
-      "Colgate-Palmolive Co",
+      "MMM",
+      "3M Co",
       null,
       null,
       null,
@@ -1713,11 +1685,11 @@
       null,
       null,
       null,
-      "74230000000"
+      "83680000000"
     ],
     [
-      "ALAB",
-      "Astera Labs Inc",
+      "RCL",
+      "Royal Caribbean Group",
       null,
       null,
       null,
@@ -1727,7 +1699,7 @@
       null,
       null,
       null,
-      "73850000000"
+      "79470000000"
     ],
     [
       "NOC",
@@ -1741,7 +1713,7 @@
       null,
       null,
       null,
-      "73850000000"
+      "77980000000"
     ],
     [
       "CI",
@@ -1755,7 +1727,21 @@
       null,
       null,
       null,
-      "73290000000"
+      "76120000000"
+    ],
+    [
+      "CL",
+      "Colgate-Palmolive Co",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "76120000000"
     ],
     [
       "INTU",
@@ -1769,7 +1755,7 @@
       null,
       null,
       null,
-      "73060000000"
+      "75320000000"
     ],
     [
       "ICE",
@@ -1783,11 +1769,11 @@
       null,
       null,
       null,
-      "71670000000"
+      "75210000000"
     ],
     [
-      "APO",
-      "Apollo Global Management Inc",
+      "ALAB",
+      "Astera Labs Inc",
       null,
       null,
       null,
@@ -1797,49 +1783,7 @@
       null,
       null,
       null,
-      "68280000000"
-    ],
-    [
-      "GM",
-      "General Motors Company",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "68090000000"
-    ],
-    [
-      "SLB",
-      "SLB Ltd",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "67410000000"
-    ],
-    [
-      "RACE",
-      "Ferrari NV",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "66130000000"
+      "69660000000"
     ],
     [
       "REGN",
@@ -1853,7 +1797,63 @@
       null,
       null,
       null,
-      "65500000000"
+      "68590000000"
+    ],
+    [
+      "GM",
+      "General Motors Company",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "68530000000"
+    ],
+    [
+      "APO",
+      "Apollo Global Management Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "68380000000"
+    ],
+    [
+      "RACE",
+      "Ferrari NV",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "67950000000"
+    ],
+    [
+      "SLB",
+      "SLB Ltd",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "67470000000"
     ],
     [
       "NU",
@@ -1867,7 +1867,7 @@
       null,
       null,
       null,
-      "65080000000"
+      "66150000000"
     ],
     [
       "NKE",
@@ -1881,35 +1881,7 @@
       null,
       null,
       null,
-      "63770000000"
-    ],
-    [
-      "TGT",
-      "Target Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "59180000000"
-    ],
-    [
-      "SE",
-      "Sea Ltd ADR",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "58020000000"
+      "65290000000"
     ],
     [
       "RKLB",
@@ -1923,11 +1895,11 @@
       null,
       null,
       null,
-      "57930000000"
+      "60090000000"
     ],
     [
-      "NBIS",
-      "Nebius Group NV",
+      "TGT",
+      "Target Corp",
       null,
       null,
       null,
@@ -1937,11 +1909,11 @@
       null,
       null,
       null,
-      "57670000000"
+      "59140000000"
     ],
     [
-      "F",
-      "Ford Motor Co",
+      "SE",
+      "Sea Ltd ADR",
       null,
       null,
       null,
@@ -1951,7 +1923,7 @@
       null,
       null,
       null,
-      "54350000000"
+      "58570000000"
     ],
     [
       "EW",
@@ -1965,7 +1937,35 @@
       null,
       null,
       null,
-      "52970000000"
+      "54340000000"
+    ],
+    [
+      "NBIS",
+      "Nebius Group NV",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "54260000000"
+    ],
+    [
+      "F",
+      "Ford Motor Co",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "53240000000"
     ],
     [
       "VST",
@@ -1979,7 +1979,7 @@
       null,
       null,
       null,
-      "51640000000"
+      "50930000000"
     ],
     [
       "OXY",
@@ -1993,21 +1993,7 @@
       null,
       null,
       null,
-      "47680000000"
-    ],
-    [
-      "CRWV",
-      "CoreWeave Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "46750000000"
+      "48650000000"
     ],
     [
       "XYZ",
@@ -2021,7 +2007,7 @@
       null,
       null,
       null,
-      "45910000000"
+      "46920000000"
     ],
     [
       "CMG",
@@ -2035,7 +2021,21 @@
       null,
       null,
       null,
-      "44900000000"
+      "45400000000"
+    ],
+    [
+      "CRWV",
+      "CoreWeave Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "44600000000"
     ],
     [
       "MSCI",
@@ -2049,7 +2049,7 @@
       null,
       null,
       null,
-      "42370000000"
+      "43910000000"
     ],
     [
       "ADSK",
@@ -2063,7 +2063,7 @@
       null,
       null,
       null,
-      "42150000000"
+      "43780000000"
     ],
     [
       "COIN",
@@ -2077,21 +2077,7 @@
       null,
       null,
       null,
-      "41950000000"
-    ],
-    [
-      "CCL",
-      "Carnival Corp Ltd",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "39060000000"
+      "43600000000"
     ],
     [
       "PYPL",
@@ -2105,7 +2091,21 @@
       null,
       null,
       null,
-      "38870000000"
+      "40110000000"
+    ],
+    [
+      "CCL",
+      "Carnival Corp Ltd",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "38230000000"
     ],
     [
       "RDDT",
@@ -2119,7 +2119,7 @@
       null,
       null,
       null,
-      "38070000000"
+      "37480000000"
     ],
     [
       "MSTR",
@@ -2133,7 +2133,7 @@
       null,
       null,
       null,
-      "32730000000"
+      "35310000000"
     ],
     [
       "WDAY",
@@ -2147,7 +2147,7 @@
       null,
       null,
       null,
-      "32180000000"
+      "33440000000"
     ],
     [
       "JD",
@@ -2161,7 +2161,7 @@
       null,
       null,
       null,
-      "31920000000"
+      "32290000000"
     ],
     [
       "TWLO",
@@ -2175,35 +2175,7 @@
       null,
       null,
       null,
-      "31760000000"
-    ],
-    [
-      "ZTS",
-      "Zoetis Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "30370000000"
-    ],
-    [
-      "EL",
-      "Estee Lauder Cos. Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "29840000000"
+      "31770000000"
     ],
     [
       "MRNA",
@@ -2217,11 +2189,11 @@
       null,
       null,
       null,
-      "28770000000"
+      "31650000000"
     ],
     [
-      "AFRM",
-      "Affirm Holdings Inc",
+      "ZTS",
+      "Zoetis Inc",
       null,
       null,
       null,
@@ -2231,7 +2203,21 @@
       null,
       null,
       null,
-      "28080000000"
+      "31360000000"
+    ],
+    [
+      "EL",
+      "Estee Lauder Cos. Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "30290000000"
     ],
     [
       "ILMN",
@@ -2245,7 +2231,21 @@
       null,
       null,
       null,
-      "27820000000"
+      "28550000000"
+    ],
+    [
+      "AFRM",
+      "Affirm Holdings Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "28330000000"
     ],
     [
       "FI",
@@ -2259,7 +2259,7 @@
       null,
       null,
       null,
-      "27050000000"
+      "27910000000"
     ],
     [
       "ZM",
@@ -2273,7 +2273,7 @@
       null,
       null,
       null,
-      "26430000000"
+      "25550000000"
     ],
     [
       "FSLR",
@@ -2287,7 +2287,7 @@
       null,
       null,
       null,
-      "24940000000"
+      "24130000000"
     ],
     [
       "ZS",
@@ -2301,7 +2301,7 @@
       null,
       null,
       null,
-      "23680000000"
+      "23820000000"
     ],
     [
       "SOFI",
@@ -2315,7 +2315,7 @@
       null,
       null,
       null,
-      "23650000000"
+      "23400000000"
     ],
     [
       "DKNG",
@@ -2329,7 +2329,7 @@
       null,
       null,
       null,
-      "22910000000"
+      "23020000000"
     ],
     [
       "ROKU",
@@ -2343,7 +2343,7 @@
       null,
       null,
       null,
-      "20840000000"
+      "21130000000"
     ],
     [
       "CHTR",
@@ -2357,7 +2357,7 @@
       null,
       null,
       null,
-      "19370000000"
+      "19000000000"
     ],
     [
       "IONQ",
@@ -2371,7 +2371,7 @@
       null,
       null,
       null,
-      "19190000000"
+      "18340000000"
     ],
     [
       "SMCI",
@@ -2385,49 +2385,7 @@
       null,
       null,
       null,
-      "17890000000"
-    ],
-    [
-      "GRAB",
-      "Grab Holdings Limited",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "15940000000"
-    ],
-    [
-      "GRAB",
-      "Grab Holdings Limited",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "15940000000"
-    ],
-    [
-      "IREN",
-      "IREN Ltd",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "15460000000"
+      "17610000000"
     ],
     [
       "CRCL",
@@ -2441,7 +2399,49 @@
       null,
       null,
       null,
-      "15400000000"
+      "16060000000"
+    ],
+    [
+      "GRAB",
+      "Grab Holdings Limited",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "15990000000"
+    ],
+    [
+      "GRAB",
+      "Grab Holdings Limited",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "15990000000"
+    ],
+    [
+      "IREN",
+      "IREN Ltd",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "13850000000"
     ],
     [
       "TXRH",
@@ -2455,7 +2455,7 @@
       null,
       null,
       null,
-      "12590000000"
+      "12770000000"
     ],
     [
       "PINS",
@@ -2469,7 +2469,7 @@
       null,
       null,
       null,
-      "12260000000"
+      "12360000000"
     ],
     [
       "BROS",
@@ -2483,21 +2483,7 @@
       null,
       null,
       null,
-      "12080000000"
-    ],
-    [
-      "APLD",
-      "Applied Digital Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "10150000000"
+      "11890000000"
     ],
     [
       "OSCR",
@@ -2511,35 +2497,7 @@
       null,
       null,
       null,
-      "9620000000"
-    ],
-    [
-      "OKLO",
-      "Oklo Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "9130000000"
-    ],
-    [
-      "PRMB",
-      "Primo Brands Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "8900000000"
+      "9700000000"
     ],
     [
       "AVAV",
@@ -2553,7 +2511,49 @@
       null,
       null,
       null,
-      "8730000000"
+      "9660000000"
+    ],
+    [
+      "APLD",
+      "Applied Digital Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "9450000000"
+    ],
+    [
+      "OKLO",
+      "Oklo Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "9110000000"
+    ],
+    [
+      "PRMB",
+      "Primo Brands Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "9080000000"
     ],
     [
       "HIMS",
@@ -2567,7 +2567,7 @@
       null,
       null,
       null,
-      "8700000000"
+      "8520000000"
     ],
     [
       "CELH",
@@ -2581,7 +2581,7 @@
       null,
       null,
       null,
-      "8150000000"
+      "8480000000"
     ],
     [
       "MBLY",
@@ -2595,7 +2595,7 @@
       null,
       null,
       null,
-      "8140000000"
+      "8060000000"
     ],
     [
       "Z",
@@ -2609,21 +2609,7 @@
       null,
       null,
       null,
-      "7550000000"
-    ],
-    [
-      "RGTI",
-      "Rigetti Computing Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "6210000000"
+      "7630000000"
     ],
     [
       "S",
@@ -2637,7 +2623,21 @@
       null,
       null,
       null,
-      "6030000000"
+      "6000000000"
+    ],
+    [
+      "RGTI",
+      "Rigetti Computing Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "5960000000"
     ],
     [
       "CRSP",
@@ -2651,7 +2651,7 @@
       null,
       null,
       null,
-      "5360000000"
+      "5790000000"
     ],
     [
       "LMND",
@@ -2665,7 +2665,7 @@
       null,
       null,
       null,
-      "5330000000"
+      "5490000000"
     ],
     [
       "MARA",
@@ -2679,7 +2679,7 @@
       null,
       null,
       null,
-      "5100000000"
+      "4730000000"
     ],
     [
       "ONDS",
@@ -2693,7 +2693,7 @@
       null,
       null,
       null,
-      "4140000000"
+      "3880000000"
     ],
     [
       "SMR",
@@ -2707,7 +2707,7 @@
       null,
       null,
       null,
-      "3710000000"
+      "3570000000"
     ],
     [
       "UPST",
@@ -2721,21 +2721,7 @@
       null,
       null,
       null,
-      "3420000000"
-    ],
-    [
-      "FLNC",
-      "Fluence Energy Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "3380000000"
+      "3330000000"
     ],
     [
       "LEU",
@@ -2749,11 +2735,11 @@
       null,
       null,
       null,
-      "3270000000"
+      "3190000000"
     ],
     [
-      "FSLY",
-      "Fastly Inc",
+      "FLNC",
+      "Fluence Energy Inc",
       null,
       null,
       null,
@@ -2763,7 +2749,7 @@
       null,
       null,
       null,
-      "2900000000"
+      "3130000000"
     ],
     [
       "PENN",
@@ -2777,7 +2763,21 @@
       null,
       null,
       null,
-      "2880000000"
+      "2950000000"
+    ],
+    [
+      "FSLY",
+      "Fastly Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2840000000"
     ],
     [
       "TMDX",
@@ -2791,7 +2791,7 @@
       null,
       null,
       null,
-      "2340000000"
+      "2380000000"
     ],
     [
       "QUBT",
@@ -2805,7 +2805,7 @@
       null,
       null,
       null,
-      "2130000000"
+      "2040000000"
     ],
     [
       "TDOC",
@@ -2819,7 +2819,7 @@
       null,
       null,
       null,
-      "1640000000"
+      "1660000000"
     ],
     [
       "AI",
@@ -2833,7 +2833,7 @@
       null,
       null,
       null,
-      "1470000000"
+      "1410000000"
     ],
     [
       "UMAC",
@@ -2847,7 +2847,7 @@
       null,
       null,
       null,
-      "1110000000"
+      "1060000000"
     ],
     [
       "NNE",
@@ -2861,7 +2861,7 @@
       null,
       null,
       null,
-      "1080000000"
+      "1040000000"
     ],
     [
       "ASPI",
@@ -2875,7 +2875,7 @@
       null,
       null,
       null,
-      "776820000"
+      "708830000"
     ],
     [
       "RR",
@@ -2889,7 +2889,7 @@
       null,
       null,
       null,
-      "460610000"
+      "438250000"
     ],
     [
       "ETHA",
