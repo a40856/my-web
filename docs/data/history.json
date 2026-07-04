@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-07-03T01:08:08.942Z",
-  "sourceFile": "final_stock_data-2026-07-02_2317.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-07-02_2317.xlsx",
+  "generatedAt": "2026-07-04T01:05:06.235Z",
+  "sourceFile": "final_stock_data-2026-07-03_2314.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-07-03_2314.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.33752E+12"
+      "4.34036E+12"
     ],
     [
       "MSFT",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "1.09592E+12"
+      "1.09516E+12"
     ],
     [
       "JPM",
@@ -327,7 +327,7 @@
       null,
       null,
       null,
-      "5.6823E+11"
+      "5.6816E+11"
     ],
     [
       "AMAT",
@@ -1181,7 +1181,7 @@
       null,
       null,
       null,
-      "1.6215E+11"
+      "1.6191E+11"
     ],
     [
       "SHOP",
@@ -1324,6 +1324,20 @@
       "1.3569E+11"
     ],
     [
+      "PLD",
+      "Prologis Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.3274E+11"
+    ],
+    [
       "SPGI",
       "S&P Global Inc",
       null,
@@ -1336,20 +1350,6 @@
       null,
       null,
       "1.3021E+11"
-    ],
-    [
-      "PLD",
-      "Prologis Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.3E+11"
     ],
     [
       "LOW",
@@ -2609,7 +2609,7 @@
       null,
       null,
       null,
-      "7630000000"
+      "7650000000"
     ],
     [
       "S",
@@ -2875,7 +2875,7 @@
       null,
       null,
       null,
-      "708830000"
+      "708840000"
     ],
     [
       "RR",
