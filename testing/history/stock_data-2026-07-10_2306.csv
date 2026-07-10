@@ -1,0 +1,208 @@
+Ticker,Name,Price,% Change,20 SMA,50 SMA,200 SMA,YTD %,12M Return,RSI,ATR,Market Cap,52W High,52W Low
+QQQ,Invesco QQQ Trust Series 1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Invesco,N/A,N/A
+SPY,SPDR S&P 500 ETF Trust,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,State Street (SPDR),N/A,N/A
+IWM,iShares Russell 2000 Index Fund,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Blackrock (iShares),N/A,N/A
+AAPL,Apple Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,4631.22B,N/A,N/A
+NVDA,NVIDIA Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,5105.23B,N/A,N/A
+MSFT,Microsoft Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2860.69B,N/A,N/A
+GOOG,Alphabet Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,4329.65B,N/A,N/A
+AMZN,Amazon.com Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2639.15B,N/A,N/A
+META,Meta Platforms Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1698.74B,N/A,N/A
+BRK-B,Berkshire Hathaway Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1063.78B,N/A,N/A
+LLY,Lilly(Eli) & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1119.33B,N/A,N/A
+TSM,Taiwan Semiconductor Manufacturing ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2251.50B,N/A,N/A
+AVGO,Broadcom Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1902.89B,N/A,N/A
+TSLA,Tesla Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1531.43B,N/A,N/A
+JPM,JPMorgan Chase & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,901.58B,N/A,N/A
+WMT,Walmart Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,906.43B,N/A,N/A
+UNH,Unitedhealth Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,385.62B,N/A,N/A
+V,Visa Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,657.50B,N/A,N/A
+XOM,ExxonMobil Holdings Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,575.58B,N/A,N/A
+NVO,Novo Nordisk ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,166.15B,N/A,N/A
+MA,Mastercard Incorporated,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,465.42B,N/A,N/A
+PG,Procter & Gamble Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,342.40B,N/A,N/A
+JNJ,Johnson & Johnson,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,618.61B,N/A,N/A
+COST,Costco Wholesale Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,406.34B,N/A,N/A
+ORCL,Oracle Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,405.11B,N/A,N/A
+HD,Home Depot Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,342.31B,N/A,N/A
+ASML,ASML Holding NV,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,692.72B,N/A,N/A
+ABBV,Abbvie Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,438.31B,N/A,N/A
+BAC,Bank Of America Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,423.45B,N/A,N/A
+KO,Coca-Cola Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,359.21B,N/A,N/A
+MRK,Merck & Co Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,305.12B,N/A,N/A
+NFLX,Netflix Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,308.95B,N/A,N/A
+CVX,Chevron Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,351.32B,N/A,N/A
+AZN,Astrazeneca plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,266.14B,N/A,N/A
+CRM,Salesforce Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,133.76B,N/A,N/A
+SAP,Sap SE ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,184.31B,N/A,N/A
+AMD,Advanced Micro Devices Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,909.70B,N/A,N/A
+TM,Toyota Motor Corp ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,187.75B,N/A,N/A
+ADBE,Adobe Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,88.90B,N/A,N/A
+PEP,PepsiCo Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,187.77B,N/A,N/A
+SHEL,Shell Plc ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,229.26B,N/A,N/A
+NVS,Novartis AG ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,282.00B,N/A,N/A
+TMUS,T-Mobile US Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,203.03B,N/A,N/A
+TMO,Thermo Fisher Scientific Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,195.86B,N/A,N/A
+LIN,Linde Plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,245.08B,N/A,N/A
+ACN,Accenture plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,82.75B,N/A,N/A
+MCD,McDonald's Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,195.10B,N/A,N/A
+CSCO,Cisco Systems Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,478.14B,N/A,N/A
+ABT,Abbott Laboratories,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,163.61B,N/A,N/A
+DHR,Danaher Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,140.88B,N/A,N/A
+QCOM,Qualcomm Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,199.37B,N/A,N/A
+WFC,Wells Fargo & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,266.73B,N/A,N/A
+TXN,Texas Instruments Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,283.46B,N/A,N/A
+PDD,PDD Holdings Inc ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,121.17B,N/A,N/A
+GE,GE Aerospace,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,374.84B,N/A,N/A
+IBM,International Business Machines Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,270.27B,N/A,N/A
+BABA,Alibaba Group Holding Ltd ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,269.68B,N/A,N/A
+AXP,American Express Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,239.21B,N/A,N/A
+AMGN,AMGEN Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,196.12B,N/A,N/A
+VZ,Verizon Communications Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,175.87B,N/A,N/A
+INTU,Intuit Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,75.21B,N/A,N/A
+ISRG,Intuitive Surgical Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,144.07B,N/A,N/A
+BX,Blackstone Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,150.36B,N/A,N/A
+CAT,Caterpillar Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,438.72B,N/A,N/A
+AMAT,Applied Materials Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,478.36B,N/A,N/A
+MS,Morgan Stanley,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,350.60B,N/A,N/A
+DIS,Walt Disney Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,166.05B,N/A,N/A
+NEE,NextEra Energy Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,183.45B,N/A,N/A
+TTE,TotalEnergies SE,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,174.80B,N/A,N/A
+GS,Goldman Sachs Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,311.29B,N/A,N/A
+RTX,RTX Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,263.86B,N/A,N/A
+SPGI,S&P Global Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,127.43B,N/A,N/A
+UBER,Uber Technologies Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,151.73B,N/A,N/A
+ARM,Arm Holdings Plc ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,344.09B,N/A,N/A
+LOW,Lowe's Cos. Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,118.66B,N/A,N/A
+T,AT&T Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,146.82B,N/A,N/A
+PGR,Progressive Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,134.82B,N/A,N/A
+LMT,Lockheed Martin Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,120.64B,N/A,N/A
+REGN,Regeneron Pharmaceuticals Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,69.67B,N/A,N/A
+BLK,Blackrock Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,168.47B,N/A,N/A
+BKNG,Booking Holdings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,138.23B,N/A,N/A
+ELV,Elevance Health Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,90.39B,N/A,N/A
+NKE,Nike Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,65.71B,N/A,N/A
+PLD,Prologis Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,134.11B,N/A,N/A
+C,Citigroup Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,241.44B,N/A,N/A
+SCHW,Charles Schwab Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,179.34B,N/A,N/A
+MU,Micron Technology Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1106.01B,N/A,N/A
+PANW,Palo Alto Networks Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,265.62B,N/A,N/A
+MDT,Medtronic Plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,107.36B,N/A,N/A
+CB,Chubb Limited,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,134.91B,N/A,N/A
+LRCX,Lam Research Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,438.11B,N/A,N/A
+ADP,Automatic Data Processing Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,96.70B,N/A,N/A
+KLAC,KLA Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,302.43B,N/A,N/A
+MMC,Marsh,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,85.91B,N/A,N/A
+UPS,United Parcel Service Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,95.60B,N/A,N/A
+BA,Boeing Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,175.22B,N/A,N/A
+SBUX,Starbucks Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,120.82B,N/A,N/A
+DE,Deere & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,158.42B,N/A,N/A
+HCA,HCA Healthcare Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,90.20B,N/A,N/A
+CI,Cigna Group,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,77.63B,N/A,N/A
+SHOP,Shopify Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,159.01B,N/A,N/A
+FI,Fiserv Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,26.90B,N/A,N/A
+BMY,Bristol-Myers Squibb Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,117.58B,N/A,N/A
+GILD,Gilead Sciences Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,161.19B,N/A,N/A
+ICE,Intercontinental Exchange Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,76.49B,N/A,N/A
+MO,Altria Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,119.88B,N/A,N/A
+RACE,Ferrari NV,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,66.48B,N/A,N/A
+CL,Colgate-Palmolive Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,73.81B,N/A,N/A
+ZTS,Zoetis Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,31.68B,N/A,N/A
+DELL,Dell Technologies Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,281.98B,N/A,N/A
+EQIX,Equinix Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,103.67B,N/A,N/A
+NOC,Northrop Grumman Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,76.65B,N/A,N/A
+ABNB,Airbnb Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,89.57B,N/A,N/A
+TGT,Target Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,61.38B,N/A,N/A
+PYPL,PayPal Holdings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,40.86B,N/A,N/A
+MMM,3M Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,82.16B,N/A,N/A
+PLTR,Palantir Technologies Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,303.96B,N/A,N/A
+USB,U.S. Bancorp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,97.22B,N/A,N/A
+SPOT,Spotify Technology SA,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,98.75B,N/A,N/A
+CRWD,Crowdstrike Holdings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,190.60B,N/A,N/A
+SLB,SLB Ltd,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,71.40B,N/A,N/A
+ADSK,Autodesk Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,43.98B,N/A,N/A
+GM,General Motors Company,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,70.19B,N/A,N/A
+COIN,Coinbase Global Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,41.91B,N/A,N/A
+OXY,Occidental Petroleum Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,52.61B,N/A,N/A
+GEV,GE Vernova Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,293.33B,N/A,N/A
+CHTR,Charter Communications Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,18.11B,N/A,N/A
+MSCI,MSCI Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,44.02B,N/A,N/A
+F,Ford Motor Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,55.79B,N/A,N/A
+SE,Sea Ltd ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,63.01B,N/A,N/A
+EW,Edwards Lifesciences Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,53.09B,N/A,N/A
+RCL,Royal Caribbean Group,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,76.53B,N/A,N/A
+XYZ,Block Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,46.01B,N/A,N/A
+SNOW,Snowflake Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,90.62B,N/A,N/A
+JD,JD.com Inc ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,34.21B,N/A,N/A
+SMCI,Super Micro Computer Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,18.31B,N/A,N/A
+EL,Estee Lauder Cos. Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,29.91B,N/A,N/A
+MRNA,Moderna Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,27.09B,N/A,N/A
+MSTR,Strategy Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,33.17B,N/A,N/A
+CCL,Carnival Corp Ltd,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,36.75B,N/A,N/A
+ILMN,Illumina Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,28.78B,N/A,N/A
+CELH,Celsius Holdings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,7.82B,N/A,N/A
+MARA,MARA Holdings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,4.80B,N/A,N/A
+VST,Vistra Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,53.56B,N/A,N/A
+OKLO,Oklo Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,8.50B,N/A,N/A
+SMR,NuScale Power Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3.30B,N/A,N/A
+APO,Apollo Global Management Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,69.38B,N/A,N/A
+WDAY,Workday Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,34.32B,N/A,N/A
+APP,Applovin Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,170.31B,N/A,N/A
+NET,Cloudflare Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,95.31B,N/A,N/A
+MBLY,Mobileye Global Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,8.04B,N/A,N/A
+AFRM,Affirm Holdings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,27.94B,N/A,N/A
+UPST,Upstart Holdings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3.13B,N/A,N/A
+TMDX,Transmedics Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2.46B,N/A,N/A
+QUBT,Quantum Computing Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1.95B,N/A,N/A
+IONQ,IonQ Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,16.00B,N/A,N/A
+RKLB,Rocket Lab Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,48.48B,N/A,N/A
+SOFI,SoFi Technologies Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,24.09B,N/A,N/A
+NU,Nu Holdings Ltd,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,66.47B,N/A,N/A
+MELI,MercadoLibre Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,93.90B,N/A,N/A
+TXRH,Texas Roadhouse Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,12.46B,N/A,N/A
+BROS,Dutch Bros Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,11.13B,N/A,N/A
+PRMB,Primo Brands Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,8.71B,N/A,N/A
+PM,Philip Morris International Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,283.07B,N/A,N/A
+TDOC,Teladoc Health Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1.68B,N/A,N/A
+ZM,Zoom Communications Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,26.32B,N/A,N/A
+PINS,Pinterest Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,12.61B,N/A,N/A
+ROKU,Roku Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,20.87B,N/A,N/A
+CRSP,CRISPR Therapeutics AG,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,5.15B,N/A,N/A
+Z,Zillow Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,7.36B,N/A,N/A
+FSLY,Fastly Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3.07B,N/A,N/A
+RDDT,Reddit Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,37.60B,N/A,N/A
+GRAB,Grab Holdings Limited,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,16.11B,N/A,N/A
+GLW,Corning Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,164.29B,N/A,N/A
+NNE,Nano Nuclear Energy Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,982.29M,N/A,N/A
+ZS,Zscaler Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,22.52B,N/A,N/A
+TWLO,Twilio Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,32.56B,N/A,N/A
+FSLR,First Solar Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,24.48B,N/A,N/A
+NBIS,Nebius Group NV,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,55.28B,N/A,N/A
+PENN,PENN Entertainment Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2.73B,N/A,N/A
+DKNG,DraftKings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,23.54B,N/A,N/A
+LMND,Lemonade Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,5.42B,N/A,N/A
+DDOG,Datadog Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,91.67B,N/A,N/A
+CRWV,CoreWeave Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,48.49B,N/A,N/A
+CRCL,Circle Internet Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,16.44B,N/A,N/A
+LEU,Centrus Energy Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3.37B,N/A,N/A
+ASPI,ASP Isotopes Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,630.77M,N/A,N/A
+APLD,Applied Digital Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,8.90B,N/A,N/A
+ALAB,Astera Labs Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,70.79B,N/A,N/A
+VRT,Vertiv Holdings Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,122.48B,N/A,N/A
+RGTI,Rigetti Computing Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,5.50B,N/A,N/A
+HIMS,Hims & Hers Health Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,7.96B,N/A,N/A
+AI,C3.ai Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1.39B,N/A,N/A
+GRAB,Grab Holdings Limited,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,16.11B,N/A,N/A
+S,SentinelOne Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,6.13B,N/A,N/A
+OSCR,Oscar Health Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,9.21B,N/A,N/A
+IBIT,iShares Bitcoin Trust ETF,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Blackrock (iShares),N/A,N/A
+IREN,IREN Ltd,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,14.68B,N/A,N/A
+ETHA,iShares Ethereum Trust ETF,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Blackrock (iShares),N/A,N/A
+CMG,Chipotle Mexican Grill,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,45.22B,N/A,N/A
+WDC,Western Digital Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,200.81B,N/A,N/A
+ONDS,Ondas Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3.80B,N/A,N/A
+AVAV,AeroVironment Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,7.32B,N/A,N/A
+UMAC,Unusual Machines Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,899.01M,N/A,N/A
+FLNC,Fluence Energy Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2.98B,N/A,N/A
+SNDK,Sandisk Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,283.73B,N/A,N/A
+RR,Richtech Robotics Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,384.58M,N/A,N/A
