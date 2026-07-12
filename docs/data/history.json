@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-07-11T00:54:44.342Z",
-  "sourceFile": "final_stock_data-2026-07-10_2306.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-07-10_2306.xlsx",
+  "generatedAt": "2026-07-12T00:59:51.419Z",
+  "sourceFile": "final_stock_data-2026-07-11_2259.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-07-11_2259.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.32965E+12"
+      "4.32636E+12"
     ],
     [
       "MSFT",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "1.06378E+12"
+      "1.06445E+12"
     ],
     [
       "AMD",
@@ -960,20 +960,6 @@
       "1.906E+11"
     ],
     [
-      "PEP",
-      "PepsiCo Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.8777E+11"
-    ],
-    [
       "TM",
       "Toyota Motor Corp ADR",
       null,
@@ -986,6 +972,20 @@
       null,
       null,
       "1.8775E+11"
+    ],
+    [
+      "PEP",
+      "PepsiCo Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.8751E+11"
     ],
     [
       "SAP",
@@ -2861,7 +2861,7 @@
       null,
       null,
       null,
-      "899010000"
+      "899000000"
     ],
     [
       "ASPI",
@@ -2875,7 +2875,7 @@
       null,
       null,
       null,
-      "630770000"
+      "630780000"
     ],
     [
       "RR",
@@ -2889,7 +2889,7 @@
       null,
       null,
       null,
-      "384580000"
+      "384590000"
     ],
     [
       "ETHA",
