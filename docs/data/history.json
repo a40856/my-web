@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-07-18T00:51:45.427Z",
-  "sourceFile": "final_stock_data-2026-07-17_2259.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-07-17_2259.xlsx",
+  "generatedAt": "2026-07-19T00:14:15.934Z",
+  "sourceFile": "final_stock_data-2026-07-18_2259.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-07-18_2259.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.21803E+12"
+      "4.21813E+12"
     ],
     [
       "MSFT",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "1.05823E+12"
+      "1.05864E+12"
     ],
     [
       "MU",
@@ -495,7 +495,7 @@
       null,
       null,
       null,
-      "3.6395E+11"
+      "3.6193E+11"
     ],
     [
       "KO",
@@ -2693,7 +2693,7 @@
       null,
       null,
       null,
-      "3460000000"
+      "3720000000"
     ],
     [
       "FSLY",
