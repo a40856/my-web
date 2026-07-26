@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-07-25T00:58:18.009Z",
-  "sourceFile": "final_stock_data-2026-07-24_2309.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-07-24_2309.xlsx",
+  "generatedAt": "2026-07-26T01:04:11.571Z",
+  "sourceFile": "final_stock_data-2026-07-25_2304.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-07-25_2304.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "3.8801E+12"
+      "3.88881E+12"
     ],
     [
       "MSFT",
@@ -187,7 +187,7 @@
       null,
       null,
       null,
-      "1.17565E+12"
+      "1.23633E+12"
     ],
     [
       "LLY",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "9.609E+11"
+      "9.6204E+11"
     ],
     [
       "JPM",
@@ -327,7 +327,7 @@
       null,
       null,
       null,
-      "6.3406E+11"
+      "6.3477E+11"
     ],
     [
       "MA",
@@ -635,7 +635,7 @@
       null,
       null,
       null,
-      "2.8656E+11"
+      "2.8679E+11"
     ],
     [
       "NVS",
@@ -887,21 +887,7 @@
       null,
       null,
       null,
-      "2.0131E+11"
-    ],
-    [
-      "TMUS",
-      "T-Mobile US Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.9489E+11"
+      "2.018E+11"
     ],
     [
       "VZ",
@@ -918,6 +904,20 @@
       "1.9366E+11"
     ],
     [
+      "TMUS",
+      "T-Mobile US Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.9318E+11"
+    ],
+    [
       "TTE",
       "TotalEnergies SE",
       null,
@@ -929,7 +929,7 @@
       null,
       null,
       null,
-      "1.9328E+11"
+      "1.9306E+11"
     ],
     [
       "TM",
@@ -1156,6 +1156,20 @@
       "1.6377E+11"
     ],
     [
+      "BX",
+      "Blackstone Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.617E+11"
+    ],
+    [
       "GILD",
       "Gilead Sciences Inc",
       null,
@@ -1168,20 +1182,6 @@
       null,
       null,
       "1.6055E+11"
-    ],
-    [
-      "BX",
-      "Blackstone Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.6043E+11"
     ],
     [
       "SHOP",
@@ -1265,7 +1265,7 @@
       null,
       null,
       null,
-      "1.3433E+11"
+      "1.3446E+11"
     ],
     [
       "UBER",
@@ -1503,7 +1503,7 @@
       null,
       null,
       null,
-      "99650000000"
+      "99670000000"
     ],
     [
       "SPOT",
@@ -2553,7 +2553,7 @@
       null,
       null,
       null,
-      "7040000000"
+      "7030000000"
     ],
     [
       "OKLO",
@@ -2595,7 +2595,7 @@
       null,
       null,
       null,
-      "6780000000"
+      "6840000000"
     ],
     [
       "HIMS",
