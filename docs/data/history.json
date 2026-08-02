@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-08-01T00:59:58.533Z",
-  "sourceFile": "final_stock_data-2026-07-31_2310.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-07-31_2310.xlsx",
+  "generatedAt": "2026-08-02T01:03:21.009Z",
+  "sourceFile": "final_stock_data-2026-08-01_2303.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-08-01_2303.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.36169E+12"
+      "4.35834E+12"
     ],
     [
       "MSFT",
@@ -173,7 +173,7 @@
       null,
       null,
       null,
-      "1.41296E+12"
+      "1.41801E+12"
     ],
     [
       "TSLA",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "9.932E+11"
+      "9.926E+11"
     ],
     [
       "JPM",
@@ -1251,7 +1251,7 @@
       null,
       null,
       null,
-      "1.3778E+11"
+      "1.3767E+11"
     ],
     [
       "DHR",
@@ -1307,7 +1307,7 @@
       null,
       null,
       null,
-      "1.3337E+11"
+      "1.3341E+11"
     ],
     [
       "APP",
@@ -1391,7 +1391,7 @@
       null,
       null,
       null,
-      "1.1999E+11"
+      "1.1998E+11"
     ],
     [
       "GLW",
@@ -1433,7 +1433,7 @@
       null,
       null,
       null,
-      "1.141E+11"
+      "1.1409E+11"
     ],
     [
       "MDT",
@@ -1772,8 +1772,8 @@
       "77070000000"
     ],
     [
-      "SLB",
-      "SLB Ltd",
+      "APO",
+      "Apollo Global Management Inc",
       null,
       null,
       null,
@@ -1783,7 +1783,7 @@
       null,
       null,
       null,
-      "74140000000"
+      "74240000000"
     ],
     [
       "CI",
@@ -1797,7 +1797,21 @@
       null,
       null,
       null,
-      "73820000000"
+      "73740000000"
+    ],
+    [
+      "SLB",
+      "SLB Ltd",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "73600000000"
     ],
     [
       "CL",
@@ -1812,20 +1826,6 @@
       null,
       null,
       "73060000000"
-    ],
-    [
-      "APO",
-      "Apollo Global Management Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "72400000000"
     ],
     [
       "RACE",
@@ -2539,7 +2539,7 @@
       null,
       null,
       null,
-      "7810000000"
+      "7820000000"
     ],
     [
       "AVAV",
@@ -2833,7 +2833,7 @@
       null,
       null,
       null,
-      "1210000000"
+      "1220000000"
     ],
     [
       "UMAC",
@@ -2875,7 +2875,7 @@
       null,
       null,
       null,
-      "503620000"
+      "503610000"
     ],
     [
       "RR",
