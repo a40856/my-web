@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-08-02T01:03:21.009Z",
-  "sourceFile": "final_stock_data-2026-08-01_2303.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-08-01_2303.xlsx",
+  "generatedAt": "2026-08-03T01:03:12.193Z",
+  "sourceFile": "final_stock_data-2026-08-02_2305.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-08-02_2305.xlsx",
   "rows": [
     [
       "Ticker",
@@ -569,7 +569,7 @@
     ],
     [
       "GS",
-      "Goldman Sachs Group Inc",
+      null,
       null,
       null,
       null,
