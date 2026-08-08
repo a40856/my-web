@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-08-07T23:55:43.366Z",
-  "sourceFile": "final_stock_data-2026-08-07_2244.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-08-07_2244.xlsx",
+  "generatedAt": "2026-08-08T23:52:13.148Z",
+  "sourceFile": "final_stock_data-2026-08-08_2239.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-08-08_2239.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.33045E+12"
+      "4.3285E+12"
     ],
     [
       "MSFT",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "1.01242E+12"
+      "1.01156E+12"
     ],
     [
       "MU",
@@ -498,20 +498,6 @@
       "3.7454E+11"
     ],
     [
-      "CVX",
-      "Chevron Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "3.7155E+11"
-    ],
-    [
       "UNH",
       "Unitedhealth Group Inc",
       null,
@@ -524,6 +510,20 @@
       null,
       null,
       "3.6969E+11"
+    ],
+    [
+      "CVX",
+      "Chevron Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "3.686E+11"
     ],
     [
       "HD",
@@ -761,7 +761,7 @@
       null,
       null,
       null,
-      "2.5879E+11"
+      "2.5884E+11"
     ],
     [
       "AZN",
@@ -806,20 +806,6 @@
       "2.3795E+11"
     ],
     [
-      "C",
-      "Citigroup Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "2.3151E+11"
-    ],
-    [
       "AXP",
       "American Express Co",
       null,
@@ -832,6 +818,20 @@
       null,
       null,
       "2.3022E+11"
+    ],
+    [
+      "C",
+      "Citigroup Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.2645E+11"
     ],
     [
       "LIN",
@@ -1055,7 +1055,7 @@
       null,
       null,
       null,
-      "1.8478E+11"
+      "1.8464E+11"
     ],
     [
       "DIS",
@@ -1153,7 +1153,7 @@
       null,
       null,
       null,
-      "1.6539E+11"
+      "1.6517E+11"
     ],
     [
       "T",
@@ -1419,7 +1419,7 @@
       null,
       null,
       null,
-      "1.165E+11"
+      "1.1606E+11"
     ],
     [
       "SNOW",
@@ -1492,20 +1492,6 @@
       "1.0753E+11"
     ],
     [
-      "ABNB",
-      "Airbnb Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.0732E+11"
-    ],
-    [
       "NET",
       "Cloudflare Inc",
       null,
@@ -1517,7 +1503,21 @@
       null,
       null,
       null,
-      "1.0663E+11"
+      "1.0706E+11"
+    ],
+    [
+      "ABNB",
+      "Airbnb Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.0633E+11"
     ],
     [
       "ADBE",
@@ -1727,7 +1727,7 @@
       null,
       null,
       null,
-      "83270000000"
+      "84220000000"
     ],
     [
       "NOC",
@@ -2217,7 +2217,7 @@
       null,
       null,
       null,
-      "30460000000"
+      "30020000000"
     ],
     [
       "ILMN",
@@ -2290,6 +2290,20 @@
       "25200000000"
     ],
     [
+      "SOFI",
+      "SoFi Technologies Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "23740000000"
+    ],
+    [
       "MRNA",
       "Moderna Inc",
       null,
@@ -2302,20 +2316,6 @@
       null,
       null,
       "23620000000"
-    ],
-    [
-      "SOFI",
-      "SoFi Technologies Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "23580000000"
     ],
     [
       "ROKU",
@@ -2497,7 +2497,7 @@
       null,
       null,
       null,
-      "8740000000"
+      "9260000000"
     ],
     [
       "PRMB",
@@ -2553,7 +2553,7 @@
       null,
       null,
       null,
-      "8410000000"
+      "8400000000"
     ],
     [
       "Z",
@@ -2567,7 +2567,7 @@
       null,
       null,
       null,
-      "7700000000"
+      "7570000000"
     ],
     [
       "MBLY",
@@ -2623,7 +2623,7 @@
       null,
       null,
       null,
-      "7100000000"
+      "7030000000"
     ],
     [
       "RGTI",
@@ -2637,7 +2637,7 @@
       null,
       null,
       null,
-      "5960000000"
+      "5990000000"
     ],
     [
       "ONDS",
@@ -2707,7 +2707,7 @@
       null,
       null,
       null,
-      "3850000000"
+      "3900000000"
     ],
     [
       "LEU",
@@ -2721,7 +2721,7 @@
       null,
       null,
       null,
-      "3760000000"
+      "3820000000"
     ],
     [
       "FSLY",
@@ -2847,7 +2847,7 @@
       null,
       null,
       null,
-      "1250000000"
+      "1300000000"
     ],
     [
       "NNE",
