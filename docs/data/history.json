@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-08-14T23:44:19.045Z",
-  "sourceFile": "final_stock_data-2026-08-14_2233.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-08-14_2233.xlsx",
+  "generatedAt": "2026-08-15T23:41:46.618Z",
+  "sourceFile": "final_stock_data-2026-08-15_2231.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-08-15_2231.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.2177E+12"
+      "4.21731E+12"
     ],
     [
       "MSFT",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "9.7103E+11"
+      "9.7002E+11"
     ],
     [
       "JPM",
@@ -1800,6 +1800,20 @@
       "76140000000"
     ],
     [
+      "NBIS",
+      "Nebius Group NV",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "75490000000"
+    ],
+    [
       "CI",
       "Cigna Group",
       null,
@@ -1854,20 +1868,6 @@
       null,
       null,
       "70160000000"
-    ],
-    [
-      "NBIS",
-      "Nebius Group NV",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "69870000000"
     ],
     [
       "SE",
@@ -1926,6 +1926,20 @@
       "58340000000"
     ],
     [
+      "CRWV",
+      "CoreWeave Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "58200000000"
+    ],
+    [
       "F",
       "Ford Motor Co",
       null,
@@ -1938,20 +1952,6 @@
       null,
       null,
       "57300000000"
-    ],
-    [
-      "CRWV",
-      "CoreWeave Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "57010000000"
     ],
     [
       "ALAB",
@@ -2385,7 +2385,7 @@
       null,
       null,
       null,
-      "18380000000"
+      "18740000000"
     ],
     [
       "CRCL",
@@ -2581,7 +2581,7 @@
       null,
       null,
       null,
-      "7830000000"
+      "7840000000"
     ],
     [
       "MBLY",
@@ -2889,7 +2889,7 @@
       null,
       null,
       null,
-      "402480000"
+      "405180000"
     ],
     [
       "ETHA",
