@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-08-22T23:42:34.278Z",
-  "sourceFile": "final_stock_data-2026-08-22_2231.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-08-22_2231.xlsx",
+  "generatedAt": "2026-08-23T23:42:28.820Z",
+  "sourceFile": "final_stock_data-2026-08-23_2230.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-08-23_2230.xlsx",
   "rows": [
     [
       "Ticker",
@@ -2696,20 +2696,6 @@
       "4130000000"
     ],
     [
-      "SMR",
-      "NuScale Power Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "4040000000"
-    ],
-    [
       "FSLY",
       "Fastly Inc",
       null,
@@ -2722,6 +2708,20 @@
       null,
       null,
       "3970000000"
+    ],
+    [
+      "SMR",
+      "NuScale Power Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "3860000000"
     ],
     [
       "LEU",
