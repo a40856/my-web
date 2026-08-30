@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-08-29T04:14:18.320Z",
-  "sourceFile": "final_stock_data-2026-08-29_0341.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-08-29_0341.xlsx",
+  "generatedAt": "2026-08-30T01:23:36.701Z",
+  "sourceFile": "final_stock_data-2026-08-30_0003.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-08-30_0003.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.21343E+12"
+      "4.21829E+12"
     ],
     [
       "MSFT",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "9.7231E+11"
+      "9.7235E+11"
     ],
     [
       "JPM",
@@ -485,7 +485,7 @@
     ],
     [
       "AMAT",
-      "Applied Materials Inc",
+      null,
       null,
       null,
       null,
@@ -876,20 +876,6 @@
       "2.2501E+11"
     ],
     [
-      "C",
-      "Citigroup Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "2.2293E+11"
-    ],
-    [
       "CRWD",
       "Crowdstrike Holdings Inc",
       null,
@@ -901,7 +887,21 @@
       null,
       null,
       null,
-      "2.2239E+11"
+      "2.2363E+11"
+    ],
+    [
+      "C",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.2293E+11"
     ],
     [
       "IBM",
@@ -943,7 +943,7 @@
       null,
       null,
       null,
-      "2.0966E+11"
+      "2.1069E+11"
     ],
     [
       "VZ",
@@ -1167,7 +1167,7 @@
       null,
       null,
       null,
-      "1.7015E+11"
+      "1.6995E+11"
     ],
     [
       "BA",
@@ -1419,7 +1419,7 @@
       null,
       null,
       null,
-      "1.1666E+11"
+      "1.1673E+11"
     ],
     [
       "ACN",
@@ -1982,20 +1982,6 @@
       "52000000000"
     ],
     [
-      "WDAY",
-      "Workday Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "50360000000"
-    ],
-    [
       "ALAB",
       "Astera Labs Inc",
       null,
@@ -2022,6 +2008,20 @@
       null,
       null,
       "50210000000"
+    ],
+    [
+      "WDAY",
+      "Workday Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "49340000000"
     ],
     [
       "MSTR",
@@ -2287,7 +2287,7 @@
       null,
       null,
       null,
-      "26040000000"
+      "26240000000"
     ],
     [
       "SMCI",
@@ -2385,7 +2385,7 @@
       null,
       null,
       null,
-      "19830000000"
+      "17600000000"
     ],
     [
       "IONQ",
@@ -2430,6 +2430,20 @@
       "14720000000"
     ],
     [
+      "IREN",
+      "IREN Ltd",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "13950000000"
+    ],
+    [
       "PINS",
       "Pinterest Inc",
       null,
@@ -2456,20 +2470,6 @@
       null,
       null,
       "13060000000"
-    ],
-    [
-      "IREN",
-      "IREN Ltd",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "12650000000"
     ],
     [
       "OSCR",
@@ -2861,7 +2861,7 @@
       null,
       null,
       null,
-      "964950000"
+      "964960000"
     ],
     [
       "ASPI",
