@@ -5,10 +5,10 @@ IWM,iShares Russell 2000 Index Fund,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Blackroc
 AAPL,Apple Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,4669.70B,N/A,N/A
 NVDA,NVIDIA Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,5551.68B,N/A,N/A
 MSFT,Microsoft Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3710.55B,N/A,N/A
-GOOG,Alphabet Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,4123.38B,N/A,N/A
+GOOG,Alphabet Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,4121.96B,N/A,N/A
 AMZN,Amazon.com Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2788.37B,N/A,N/A
 META,Meta Platforms Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1571.23B,N/A,N/A
-BRK-B,Berkshire Hathaway Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,974.50B,N/A,N/A
+BRK-B,Berkshire Hathaway Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,974.25B,N/A,N/A
 LLY,Lilly(Eli) & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1081.96B,N/A,N/A
 TSM,Taiwan Semiconductor Manufacturing ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2224.53B,N/A,N/A
 AVGO,Broadcom Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1702.71B,N/A,N/A
@@ -87,7 +87,7 @@ C,Citigroup Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,231.02B,N/A,N/A
 SCHW,Charles Schwab Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,189.00B,N/A,N/A
 MU,Micron Technology Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1148.13B,N/A,N/A
 PANW,Palo Alto Networks Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,271.61B,N/A,N/A
-MDT,Medtronic Plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,120.54B,N/A,N/A
+MDT,Medtronic Plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,120.46B,N/A,N/A
 CB,Chubb Limited,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,131.79B,N/A,N/A
 LRCX,Lam Research Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,384.97B,N/A,N/A
 ADP,Automatic Data Processing Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,110.29B,N/A,N/A
@@ -174,7 +174,7 @@ RDDT,Reddit Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,29.72B,N/A,N/A
 GRAB,Grab Holdings Limited,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,13.95B,N/A,N/A
 GLW,Corning Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,132.91B,N/A,N/A
 NNE,Nano Nuclear Energy Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,951.53M,N/A,N/A
-ZS,Zscaler Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,27.46B,N/A,N/A
+ZS,Zscaler Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,27.69B,N/A,N/A
 TWLO,Twilio Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,35.78B,N/A,N/A
 FSLR,First Solar Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,21.97B,N/A,N/A
 NBIS,Nebius Group NV,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,61.55B,N/A,N/A
