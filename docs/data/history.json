@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-09-05T01:10:18.737Z",
-  "sourceFile": "final_stock_data-2026-09-04_2354.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-09-04_2354.xlsx",
+  "generatedAt": "2026-09-06T01:08:50.807Z",
+  "sourceFile": "final_stock_data-2026-09-05_2343.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-09-05_2343.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.12338E+12"
+      "4.12196E+12"
     ],
     [
       "MSFT",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "9.745E+11"
+      "9.7425E+11"
     ],
     [
       "JPM",
@@ -1377,7 +1377,7 @@
       null,
       null,
       null,
-      "1.2054E+11"
+      "1.2046E+11"
     ],
     [
       "SBUX",
@@ -2273,7 +2273,7 @@
       null,
       null,
       null,
-      "27460000000"
+      "27690000000"
     ],
     [
       "CHTR",
