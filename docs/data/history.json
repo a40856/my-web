@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-09-06T01:08:50.807Z",
-  "sourceFile": "final_stock_data-2026-09-05_2343.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-09-05_2343.xlsx",
+  "generatedAt": "2026-09-07T01:09:34.902Z",
+  "sourceFile": "final_stock_data-2026-09-06_2342.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-09-06_2342.xlsx",
   "rows": [
     [
       "Ticker",
@@ -75,7 +75,7 @@
       null,
       null,
       null,
-      "4.6697E+12"
+      "4.66971E+12"
     ],
     [
       "NVDA",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.12196E+12"
+      "4.10084E+12"
     ],
     [
       "MSFT",
@@ -204,6 +204,20 @@
       "1.14813E+12"
     ],
     [
+      "BRK-B",
+      "Berkshire Hathaway Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.08327E+12"
+    ],
+    [
       "LLY",
       "Lilly(Eli) & Co",
       null,
@@ -216,20 +230,6 @@
       null,
       null,
       "1.08196E+12"
-    ],
-    [
-      "BRK-B",
-      "Berkshire Hathaway Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "9.7425E+11"
     ],
     [
       "JPM",
@@ -369,7 +369,7 @@
       null,
       null,
       null,
-      "4.5319E+11"
+      "4.532E+11"
     ],
     [
       "BAC",
@@ -873,7 +873,7 @@
       null,
       null,
       null,
-      "2.2694E+11"
+      "2.2695E+11"
     ],
     [
       "IBM",
@@ -1282,20 +1282,6 @@
       "1.3291E+11"
     ],
     [
-      "PLD",
-      "Prologis Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.3281E+11"
-    ],
-    [
       "CB",
       "Chubb Limited",
       null,
@@ -1322,6 +1308,20 @@
       null,
       null,
       "1.3075E+11"
+    ],
+    [
+      "PLD",
+      "Prologis Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.3021E+11"
     ],
     [
       "ISRG",
@@ -1377,7 +1377,7 @@
       null,
       null,
       null,
-      "1.2046E+11"
+      "1.2054E+11"
     ],
     [
       "SBUX",
@@ -1492,20 +1492,6 @@
       "1.1029E+11"
     ],
     [
-      "ABNB",
-      "Airbnb Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.0894E+11"
-    ],
-    [
       "VRT",
       "Vertiv Holdings Co",
       null,
@@ -1532,6 +1518,20 @@
       null,
       null,
       "1.0728E+11"
+    ],
+    [
+      "ABNB",
+      "Airbnb Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1.0727E+11"
     ],
     [
       "ADBE",
@@ -1727,7 +1727,7 @@
       null,
       null,
       null,
-      "85220000000"
+      "85210000000"
     ],
     [
       "APO",
@@ -1783,7 +1783,7 @@
       null,
       null,
       null,
-      "74700000000"
+      "74710000000"
     ],
     [
       "CI",
@@ -1853,7 +1853,7 @@
       null,
       null,
       null,
-      "70770000000"
+      "70760000000"
     ],
     [
       "RACE",
@@ -2049,7 +2049,7 @@
       null,
       null,
       null,
-      "48710000000"
+      "48720000000"
     ],
     [
       "WDAY",
@@ -2192,20 +2192,6 @@
       "32950000000"
     ],
     [
-      "CCL",
-      "Carnival Corp Ltd",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "32200000000"
-    ],
-    [
       "ZTS",
       "Zoetis Inc",
       null,
@@ -2248,6 +2234,20 @@
       "29570000000"
     ],
     [
+      "CCL",
+      "Carnival Corp Ltd",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "29130000000"
+    ],
+    [
       "FI",
       "Fiserv Inc",
       null,
@@ -2273,21 +2273,7 @@
       null,
       null,
       null,
-      "27690000000"
-    ],
-    [
-      "CHTR",
-      "Charter Communications Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "26620000000"
+      "27460000000"
     ],
     [
       "SMCI",
@@ -2316,6 +2302,20 @@
       null,
       null,
       "25910000000"
+    ],
+    [
+      "CHTR",
+      "Charter Communications Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "24410000000"
     ],
     [
       "AFRM",
@@ -2372,20 +2372,6 @@
       null,
       null,
       "21970000000"
-    ],
-    [
-      "DKNG",
-      "DraftKings Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "21360000000"
     ],
     [
       "IREN",
@@ -2458,6 +2444,20 @@
       "12440000000"
     ],
     [
+      "DKNG",
+      "DraftKings Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "11920000000"
+    ],
+    [
       "PINS",
       "Pinterest Inc",
       null,
@@ -2486,20 +2486,6 @@
       "9960000000"
     ],
     [
-      "BROS",
-      "Dutch Bros Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "8140000000"
-    ],
-    [
       "PRMB",
       "Primo Brands Corp",
       null,
@@ -2525,7 +2511,7 @@
       null,
       null,
       null,
-      "7810000000"
+      "7780000000"
     ],
     [
       "CELH",
@@ -2626,6 +2612,20 @@
       "6470000000"
     ],
     [
+      "BROS",
+      "Dutch Bros Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "6430000000"
+    ],
+    [
       "CRSP",
       "CRISPR Therapeutics AG",
       null,
@@ -2682,20 +2682,6 @@
       "4350000000"
     ],
     [
-      "SMR",
-      "NuScale Power Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "4170000000"
-    ],
-    [
       "LMND",
       "Lemonade Inc",
       null,
@@ -2708,6 +2694,20 @@
       null,
       null,
       "4130000000"
+    ],
+    [
+      "SMR",
+      "NuScale Power Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "3980000000"
     ],
     [
       "LEU",
@@ -2780,20 +2780,6 @@
       "2290000000"
     ],
     [
-      "FLNC",
-      "Fluence Energy Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1910000000"
-    ],
-    [
       "QUBT",
       "Quantum Computing Inc",
       null,
@@ -2820,6 +2806,20 @@
       null,
       null,
       "1670000000"
+    ],
+    [
+      "FLNC",
+      "Fluence Energy Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1480000000"
     ],
     [
       "UMAC",
@@ -2861,7 +2861,7 @@
       null,
       null,
       null,
-      "951530000"
+      "951560000"
     ],
     [
       "ASPI",
