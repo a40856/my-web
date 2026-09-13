@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-09-12T01:18:32.559Z",
-  "sourceFile": "final_stock_data-2026-09-12_0005.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-09-12_0005.xlsx",
+  "generatedAt": "2026-09-13T01:15:17.979Z",
+  "sourceFile": "final_stock_data-2026-09-12_2358.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-09-12_2358.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.11759E+12"
+      "4.123E+12"
     ],
     [
       "MSFT",
@@ -159,7 +159,7 @@
       null,
       null,
       null,
-      "1.7222E+12"
+      "1.72801E+12"
     ],
     [
       "META",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "9.8282E+11"
+      "9.8267E+11"
     ],
     [
       "JPM",
@@ -663,7 +663,7 @@
       null,
       null,
       null,
-      "2.7723E+11"
+      "2.7719E+11"
     ],
     [
       "WFC",
@@ -705,7 +705,7 @@
       null,
       null,
       null,
-      "2.6948E+11"
+      "2.7047E+11"
     ],
     [
       "RTX",
@@ -2780,20 +2780,6 @@
       "2390000000"
     ],
     [
-      "FLNC",
-      "Fluence Energy Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1830000000"
-    ],
-    [
       "QUBT",
       "Quantum Computing Inc",
       null,
@@ -2820,6 +2806,20 @@
       null,
       null,
       "1690000000"
+    ],
+    [
+      "FLNC",
+      "Fluence Energy Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1420000000"
     ],
     [
       "UMAC",
@@ -2875,7 +2875,7 @@
       null,
       null,
       null,
-      "507450000"
+      "507460000"
     ],
     [
       "RR",
