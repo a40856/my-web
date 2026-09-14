@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-09-13T01:15:17.979Z",
-  "sourceFile": "final_stock_data-2026-09-12_2358.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-09-12_2358.xlsx",
+  "generatedAt": "2026-09-14T01:17:47.616Z",
+  "sourceFile": "final_stock_data-2026-09-14_0003.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-09-14_0003.xlsx",
   "rows": [
     [
       "Ticker",
@@ -2780,6 +2780,20 @@
       "2390000000"
     ],
     [
+      "FLNC",
+      "Fluence Energy Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "1830000000"
+    ],
+    [
       "QUBT",
       "Quantum Computing Inc",
       null,
@@ -2806,20 +2820,6 @@
       null,
       null,
       "1690000000"
-    ],
-    [
-      "FLNC",
-      "Fluence Energy Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1420000000"
     ],
     [
       "UMAC",
@@ -2875,7 +2875,7 @@
       null,
       null,
       null,
-      "507460000"
+      "507450000"
     ],
     [
       "RR",
