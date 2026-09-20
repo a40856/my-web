@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-09-19T01:20:41.761Z",
-  "sourceFile": "final_stock_data-2026-09-19_0005.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-09-19_0005.xlsx",
+  "generatedAt": "2026-09-20T01:20:26.222Z",
+  "sourceFile": "final_stock_data-2026-09-20_0003.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-09-20_0003.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.23665E+12"
+      "4.24652E+12"
     ],
     [
       "MSFT",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "9.8136E+11"
+      "9.8078E+11"
     ],
     [
       "JPM",
@@ -2609,7 +2609,7 @@
       null,
       null,
       null,
-      "6730000000"
+      "6720000000"
     ],
     [
       "HIMS",
