@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-09-26T01:45:51.660Z",
-  "sourceFile": "final_stock_data-2026-09-26_0031.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-09-26_0031.xlsx",
+  "generatedAt": "2026-09-27T01:36:57.673Z",
+  "sourceFile": "final_stock_data-2026-09-27_0026.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-09-27_0026.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.194E+12"
+      "4.19044E+12"
     ],
     [
       "MSFT",
@@ -243,7 +243,7 @@
       null,
       null,
       null,
-      "9.7374E+11"
+      "9.7318E+11"
     ],
     [
       "JPM",
@@ -453,7 +453,7 @@
       null,
       null,
       null,
-      "3.9443E+11"
+      "3.9446E+11"
     ],
     [
       "AMAT",
@@ -663,7 +663,7 @@
       null,
       null,
       null,
-      "2.737E+11"
+      "2.7362E+11"
     ],
     [
       "BABA",
@@ -1503,7 +1503,7 @@
       null,
       null,
       null,
-      "1.0475E+11"
+      "1.0448E+11"
     ],
     [
       "APP",
@@ -2889,7 +2889,7 @@
       null,
       null,
       null,
-      "382680000"
+      "382670000"
     ],
     [
       "ETHA",
