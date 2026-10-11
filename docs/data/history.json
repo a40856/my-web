@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-10-10T02:29:52.357Z",
-  "sourceFile": "final_stock_data-2026-10-10_0140.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-10-10_0140.xlsx",
+  "generatedAt": "2026-10-11T02:01:48.881Z",
+  "sourceFile": "final_stock_data-2026-10-11_0050.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-10-11_0050.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "4.27752E+12"
+      "4.2798E+12"
     ],
     [
       "MSFT",
@@ -229,7 +229,7 @@
       null,
       null,
       null,
-      "9.9271E+11"
+      "9.9298E+11"
     ],
     [
       "AMD",
@@ -1069,7 +1069,7 @@
       null,
       null,
       null,
-      "1.7194E+11"
+      "1.7166E+11"
     ],
     [
       "DE",
@@ -1517,7 +1517,7 @@
       null,
       null,
       null,
-      "1.0346E+11"
+      "1.0345E+11"
     ],
     [
       "EQIX",
@@ -2595,7 +2595,7 @@
       null,
       null,
       null,
-      "6550000000"
+      "6560000000"
     ],
     [
       "OKLO",
@@ -2889,7 +2889,7 @@
       null,
       null,
       null,
-      "369160000"
+      "369170000"
     ],
     [
       "ETHA",
