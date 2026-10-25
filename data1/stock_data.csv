@@ -5,14 +5,14 @@ IWM,iShares Russell 2000 Index Fund,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Blackroc
 AAPL,Apple Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,5074.76B,N/A,N/A
 NVDA,NVIDIA Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,5084.14B,N/A,N/A
 MSFT,Microsoft Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3895.23B,N/A,N/A
-GOOG,Alphabet Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3903.28B,N/A,N/A
+GOOG,Alphabet Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3899.97B,N/A,N/A
 AMZN,Amazon.com Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2675.01B,N/A,N/A
 META,Meta Platforms Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1636.69B,N/A,N/A
-BRK-B,Berkshire Hathaway Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1160.69B,N/A,N/A
+BRK-B,Berkshire Hathaway Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1160.82B,N/A,N/A
 LLY,Lilly(Eli) & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1198.78B,N/A,N/A
 TSM,Taiwan Semiconductor Manufacturing ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2170.59B,N/A,N/A
 AVGO,Broadcom Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1535.58B,N/A,N/A
-TSLA,Tesla Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1471.29B,N/A,N/A
+TSLA,Tesla Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1471.30B,N/A,N/A
 JPM,JPMorgan Chase & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,881.40B,N/A,N/A
 WMT,Walmart Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,951.18B,N/A,N/A
 UNH,Unitedhealth Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,375.28B,N/A,N/A
@@ -20,7 +20,7 @@ V,Visa Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,761.61B,N/A,N/A
 XOM,ExxonMobil Holdings Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,753.34B,N/A,N/A
 NVO,Novo Nordisk ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,130.66B,N/A,N/A
 MA,Mastercard Incorporated,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,546.28B,N/A,N/A
-PG,Procter & Gamble Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,374.00B,N/A,N/A
+PG,Procter & Gamble Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,373.21B,N/A,N/A
 JNJ,Johnson & Johnson,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,635.07B,N/A,N/A
 COST,Costco Wholesale Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,444.60B,N/A,N/A
 ORCL,Oracle Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,381.47B,N/A,N/A
@@ -54,7 +54,7 @@ WFC,Wells Fargo & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,247.31B,N/A,N/A
 TXN,Texas Instruments Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,259.99B,N/A,N/A
 PDD,PDD Holdings Inc ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,112.51B,N/A,N/A
 GE,GE Aerospace,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,295.17B,N/A,N/A
-IBM,International Business Machines Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,238.89B,N/A,N/A
+IBM,International Business Machines Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,239.64B,N/A,N/A
 BABA,Alibaba Group Holding Ltd ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,247.88B,N/A,N/A
 AXP,American Express Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,211.52B,N/A,N/A
 AMGN,AMGEN Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,237.48B,N/A,N/A
@@ -76,7 +76,7 @@ ARM,Arm Holdings Plc ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,224.63B,N/A,N/A
 LOW,Lowe's Cos. Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,111.47B,N/A,N/A
 T,AT&T Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,140.99B,N/A,N/A
 PGR,Progressive Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,132.53B,N/A,N/A
-LMT,Lockheed Martin Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,139.44B,N/A,N/A
+LMT,Lockheed Martin Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,139.57B,N/A,N/A
 REGN,Regeneron Pharmaceuticals Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,82.88B,N/A,N/A
 BLK,Blackrock Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,181.69B,N/A,N/A
 BKNG,Booking Holdings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,117.09B,N/A,N/A
@@ -89,7 +89,7 @@ MU,Micron Technology Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,992.88B,N/A,N/A
 PANW,Palo Alto Networks Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,311.29B,N/A,N/A
 MDT,Medtronic Plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,122.05B,N/A,N/A
 CB,Chubb Limited,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,137.00B,N/A,N/A
-LRCX,Lam Research Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,287.95B,N/A,N/A
+LRCX,Lam Research Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,287.43B,N/A,N/A
 ADP,Automatic Data Processing Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,120.52B,N/A,N/A
 KLAC,KLA Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,190.02B,N/A,N/A
 MMC,Marsh,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,93.90B,N/A,N/A
