@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-10-24T01:45:18.388Z",
-  "sourceFile": "final_stock_data-2026-10-24_0029.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-10-24_0029.xlsx",
+  "generatedAt": "2026-10-25T01:22:28.654Z",
+  "sourceFile": "final_stock_data-2026-10-25_0011.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-10-25_0011.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "3.90328E+12"
+      "3.89997E+12"
     ],
     [
       "MSFT",
@@ -187,7 +187,7 @@
       null,
       null,
       null,
-      "1.47129E+12"
+      "1.4713E+12"
     ],
     [
       "LLY",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "1.16069E+12"
+      "1.16082E+12"
     ],
     [
       "MU",
@@ -467,7 +467,7 @@
       null,
       null,
       null,
-      "3.74E+11"
+      "3.7321E+11"
     ],
     [
       "MRK",
@@ -621,7 +621,7 @@
       null,
       null,
       null,
-      "2.8795E+11"
+      "2.8743E+11"
     ],
     [
       "MS",
@@ -803,7 +803,7 @@
       null,
       null,
       null,
-      "2.3889E+11"
+      "2.3964E+11"
     ],
     [
       "AMGN",
@@ -1237,7 +1237,7 @@
       null,
       null,
       null,
-      "1.3944E+11"
+      "1.3957E+11"
     ],
     [
       "CB",
