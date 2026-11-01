@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-10-31T02:34:57.450Z",
-  "sourceFile": "final_stock_data-2026-10-31_0133.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-10-31_0133.xlsx",
+  "generatedAt": "2026-11-01T02:23:46.862Z",
+  "sourceFile": "final_stock_data-2026-11-01_0055.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-11-01_0055.xlsx",
   "rows": [
     [
       "Ticker",
@@ -117,7 +117,7 @@
       null,
       null,
       null,
-      "3.41058E+12"
+      "3.41153E+12"
     ],
     [
       "AMZN",
@@ -201,7 +201,7 @@
       null,
       null,
       null,
-      "1.33441E+12"
+      "1.33354E+12"
     ],
     [
       "BRK-B",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "1.16354E+12"
+      "1.16222E+12"
     ],
     [
       "MU",
@@ -411,7 +411,7 @@
       null,
       null,
       null,
-      "4.1204E+11"
+      "4.1145E+11"
     ],
     [
       "KO",
@@ -831,7 +831,7 @@
       null,
       null,
       null,
-      "2.3705E+11"
+      "2.3608E+11"
     ],
     [
       "TM",
@@ -890,20 +890,6 @@
       "2.1398E+11"
     ],
     [
-      "TTE",
-      "TotalEnergies SE",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "2.1203E+11"
-    ],
-    [
       "GILD",
       "Gilead Sciences Inc",
       null,
@@ -918,6 +904,20 @@
       "2.1164E+11"
     ],
     [
+      "TTE",
+      "TotalEnergies SE",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "2.1036E+11"
+    ],
+    [
       "KLAC",
       "KLA Corp",
       null,
@@ -929,7 +929,7 @@
       null,
       null,
       null,
-      "2.0607E+11"
+      "2.0575E+11"
     ],
     [
       "C",
@@ -1027,7 +1027,7 @@
       null,
       null,
       null,
-      "1.8541E+11"
+      "1.8539E+11"
     ],
     [
       "ABT",
@@ -1335,7 +1335,7 @@
       null,
       null,
       null,
-      "1.3029E+11"
+      "1.298E+11"
     ],
     [
       "BMY",
@@ -1349,7 +1349,7 @@
       null,
       null,
       null,
-      "1.2763E+11"
+      "1.2771E+11"
     ],
     [
       "PLD",
@@ -1492,20 +1492,6 @@
       "1.0622E+11"
     ],
     [
-      "HCA",
-      "HCA Healthcare Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "1.0245E+11"
-    ],
-    [
       "EQIX",
       "Equinix Inc",
       null,
@@ -1532,6 +1518,20 @@
       null,
       null,
       "99950000000"
+    ],
+    [
+      "HCA",
+      "HCA Healthcare Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "98850000000"
     ],
     [
       "ABNB",
@@ -1573,7 +1573,7 @@
       null,
       null,
       null,
-      "95530000000"
+      "95510000000"
     ],
     [
       "MMC",
@@ -2091,7 +2091,7 @@
       null,
       null,
       null,
-      "40350000000"
+      "40340000000"
     ],
     [
       "EL",
@@ -2147,7 +2147,7 @@
       null,
       null,
       null,
-      "37870000000"
+      "38000000000"
     ],
     [
       "ILMN",
@@ -2455,7 +2455,7 @@
       null,
       null,
       null,
-      "10960000000"
+      "10950000000"
     ],
     [
       "IREN",
@@ -2553,7 +2553,7 @@
       null,
       null,
       null,
-      "7010000000"
+      "7000000000"
     ],
     [
       "HIMS",
@@ -2847,7 +2847,7 @@
       null,
       null,
       null,
-      "806180000"
+      "806190000"
     ],
     [
       "NNE",
@@ -2875,7 +2875,7 @@
       null,
       null,
       null,
-      "309690000"
+      "309680000"
     ],
     [
       "RR",
