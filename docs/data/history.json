@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-11-07T02:58:19.127Z",
-  "sourceFile": "final_stock_data-2026-11-07_0148.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-11-07_0148.xlsx",
+  "generatedAt": "2026-11-08T02:36:20.180Z",
+  "sourceFile": "final_stock_data-2026-11-08_0118.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-11-08_0118.xlsx",
   "rows": [
     [
       "Ticker",
@@ -117,7 +117,7 @@
       null,
       null,
       null,
-      "3.47608E+12"
+      "3.47617E+12"
     ],
     [
       "AMZN",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "1.22124E+12"
+      "1.22225E+12"
     ],
     [
       "WMT",
@@ -257,7 +257,7 @@
       null,
       null,
       null,
-      "8.0966E+11"
+      "7.8541E+11"
     ],
     [
       "MU",
@@ -383,7 +383,7 @@
       null,
       null,
       null,
-      "4.148E+11"
+      "4.1787E+11"
     ],
     [
       "KO",
@@ -579,7 +579,7 @@
       null,
       null,
       null,
-      "2.8496E+11"
+      "2.836E+11"
     ],
     [
       "SHEL",
@@ -1475,7 +1475,7 @@
       null,
       null,
       null,
-      "1.1376E+11"
+      "1.1242E+11"
     ],
     [
       "HCA",
@@ -1576,20 +1576,6 @@
       "96270000000"
     ],
     [
-      "NET",
-      "Cloudflare Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "95700000000"
-    ],
-    [
       "MMM",
       "3M Co",
       null,
@@ -1602,6 +1588,20 @@
       null,
       null,
       "95670000000"
+    ],
+    [
+      "NET",
+      "Cloudflare Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "95650000000"
     ],
     [
       "REGN",
@@ -1643,7 +1643,7 @@
       null,
       null,
       null,
-      "92630000000"
+      "92640000000"
     ],
     [
       "UPS",
@@ -1727,7 +1727,7 @@
       null,
       null,
       null,
-      "77580000000"
+      "77360000000"
     ],
     [
       "CL",
@@ -1853,7 +1853,7 @@
       null,
       null,
       null,
-      "68950000000"
+      "68930000000"
     ],
     [
       "DDOG",
@@ -2175,7 +2175,7 @@
       null,
       null,
       null,
-      "32810000000"
+      "32260000000"
     ],
     [
       "ZS",
@@ -2315,7 +2315,7 @@
       null,
       null,
       null,
-      "21020000000"
+      "21040000000"
     ],
     [
       "CHTR",
@@ -2371,7 +2371,7 @@
       null,
       null,
       null,
-      "17310000000"
+      "17420000000"
     ],
     [
       "DKNG",
@@ -2399,7 +2399,7 @@
       null,
       null,
       null,
-      "14010000000"
+      "14110000000"
     ],
     [
       "GRAB",
@@ -2486,20 +2486,6 @@
       "8760000000"
     ],
     [
-      "CELH",
-      "Celsius Holdings Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "8140000000"
-    ],
-    [
       "PRMB",
       "Primo Brands Corp",
       null,
@@ -2512,6 +2498,20 @@
       null,
       null,
       "8100000000"
+    ],
+    [
+      "CELH",
+      "Celsius Holdings Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "8060000000"
     ],
     [
       "S",
@@ -2679,7 +2679,7 @@
       null,
       null,
       null,
-      "3060000000"
+      "3080000000"
     ],
     [
       "TMDX",
@@ -2861,7 +2861,7 @@
       null,
       null,
       null,
-      "596580000"
+      "596590000"
     ],
     [
       "ASPI",
@@ -2875,7 +2875,7 @@
       null,
       null,
       null,
-      "318110000"
+      "318120000"
     ],
     [
       "RR",
