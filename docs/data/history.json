@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-11-14T03:25:02.491Z",
-  "sourceFile": "final_stock_data-2026-11-14_0208.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-11-14_0208.xlsx",
+  "generatedAt": "2026-11-15T02:54:41.970Z",
+  "sourceFile": "final_stock_data-2026-11-15_0140.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-11-15_0140.xlsx",
   "rows": [
     [
       "Ticker",
@@ -117,7 +117,7 @@
       null,
       null,
       null,
-      "3.59769E+12"
+      "3.59723E+12"
     ],
     [
       "AMZN",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "1.26015E+12"
+      "1.2599E+12"
     ],
     [
       "WMT",
@@ -2203,7 +2203,7 @@
       null,
       null,
       null,
-      "31500000000"
+      "31490000000"
     ],
     [
       "ZS",
@@ -2623,7 +2623,7 @@
       null,
       null,
       null,
-      "4600000000"
+      "4620000000"
     ],
     [
       "CRSP",
@@ -2847,7 +2847,7 @@
       null,
       null,
       null,
-      "596580000"
+      "596590000"
     ],
     [
       "UMAC",
@@ -2861,7 +2861,7 @@
       null,
       null,
       null,
-      "585570000"
+      "585560000"
     ],
     [
       "ASPI",
