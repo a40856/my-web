@@ -5,10 +5,10 @@ IWM,iShares Russell 2000 Index Fund,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,Blackroc
 AAPL,Apple Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,4978.14B,N/A,N/A
 NVDA,NVIDIA Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3025.27B,N/A,N/A
 MSFT,Microsoft Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3598.14B,N/A,N/A
-GOOG,Alphabet Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3237.57B,N/A,N/A
+GOOG,Alphabet Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3235.51B,N/A,N/A
 AMZN,Amazon.com Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2668.90B,N/A,N/A
 META,Meta Platforms Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1433.64B,N/A,N/A
-BRK-B,Berkshire Hathaway Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1211.43B,N/A,N/A
+BRK-B,Berkshire Hathaway Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1210.98B,N/A,N/A
 LLY,Lilly(Eli) & Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1267.29B,N/A,N/A
 TSM,Taiwan Semiconductor Manufacturing ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1652.98B,N/A,N/A
 AVGO,Broadcom Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1453.14B,N/A,N/A
@@ -45,7 +45,7 @@ TMUS,T-Mobile US Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,175.42B,N/A,N/A
 TMO,Thermo Fisher Scientific Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,248.08B,N/A,N/A
 LIN,Linde Plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,230.84B,N/A,N/A
 ACN,Accenture plc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,130.72B,N/A,N/A
-MCD,McDonald's Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,194.04B,N/A,N/A
+MCD,McDonald's Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,192.85B,N/A,N/A
 CSCO,Cisco Systems Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,357.34B,N/A,N/A
 ABT,Abbott Laboratories,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,178.39B,N/A,N/A
 DHR,Danaher Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,155.03B,N/A,N/A
@@ -59,7 +59,7 @@ BABA,Alibaba Group Holding Ltd ADR,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,201.71B,N
 AXP,American Express Co,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,202.31B,N/A,N/A
 AMGN,AMGEN Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,235.64B,N/A,N/A
 VZ,Verizon Communications Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,192.64B,N/A,N/A
-INTU,Intuit Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,72.27B,N/A,N/A
+INTU,Intuit Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,71.40B,N/A,N/A
 ISRG,Intuitive Surgical Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,138.33B,N/A,N/A
 BX,Blackstone Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,136.77B,N/A,N/A
 CAT,Caterpillar Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,233.58B,N/A,N/A
@@ -166,7 +166,6 @@ PM,Philip Morris International Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,286.93B,N
 TDOC,Teladoc Health Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1.36B,N/A,N/A
 ZM,Zoom Communications Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,23.71B,N/A,N/A
 PINS,Pinterest Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,9.37B,N/A,N/A
-ROKU,Roku Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,23.93B,N/A,N/A
 CRSP,CRISPR Therapeutics AG,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,3.79B,N/A,N/A
 Z,Zillow Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,6.15B,N/A,N/A
 FSLY,Fastly Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2.40B,N/A,N/A
@@ -182,7 +181,7 @@ PENN,PENN Entertainment Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2.43B,N/A,N/A
 DKNG,DraftKings Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,14.05B,N/A,N/A
 LMND,Lemonade Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2.76B,N/A,N/A
 DDOG,Datadog Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,56.83B,N/A,N/A
-CRWV,CoreWeave Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,21.96B,N/A,N/A
+CRWV,CoreWeave Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,21.97B,N/A,N/A
 CRCL,Circle Internet Group Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,12.19B,N/A,N/A
 LEU,Centrus Energy Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,1.68B,N/A,N/A
 ASPI,ASP Isotopes Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,171.42M,N/A,N/A
@@ -202,6 +201,6 @@ CMG,Chipotle Mexican Grill,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,44.97B,N/A,N/A
 WDC,Western Digital Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,97.74B,N/A,N/A
 ONDS,Ondas Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,2.22B,N/A,N/A
 AVAV,AeroVironment Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,4.41B,N/A,N/A
-UMAC,Unusual Machines Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,448.51M,N/A,N/A
+UMAC,Unusual Machines Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,448.52M,N/A,N/A
 FLNC,Fluence Energy Inc,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,638.70M,N/A,N/A
-SNDK,Sandisk Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,90.20B,N/A,N/A
+SNDK,Sandisk Corp,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,92.82B,N/A,N/A
