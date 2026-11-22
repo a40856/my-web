@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-11-21T04:06:30.415Z",
-  "sourceFile": "final_stock_data-2026-11-21_0307.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-11-21_0307.xlsx",
+  "generatedAt": "2026-11-22T03:18:43.378Z",
+  "sourceFile": "final_stock_data-2026-11-22_0204.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-11-22_0204.xlsx",
   "rows": [
     [
       "Ticker",
@@ -103,7 +103,7 @@
       null,
       null,
       null,
-      "3.23757E+12"
+      "3.23551E+12"
     ],
     [
       "NVDA",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "1.21143E+12"
+      "1.21098E+12"
     ],
     [
       "WMT",
@@ -887,7 +887,7 @@
       null,
       null,
       null,
-      "1.9404E+11"
+      "1.9285E+11"
     ],
     [
       "VZ",
@@ -1562,6 +1562,20 @@
       "95010000000"
     ],
     [
+      "SNDK",
+      "Sandisk Corp",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "92820000000"
+    ],
+    [
       "MMM",
       "3M Co",
       null,
@@ -1588,20 +1602,6 @@
       null,
       null,
       "90440000000"
-    ],
-    [
-      "SNDK",
-      "Sandisk Corp",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "90200000000"
     ],
     [
       "SNOW",
@@ -1755,7 +1755,7 @@
       null,
       null,
       null,
-      "72270000000"
+      "71400000000"
     ],
     [
       "CI",
@@ -2220,20 +2220,6 @@
       "26630000000"
     ],
     [
-      "ROKU",
-      "Roku Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "23930000000"
-    ],
-    [
       "NBIS",
       "Nebius Group NV",
       null,
@@ -2287,7 +2273,7 @@
       null,
       null,
       null,
-      "21960000000"
+      "21970000000"
     ],
     [
       "AFRM",
@@ -2861,7 +2847,7 @@
       null,
       null,
       null,
-      "448510000"
+      "448520000"
     ],
     [
       "ASPI",
