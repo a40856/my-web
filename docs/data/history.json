@@ -1,9 +1,9 @@
 {
   "id": "history",
   "title": "股票觀察名單（History）",
-  "generatedAt": "2026-11-26T05:15:06.777Z",
-  "sourceFile": "final_stock_data-2026-11-26_0406.xlsx",
-  "download": "data/latest/history/final_stock_data-2026-11-26_0406.xlsx",
+  "generatedAt": "2026-11-27T05:13:12.501Z",
+  "sourceFile": "final_stock_data-2026-11-27_0404.xlsx",
+  "download": "data/latest/history/final_stock_data-2026-11-27_0404.xlsx",
   "rows": [
     [
       "Ticker",
@@ -117,7 +117,7 @@
       null,
       null,
       null,
-      "3.32839E+12"
+      "3.32638E+12"
     ],
     [
       "AMZN",
@@ -215,7 +215,7 @@
       null,
       null,
       null,
-      "1.23062E+12"
+      "1.23134E+12"
     ],
     [
       "WMT",
@@ -271,7 +271,7 @@
       null,
       null,
       null,
-      "6.8027E+11"
+      "7.7016E+11"
     ],
     [
       "AMD",
@@ -999,7 +999,7 @@
       null,
       null,
       null,
-      "1.8644E+11"
+      "1.8536E+11"
     ],
     [
       "BLK",
@@ -1772,20 +1772,6 @@
       "71850000000"
     ],
     [
-      "INTU",
-      "Intuit Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "71740000000"
-    ],
-    [
       "SLB",
       "SLB Ltd",
       null,
@@ -1798,6 +1784,20 @@
       null,
       null,
       "71620000000"
+    ],
+    [
+      "INTU",
+      "Intuit Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "71590000000"
     ],
     [
       "CI",
@@ -2021,7 +2021,7 @@
       null,
       null,
       null,
-      "43310000000"
+      "42940000000"
     ],
     [
       "VST",
@@ -2220,20 +2220,6 @@
       "27460000000"
     ],
     [
-      "ZM",
-      "Zoom Communications Inc",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "25840000000"
-    ],
-    [
       "CHTR",
       "Charter Communications Inc",
       null,
@@ -2246,6 +2232,20 @@
       null,
       null,
       "25790000000"
+    ],
+    [
+      "ZM",
+      "Zoom Communications Inc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "25650000000"
     ],
     [
       "NBIS",
@@ -2343,7 +2343,7 @@
       null,
       null,
       null,
-      "15700000000"
+      "15730000000"
     ],
     [
       "SMCI",
@@ -2819,7 +2819,7 @@
       null,
       null,
       null,
-      "871510000"
+      "871920000"
     ],
     [
       "NNE",
@@ -2861,7 +2861,7 @@
       null,
       null,
       null,
-      "202590000"
+      "202580000"
     ],
     [
       "RR",
